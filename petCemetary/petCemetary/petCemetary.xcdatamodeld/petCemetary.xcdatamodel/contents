@@ -1,4 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Owner" syncable="YES">
+        <attribute name="ownerID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ownerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pet" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="whoOwns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pet" inverseName="pet" inverseEntity="Pet" syncable="YES"/>
+    </entity>
+    <entity name="Pet" syncable="YES">
+        <attribute name="animalType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="breed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dateOfDeath" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ownerID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="whoOwns" inverseEntity="Owner" syncable="YES"/>
+        <relationship name="petPhotographed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="photos" inverseEntity="Photo" syncable="YES"/>
+    </entity>
+    <entity name="Photo" syncable="YES">
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateUploaded" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnailImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="thumbnailImageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="treater" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="treatsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="photos" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pet" inverseName="petPhotographed" inverseEntity="Pet" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Photo" positionX="187" positionY="225" width="128" height="193"/>
+        <element name="Owner" positionX="-135" positionY="15" width="128" height="103"/>
+        <element name="Pet" positionX="196" positionY="-0" width="128" height="163"/>
+    </elements>
 </model>
