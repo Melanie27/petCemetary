@@ -18,8 +18,11 @@
 @dynamic name;
 @dynamic dateOfBirth;
 @dynamic dateOfDeath;
+@dynamic dateCreated;
 @dynamic animalType;
 @dynamic breed;
+@dynamic personality;
+@dynamic anecdote;
 @dynamic pet;
 @dynamic petPhotographed;
 

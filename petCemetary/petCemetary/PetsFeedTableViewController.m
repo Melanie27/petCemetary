@@ -16,12 +16,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Pets";
+    [self fetchPets];
     
+    //preload data model so that something shows up
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+#pragma mark - Core Data methods
+
+-(id)initWithManagedObjectContext:(NSManagedObjectContext *)context {
+    
+    self = [super initWithStyle:UITableViewStylePlain];
+    if (self) {
+        self.managedObjectContext = context;
+    }
+    
+    return self;
+}
+
+-(void)fetchPets {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Pet"];
+    NSString *cacheName = [@"Pet" stringByAppendingString:@"Cache"];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
+    
+    NSError *error;
+    if(![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"Fetch failed: %@", error);
+    }
 }
 
 - (void)didReceiveMemoryWarning {

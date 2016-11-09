@@ -19,8 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSDate *dateOfBirth;
 @property (nullable, nonatomic, copy) NSDate *dateOfDeath;
+@property (nullable, nonatomic, copy) NSDate *dateCreated;
 @property (nullable, nonatomic, copy) NSString *animalType;
 @property (nullable, nonatomic, copy) NSString *breed;
+@property (nullable, nonatomic, copy) NSString *personality;
+@property (nullable, nonatomic, copy) NSString *anecdote;
 @property (nullable, nonatomic, retain) Owner *pet;
 @property (nullable, nonatomic, retain) NSSet<Photo *> *petPhotographed;
 

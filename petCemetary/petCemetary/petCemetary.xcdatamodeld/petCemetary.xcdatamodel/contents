@@ -7,12 +7,15 @@
         <relationship name="whoOwns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Pet" inverseName="pet" inverseEntity="Pet" syncable="YES"/>
     </entity>
     <entity name="Pet" representedClassName="Pet" syncable="YES">
+        <attribute name="anecdote" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="animalType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="breed" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dateOfBirth" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="dateOfDeath" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="personality" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="pet" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Owner" inverseName="whoOwns" inverseEntity="Owner" syncable="YES"/>
         <relationship name="petPhotographed" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="photos" inverseEntity="Photo" syncable="YES"/>
     </entity>
@@ -31,6 +34,6 @@
     <elements>
         <element name="Photo" positionX="459" positionY="-45" width="128" height="193"/>
         <element name="Owner" positionX="-101" positionY="45" width="128" height="103"/>
-        <element name="Pet" positionX="196" positionY="-0" width="128" height="163"/>
+        <element name="Pet" positionX="196" positionY="-0" width="128" height="208"/>
     </elements>
 </model>
