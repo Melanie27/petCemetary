@@ -18,6 +18,12 @@
 		9B21FF641DD39C51008AC917 /* petCemetaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B21FF631DD39C51008AC917 /* petCemetaryTests.m */; };
 		9B21FF6F1DD39C51008AC917 /* petCemetaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B21FF6E1DD39C51008AC917 /* petCemetaryUITests.m */; };
 		9BB12ABF1DD3AA4B00EBBBC5 /* PetsFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12ABE1DD3AA4B00EBBBC5 /* PetsFeedTableViewController.m */; };
+		9BB12ADE1DD3DA9E00EBBBC5 /* Owner+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12AD31DD3DA9E00EBBBC5 /* Owner+CoreDataClass.m */; };
+		9BB12ADF1DD3DA9E00EBBBC5 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12AD51DD3DA9E00EBBBC5 /* Owner.m */; };
+		9BB12AE01DD3DA9E00EBBBC5 /* Pet+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12AD71DD3DA9E00EBBBC5 /* Pet+CoreDataClass.m */; };
+		9BB12AE11DD3DA9E00EBBBC5 /* Pet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12AD91DD3DA9E00EBBBC5 /* Pet.m */; };
+		9BB12AE21DD3DA9E00EBBBC5 /* Photo+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12ADB1DD3DA9E00EBBBC5 /* Photo+CoreDataClass.m */; };
+		9BB12AE31DD3DA9E00EBBBC5 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12ADD1DD3DA9E00EBBBC5 /* Photo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +64,18 @@
 		9B21FF701DD39C51008AC917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BB12ABD1DD3AA4B00EBBBC5 /* PetsFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetsFeedTableViewController.h; sourceTree = "<group>"; };
 		9BB12ABE1DD3AA4B00EBBBC5 /* PetsFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetsFeedTableViewController.m; sourceTree = "<group>"; };
+		9BB12AD21DD3DA9E00EBBBC5 /* Owner+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Owner+CoreDataClass.h"; path = "petCemetary/Owner+CoreDataClass.h"; sourceTree = "<group>"; };
+		9BB12AD31DD3DA9E00EBBBC5 /* Owner+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Owner+CoreDataClass.m"; path = "petCemetary/Owner+CoreDataClass.m"; sourceTree = "<group>"; };
+		9BB12AD41DD3DA9E00EBBBC5 /* Owner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Owner.h; path = petCemetary/Owner.h; sourceTree = "<group>"; };
+		9BB12AD51DD3DA9E00EBBBC5 /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Owner.m; path = petCemetary/Owner.m; sourceTree = "<group>"; };
+		9BB12AD61DD3DA9E00EBBBC5 /* Pet+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Pet+CoreDataClass.h"; path = "petCemetary/Pet+CoreDataClass.h"; sourceTree = "<group>"; };
+		9BB12AD71DD3DA9E00EBBBC5 /* Pet+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Pet+CoreDataClass.m"; path = "petCemetary/Pet+CoreDataClass.m"; sourceTree = "<group>"; };
+		9BB12AD81DD3DA9E00EBBBC5 /* Pet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pet.h; path = petCemetary/Pet.h; sourceTree = "<group>"; };
+		9BB12AD91DD3DA9E00EBBBC5 /* Pet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pet.m; path = petCemetary/Pet.m; sourceTree = "<group>"; };
+		9BB12ADA1DD3DA9E00EBBBC5 /* Photo+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Photo+CoreDataClass.h"; path = "petCemetary/Photo+CoreDataClass.h"; sourceTree = "<group>"; };
+		9BB12ADB1DD3DA9E00EBBBC5 /* Photo+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Photo+CoreDataClass.m"; path = "petCemetary/Photo+CoreDataClass.m"; sourceTree = "<group>"; };
+		9BB12ADC1DD3DA9E00EBBBC5 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = petCemetary/Photo.h; sourceTree = "<group>"; };
+		9BB12ADD1DD3DA9E00EBBBC5 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = petCemetary/Photo.m; sourceTree = "<group>"; };
 		9F15009D66702282CAC42141 /* Pods-petCemetary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-petCemetary.release.xcconfig"; path = "Pods/Target Support Files/Pods-petCemetary/Pods-petCemetary.release.xcconfig"; sourceTree = "<group>"; };
 		E030DB775DDE0B9F2A0634CC /* Pods-petCemetary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-petCemetary.debug.xcconfig"; path = "Pods/Target Support Files/Pods-petCemetary/Pods-petCemetary.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,10 +131,7 @@
 		9B21FF451DD39C51008AC917 /* petCemetary */ = {
 			isa = PBXGroup;
 			children = (
-				9B21FF491DD39C51008AC917 /* AppDelegate.h */,
-				9B21FF4A1DD39C51008AC917 /* AppDelegate.m */,
-				9B21FF4C1DD39C51008AC917 /* ViewController.h */,
-				9B21FF4D1DD39C51008AC917 /* ViewController.m */,
+				9BB12AE41DD3DB3500EBBBC5 /* CoreData  */,
 				9B21FF4F1DD39C51008AC917 /* Main.storyboard */,
 				9BB12ABD1DD3AA4B00EBBBC5 /* PetsFeedTableViewController.h */,
 				9BB12ABE1DD3AA4B00EBBBC5 /* PetsFeedTableViewController.m */,
@@ -132,6 +147,10 @@
 		9B21FF461DD39C51008AC917 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9B21FF491DD39C51008AC917 /* AppDelegate.h */,
+				9B21FF4A1DD39C51008AC917 /* AppDelegate.m */,
+				9B21FF4C1DD39C51008AC917 /* ViewController.h */,
+				9B21FF4D1DD39C51008AC917 /* ViewController.m */,
 				9B21FF471DD39C51008AC917 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -153,6 +172,26 @@
 				9B21FF701DD39C51008AC917 /* Info.plist */,
 			);
 			path = petCemetaryUITests;
+			sourceTree = "<group>";
+		};
+		9BB12AE41DD3DB3500EBBBC5 /* CoreData  */ = {
+			isa = PBXGroup;
+			children = (
+				9BB12AD21DD3DA9E00EBBBC5 /* Owner+CoreDataClass.h */,
+				9BB12AD31DD3DA9E00EBBBC5 /* Owner+CoreDataClass.m */,
+				9BB12AD41DD3DA9E00EBBBC5 /* Owner.h */,
+				9BB12AD51DD3DA9E00EBBBC5 /* Owner.m */,
+				9BB12AD61DD3DA9E00EBBBC5 /* Pet+CoreDataClass.h */,
+				9BB12AD71DD3DA9E00EBBBC5 /* Pet+CoreDataClass.m */,
+				9BB12AD81DD3DA9E00EBBBC5 /* Pet.h */,
+				9BB12AD91DD3DA9E00EBBBC5 /* Pet.m */,
+				9BB12ADA1DD3DA9E00EBBBC5 /* Photo+CoreDataClass.h */,
+				9BB12ADB1DD3DA9E00EBBBC5 /* Photo+CoreDataClass.m */,
+				9BB12ADC1DD3DA9E00EBBBC5 /* Photo.h */,
+				9BB12ADD1DD3DA9E00EBBBC5 /* Photo.m */,
+			);
+			name = "CoreData ";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		A2E96ED74B8C4F4476C7E418 /* Frameworks */ = {
@@ -361,9 +400,15 @@
 			files = (
 				9B21FF4E1DD39C51008AC917 /* ViewController.m in Sources */,
 				9B21FF4B1DD39C51008AC917 /* AppDelegate.m in Sources */,
+				9BB12ADF1DD3DA9E00EBBBC5 /* Owner.m in Sources */,
+				9BB12AE01DD3DA9E00EBBBC5 /* Pet+CoreDataClass.m in Sources */,
 				9B21FF481DD39C51008AC917 /* main.m in Sources */,
+				9BB12AE11DD3DA9E00EBBBC5 /* Pet.m in Sources */,
+				9BB12AE31DD3DA9E00EBBBC5 /* Photo.m in Sources */,
 				9B21FF541DD39C51008AC917 /* petCemetary.xcdatamodeld in Sources */,
 				9BB12ABF1DD3AA4B00EBBBC5 /* PetsFeedTableViewController.m in Sources */,
+				9BB12AE21DD3DA9E00EBBBC5 /* Photo+CoreDataClass.m in Sources */,
+				9BB12ADE1DD3DA9E00EBBBC5 /* Owner+CoreDataClass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
