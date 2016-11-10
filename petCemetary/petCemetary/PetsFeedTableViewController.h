@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Pet+CoreDataProperties.h"
 
-@interface PetsFeedTableViewController : UITableViewController
+@interface PetsFeedTableViewController : UITableViewController<UIAlertViewDelegate>
+
+
+@property (strong, nonatomic)NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic)NSFetchedResultsController *fetchedResultsController;
+
+-(id)initWithManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

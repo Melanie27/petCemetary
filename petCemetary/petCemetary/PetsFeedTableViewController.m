@@ -17,6 +17,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Pets Feed";
+    [self fetchPets];
+    
+    //preload data model
+    if(self.fetchedResultsController.fetchedObjects.count ==  0 ) {
+        NSEntityDescription *petEntityDescription = [NSEntityDescription entityForName:@"Pet" inManagedObjectContext:self.managedObjectContext];
+        Pet *melaniePet = [(Pet *)[NSManagedObject alloc] initWithEntity:petEntityDescription insertIntoManagedObjectContext:self.managedObjectContext];
+        melaniePet.name = @"Captain";
+        NSError *error;
+        if(![self.managedObjectContext save:&error]) {
+            NSLog(@"error saving context: %@", error);
+        }
+        [self fetchPets];
+    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -29,6 +42,34 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark - Core Data methods
+
+-(id)initWithManagedObjectContext:(NSManagedObjectContext *)context {
+    
+    self = [super initWithStyle:UITableViewStylePlain];
+    if (self) {
+        self.managedObjectContext = context;
+    }
+    
+    return self;
+}
+
+-(void)fetchPets {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Pet"];
+    NSString *cacheName = [@"Pet" stringByAppendingString:@"Cache"];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
+    
+    NSError *error;
+    if(![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"Fetch failed: %@", error);
+    }
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -37,8 +78,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return 10;
+    return self.fetchedResultsController.fetchedObjects.count;
+    //return 10;
 }
 
 
@@ -47,6 +88,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+    }
+    
+    Pet *pet = (Pet *)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = pet.name;
     
     return cell;
 }
