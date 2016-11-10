@@ -18,9 +18,10 @@
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 
 @property (nonatomic, strong) PetsFeedTableViewController *pftVC;
+@property(nonatomic, strong) UINavigationController *navigationController;
 
 - (void)saveContext;
--(NSURL *)applicationDocumentsDirectory;
+
 
 @end
 
