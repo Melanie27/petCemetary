@@ -12,13 +12,13 @@
 		9B21FF4B1DD39C51008AC917 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B21FF4A1DD39C51008AC917 /* AppDelegate.m */; };
 		9B21FF4E1DD39C51008AC917 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B21FF4D1DD39C51008AC917 /* ViewController.m */; };
 		9B21FF511DD39C51008AC917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B21FF4F1DD39C51008AC917 /* Main.storyboard */; };
-		9B21FF561DD39C51008AC917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B21FF551DD39C51008AC917 /* Assets.xcassets */; };
 		9B21FF591DD39C51008AC917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B21FF571DD39C51008AC917 /* LaunchScreen.storyboard */; };
 		9B21FF641DD39C51008AC917 /* petCemetaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B21FF631DD39C51008AC917 /* petCemetaryTests.m */; };
 		9B21FF6F1DD39C51008AC917 /* petCemetaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B21FF6E1DD39C51008AC917 /* petCemetaryUITests.m */; };
 		9B5B10091DD551FB0014EED6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B5B10081DD551FB0014EED6 /* GoogleService-Info.plist */; };
 		9B5B10101DD612A00014EED6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B100F1DD612A00014EED6 /* LoginViewController.m */; };
 		9B5B10131DD615E60014EED6 /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B10121DD615E60014EED6 /* UIViewController+Alerts.m */; };
+		9B5B10151DD61A530014EED6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B5B10141DD61A530014EED6 /* Assets.xcassets */; };
 		9BB12B2B1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12B2A1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +48,6 @@
 		9B21FF4C1DD39C51008AC917 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		9B21FF4D1DD39C51008AC917 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9B21FF501DD39C51008AC917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9B21FF551DD39C51008AC917 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B21FF581DD39C51008AC917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B21FF5A1DD39C51008AC917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B21FF5F1DD39C51008AC917 /* petCemetaryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = petCemetaryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +62,7 @@
 		9B5B100F1DD612A00014EED6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		9B5B10111DD615E50014EED6 /* UIViewController+Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alerts.h"; sourceTree = "<group>"; };
 		9B5B10121DD615E60014EED6 /* UIViewController+Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alerts.m"; sourceTree = "<group>"; };
+		9B5B10141DD61A530014EED6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BB12B291DD4ED8700EBBBC5 /* PetsFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetsFeedTableViewController.h; sourceTree = "<group>"; };
 		9BB12B2A1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetsFeedTableViewController.m; sourceTree = "<group>"; };
 		9F15009D66702282CAC42141 /* Pods-petCemetary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-petCemetary.release.xcconfig"; path = "Pods/Target Support Files/Pods-petCemetary/Pods-petCemetary.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,9 +128,9 @@
 				9B5B10121DD615E60014EED6 /* UIViewController+Alerts.m */,
 				9BB12B291DD4ED8700EBBBC5 /* PetsFeedTableViewController.h */,
 				9BB12B2A1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m */,
-				9B21FF551DD39C51008AC917 /* Assets.xcassets */,
 				9B21FF571DD39C51008AC917 /* LaunchScreen.storyboard */,
 				9B21FF5A1DD39C51008AC917 /* Info.plist */,
+				9B5B10141DD61A530014EED6 /* Assets.xcassets */,
 				9B5B10081DD551FB0014EED6 /* GoogleService-Info.plist */,
 				9B21FF461DD39C51008AC917 /* Supporting Files */,
 			);
@@ -301,9 +301,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B5B10151DD61A530014EED6 /* Assets.xcassets in Resources */,
 				9B21FF591DD39C51008AC917 /* LaunchScreen.storyboard in Resources */,
 				9B5B10091DD551FB0014EED6 /* GoogleService-Info.plist in Resources */,
-				9B21FF561DD39C51008AC917 /* Assets.xcassets in Resources */,
 				9B21FF511DD39C51008AC917 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
