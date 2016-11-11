@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CGW-yf-AAj" id="4B8-xm-PMV">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -95,6 +95,14 @@
                                             <action selector="didCreateAccount:" destination="SKy-XN-VZw" eventType="touchUpInside" id="xmE-3i-g2L"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBd-H3-H1f">
+                                        <frame key="frameInset" minX="151" minY="472" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <segue destination="ZBA-21-rvE" kind="show" id="UOD-iH-fsF"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -133,6 +141,7 @@
                         <outlet property="emailField" destination="T1P-Zf-g2i" id="1Yk-nx-p1Y"/>
                         <outlet property="logoutAccount" destination="A9X-op-hCG" id="LHs-9o-xXu"/>
                         <outlet property="passwordField" destination="dDl-FJ-OXC" id="tXa-Wl-bI7"/>
+                        <outlet property="questionsButton" destination="LBd-H3-H1f" id="NY5-WA-XIB"/>
                         <segue destination="ZBA-21-rvE" kind="show" identifier="loginSegue" id="kE4-Qd-d8n"/>
                     </connections>
                 </viewController>
@@ -145,7 +154,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3l8-FP-Xfd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3Hf-qg-sSd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Hf-qg-sSd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -179,4 +188,7 @@
     <resources>
         <image name="pcBackgroundTrans-3" width="620" height="1136"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="kE4-Qd-d8n"/>
+    </inferredMetricsTieBreakers>
 </document>
