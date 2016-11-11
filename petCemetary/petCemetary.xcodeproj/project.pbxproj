@@ -115,10 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				9B5B100A1DD558BB0014EED6 /* petCemetary.entitlements */,
-				9B21FF491DD39C51008AC917 /* AppDelegate.h */,
-				9B21FF4A1DD39C51008AC917 /* AppDelegate.m */,
-				9B21FF4C1DD39C51008AC917 /* ViewController.h */,
-				9B21FF4D1DD39C51008AC917 /* ViewController.m */,
 				9B21FF4F1DD39C51008AC917 /* Main.storyboard */,
 				9BB12B291DD4ED8700EBBBC5 /* PetsFeedTableViewController.h */,
 				9BB12B2A1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m */,
@@ -134,6 +130,10 @@
 		9B21FF461DD39C51008AC917 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9B21FF491DD39C51008AC917 /* AppDelegate.h */,
+				9B21FF4A1DD39C51008AC917 /* AppDelegate.m */,
+				9B21FF4C1DD39C51008AC917 /* ViewController.h */,
+				9B21FF4D1DD39C51008AC917 /* ViewController.m */,
 				9B21FF471DD39C51008AC917 /* main.m */,
 			);
 			name = "Supporting Files";
