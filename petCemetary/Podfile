@@ -2,5 +2,10 @@ platform :ios, '8.0'
 target 'petCemetary' do
 
 pod 'SDWebImage', '~>3.8'
+pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
+pod 'Firebase/Storage'
+pod 'FirebaseUI', '~> 0.4'
 
 end
