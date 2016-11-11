@@ -17,6 +17,8 @@
 		9B21FF641DD39C51008AC917 /* petCemetaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B21FF631DD39C51008AC917 /* petCemetaryTests.m */; };
 		9B21FF6F1DD39C51008AC917 /* petCemetaryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B21FF6E1DD39C51008AC917 /* petCemetaryUITests.m */; };
 		9B5B10091DD551FB0014EED6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B5B10081DD551FB0014EED6 /* GoogleService-Info.plist */; };
+		9B5B10101DD612A00014EED6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B100F1DD612A00014EED6 /* LoginViewController.m */; };
+		9B5B10131DD615E60014EED6 /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B10121DD615E60014EED6 /* UIViewController+Alerts.m */; };
 		9BB12B2B1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12B2A1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,10 @@
 		9B21FF701DD39C51008AC917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B5B10081DD551FB0014EED6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B5B100A1DD558BB0014EED6 /* petCemetary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = petCemetary.entitlements; sourceTree = "<group>"; };
+		9B5B100E1DD612A00014EED6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		9B5B100F1DD612A00014EED6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		9B5B10111DD615E50014EED6 /* UIViewController+Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alerts.h"; sourceTree = "<group>"; };
+		9B5B10121DD615E60014EED6 /* UIViewController+Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alerts.m"; sourceTree = "<group>"; };
 		9BB12B291DD4ED8700EBBBC5 /* PetsFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetsFeedTableViewController.h; sourceTree = "<group>"; };
 		9BB12B2A1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetsFeedTableViewController.m; sourceTree = "<group>"; };
 		9F15009D66702282CAC42141 /* Pods-petCemetary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-petCemetary.release.xcconfig"; path = "Pods/Target Support Files/Pods-petCemetary/Pods-petCemetary.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +122,10 @@
 			children = (
 				9B5B100A1DD558BB0014EED6 /* petCemetary.entitlements */,
 				9B21FF4F1DD39C51008AC917 /* Main.storyboard */,
+				9B5B100E1DD612A00014EED6 /* LoginViewController.h */,
+				9B5B100F1DD612A00014EED6 /* LoginViewController.m */,
+				9B5B10111DD615E50014EED6 /* UIViewController+Alerts.h */,
+				9B5B10121DD615E60014EED6 /* UIViewController+Alerts.m */,
 				9BB12B291DD4ED8700EBBBC5 /* PetsFeedTableViewController.h */,
 				9BB12B2A1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m */,
 				9B21FF551DD39C51008AC917 /* Assets.xcassets */,
@@ -370,7 +380,9 @@
 				9B21FF4E1DD39C51008AC917 /* ViewController.m in Sources */,
 				9B21FF4B1DD39C51008AC917 /* AppDelegate.m in Sources */,
 				9B21FF481DD39C51008AC917 /* main.m in Sources */,
+				9B5B10131DD615E60014EED6 /* UIViewController+Alerts.m in Sources */,
 				9BB12B2B1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m in Sources */,
+				9B5B10101DD612A00014EED6 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

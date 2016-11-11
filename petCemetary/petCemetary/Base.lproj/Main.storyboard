@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="aKB-4K-qXx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3l8-FP-Xfd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -33,25 +33,47 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FGS-H4-lQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1896.8" y="73.313343328335833"/>
+            <point key="canvasLocation" x="3033" y="55"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="yvz-Rt-Epd">
+            <objects>
+                <viewController id="SKy-XN-VZw" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hPi-Vr-nEP"/>
+                        <viewControllerLayoutGuide type="bottom" id="RsC-Kl-loG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="d6Z-dM-FKn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="suB-da-8qR"/>
+                    <connections>
+                        <segue destination="ZBA-21-rvE" kind="show" identifier="loginSegue" id="kE4-Qd-d8n"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2vY-GA-n7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1639" y="57"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="hce-bs-aYA">
+        <scene sceneID="K3F-sr-l70">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aKB-4K-qXx" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3l8-FP-Xfd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="9Ze-TD-2tw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3Hf-qg-sSd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ZBA-21-rvE" kind="relationship" relationship="rootViewController" id="0wd-Xw-7gq"/>
+                        <segue destination="SKy-XN-VZw" kind="relationship" relationship="rootViewController" id="TE9-wm-EQ6"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a5o-fn-rlO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eRv-ip-rcs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="957.60000000000002" y="73.313343328335833"/>
+            <point key="canvasLocation" x="1098" y="57"/>
         </scene>
     </scenes>
 </document>
