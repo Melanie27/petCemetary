@@ -24,6 +24,7 @@
 		9BBBAF291DDA356C00E3BD42 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BBBAF281DDA356C00E3BD42 /* 1.jpg */; };
 		9BBBAF2D1DDA35A000E3BD42 /* 2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BBBAF2C1DDA35A000E3BD42 /* 2.jpg */; };
 		9BBBAF2F1DDA35E500E3BD42 /* 3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BBBAF2E1DDA35E500E3BD42 /* 3.jpg */; };
+		9BBBAF331DDA3EC900E3BD42 /* Owner.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBAF321DDA3EC900E3BD42 /* Owner.m */; };
 		9BDB39591DD63AE0007A5679 /* PCDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB39581DD63AE0007A5679 /* PCDataSource.m */; };
 		9BDB395C1DD63B84007A5679 /* Pet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB395B1DD63B84007A5679 /* Pet.m */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,8 @@
 		9BBBAF281DDA356C00E3BD42 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		9BBBAF2C1DDA35A000E3BD42 /* 2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpg; sourceTree = "<group>"; };
 		9BBBAF2E1DDA35E500E3BD42 /* 3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpg; sourceTree = "<group>"; };
+		9BBBAF311DDA3EC900E3BD42 /* Owner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Owner.h; sourceTree = "<group>"; };
+		9BBBAF321DDA3EC900E3BD42 /* Owner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Owner.m; sourceTree = "<group>"; };
 		9BDB39571DD63AE0007A5679 /* PCDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDataSource.h; sourceTree = "<group>"; };
 		9BDB39581DD63AE0007A5679 /* PCDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCDataSource.m; sourceTree = "<group>"; };
 		9BDB395A1DD63B84007A5679 /* Pet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pet.h; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 				9B21FF571DD39C51008AC917 /* LaunchScreen.storyboard */,
 				9BDB395A1DD63B84007A5679 /* Pet.h */,
 				9BDB395B1DD63B84007A5679 /* Pet.m */,
+				9BBBAF311DDA3EC900E3BD42 /* Owner.h */,
+				9BBBAF321DDA3EC900E3BD42 /* Owner.m */,
 				9BDB39571DD63AE0007A5679 /* PCDataSource.h */,
 				9BDB39581DD63AE0007A5679 /* PCDataSource.m */,
 				9B21FF5A1DD39C51008AC917 /* Info.plist */,
@@ -413,6 +418,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B21FF4E1DD39C51008AC917 /* ViewController.m in Sources */,
+				9BBBAF331DDA3EC900E3BD42 /* Owner.m in Sources */,
 				9BDB395C1DD63B84007A5679 /* Pet.m in Sources */,
 				9BDB39591DD63AE0007A5679 /* PCDataSource.m in Sources */,
 				9B21FF4B1DD39C51008AC917 /* AppDelegate.m in Sources */,

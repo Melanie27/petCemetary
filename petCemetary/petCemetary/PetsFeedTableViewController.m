@@ -6,10 +6,11 @@
 //  Copyright © 2016 melaniemcganney.com. All rights reserved.
 //
 
-//#import "PCDataSource.h"
+#import "PCDataSource.h"
 #import "PetsFeedTableViewController.h"
 //#import "PetsFeedTableViewCell.h"
 #import "Pet.h"
+#import "Owner.h"
 
 
 
@@ -21,7 +22,7 @@
 
 //@property (strong, nonatomic) FIRDatabaseReference *ref;
 //@property (strong, nonatomic) FIRStorage *storageRef;
-@property (strong, nonatomic) NSMutableArray *images;
+
 
 @end
 
@@ -49,16 +50,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.images = [[NSMutableArray alloc] init];
     
-    for (int i = 1; i <= 3; i++) {
-        NSString *imageName = [NSString stringWithFormat:@"%d.jpg", i];
-        UIImage *image = [UIImage imageNamed:imageName];
-        if (image) {
-           [self.images addObject:image];
-           
-        }
-    }
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"PetCell"];
     
@@ -78,10 +70,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"count %lu", (unsigned long)self.images.count);
-    return self.images.count;
-    
-    //return [PCDataSource sharedInstance].pets.count;
+    return [PCDataSource sharedInstance].petItems.count;
+   
     
 }
 
@@ -114,8 +104,8 @@
         [cell.contentView addSubview:imageView];
     }
     
-    UIImage *image = self.images[indexPath.row];
-    imageView.image = image;
+    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
+    imageView.image = pet.feedImage;
 
     
     return cell;
@@ -123,8 +113,10 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    UIImage *image = self.images[indexPath.row];
-    return (CGRectGetWidth(self.view.frame) /image.size.width) * image.size.height;
+    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
+    UIImage *image = pet.feedImage;
+    return image.size.height / image.size.width * CGRectGetWidth(self.view.frame);
+    
 }
 
 /*

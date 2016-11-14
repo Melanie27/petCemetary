@@ -12,6 +12,7 @@
 
 @class PetsFeedTableViewController;
 @class Pet;
+@class Owner;
 
 
 @interface PCDataSource : NSObject
@@ -20,6 +21,9 @@
 //singleton to access call [PCDataSource sharedInstance]
 
 +(instancetype) sharedInstance;
+@property (nonatomic, strong, readonly) NSArray *petItems;
+
+
 @property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
 @property (nonatomic, strong) Pet *pet;
 @property (nonatomic, assign) NSInteger petNumber;
