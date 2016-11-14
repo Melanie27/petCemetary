@@ -50,9 +50,7 @@
         
         if (image) {
             Pet *pet = [[Pet alloc] init];
-            pet.owner = [self randomOwner];
             pet.feedImage = image;
-            
             
             [randomMediaItems addObject:pet];
         }
@@ -61,43 +59,8 @@
     self.petItems = randomMediaItems;
 }
 
-- (Owner *) randomOwner {
-    Owner *owner = [[Owner alloc] init];
-    
-    owner.ownerName = [self randomStringOfLength:arc4random_uniform(10) + 2];
-    
-    NSString *firstName = [self randomStringOfLength:arc4random_uniform(7) + 2];
-    NSString *lastName = [self randomStringOfLength:arc4random_uniform(12) + 2];
-    owner.ownerName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-    
-    return owner;
-}
 
-- (NSString *) randomSentence {
-    NSUInteger wordCount = arc4random_uniform(20) + 2;
-    
-    NSMutableString *randomSentence = [[NSMutableString alloc] init];
-    
-    for (int i  = 0; i <= wordCount; i++) {
-        NSString *randomWord = [self randomStringOfLength:arc4random_uniform(12) + 2];
-        [randomSentence appendFormat:@"%@ ", randomWord];
-    }
-    
-    return randomSentence;
-}
 
-- (NSString *) randomStringOfLength:(NSUInteger) len {
-    NSString *alphabet = @"abcdefghijklmnopqrstuvwxyz";
-    
-    NSMutableString *s = [NSMutableString string];
-    for (NSUInteger i = 0U; i < len; i++) {
-        u_int32_t r = arc4random_uniform((u_int32_t)[alphabet length]);
-        unichar c = [alphabet characterAtIndex:r];
-        [s appendFormat:@"%C", c];
-    }
-    
-    return [NSString stringWithString:s];
-}
 
 
 

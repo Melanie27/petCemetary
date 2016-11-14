@@ -14,7 +14,7 @@
 @end
 
 @interface PetsFeedTableViewCell : UITableViewCell
-@property (nonatomic, strong) Pet *pet;
+@property (nonatomic, strong) Pet *petItem;
 @property (nonatomic, weak) id <PetsTableViewCellDelegate> delegate;
 
 @end

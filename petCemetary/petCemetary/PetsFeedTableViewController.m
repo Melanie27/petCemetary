@@ -8,7 +8,7 @@
 
 #import "PCDataSource.h"
 #import "PetsFeedTableViewController.h"
-//#import "PetsFeedTableViewCell.h"
+#import "PetsFeedTableViewCell.h"
 #import "Pet.h"
 #import "Owner.h"
 
@@ -52,7 +52,8 @@
     
     
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"PetCell"];
+    [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"PetCell"];
+    
     
 }
 
@@ -78,9 +79,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
-     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PetCell" forIndexPath:indexPath];
- 
-    //PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+      PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"PetCell" forIndexPath:indexPath];
+    cell.petItem = [PCDataSource sharedInstance].petItems[indexPath.row];
     //cell.delegate = self;
     
     //[cell.contentView layoutSubviews];
@@ -88,7 +89,7 @@
  
     
     // Configure the cell...
-    static NSInteger imageViewTag = 1234;
+    /*static NSInteger imageViewTag = 1234;
     UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:imageViewTag];
     
     // #3
@@ -105,10 +106,9 @@
     }
     
     Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
-    imageView.image = pet.feedImage;
+    imageView.image = pet.feedImage;*/
 
-    
-    return cell;
+       return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -116,7 +116,7 @@
     Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
     UIImage *image = pet.feedImage;
     return image.size.height / image.size.width * CGRectGetWidth(self.view.frame);
-    
+    //return 300 + (image.size.height / image.size.width * CGRectGetWidth(self.view.frame));
 }
 
 /*
