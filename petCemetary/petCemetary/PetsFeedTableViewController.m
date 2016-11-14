@@ -6,22 +6,62 @@
 //  Copyright © 2016 melaniemcganney.com. All rights reserved.
 //
 
+//#import "PCDataSource.h"
 #import "PetsFeedTableViewController.h"
+//#import "PetsFeedTableViewCell.h"
+#import "Pet.h"
 
-@interface PetsFeedTableViewController ()
+
+
+//@import Firebase;
+//@import FirebaseDatabase;
+//@import FirebaseStorage;
+
+@interface PetsFeedTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource>
+
+//@property (strong, nonatomic) FIRDatabaseReference *ref;
+//@property (strong, nonatomic) FIRStorage *storageRef;
+@property (strong, nonatomic) NSMutableArray *images;
 
 @end
 
 @implementation PetsFeedTableViewController
 
+//Override the table view controller's initializer to create an empty array
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        
+    }
+    return self;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //[PCDataSource sharedInstance].pftVC = self;
+    //[[PCDataSource sharedInstance] retrievePets];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.images = [[NSMutableArray alloc] init];
+    
+    for (int i = 1; i <= 3; i++) {
+        NSString *imageName = [NSString stringWithFormat:@"%d.jpg", i];
+        UIImage *image = [UIImage imageNamed:imageName];
+        if (image) {
+           [self.images addObject:image];
+           
+        }
+    }
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"PetCell"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,23 +77,55 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return 10;
+    
+    NSLog(@"count %lu", (unsigned long)self.images.count);
+    return self.images.count;
+    
+    //return [PCDataSource sharedInstance].pets.count;
+    
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"PetCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+   
+     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PetCell" forIndexPath:indexPath];
  
- 
+    //PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    //cell.delegate = self;
+    
+    //[cell.contentView layoutSubviews];
+    //cell.pet = [PCDataSource sharedInstance].pets[indexPath.row];
  
     
     // Configure the cell...
+    static NSInteger imageViewTag = 1234;
+    UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:imageViewTag];
+    
+    // #3
+    if (!imageView) {
+        // This is a new cell, it doesn't have an image view yet
+        imageView = [[UIImageView alloc] init];
+        imageView.contentMode = UIViewContentModeScaleToFill;
+        
+        imageView.frame = cell.contentView.bounds;
+        imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        
+        imageView.tag = imageViewTag;
+        [cell.contentView addSubview:imageView];
+    }
+    
+    UIImage *image = self.images[indexPath.row];
+    imageView.image = image;
+
     
     return cell;
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+   
+    UIImage *image = self.images[indexPath.row];
+    return (CGRectGetWidth(self.view.frame) /image.size.width) * image.size.height;
+}
 
 /*
 // Override to support conditional editing of the table view.
