@@ -17,7 +17,9 @@
 @property (nonatomic, strong) NSString *ownerName;
 @property (nonatomic, strong) NSString *ownerUID;
  @property (nonatomic, strong) Owner *owner;
-@property (nonatomic, strong) NSURL *feedMediaURL;
+@property (nonatomic, strong) NSURL *feedImageURL;
+@property (nonatomic, strong) NSString *feedImageString;
+
 @property (nonatomic, strong) UIImage *feedImage;
 @property (nonatomic, strong) NSString *feedCaption;
 

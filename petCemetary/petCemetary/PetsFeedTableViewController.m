@@ -14,14 +14,14 @@
 
 
 
-//@import Firebase;
-//@import FirebaseDatabase;
-//@import FirebaseStorage;
+@import Firebase;
+@import FirebaseDatabase;
+@import FirebaseStorage;
 
-@interface PetsFeedTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface PetsFeedTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, PetsTableViewCellDelegate>
 
-//@property (strong, nonatomic) FIRDatabaseReference *ref;
-//@property (strong, nonatomic) FIRStorage *storageRef;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FIRStorage *storageRef;
 
 
 @end
@@ -41,6 +41,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     
     //[PCDataSource sharedInstance].pftVC = self;
     //[[PCDataSource sharedInstance] retrievePets];
@@ -72,6 +74,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return [PCDataSource sharedInstance].petItems.count;
+    //return [PCDataSource sharedInstance].pets.count;
    
     
 }
@@ -82,37 +85,19 @@
     
       PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"PetCell" forIndexPath:indexPath];
     cell.petItem = [PCDataSource sharedInstance].petItems[indexPath.row];
+    //cell.petItem = [PCDataSource sharedInstance].pets[indexPath.row];
     //cell.delegate = self;
     
     //[cell.contentView layoutSubviews];
-    //cell.pet = [PCDataSource sharedInstance].pets[indexPath.row];
+    
  
-    
-    // Configure the cell...
-    /*static NSInteger imageViewTag = 1234;
-    UIImageView *imageView = (UIImageView*)[cell.contentView viewWithTag:imageViewTag];
-    
-    // #3
-    if (!imageView) {
-        // This is a new cell, it doesn't have an image view yet
-        imageView = [[UIImageView alloc] init];
-        imageView.contentMode = UIViewContentModeScaleToFill;
-        
-        imageView.frame = cell.contentView.bounds;
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        
-        imageView.tag = imageViewTag;
-        [cell.contentView addSubview:imageView];
-    }
-    
-    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
-    imageView.image = pet.feedImage;*/
-
+    //[cell.petImageView setImage:_pet.feedImage forState:UIControlStateNormal];
+   
        return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
+   [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"PetCell"];
     Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
     UIImage *image = pet.feedImage;
     return image.size.height / image.size.width * CGRectGetWidth(self.view.frame);

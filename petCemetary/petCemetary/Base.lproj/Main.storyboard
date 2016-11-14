@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,10 +15,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PetCell" rowHeight="300" id="rX5-iT-ujj" customClass="PetsFeedTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="375" height="300"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rX5-iT-ujj" id="Hkd-80-RW9">
+                                    <frame key="frameInset" width="375" height="299"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yed-Fd-J7S">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="128" id="h21-Ts-kdS"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-MR-asb">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Awj-Zb-gyG">
+                                            <frame key="frameInset" minX="164" minY="222" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yed-Fd-J7S" firstAttribute="top" secondItem="4eH-MR-asb" secondAttribute="bottom" constant="19" id="3sw-Dx-qgC"/>
+                                        <constraint firstItem="4eH-MR-asb" firstAttribute="leading" secondItem="yed-Fd-J7S" secondAttribute="leading" id="Gpv-25-8Yt"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="yed-Fd-J7S" secondAttribute="trailing" constant="73" id="JyS-Ti-iDE"/>
+                                        <constraint firstItem="4eH-MR-asb" firstAttribute="top" secondItem="Hkd-80-RW9" secondAttribute="topMargin" constant="9" id="M9f-iz-dvz"/>
+                                        <constraint firstItem="4eH-MR-asb" firstAttribute="leading" secondItem="Hkd-80-RW9" secondAttribute="leadingMargin" constant="46" id="yLH-P6-FWU"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="petImageButton" destination="Awj-Zb-gyG" id="zIX-Sf-8jB"/>
+                                    <outlet property="petImageView" destination="Awj-Zb-gyG" id="K8f-BL-tgb"/>
+                                    <outlet property="petNameLabel" destination="4eH-MR-asb" id="0n6-HI-umX"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="ZBA-21-rvE" id="whv-FX-SyO"/>
-                            <outlet property="delegate" destination="ZBA-21-rvE" id="6ae-ed-rus"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Pet Cemetary" id="OwV-wE-AO9">

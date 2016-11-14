@@ -11,6 +11,7 @@
 @import FirebaseStorage;
 
 @class PetsFeedTableViewController;
+@class PetsFeedTableViewCell;
 @class Pet;
 @class Owner;
 

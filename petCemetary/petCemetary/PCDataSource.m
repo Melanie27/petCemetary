@@ -13,7 +13,6 @@
 
 @interface PCDataSource ()
     @property (nonatomic, strong) NSArray *pets;
-
     @property (nonatomic, strong) NSArray *petItems;
 
 @end
@@ -76,16 +75,47 @@
      observeEventType:FIRDataEventTypeValue
      withBlock:^(FIRDataSnapshot *snapshot) {
          //init the array
+         NSLog(@"snapshot %@", snapshot);
+         
          self.pets = @[];
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
              Pet *pet = [[Pet alloc] init];
+             NSLog(@"url %@", snapshot.value[@"pets"][i][@"feedPhoto"]);
              pet.petName = snapshot.value[@"pets"][i][@"pet"];
              pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
+             pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
              self.pets = [self.pets arrayByAddingObject:pet];
+             
+             if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
+                 //THIS IS THE STRING TO THE IMAGE WE WANT TO SEE
+                 //petf.feedImageString = snapshot.value[@"profile_picture"];
+                 
+                 FIRStorage *storage = [FIRStorage storage];
+                 FIRStorageReference *httpsReference = [storage referenceForURL:pet.feedImageString];
+                 
+                 
+                 [httpsReference downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                     if (error != nil) {
+                         NSLog(@"download url error");
+                     } else {
+                         //NSLog(@"no download url error %@", URL);
+                         NSData *imageData = [NSData dataWithContentsOfURL:URL];
+                         pet.feedImage = [UIImage imageWithData:imageData];
+                     }
+                     
+                 }];
+                 
+                 
+             }
+             
          }
+         
+         
+         
+         
          NSLog(@"retrieved pets %@", retrievedPets);
-         [self.pftVC.tableView reloadData];
+         //[self.pftVC.tableView reloadData];
         
          
      }];
