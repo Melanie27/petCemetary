@@ -43,19 +43,14 @@
     [super viewDidLoad];
     
     
-    
-    //[PCDataSource sharedInstance].pftVC = self;
-    //[[PCDataSource sharedInstance] retrievePets];
+    [PCDataSource sharedInstance].pftVC = self;
+    [[PCDataSource sharedInstance] retrievePets];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    
-    
-    [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"PetCell"];
-    
+    [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"cell"];
+//       [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"cell"];
     
 }
 
@@ -83,25 +78,42 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     
-      PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"PetCell" forIndexPath:indexPath];
+      PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.delegate = self;
+    [cell.contentView layoutSubviews];
     cell.petItem = [PCDataSource sharedInstance].petItems[indexPath.row];
     //cell.petItem = [PCDataSource sharedInstance].pets[indexPath.row];
-    //cell.delegate = self;
+    UIImage *image = cell.petItem.feedImage;
     
-    //[cell.contentView layoutSubviews];
+    if( cell.petItem.feedImage == nil) {
+        NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
+        image = [UIImage imageNamed:imageName];
+    }
+
     
- 
-    //[cell.petImageView setImage:_pet.feedImage forState:UIControlStateNormal];
+    
+    [cell.petImageView setImage:image];
    
        return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-   [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"PetCell"];
+
     Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
     UIImage *image = pet.feedImage;
-    return image.size.height / image.size.width * CGRectGetWidth(self.view.frame);
-    //return 300 + (image.size.height / image.size.width * CGRectGetWidth(self.view.frame));
+    
+    if( pet.feedImage == nil) {
+        NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
+        image = [UIImage imageNamed:imageName];
+    }
+    CGFloat height = (image.size.height / image.size.width) * CGRectGetWidth(self.view.frame);
+
+    if (height > 50) {
+        return height;
+    } else {
+        NSLog(@"bad height %f",height);
+        return 100.0;
+    }
 }
 
 /*

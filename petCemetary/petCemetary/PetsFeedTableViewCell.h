@@ -22,7 +22,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *petNameLabel;
 
-@property (nonatomic, strong) IBOutlet UIButton *petImageButton;
+@property (nonatomic, strong) IBOutlet UIImageView *petImageView;
 
 
 

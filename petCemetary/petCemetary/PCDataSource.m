@@ -33,7 +33,8 @@
     self = [super init];
     
     if (self) {
-        [self addRandomData];
+        //[self addRandomData];
+        [self retrievePets];
     }
     
     return self;
@@ -77,7 +78,7 @@
          //init the array
          NSLog(@"snapshot %@", snapshot);
          
-         self.pets = @[];
+         self.petItems = @[];
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
              Pet *pet = [[Pet alloc] init];
@@ -85,7 +86,7 @@
              pet.petName = snapshot.value[@"pets"][i][@"pet"];
              pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
              pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
-             self.pets = [self.pets arrayByAddingObject:pet];
+             self.petItems = [self.petItems arrayByAddingObject:pet];
              
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
                  //THIS IS THE STRING TO THE IMAGE WE WANT TO SEE
@@ -103,7 +104,8 @@
                          NSData *imageData = [NSData dataWithContentsOfURL:URL];
                          pet.feedImage = [UIImage imageWithData:imageData];
                      }
-                     
+                     [self.pftVC.tableView reloadData];
+
                  }];
                  
                  
@@ -115,7 +117,7 @@
          
          
          NSLog(@"retrieved pets %@", retrievedPets);
-         //[self.pftVC.tableView reloadData];
+         [self.pftVC.tableView reloadData];
         
          
      }];

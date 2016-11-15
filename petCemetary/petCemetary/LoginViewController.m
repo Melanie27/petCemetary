@@ -108,7 +108,7 @@ static NSString *const kChangePasswordText = @"Change Password";
                                          return;
                                      }
                                      NSLog(@"success2, %@", user);
-                                     //[self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                                     [self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
                                  }];
                                  // [END_EXCLUDE]
                              }];

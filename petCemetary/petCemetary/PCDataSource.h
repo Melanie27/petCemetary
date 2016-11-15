@@ -23,9 +23,10 @@
 
 +(instancetype) sharedInstance;
 @property (nonatomic, strong, readonly) NSArray *petItems;
+@property (nonatomic, strong, readonly) NSArray *pets;
 
 
-@property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
+//@property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
 @property (nonatomic, strong) Pet *pet;
 @property (nonatomic, assign) NSInteger petNumber;
 @property (nonatomic, weak) PetsFeedTableViewController *pftVC;

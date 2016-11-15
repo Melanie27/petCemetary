@@ -12,7 +12,7 @@
 
 @interface PetsFeedTableViewCell ()
 
-@property (nonatomic, strong) UIImageView *petImageView;
+//@property (nonatomic, strong) UIImageView *petImageView;
 
 
 @end
@@ -44,8 +44,15 @@
         return;
         
     }
+    UIImage *image = self.petItem.feedImage;
     
-    CGFloat imageHeight = self.petItem.feedImage.size.height / self.petItem.feedImage.size.width * CGRectGetWidth(self.contentView.bounds);
+    if( self.petItem.feedImage == nil) {
+        NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
+        image = [UIImage imageNamed:imageName];
+    }
+
+    CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
+    imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
     self.petImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
 }
@@ -68,8 +75,8 @@
 -(void)setPetItem:(Pet*)petItem {
     _petItem = petItem;
     self.petImageView.image = _petItem.feedImage;
-    NSLog(@"pet %@", petItem);
-    NSLog(@"pet image %@", _petItem.feedImage);
+    //NSLog(@"pet %@", petItem);
+    //NSLog(@"pet image %@", _petItem.feedImage);
     
     
 }
