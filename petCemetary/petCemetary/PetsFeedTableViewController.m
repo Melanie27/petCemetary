@@ -122,6 +122,7 @@
     Pet *p;
     p = pc.petItems[row];
     NSLog(@"pet %@", p);
+    [self performSegueWithIdentifier:@"showProfilePage" sender:self];
 }
 
 /*
