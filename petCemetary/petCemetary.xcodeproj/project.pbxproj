@@ -28,6 +28,7 @@
 		9BBBAF351DDA7D5C00E3BD42 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BBBAF341DDA7D5C00E3BD42 /* 4.jpg */; };
 		9BBBAF371DDA7DA700E3BD42 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BBBAF361DDA7DA700E3BD42 /* 5.jpg */; };
 		9BBBAF3A1DDAA22800E3BD42 /* PetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBAF391DDAA22800E3BD42 /* PetProfileViewController.m */; };
+		9BBBAF3D1DDB809D00E3BD42 /* PetPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBAF3C1DDB809D00E3BD42 /* PetPhotosTableViewController.m */; };
 		9BDB39591DD63AE0007A5679 /* PCDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB39581DD63AE0007A5679 /* PCDataSource.m */; };
 		9BDB395C1DD63B84007A5679 /* Pet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB395B1DD63B84007A5679 /* Pet.m */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,8 @@
 		9BBBAF361DDA7DA700E3BD42 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 5.jpg; sourceTree = "<group>"; };
 		9BBBAF381DDAA22800E3BD42 /* PetProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetProfileViewController.h; sourceTree = "<group>"; };
 		9BBBAF391DDAA22800E3BD42 /* PetProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetProfileViewController.m; sourceTree = "<group>"; };
+		9BBBAF3B1DDB809D00E3BD42 /* PetPhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetPhotosTableViewController.h; sourceTree = "<group>"; };
+		9BBBAF3C1DDB809D00E3BD42 /* PetPhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetPhotosTableViewController.m; sourceTree = "<group>"; };
 		9BDB39571DD63AE0007A5679 /* PCDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDataSource.h; sourceTree = "<group>"; };
 		9BDB39581DD63AE0007A5679 /* PCDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCDataSource.m; sourceTree = "<group>"; };
 		9BDB395A1DD63B84007A5679 /* Pet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pet.h; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				9BBBAF261DD642A400E3BD42 /* PetsFeedTableViewCell.m */,
 				9BBBAF381DDAA22800E3BD42 /* PetProfileViewController.h */,
 				9BBBAF391DDAA22800E3BD42 /* PetProfileViewController.m */,
+				9BBBAF3B1DDB809D00E3BD42 /* PetPhotosTableViewController.h */,
+				9BBBAF3C1DDB809D00E3BD42 /* PetPhotosTableViewController.m */,
 				9B21FF4F1DD39C51008AC917 /* Main.storyboard */,
 				9B21FF571DD39C51008AC917 /* LaunchScreen.storyboard */,
 				9BDB395A1DD63B84007A5679 /* Pet.h */,
@@ -436,6 +441,7 @@
 				9BBBAF3A1DDAA22800E3BD42 /* PetProfileViewController.m in Sources */,
 				9BDB39591DD63AE0007A5679 /* PCDataSource.m in Sources */,
 				9B21FF4B1DD39C51008AC917 /* AppDelegate.m in Sources */,
+				9BBBAF3D1DDB809D00E3BD42 /* PetPhotosTableViewController.m in Sources */,
 				9B21FF481DD39C51008AC917 /* main.m in Sources */,
 				9B5B10131DD615E60014EED6 /* UIViewController+Alerts.m in Sources */,
 				9BB12B2B1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m in Sources */,
