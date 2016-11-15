@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Pet;
 
 @interface PetsFeedTableViewController : UITableViewController
+
+@property (nonatomic, strong) Pet *pet;
+@property (nonatomic, assign) NSInteger petNumber;
 
 @end

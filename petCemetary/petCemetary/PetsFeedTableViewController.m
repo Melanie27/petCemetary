@@ -6,22 +6,52 @@
 //  Copyright © 2016 melaniemcganney.com. All rights reserved.
 //
 
+#import "PCDataSource.h"
 #import "PetsFeedTableViewController.h"
+#import "PetsFeedTableViewCell.h"
+#import "Pet.h"
+#import "Owner.h"
 
-@interface PetsFeedTableViewController ()
+
+
+@import Firebase;
+@import FirebaseDatabase;
+@import FirebaseStorage;
+
+@interface PetsFeedTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, PetsTableViewCellDelegate>
+
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FIRStorage *storageRef;
+
 
 @end
 
 @implementation PetsFeedTableViewController
 
+//Override the table view controller's initializer to create an empty array
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        
+    }
+    return self;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    [PCDataSource sharedInstance].pftVC = self;
+    [[PCDataSource sharedInstance] retrievePets];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"cell"];
+//       [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"cell"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,23 +67,54 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return 10;
+    
+    return [PCDataSource sharedInstance].petItems.count;
+    //return [PCDataSource sharedInstance].pets.count;
+   
+    
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentifier = @"PetCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
- 
- 
- 
+   
     
-    // Configure the cell...
+      PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    cell.delegate = self;
+    [cell.contentView layoutSubviews];
+    cell.petItem = [PCDataSource sharedInstance].petItems[indexPath.row];
+    //cell.petItem = [PCDataSource sharedInstance].pets[indexPath.row];
+    UIImage *image = cell.petItem.feedImage;
     
-    return cell;
+    if( cell.petItem.feedImage == nil) {
+        NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
+        image = [UIImage imageNamed:imageName];
+    }
+
+    
+    
+    [cell.petImageView setImage:image];
+   
+       return cell;
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
+    UIImage *image = pet.feedImage;
+    
+    if( pet.feedImage == nil) {
+        NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
+        image = [UIImage imageNamed:imageName];
+    }
+    CGFloat height = (image.size.height / image.size.width) * CGRectGetWidth(self.view.frame);
+
+    if (height > 50) {
+        return height;
+    } else {
+        NSLog(@"bad height %f",height);
+        return 100.0;
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.
