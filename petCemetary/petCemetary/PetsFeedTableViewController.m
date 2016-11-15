@@ -23,6 +23,7 @@
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRStorage *storageRef;
+@property (nonatomic, strong)Pet *passPetToProfile;
 
 
 @end
@@ -42,10 +43,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    PCDataSource *ps = [PCDataSource sharedInstance];
     
-    
-    [PCDataSource sharedInstance].pftVC = self;
-    [[PCDataSource sharedInstance] retrievePets];
+    ps.pftVC = self;
+    [ps retrievePets];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -121,7 +122,10 @@
     NSInteger row = indexPath.row;
     Pet *p;
     p = pc.petItems[row];
+    self.passPetToProfile = pc.petItems[row];
+    pc.pet = self.passPetToProfile;
     NSLog(@"pet %@", p);
+    NSLog(@"pc.pet %@", pc.pet);
     [self performSegueWithIdentifier:@"showProfilePage" sender:self];
 }
 
@@ -169,6 +173,7 @@
     if([segue.identifier isEqualToString:@"showProfilePage"]) {
         NSLog(@"holla");
         PetProfileViewController *petProfileVC = (PetProfileViewController*)segue.destinationViewController;
+        petProfileVC.pet = self.passPetToProfile;
        
     }
 }

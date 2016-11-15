@@ -1,5 +1,5 @@
 //
-//  PetPhotosTableViewController.h
+//  AddPetProfileViewController.h
 //  petCemetary
 //
 //  Created by MELANIE MCGANNEY on 11/15/16.
@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Pet;
 
-@interface PetPhotosTableViewController : UITableViewController
-    @property (nonatomic, strong) Pet *pet;
+@interface AddPetProfileViewController : UIViewController
+
 @end

@@ -29,6 +29,8 @@
 		9BBBAF371DDA7DA700E3BD42 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BBBAF361DDA7DA700E3BD42 /* 5.jpg */; };
 		9BBBAF3A1DDAA22800E3BD42 /* PetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBAF391DDAA22800E3BD42 /* PetProfileViewController.m */; };
 		9BBBAF3D1DDB809D00E3BD42 /* PetPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBAF3C1DDB809D00E3BD42 /* PetPhotosTableViewController.m */; };
+		9BBBAF401DDB8AE000E3BD42 /* AddPetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBAF3F1DDB8AE000E3BD42 /* AddPetProfileViewController.m */; };
+		9BBBAF431DDBAF3800E3BD42 /* PetPhotosTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBAF421DDBAF3800E3BD42 /* PetPhotosTableViewCell.m */; };
 		9BDB39591DD63AE0007A5679 /* PCDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB39581DD63AE0007A5679 /* PCDataSource.m */; };
 		9BDB395C1DD63B84007A5679 /* Pet.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDB395B1DD63B84007A5679 /* Pet.m */; };
 /* End PBXBuildFile section */
@@ -89,6 +91,10 @@
 		9BBBAF391DDAA22800E3BD42 /* PetProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetProfileViewController.m; sourceTree = "<group>"; };
 		9BBBAF3B1DDB809D00E3BD42 /* PetPhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetPhotosTableViewController.h; sourceTree = "<group>"; };
 		9BBBAF3C1DDB809D00E3BD42 /* PetPhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetPhotosTableViewController.m; sourceTree = "<group>"; };
+		9BBBAF3E1DDB8AE000E3BD42 /* AddPetProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPetProfileViewController.h; sourceTree = "<group>"; };
+		9BBBAF3F1DDB8AE000E3BD42 /* AddPetProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPetProfileViewController.m; sourceTree = "<group>"; };
+		9BBBAF411DDBAF3800E3BD42 /* PetPhotosTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetPhotosTableViewCell.h; sourceTree = "<group>"; };
+		9BBBAF421DDBAF3800E3BD42 /* PetPhotosTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetPhotosTableViewCell.m; sourceTree = "<group>"; };
 		9BDB39571DD63AE0007A5679 /* PCDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCDataSource.h; sourceTree = "<group>"; };
 		9BDB39581DD63AE0007A5679 /* PCDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCDataSource.m; sourceTree = "<group>"; };
 		9BDB395A1DD63B84007A5679 /* Pet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pet.h; sourceTree = "<group>"; };
@@ -162,6 +168,10 @@
 				9BBBAF391DDAA22800E3BD42 /* PetProfileViewController.m */,
 				9BBBAF3B1DDB809D00E3BD42 /* PetPhotosTableViewController.h */,
 				9BBBAF3C1DDB809D00E3BD42 /* PetPhotosTableViewController.m */,
+				9BBBAF411DDBAF3800E3BD42 /* PetPhotosTableViewCell.h */,
+				9BBBAF421DDBAF3800E3BD42 /* PetPhotosTableViewCell.m */,
+				9BBBAF3E1DDB8AE000E3BD42 /* AddPetProfileViewController.h */,
+				9BBBAF3F1DDB8AE000E3BD42 /* AddPetProfileViewController.m */,
 				9B21FF4F1DD39C51008AC917 /* Main.storyboard */,
 				9B21FF571DD39C51008AC917 /* LaunchScreen.storyboard */,
 				9BDB395A1DD63B84007A5679 /* Pet.h */,
@@ -435,12 +445,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BBBAF431DDBAF3800E3BD42 /* PetPhotosTableViewCell.m in Sources */,
 				9B21FF4E1DD39C51008AC917 /* ViewController.m in Sources */,
 				9BBBAF331DDA3EC900E3BD42 /* Owner.m in Sources */,
 				9BDB395C1DD63B84007A5679 /* Pet.m in Sources */,
 				9BBBAF3A1DDAA22800E3BD42 /* PetProfileViewController.m in Sources */,
 				9BDB39591DD63AE0007A5679 /* PCDataSource.m in Sources */,
 				9B21FF4B1DD39C51008AC917 /* AppDelegate.m in Sources */,
+				9BBBAF401DDB8AE000E3BD42 /* AddPetProfileViewController.m in Sources */,
 				9BBBAF3D1DDB809D00E3BD42 /* PetPhotosTableViewController.m in Sources */,
 				9B21FF481DD39C51008AC917 /* main.m in Sources */,
 				9B5B10131DD615E60014EED6 /* UIViewController+Alerts.m in Sources */,

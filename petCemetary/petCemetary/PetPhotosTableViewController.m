@@ -7,8 +7,11 @@
 //
 
 #import "PetPhotosTableViewController.h"
+#import "PetPhotosTableViewCell.h"
+#import "PCDataSource.h"
+#import "Pet.h"
 
-@interface PetPhotosTableViewController ()
+@interface PetPhotosTableViewController () <PetPhotosTableViewCellDelegate>
 
 @end
 
@@ -16,13 +19,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    pc.pptVC = self;
+    [pc retrievePets];
     self.title = @"Photo Album";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self.tableView registerClass:[PetPhotosTableViewCell class] forCellReuseIdentifier:@"albumCell"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,24 +38,38 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+
+    return [PCDataSource sharedInstance].petAlbumPhotos.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    PetPhotosTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"albumCell" forIndexPath:indexPath];
+    
+    cell.delegate = self;
     
     // Configure the cell...
+    cell.petAlbumItem = [PCDataSource sharedInstance].petItems[indexPath.row];
+    
+    UIImage *image = cell.petAlbumItem.albumImage;
+    
+    if( cell.petAlbumItem.albumImage == nil) {
+        NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
+        image = [UIImage imageNamed:imageName];
+    }
+    
+    
+    
+    [cell.albumPhotoImageView setImage:image];
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.

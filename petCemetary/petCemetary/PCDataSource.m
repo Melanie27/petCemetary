@@ -14,6 +14,7 @@
 @interface PCDataSource ()
     
     @property (nonatomic, strong) NSArray *petItems;
+    @property (nonatomic, strong) NSArray *petAlbumPhotos;
 
 @end
 
@@ -61,9 +62,21 @@
              Pet *pet = [[Pet alloc] init];
              NSLog(@"url %@", snapshot.value[@"pets"][i][@"feedPhoto"]);
              pet.petName = snapshot.value[@"pets"][i][@"pet"];
+             pet.petDOB = snapshot.value[@"pets"][i][@"dateOfBirth"];
+             pet.petDOD = snapshot.value[@"pets"][i][@"dateOfDeath"];
+             pet.petType = snapshot.value[@"pets"][i][@"animalType"];
+             pet.petBreed = snapshot.value[@"pets"][i][@"breed"];
+             pet.petPersonality = snapshot.value[@"pets"][i][@"personality"];
              pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
+             pet.ownerName = snapshot.value[@"pets"][i][@"ownerName"];
              pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
+             
+             
+             
+             
              self.petItems = [self.petItems arrayByAddingObject:pet];
+             
+             
              
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
                  //THIS IS THE STRING TO THE IMAGE WE WANT TO SEE
@@ -87,6 +100,38 @@
                  
                  
              }
+             
+             
+             //this gets all photos for all pets
+             self.petAlbumPhotos = @[];
+             NSInteger numAlbumPhotos = [snapshot.value[@"pets"][i][@"photos"] count];
+             pet.albumPhotos = snapshot.value[@"pets"][i][@"photos"];
+             NSLog(@"album photo array %@", pet.albumPhotos);
+             NSLog(@"num photos %ld", (long)numAlbumPhotos);
+              for (NSInteger i = 1; i < numAlbumPhotos; i++) {
+                  //pet.albumImageString = snapshot.value[@"pets"][i][@"photos"][i][@"photoURL"];
+                  //NSLog(@"album image String %@", pet.albumImageString);
+                  
+                  //DOWNLOAD THE album photos
+                  /*FIRStorage *storage = [FIRStorage storage];
+                  FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
+                  
+                  if (pet.albumImageString != nil) {
+                  
+                      [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                          if (error != nil) {
+                              NSLog(@"download url error");
+                          } else {
+                          //NSLog(@"no download url error %@", URL);
+                          NSData *imageData = [NSData dataWithContentsOfURL:URL];
+                          pet.albumImage = [UIImage imageWithData:imageData];
+                          
+                          }
+                      //[self.pptVC.tableView reloadData];
+                      
+                      }];
+                  }*/
+              }
              
          }
          
