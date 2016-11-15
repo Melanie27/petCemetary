@@ -12,7 +12,7 @@
 #import "Owner.h"
 
 @interface PCDataSource ()
-    @property (nonatomic, strong) NSArray *pets;
+    
     @property (nonatomic, strong) NSArray *petItems;
 
 @end
@@ -33,35 +33,12 @@
     self = [super init];
     
     if (self) {
-        //[self addRandomData];
+    
         [self retrievePets];
     }
     
     return self;
 }
-
-
-- (void) addRandomData {
-    NSMutableArray *randomMediaItems = [NSMutableArray array];
-    
-    for (int i = 1; i <= 10; i++) {
-        NSString *imageName = [NSString stringWithFormat:@"%d.jpg", i];
-        UIImage *image = [UIImage imageNamed:imageName];
-        
-        if (image) {
-            Pet *pet = [[Pet alloc] init];
-            pet.feedImage = image;
-            
-            [randomMediaItems addObject:pet];
-        }
-    }
-    
-    self.petItems = randomMediaItems;
-}
-
-
-
-
 
 
 
@@ -116,8 +93,8 @@
          
          
          
-         NSLog(@"retrieved pets %@", retrievedPets);
-         [self.pftVC.tableView reloadData];
+         
+         //[self.pftVC.tableView reloadData];
         
          
      }];

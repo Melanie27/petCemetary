@@ -48,6 +48,7 @@
                                     <outlet property="petImageButton" destination="Awj-Zb-gyG" id="zIX-Sf-8jB"/>
                                     <outlet property="petImageView" destination="Awj-Zb-gyG" id="K8f-BL-tgb"/>
                                     <outlet property="petNameLabel" destination="4eH-MR-asb" id="0n6-HI-umX"/>
+                                    <segue destination="JWh-gx-xR0" kind="show" identifier="showProfilePage" id="Q0B-Yr-vHT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -63,6 +64,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FGS-H4-lQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3032.8000000000002" y="54.422788605697157"/>
+        </scene>
+        <!--Pet Profile View Controller-->
+        <scene sceneID="0vT-Ts-i5H">
+            <objects>
+                <viewController storyboardIdentifier="PetProfileViewController" id="JWh-gx-xR0" customClass="PetProfileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Nj2-SA-3aP"/>
+                        <viewControllerLayoutGuide type="bottom" id="ijG-6K-gCx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9g4-Pr-OkO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7NO-qm-kJi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3783" y="54"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="yvz-Rt-Epd">

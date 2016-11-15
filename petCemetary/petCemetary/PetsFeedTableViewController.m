@@ -9,6 +9,7 @@
 #import "PCDataSource.h"
 #import "PetsFeedTableViewController.h"
 #import "PetsFeedTableViewCell.h"
+#import "PetProfileViewController.h"
 #import "Pet.h"
 #import "Owner.h"
 
@@ -50,7 +51,7 @@
     
     
     [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"cell"];
-//       [self.tableView registerClass:[PetsFeedTableViewCell class] forCellReuseIdentifier:@"cell"];
+
     
 }
 
@@ -69,20 +70,19 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return [PCDataSource sharedInstance].petItems.count;
-    //return [PCDataSource sharedInstance].pets.count;
    
-    
+
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     
-      PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
     [cell.contentView layoutSubviews];
     cell.petItem = [PCDataSource sharedInstance].petItems[indexPath.row];
-    //cell.petItem = [PCDataSource sharedInstance].pets[indexPath.row];
+    
     UIImage *image = cell.petItem.feedImage;
     
     if( cell.petItem.feedImage == nil) {
@@ -103,7 +103,7 @@
     UIImage *image = pet.feedImage;
     
     if( pet.feedImage == nil) {
-        NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
+        NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }
     CGFloat height = (image.size.height / image.size.width) * CGRectGetWidth(self.view.frame);
@@ -114,6 +114,14 @@
         NSLog(@"bad height %f",height);
         return 100.0;
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    NSInteger row = indexPath.row;
+    Pet *p;
+    p = pc.petItems[row];
+    NSLog(@"pet %@", p);
 }
 
 /*
@@ -150,14 +158,19 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+ //In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"showProfilePage"]) {
+        NSLog(@"holla");
+        PetProfileViewController *petProfileVC = (PetProfileViewController*)segue.destinationViewController;
+       
+    }
 }
-*/
+
 
 @end
