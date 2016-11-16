@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Pet.h"
 @class Pet;
 
 @interface PetPhotosTableViewController : UITableViewController

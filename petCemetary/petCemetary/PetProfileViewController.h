@@ -30,4 +30,6 @@
 
 - (IBAction)addTreat:(id)sender;
 
+- (IBAction)viewMorePhotos:(id)sender;
+
 @end

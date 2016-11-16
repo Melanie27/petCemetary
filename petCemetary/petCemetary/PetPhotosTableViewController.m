@@ -43,7 +43,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+     NSLog(@"count of album items %ld", [PCDataSource sharedInstance].petAlbumItems.count);
     return [PCDataSource sharedInstance].petItems.count;
+   
     //return [PCDataSource sharedInstance].petAlbumPhotos.count;
 }
 

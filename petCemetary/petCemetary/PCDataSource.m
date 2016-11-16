@@ -14,7 +14,7 @@
 @interface PCDataSource ()
     
     @property (nonatomic, strong) NSArray *petItems;
-    @property (nonatomic, strong) NSArray *petAlbumPhotos;
+    @property (nonatomic, strong) NSArray *petAlbumItems;
 
 @end
 
@@ -103,45 +103,43 @@
              
              
              //this gets all photos for all pets
-             self.petAlbumPhotos = @[];
+             self.petAlbumItems = @[];
              NSInteger numAlbumPhotos = [snapshot.value[@"pets"][i][@"photos"] count];
-             pet.albumPhotos = snapshot.value[@"pets"][i][@"photos"];
-             NSLog(@"album photo array %@", pet.albumPhotos);
              NSLog(@"num photos %ld", (long)numAlbumPhotos);
-              for (NSInteger i = 1; i < numAlbumPhotos; i++) {
-                  //pet.albumImageString = snapshot.value[@"pets"][i][@"photos"][i][@"photoURL"];
-                  //NSLog(@"album image String %@", pet.albumImageString);
-                  
-                  //DOWNLOAD THE album photos
-                  /*FIRStorage *storage = [FIRStorage storage];
-                  FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
-                  
-                  if (pet.albumImageString != nil) {
-                  
-                      [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-                          if (error != nil) {
-                              NSLog(@"download url error");
-                          } else {
-                          //NSLog(@"no download url error %@", URL);
-                          NSData *imageData = [NSData dataWithContentsOfURL:URL];
-                          pet.albumImage = [UIImage imageWithData:imageData];
-                          
-                          }
-                      //[self.pptVC.tableView reloadData];
-                      
-                      }];
-                  }*/
-              }
+             pet.albumPhotos = snapshot.value[@"pets"][i][@"photos"];
+             //NSLog(@"album photo array %@", pet.albumPhotos);
+             
+             NSArray *strings = [pet.albumPhotos valueForKey:@"photoUrl"];
+             //NSLog(@"strings %@", strings);
+             
+             for( NSString *photoUrlString in strings) {
+                 
+                 FIRStorage *storage = [FIRStorage storage];
+                 FIRStorageReference *httpsReference2 = [storage referenceForURL:photoUrlString];
+                 NSLog(@"photoUrlString %@", photoUrlString);
+                 if (photoUrlString != nil) {
+                     
+                     [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                         if (error != nil) {
+                             NSLog(@"download url error");
+                             
+                         } else {
+                             NSLog(@"no download album url error %@", URL);
+                             NSData *imageData = [NSData dataWithContentsOfURL:URL];
+                             pet.albumImage = [UIImage imageWithData:imageData];
+                             
+                         }
+                         //[self.pptVC.tableView reloadData];
+                         
+                     }];
+                 }
+                 self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
+             }
+             
+             
              
          }
-         
-         
-         
-         
-         
-         //[self.pftVC.tableView reloadData];
-        
-         
+
      }];
     
     

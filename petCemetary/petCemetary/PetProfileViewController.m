@@ -8,6 +8,7 @@
 
 #import "PCDataSource.h"
 #import "PetProfileViewController.h"
+#import "PetPhotosTableViewController.h"
 #import "Pet.h"
 #import "Owner.h"
 
@@ -25,8 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"Pet Profile Page";
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    pc.profileVC = self;
+    [pc retrievePets];
+    
     // Do any additional setup after loading the view.
-    //PCDataSource *pc = [PCDataSource sharedInstance];
+   
     self.animalNameLabel.text = _pet.petName;
     self.dateOfBirthLabel.text = _pet.petDOB;
     self.dateOfDeathLabel.text = _pet.petDOD;
@@ -93,6 +98,18 @@
     
 }
 
+- (IBAction)viewMorePhotos:(id)sender {
+    UIButton *theButton = (UIButton *)sender;
+    
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    //Pet *p;
+    //p = pc.petAlbumPhotos[theButton.tag];
+    //self.passThisPet = pc.petAlbumPhotos[theButton.tag];
+    pc.pet = self.passThisPet;
+    [self performSegueWithIdentifier:@"albumSegue" sender:self];
+    NSLog(@"this pet for album %@", self.passThisPet);
+}
+
 
 
 #pragma mark - Navigation
@@ -103,9 +120,9 @@
     // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"albumSegue"]) {
         PetPhotosTableViewController *petPhotosTVC = (PetPhotosTableViewController*)segue.destinationViewController;
-        
-        //petPhotosTVC.pet = self.passThisPet;
-        
+        NSLog(@"segue to album");
+      
+        petPhotosTVC.pet = self.passThisPet;
     }
 }
 

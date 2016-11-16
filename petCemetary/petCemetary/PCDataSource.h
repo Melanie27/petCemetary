@@ -13,6 +13,7 @@
 @class PetsFeedTableViewController;
 @class PetsFeedTableViewCell;
 @class PetPhotosTableViewController;
+@class PetProfileViewController;
 @class Pet;
 @class Owner;
 
@@ -24,7 +25,7 @@
 
 +(instancetype) sharedInstance;
 @property (nonatomic, strong, readonly) NSArray *petItems;
-@property (nonatomic, strong, readonly) NSArray *petAlbumPhotos;
+@property (nonatomic, strong, readonly) NSArray *petAlbumItems;
 
 
 //@property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
@@ -32,6 +33,7 @@
 @property (nonatomic, assign) NSInteger petNumber;
 @property (nonatomic, weak) PetsFeedTableViewController *pftVC;
 @property (nonatomic, weak) PetPhotosTableViewController *pptVC;
+@property (nonatomic, weak) PetProfileViewController *profileVC;
 
 -(NSString *)retrievePets;
 @end
