@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddPetProfileViewController : UIViewController
+@interface AddPetProfileViewController : UIViewController <UITextFieldDelegate>
+@property (nonatomic, strong) UIDatePicker *datePicker;
 
 @end
