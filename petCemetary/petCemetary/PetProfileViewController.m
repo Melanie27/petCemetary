@@ -17,7 +17,7 @@
 
 @interface PetProfileViewController ()
     @property (strong, nonatomic) FIRDatabaseReference *ref;
-
+    @property (nonatomic, strong)Pet *passThisPet;
 @end
 
 @implementation PetProfileViewController
@@ -94,14 +94,20 @@
 }
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"albumSegue"]) {
+        PetPhotosTableViewController *petPhotosTVC = (PetPhotosTableViewController*)segue.destinationViewController;
+        
+        //petPhotosTVC.pet = self.passThisPet;
+        
+    }
 }
-*/
+
 
 @end

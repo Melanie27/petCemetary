@@ -17,8 +17,8 @@
 
 @property Pet *petAlbumItem;
 
-@property (strong, nonatomic) IBOutlet UILabel *photoCaptionLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *albumPhotoImageView;
+//@property (strong, nonatomic) IBOutlet UILabel *photoCaptionLabel;
+//@property (strong, nonatomic) IBOutlet UIImageView *albumPhotoImageView;
 
 
 @property (nonatomic, weak) id <PetPhotosTableViewCellDelegate> delegate;

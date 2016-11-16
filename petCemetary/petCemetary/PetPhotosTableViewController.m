@@ -19,14 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    PCDataSource *pc = [PCDataSource sharedInstance];
-    pc.pptVC = self;
-    [pc retrievePets];
+    //PCDataSource *pc = [PCDataSource sharedInstance];
+    //pc.pptVC = self;
+    //[pc retrievePets];
     self.title = @"Photo Album";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    [self.tableView registerClass:[PetPhotosTableViewCell class] forCellReuseIdentifier:@"albumCell"];
+    //[self.tableView registerClass:[PetPhotosTableViewCell class] forCellReuseIdentifier:@"albumCell"];
     
 }
 
@@ -49,7 +49,9 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PetPhotosTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"albumCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"albumCell" forIndexPath:indexPath];
+    
+    /*PetPhotosTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"albumCell" forIndexPath:indexPath];
     
     cell.delegate = self;
     
@@ -61,11 +63,11 @@
     if( cell.petAlbumItem.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
-    }
+    }*/
     
     
     
-    [cell.albumPhotoImageView setImage:image];
+    //[cell.albumPhotoImageView setImage:image];
     
     return cell;
 }

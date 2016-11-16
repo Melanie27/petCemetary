@@ -28,10 +28,10 @@
 -(void) layoutSubviews {
     [super layoutSubviews];
     
-    if (!self.petAlbumItem) {
+    /*if (!self.petAlbumItem) {
         return;
         
-    }
+    }*/
     
     
 }
@@ -48,14 +48,14 @@
 }
 
 //override setter method to update the photo
--(void)setPetAlbumItem:(Pet*)petAlbumItem {
+/*-(void)setPetAlbumItem:(Pet*)petAlbumItem {
     _petAlbumItem = petAlbumItem;
     self.albumPhotoImageView.image = _petAlbumItem.albumImage;
     NSLog(@"pet %@", petAlbumItem);
     //NSLog(@"pet image %@", _petItem.feedImage);
     
     
-}
+}*/
 
 
 @end
