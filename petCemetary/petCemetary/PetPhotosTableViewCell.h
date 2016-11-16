@@ -15,8 +15,8 @@
 
 @interface PetPhotosTableViewCell : UITableViewCell
 
-//@property Pet *petAlbumItem;
-@property (nonatomic, strong) Pet *petItem;
+@property Pet *petAlbumItem;
+//@property (nonatomic, strong) Pet *petItem;
 //@property (strong, nonatomic) IBOutlet UILabel *photoCaptionLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *albumPhotoImageView;
 

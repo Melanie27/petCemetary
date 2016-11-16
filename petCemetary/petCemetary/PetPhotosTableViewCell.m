@@ -16,7 +16,6 @@
     if(self) {
         
         //init code
-        //init code
         self.albumPhotoImageView = [[UIImageView alloc] init];
         for (UIView *view in @[self.albumPhotoImageView]) {
             [self.contentView addSubview:view];
@@ -33,14 +32,14 @@
 -(void) layoutSubviews {
     [super layoutSubviews];
     
-    if (!self.petItem) {
+    if (!self.petAlbumItem) {
         return;
         
     }
     
-    UIImage *image = self.petItem.feedImage;
+    UIImage *image = self.petAlbumItem.albumImage;
     
-    if( self.petItem.feedImage == nil) {
+    if( self.petAlbumItem.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
         image = [UIImage imageNamed:imageName];
     }

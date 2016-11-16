@@ -11,7 +11,7 @@
 #import "PCDataSource.h"
 #import "Pet.h"
 
-@interface PetPhotosTableViewController () <PetPhotosTableViewCellDelegate>
+@interface PetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, PetPhotosTableViewCellDelegate>
 
 @end
 
@@ -44,9 +44,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
      NSLog(@"count of album items %ld", [PCDataSource sharedInstance].petAlbumItems.count);
-    return [PCDataSource sharedInstance].petItems.count;
-   
-    //return [PCDataSource sharedInstance].petAlbumPhotos.count;
+    return [PCDataSource sharedInstance].petAlbumItems.count;
 }
 
 
@@ -59,27 +57,16 @@
     [cell.contentView layoutSubviews];
     
     // Configure the cell...
-    cell.petItem = [PCDataSource sharedInstance].petItems[indexPath.row];
-    //cell.petAlbumItem = [PCDataSource sharedInstance].petItems[indexPath.row];
     
-    UIImage *image = cell.petItem.feedImage;
+    cell.petAlbumItem = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
     
-    if( cell.petItem.feedImage == nil) {
-        NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
-        image = [UIImage imageNamed:imageName];
-    }
-    
-    
-    /*UIImage *image = cell.petAlbumItem.albumImage;
+    UIImage *image = cell.petAlbumItem.albumImage;
     
     if( cell.petAlbumItem.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
-    }*/
+    }
     
-    
-    
-    //[cell.albumPhotoImageView setImage:image];
     [cell.albumPhotoImageView setImage:image];
     
     return cell;
@@ -87,10 +74,10 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
-    UIImage *image = pet.feedImage;
+    Pet *pet = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
+    UIImage *image = pet.albumImage;
     
-    if( pet.feedImage == nil) {
+    if( pet.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }

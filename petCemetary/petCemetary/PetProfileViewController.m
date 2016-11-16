@@ -99,13 +99,13 @@
 }
 
 - (IBAction)viewMorePhotos:(id)sender {
-    UIButton *theButton = (UIButton *)sender;
+    //UIButton *theButton = (UIButton *)sender;
     
-    PCDataSource *pc = [PCDataSource sharedInstance];
+    //PCDataSource *pc = [PCDataSource sharedInstance];
     //Pet *p;
     //p = pc.petAlbumPhotos[theButton.tag];
     //self.passThisPet = pc.petAlbumPhotos[theButton.tag];
-    pc.pet = self.passThisPet;
+    //pc.pet = self.passThisPet;
     [self performSegueWithIdentifier:@"albumSegue" sender:self];
     NSLog(@"this pet for album %@", self.passThisPet);
 }

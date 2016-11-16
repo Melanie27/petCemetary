@@ -8,6 +8,7 @@
 
 #import "PCDataSource.h"
 #import "PetsFeedTableViewController.h"
+#import "PetPhotosTableViewController.h"
 #import "Pet.h"
 #import "Owner.h"
 
@@ -129,7 +130,7 @@
                              pet.albumImage = [UIImage imageWithData:imageData];
                              
                          }
-                         //[self.pptVC.tableView reloadData];
+                         [self.pptVC.tableView reloadData];
                          
                      }];
                  }
