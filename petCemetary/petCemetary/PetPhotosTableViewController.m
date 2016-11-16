@@ -19,14 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //PCDataSource *pc = [PCDataSource sharedInstance];
-    //pc.pptVC = self;
-    //[pc retrievePets];
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    pc.pptVC = self;
+    [pc retrievePets];
     self.title = @"Photo Album";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    //[self.tableView registerClass:[PetPhotosTableViewCell class] forCellReuseIdentifier:@"albumCell"];
+    [self.tableView registerClass:[PetPhotosTableViewCell class] forCellReuseIdentifier:@"albumCell"];
     
 }
 
@@ -43,22 +43,32 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
-    return [PCDataSource sharedInstance].petAlbumPhotos.count;
+    return [PCDataSource sharedInstance].petItems.count;
+    //return [PCDataSource sharedInstance].petAlbumPhotos.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"albumCell" forIndexPath:indexPath];
     
-    /*PetPhotosTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"albumCell" forIndexPath:indexPath];
+    
+    PetPhotosTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"albumCell" forIndexPath:indexPath];
     
     cell.delegate = self;
+    [cell.contentView layoutSubviews];
     
     // Configure the cell...
-    cell.petAlbumItem = [PCDataSource sharedInstance].petItems[indexPath.row];
+    cell.petItem = [PCDataSource sharedInstance].petItems[indexPath.row];
+    //cell.petAlbumItem = [PCDataSource sharedInstance].petItems[indexPath.row];
     
-    UIImage *image = cell.petAlbumItem.albumImage;
+    UIImage *image = cell.petItem.feedImage;
+    
+    if( cell.petItem.feedImage == nil) {
+        NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
+        image = [UIImage imageNamed:imageName];
+    }
+    
+    
+    /*UIImage *image = cell.petAlbumItem.albumImage;
     
     if( cell.petAlbumItem.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
@@ -68,8 +78,28 @@
     
     
     //[cell.albumPhotoImageView setImage:image];
+    [cell.albumPhotoImageView setImage:image];
     
     return cell;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
+    UIImage *image = pet.feedImage;
+    
+    if( pet.feedImage == nil) {
+        NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
+        image = [UIImage imageNamed:imageName];
+    }
+    CGFloat height = (image.size.height / image.size.width) * CGRectGetWidth(self.view.frame);
+    
+    if (height > 50) {
+        return height;
+    } else {
+        NSLog(@"bad height %f",height);
+        return 100.0;
+    }
 }
 
 

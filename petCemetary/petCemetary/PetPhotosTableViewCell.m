@@ -16,6 +16,11 @@
     if(self) {
         
         //init code
+        //init code
+        self.albumPhotoImageView = [[UIImageView alloc] init];
+        for (UIView *view in @[self.albumPhotoImageView]) {
+            [self.contentView addSubview:view];
+        }
        
         
         
@@ -28,10 +33,21 @@
 -(void) layoutSubviews {
     [super layoutSubviews];
     
-    /*if (!self.petAlbumItem) {
+    if (!self.petItem) {
         return;
         
-    }*/
+    }
+    
+    UIImage *image = self.petItem.feedImage;
+    
+    if( self.petItem.feedImage == nil) {
+        NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
+        image = [UIImage imageNamed:imageName];
+    }
+    
+    CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
+    imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
+    self.albumPhotoImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
     
 }
