@@ -12,6 +12,7 @@
 
 @interface PetProfileViewController : UIViewController
 @property (nonatomic, strong) Pet *pet;
+@property (nonatomic, assign) NSInteger petNumber;
 
 @property (strong, nonatomic) IBOutlet UIButton *morePhotosButton;
 @property (strong, nonatomic) IBOutlet UILabel *dateOfBirthLabel;
@@ -25,5 +26,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *animalBreed;
 
 @property (strong, nonatomic) IBOutlet UILabel *ownerNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *treatCountLabel;
+
+- (IBAction)addTreat:(id)sender;
 
 @end
