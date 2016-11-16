@@ -200,7 +200,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="More Photos of PetName"/>
                                 <connections>
-                                    <action selector="viewMorePhotos:" destination="JWh-gx-xR0" eventType="touchUpInside" id="Jwk-aG-EOo"/>
                                     <segue destination="asp-Ic-rjJ" kind="show" identifier="albumSegue" id="P3h-e9-DWC"/>
                                 </connections>
                             </button>
