@@ -12,6 +12,7 @@
 #import "PetProfileViewController.h"
 #import "Pet.h"
 #import "Owner.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 
@@ -84,6 +85,9 @@
     [cell.contentView layoutSubviews];
     cell.petItem = [PCDataSource sharedInstance].petItems[indexPath.row];
     
+    
+    //TODO SDWebImage and Caching
+    NSString *petFeedUrlString = cell.petItem.feedImageString;
     UIImage *image = cell.petItem.feedImage;
     
     if( cell.petItem.feedImage == nil) {
@@ -92,8 +96,9 @@
     }
 
     
-    
-    [cell.petImageView setImage:image];
+    [cell.petImageView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
+                      placeholderImage:[UIImage imageNamed:@"5.jpg"]];
+    //[cell.petImageView setImage:image];
    
        return cell;
 }

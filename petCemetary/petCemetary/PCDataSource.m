@@ -72,7 +72,7 @@
              pet.ownerName = snapshot.value[@"pets"][i][@"ownerName"];
              pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
              pet.treatsNumberString = snapshot.value[@"pets"][i][@"treats"];
-             
+             pet.feedImageURL = snapshot.value[@"pets"][i][@"feedPhoto"];
              
              
              self.petItems = [self.petItems arrayByAddingObject:pet];
