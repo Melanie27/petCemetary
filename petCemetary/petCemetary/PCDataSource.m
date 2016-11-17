@@ -42,6 +42,8 @@
     return self;
 }
 
+
+//TODO - this code is cycling through all pet album photos and then displaying the last one
 -(NSString *)retrievePhotoAlbums {
      self.ref = [[FIRDatabase database] reference];
     
@@ -54,12 +56,13 @@
      withBlock:^(FIRDataSnapshot *snapshot) {
         
          NSLog(@"snapshot %@", snapshot);
-         Pet *pet = [[Pet alloc] init];
-         self.petAlbumItems = @[];
+         
+        self.petAlbumItems = @[];
         self.petItems = @[];
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
-         //NSInteger numAlbumPhotos = [snapshot.value[@"photos"] count];
+         Pet *pet = [[Pet alloc] init];
+             //NSInteger numAlbumPhotos = [snapshot.value[@"photos"] count];
          //NSLog(@"num photos %ld", (long)numAlbumPhotos);
          pet.albumPhotos = snapshot.value[@"photos"];
          NSLog(@"album photo array %@", pet.albumPhotos);
@@ -73,7 +76,7 @@
              //NSLog(@"strings %@", strings);
              
              for( NSString *photoUrlString in strings) {
-                 
+                 Pet *pet = [[Pet alloc] init];
                  FIRStorage *storage = [FIRStorage storage];
                  FIRStorageReference *httpsReference2 = [storage referenceForURL:photoUrlString];
                  NSLog(@"photoUrlString %@", photoUrlString);
@@ -92,10 +95,16 @@
                          [self.pptVC.tableView reloadData];
                          
                      }];
+                 
+                 
                  }
                  self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
+                 
              }
+             
+             
          }
+         
      }];
     
     return retrievedPhotoAlbums;
