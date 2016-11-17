@@ -20,9 +20,8 @@ static NSString * const reuseIdentifier = @"Cell";
 //separate class to manage collection view layout
 -(instancetype) init {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize =CGSizeMake(100,100);
-    //layout.headerReferenceSize = CGSizeMake(300, 200);
-    //layout.footerReferenceSize = CGSizeMake (200, 200);
+    layout.itemSize =CGSizeMake(50,50);
+    
     return [super initWithCollectionViewLayout:layout];
     
 }
@@ -30,14 +29,12 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
-    //self.collectionView.backgroundColor = [UIColor whiteColor];
+   
     UIImage *cancelImage = [UIImage imageNamed:@"x"];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:cancelImage style:UIBarButtonItemStyleDone target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
@@ -51,7 +48,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewWillLayoutSubviews];
     
     CGFloat width = CGRectGetWidth(self.view.frame);
-    CGFloat minWidth = 100;
+    CGFloat minWidth = 50;
     NSInteger divisor = width / minWidth;
     CGFloat cellSize = width / divisor;
     
