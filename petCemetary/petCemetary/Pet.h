@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSNumber *treatsNumber;
 @property (nonatomic, strong) NSString *treatsNumberString;
 
+@property (nonatomic, strong) NSObject *albumPhoto;
 @property (nonatomic, strong) NSArray *albumPhotos;
 @property (nonatomic, strong) NSArray *albumCaptions;
 @property (nonatomic, strong) NSString *albumImageString;
