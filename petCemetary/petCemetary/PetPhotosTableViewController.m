@@ -21,7 +21,7 @@
     [super viewDidLoad];
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.pptVC = self;
-    [pc retrievePets];
+    [pc retrievePhotoAlbums];
     self.title = @"Photo Album";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

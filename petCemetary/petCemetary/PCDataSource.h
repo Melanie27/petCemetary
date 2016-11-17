@@ -36,4 +36,5 @@
 @property (nonatomic, weak) PetProfileViewController *profileVC;
 
 -(NSString *)retrievePets;
+-(NSString *)retrievePhotoAlbums;
 @end
