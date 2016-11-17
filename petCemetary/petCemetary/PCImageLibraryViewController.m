@@ -88,21 +88,7 @@ static NSString * const reuseIdentifier = @"Cell";
     }
 }
 
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    PHAsset *asset = self.result[indexPath.row];
-    
-    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
-    options.synchronous = YES;
-    
-    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage *resultImage, NSDictionary *info)
-     {
-         PCCropImageViewController *cropVC = [[PCCropImageViewController alloc] initWithImage:resultImage];
-         cropVC.delegate = self;
-         [self.navigationController pushViewController:cropVC animated:YES];
-     }];
-    
-}
+
 
 /*
 #pragma mark - Navigation
@@ -162,6 +148,26 @@ static NSString * const reuseIdentifier = @"Cell";
     // Configure the cell
     
     return cell;
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PHAsset *asset = self.result[indexPath.row];
+    
+    PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    options.synchronous = YES;
+    
+    [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage *resultImage, NSDictionary *info)
+     {
+         PCCropImageViewController *cropVC = [[PCCropImageViewController alloc] initWithImage:resultImage];
+         cropVC.delegate = self;
+         [self.navigationController pushViewController:cropVC animated:YES];
+     }];
+    
+}
+
+- (void) cropControllerFinishedWithImage:(UIImage *)croppedImage {
+    [self.delegate imageLibraryViewController:self didCompleteWithImage:croppedImage];
 }
 
 #pragma mark <UICollectionViewDelegate>
