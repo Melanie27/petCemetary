@@ -25,7 +25,7 @@
 
 +(instancetype) sharedInstance;
 @property (nonatomic, strong, readonly) NSArray *petItems;
-@property (nonatomic, strong, readonly) NSArray *petAlbumItems;
+@property (nonatomic, strong, readonly) NSArray<Pet*> *petAlbumItems;
 
 
 //@property (nonatomic, strong, readonly) NSArray<Pet *> *pets;

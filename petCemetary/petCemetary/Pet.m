@@ -10,6 +10,14 @@
 #import "Owner.h"
 
 @implementation Pet
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _albumImages = @[];
+    }
+    return self;
+}
 - (NSString *) newPet {
     
     return @"";

@@ -19,6 +19,7 @@
 @interface PetProfileViewController ()
     @property (strong, nonatomic) FIRDatabaseReference *ref;
     @property (nonatomic, strong)Pet *passThisPet;
+    @property (nonatomic, strong)NSArray *photoAlbumImages;
 @end
 
 @implementation PetProfileViewController
@@ -39,7 +40,9 @@
     self.animalBreed.text = _pet.petBreed;
     self.personalityTextView.text = _pet.petPersonality;
     self.ownerNameLabel.text = _pet.ownerName;
+    //self.photoAlbumImages = _pet.albumImageStrings;
     //self.treatCountLabel.text = _pet.treatsNumberString;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,8 +124,9 @@
     if([segue.identifier isEqualToString:@"albumSegue"]) {
         PetPhotosTableViewController *petPhotosTVC = (PetPhotosTableViewController*)segue.destinationViewController;
         NSLog(@"segue to album");
-      
-        petPhotosTVC.pet = self.passThisPet;
+        
+
+        petPhotosTVC.pet = self.pet;
     }
 }
 

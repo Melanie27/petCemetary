@@ -43,8 +43,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-     NSLog(@"count of album items %ld", [PCDataSource sharedInstance].petAlbumItems.count);
-    return [PCDataSource sharedInstance].petAlbumItems.count;
+     NSLog(@"count of album items %ld", self.pet.albumImageStrings.count);
+    return self.pet.albumImageStrings.count;
 }
 
 
@@ -58,9 +58,9 @@
     
     // Configure the cell...
     
-    cell.petAlbumItem = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
+    cell.petAlbumItem = self.pet;//[PCDataSource sharedInstance].petAlbumItems[indexPath.row];
     
-    UIImage *image = cell.petAlbumItem.albumImage;
+    UIImage *image = cell.petAlbumItem.albumImages[indexPath.row];
     
     if( cell.petAlbumItem.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];

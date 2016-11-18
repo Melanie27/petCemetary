@@ -29,11 +29,12 @@
 @property (nonatomic, strong) NSNumber *treatsNumber;
 @property (nonatomic, strong) NSString *treatsNumberString;
 
-@property (nonatomic, strong) NSObject *albumPhoto;
-@property (nonatomic, strong) NSArray *albumPhotos;
+
 @property (nonatomic, strong) NSArray *albumCaptions;
+@property (nonatomic, strong) NSArray *albumImageStrings;
 @property (nonatomic, strong) NSString *albumImageString;
 @property (nonatomic, strong) UIImage *albumImage;
+@property (nonatomic, strong) NSArray<UIImage*>* albumImages;
 
 - (NSString *) newPet;
 
