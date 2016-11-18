@@ -62,7 +62,7 @@
     NSLog(@"cell.petAlbumItem %@", cell.petAlbumItem );
     cell.petAlbumItem = self.pet;//[PCDataSource sharedInstance].petAlbumItems[indexPath.row];
     
-    NSString *petPhotoUrlString = cell.petAlbumItem.albumImageString;
+    NSString *petPhotoUrlString = cell.petAlbumItem.albumImageStrings[indexPath.row];
     //UIImage *image = cell.petAlbumItem.albumImages[indexPath.row];
     [cell.albumPhotoImageView sd_setImageWithURL:[NSURL URLWithString:petPhotoUrlString]
                          placeholderImage:[UIImage imageNamed:@"5.jpg"]];
