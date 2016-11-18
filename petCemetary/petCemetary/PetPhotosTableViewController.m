@@ -69,16 +69,13 @@
    
     
     
-    
-    //[cell.albumPhotoImageView setImage:image];
-    
     return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     Pet *pet = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
-    UIImage *image = pet.albumImage;
+    UIImage *image = pet.albumImages[indexPath.row];
     
     if( pet.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
