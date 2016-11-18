@@ -127,6 +127,8 @@
         
 
         petPhotosTVC.pet = self.pet;
+        NSLog(@"petphotosTCV.pet %@", petPhotosTVC.pet);
+        NSLog(@"self.pet %@", self.pet);
     }
 }
 

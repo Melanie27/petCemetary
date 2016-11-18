@@ -10,6 +10,7 @@
 #import "PetPhotosTableViewCell.h"
 #import "PCDataSource.h"
 #import "Pet.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, PetPhotosTableViewCellDelegate>
 
@@ -21,7 +22,7 @@
     [super viewDidLoad];
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.pptVC = self;
-    [pc retrievePhotoAlbums];
+    //[pc retrievePhotoAlbums];
     self.title = @"Photo Album";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -43,7 +44,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-     NSLog(@"count of album items %ld", self.pet.albumImageStrings.count);
+     NSLog(@"count of album items %@", self.pet);
     return self.pet.albumImageStrings.count;
 }
 
@@ -57,17 +58,19 @@
     [cell.contentView layoutSubviews];
     
     // Configure the cell...
-    
+    cell.petAlbumItem  = self.pet;
+    NSLog(@"cell.petAlbumItem %@", cell.petAlbumItem );
     cell.petAlbumItem = self.pet;//[PCDataSource sharedInstance].petAlbumItems[indexPath.row];
     
-    UIImage *image = cell.petAlbumItem.albumImages[indexPath.row];
+    NSString *petPhotoUrlString = cell.petAlbumItem.albumImageString;
+    //UIImage *image = cell.petAlbumItem.albumImages[indexPath.row];
+    [cell.albumPhotoImageView sd_setImageWithURL:[NSURL URLWithString:petPhotoUrlString]
+                         placeholderImage:[UIImage imageNamed:@"5.jpg"]];
+   
     
-    if( cell.petAlbumItem.albumImage == nil) {
-        NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
-        image = [UIImage imageNamed:imageName];
-    }
     
-    [cell.albumPhotoImageView setImage:image];
+    
+    //[cell.albumPhotoImageView setImage:image];
     
     return cell;
 }

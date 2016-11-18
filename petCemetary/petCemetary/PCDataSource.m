@@ -44,7 +44,7 @@
 
 
 //TODO - this code is cycling through all pet album photos and then displaying the last one
--(NSString *)retrievePhotoAlbums {
+/*-(NSString *)retrievePhotoAlbums {
      self.ref = [[FIRDatabase database] reference];
     
     FIRDatabaseQuery *getAlbumQuery =  [[self.ref queryOrderedByChild:@"/pets/"]queryLimitedToFirst:10];
@@ -59,7 +59,7 @@
          
         self.petAlbumItems = @[];
         //self.petItems = @[];
-         //NSInteger numPets = [snapshot.value[@"pets"] count];
+         NSInteger numPets = [snapshot.value[@"pets"] count];
          
         // [self retrievePhotoAlbumForPet:];
          for (NSInteger i = 0; i < numPets; i++) {
@@ -84,13 +84,13 @@
                  NSLog(@"photoUrlString %@", photoUrlString);
                  if (photoUrlString != nil) {
                      
-                     /*
+ 
                       - (nonnull FIRStorageDownloadTask *)
                  writeToFile:(nonnull NSURL *)fileURL
                  completion:(nullable void (^)(NSURL *_Nullable, NSError *_Nullable))completion;
-                      */
+                      
                      
-                     [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                     /*[httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
                          if (error != nil) {
                              NSLog(@"download url error");
                              
@@ -118,7 +118,7 @@
      }];
     
     return retrievedPhotoAlbums;
-}
+}*/
 
 -(NSString *)retrievePets {
     
@@ -160,6 +160,18 @@
                  FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
                  NSLog(@"photo string %@", pet.albumImageString);
                  NSLog(@"httpsReference2 %@", httpsReference2);
+                 
+                 [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                     if (error != nil) {
+                         NSLog(@"download url error");
+                     } else {
+                         //NSLog(@"no download url error %@", URL);
+                         NSData *imageData = [NSData dataWithContentsOfURL:URL];
+                         pet.albumImage = [UIImage imageWithData:imageData];
+                     }
+                     [self.pptVC.tableView reloadData];
+                     
+                 }];
              }
              
              
