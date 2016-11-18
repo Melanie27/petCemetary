@@ -153,22 +153,15 @@
              
              pet.albumImages = snapshot.value[@"pets"][i][@"photos"];
              pet.albumImageStrings = [pet.albumImages valueForKey:@"photoUrl"];
-             NSLog(@"pet album image strings %@", pet.albumImageStrings);
+             
              for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
                  FIRStorage *storage = [FIRStorage storage];
                  FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
-                 NSLog(@"photo string %@", pet.albumImageString);
-                 NSLog(@"httpsReference2 %@", httpsReference2);
+                 
                  
                  [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-                     if (error != nil) {
-                         NSLog(@"download url error");
-                     } else {
-                         //NSLog(@"no download url error %@", URL);
-                         NSData *imageData = [NSData dataWithContentsOfURL:URL];
-                         pet.albumImage = [UIImage imageWithData:imageData];
-                     }
+                     
                      [self.pptVC.tableView reloadData];
                      
                  }];
@@ -179,20 +172,14 @@
              
              self.petItems = [self.petItems arrayByAddingObject:pet];
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
-                 //THIS IS THE STRING TO THE IMAGE WE WANT TO SEE
+                
                  
                  FIRStorage *storage = [FIRStorage storage];
                  FIRStorageReference *httpsReference = [storage referenceForURL:pet.feedImageString];
                  
                  
                  [httpsReference downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-                     if (error != nil) {
-                         NSLog(@"download url error");
-                     } else {
-                         //NSLog(@"no download url error %@", URL);
-                         NSData *imageData = [NSData dataWithContentsOfURL:URL];
-                         pet.feedImage = [UIImage imageWithData:imageData];
-                     }
+                    
                      [self.pftVC.tableView reloadData];
 
                  }];
