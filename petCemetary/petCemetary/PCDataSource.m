@@ -43,87 +43,11 @@
 }
 
 
-//TODO - this code is cycling through all pet album photos and then displaying the last one
-/*-(NSString *)retrievePhotoAlbums {
-     self.ref = [[FIRDatabase database] reference];
-    
-    FIRDatabaseQuery *getAlbumQuery =  [[self.ref queryOrderedByChild:@"/pets/"]queryLimitedToFirst:10];
-    
-    NSMutableString *retrievedPhotoAlbums = [[NSMutableString alloc] init];
-    
-    [getAlbumQuery
-     observeEventType:FIRDataEventTypeValue
-     withBlock:^(FIRDataSnapshot *snapshot) {
-        
-         NSLog(@"snapshot %@", snapshot);
-         
-        self.petAlbumItems = @[];
-        //self.petItems = @[];
-         NSInteger numPets = [snapshot.value[@"pets"] count];
-         
-        // [self retrievePhotoAlbumForPet:];
-         for (NSInteger i = 0; i < numPets; i++) {
-             Pet *pet = [[Pet alloc] init];
-             //NSInteger numAlbumPhotos = [snapshot.value[@"photos"] count];
-         //NSLog(@"num photos %ld", (long)numAlbumPhotos);
-             pet.albumImages = snapshot.value[@"photos"];
-             NSLog(@"album photo array %@", pet.albumImages);
-             
-             NSInteger numAlbumPhotos = [snapshot.value[@"pets"][i][@"photos"] count];
-             NSLog(@"num photos %ld", (long)numAlbumPhotos);
-             pet.albumImages = snapshot.value[@"pets"][i][@"photos"];
-             //NSLog(@"album photo array %@", pet.albumPhotos);
-             
-             NSArray *strings = [pet.albumImages valueForKey:@"photoUrl"];
-             NSLog(@"strings %@", strings);
-             
-             for( NSString *photoUrlString in strings) {
-                 Pet *pet = [[Pet alloc] init];
-                 FIRStorage *storage = [FIRStorage storage];
-                 FIRStorageReference *httpsReference2 = [storage referenceForURL:photoUrlString];
-                 NSLog(@"photoUrlString %@", photoUrlString);
-                 if (photoUrlString != nil) {
-                     
- 
-                      - (nonnull FIRStorageDownloadTask *)
-                 writeToFile:(nonnull NSURL *)fileURL
-                 completion:(nullable void (^)(NSURL *_Nullable, NSError *_Nullable))completion;
-                      
-                     
-                     /*[httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-                         if (error != nil) {
-                             NSLog(@"download url error");
-                             
-                         } else {
-                             NSLog(@"no download album url error %@", URL);
-                             NSData *imageData = [NSData dataWithContentsOfURL:URL];
-                             pet.albumImages = [pet.albumImages arrayByAddingObject:[UIImage imageWithData:imageData]];
-                         }
-                         
-                         if (self.pptVC) {
-                             [self.pptVC.tableView reloadData];
-                         }
-                         
-                     }];
-                 
-                 
-                 }
-                 self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
-                 
-             }
-             
-             
-         }
-         
-     }];
-    
-    return retrievedPhotoAlbums;
-}*/
 
 -(NSString *)retrievePets {
     
     self.ref = [[FIRDatabase database] reference];
-    //NSLog(@"db ref %@", self.ref);
+    
     FIRDatabaseQuery *getPetQuery = [[self.ref queryOrderedByChild:@"/pets/"]queryLimitedToFirst:1000];
     NSMutableString *retrievedPets = [[NSMutableString alloc] init];
     
@@ -153,6 +77,11 @@
              
              pet.albumImages = snapshot.value[@"pets"][i][@"photos"];
              pet.albumImageStrings = [pet.albumImages valueForKey:@"photoUrl"];
+             
+             //TODO write to disc??
+             /*- (nonnull FIRStorageDownloadTask *)
+            writeToFile:(nonnull NSURL *)fileURL
+            completion:(nullable void (^)(NSURL *_Nullable, NSError *_Nullable))completion;*/
              
              for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;

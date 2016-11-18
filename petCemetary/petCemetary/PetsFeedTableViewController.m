@@ -98,10 +98,12 @@
     
     [cell.petImageView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
                       placeholderImage:[UIImage imageNamed:@"5.jpg"]];
-    //[cell.petImageView setImage:image];
-   
+    
+    cell.textLabel.text = @"A quote or caption can go here";
        return cell;
 }
+
+
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -112,7 +114,10 @@
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }
-    CGFloat height = (image.size.height / image.size.width) * CGRectGetWidth(self.view.frame);
+    
+   
+    CGFloat height =  [PetsFeedTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
+    
 
     if (height > 50) {
         return height;
@@ -129,8 +134,7 @@
     p = pc.petItems[row];
     self.passPetToProfile = pc.petItems[row];
     pc.pet = self.passPetToProfile;
-    NSLog(@"pet %@", p);
-    NSLog(@"pc.pet %@", pc.pet);
+    
     [self performSegueWithIdentifier:@"showProfilePage" sender:self];
 }
 

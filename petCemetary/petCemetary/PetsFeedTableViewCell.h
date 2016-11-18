@@ -18,6 +18,7 @@
 
 
 @property (nonatomic, strong) Pet *petItem;
++ (CGFloat) heightForPetItem:(Pet *)petItem width:(CGFloat)width;
 
 
 @property (strong, nonatomic) IBOutlet UILabel *petNameLabel;
