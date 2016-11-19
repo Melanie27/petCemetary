@@ -10,9 +10,10 @@
 #import "PetPhotosTableViewCell.h"
 #import "PCDataSource.h"
 #import "Pet.h"
+#import "PCImageLibraryViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface PetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, PetPhotosTableViewCellDelegate>
+@interface PetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, PetPhotosTableViewCellDelegate, PCImageLibraryViewControllerDelegate>
 
 @end
 
@@ -28,6 +29,12 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     [self.tableView registerClass:[PetPhotosTableViewCell class] forCellReuseIdentifier:@"albumCell"];
+    
+    //check if any photo capabilities are available and if so add a camera button
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+        UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraPressed:)];
+        self.navigationItem.rightBarButtonItem = cameraButton;
+    }
     
 }
 
@@ -91,6 +98,37 @@
     }
 }
 
+
+
+#pragma mark - PCImageLibraryViewControllerDelegate
+- (void) cameraPressed:(UIBarButtonItem *) sender {
+    
+    
+    UIViewController *imageVC;
+    
+     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+        PCImageLibraryViewController *imageLibraryVC = [[PCImageLibraryViewController alloc] init];
+        imageLibraryVC.delegate = self;
+        imageVC = imageLibraryVC;
+    }
+    
+    if (imageVC) {
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:imageVC];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
+    
+    return;
+}
+
+- (void) imageLibraryViewController:(PCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image {
+    [imageLibraryViewController dismissViewControllerAnimated:YES completion:^{
+        if (image) {
+            NSLog(@"Got an image!");
+        } else {
+            NSLog(@"Closed without an image.");
+        }
+    }];
+}
 
 /*
 // Override to support conditional editing of the table view.

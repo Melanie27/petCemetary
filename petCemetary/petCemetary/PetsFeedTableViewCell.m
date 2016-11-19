@@ -10,6 +10,7 @@
 #import "Pet.h"
 #import "Owner.h"
 
+
 @interface PetsFeedTableViewCell ()
 
 //@property (nonatomic, strong) UIImageView *petImageView;
@@ -101,5 +102,8 @@
     
     
 }
+
+
+
 
 @end

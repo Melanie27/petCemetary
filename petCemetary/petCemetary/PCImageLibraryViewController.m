@@ -10,7 +10,7 @@
 #import "PCCropImageViewController.h"
 #import <Photos/Photos.h>
 
-@interface PCImageLibraryViewController ()
+@interface PCImageLibraryViewController () <PCCropImageViewControllerDelegate>
     @property (nonatomic, strong) PHFetchResult *result;
 @end
 
@@ -167,6 +167,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (void) cropControllerFinishedWithImage:(UIImage *)croppedImage {
+    NSLog(@"cropped!");
     [self.delegate imageLibraryViewController:self didCompleteWithImage:croppedImage];
 }
 

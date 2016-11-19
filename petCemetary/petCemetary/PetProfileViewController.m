@@ -11,6 +11,8 @@
 #import "PetPhotosTableViewController.h"
 #import "Pet.h"
 #import "Owner.h"
+#import "PCImageLibraryViewController.h"
+#import "PostToAlbumViewController.h"
 
 @import Firebase;
 @import FirebaseDatabase;
@@ -132,5 +134,23 @@
     }
 }
 
+#pragma mark - Images
+- (void) handleImage:(UIImage *)image withNavigationController:(UINavigationController *)nav {
+    if (image) {
+        PostToAlbumViewController *postVC = [[PostToAlbumViewController alloc] initWithImage:image];
+        
+        [nav pushViewController:postVC animated:YES];
+    } else {
+        [nav dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+
+- (void) imageLibraryViewController:(PCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image {
+
+
+    [self handleImage:image withNavigationController:imageLibraryViewController.navigationController];
+
+}
 
 @end
