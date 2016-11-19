@@ -31,10 +31,10 @@
     [self.tableView registerClass:[PetPhotosTableViewCell class] forCellReuseIdentifier:@"albumCell"];
     
     //check if any photo capabilities are available and if so add a camera button
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+    /*if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
         UIBarButtonItem *cameraButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(cameraPressed:)];
         self.navigationItem.rightBarButtonItem = cameraButton;
-    }
+    }*/
     
 }
 
@@ -101,7 +101,7 @@
 
 
 #pragma mark - PCImageLibraryViewControllerDelegate
-- (void) cameraPressed:(UIBarButtonItem *) sender {
+/*- (void) cameraPressed:(UIBarButtonItem *) sender {
     
     
     UIViewController *imageVC;
@@ -128,7 +128,7 @@
             NSLog(@"Closed without an image.");
         }
     }];
-}
+}*/
 
 /*
 // Override to support conditional editing of the table view.

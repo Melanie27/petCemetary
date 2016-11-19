@@ -135,7 +135,7 @@
 }
 
 #pragma mark - Images
-- (void) handleImage:(UIImage *)image withNavigationController:(UINavigationController *)nav {
+/*- (void) handleImage:(UIImage *)image withNavigationController:(UINavigationController *)nav {
     if (image) {
         PostToAlbumViewController *postVC = [[PostToAlbumViewController alloc] initWithImage:image];
         
@@ -151,6 +151,6 @@
 
     [self handleImage:image withNavigationController:imageLibraryViewController.navigationController];
 
-}
+}*/
 
 @end
