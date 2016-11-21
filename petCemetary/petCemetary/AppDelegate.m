@@ -15,6 +15,7 @@
 @import Firebase;
 @import FirebaseDatabase;
 @import FirebaseStorage;
+@import FirebaseAuth;
 
 @implementation AppDelegate
 

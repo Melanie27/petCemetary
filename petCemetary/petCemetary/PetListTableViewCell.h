@@ -15,10 +15,11 @@
 
 @interface PetListTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) Pet *petByOwner;
+@property (nonatomic, strong) Pet *pet;
 @property (strong, nonatomic) IBOutlet UILabel *petNameLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *petThumbnailView;
 + (CGFloat) heightForPetItem:(Pet *)petItem width:(CGFloat)width;
+
 @property (nonatomic, weak) id <PetListTableViewCellDelegate> delegate;
 
 @end

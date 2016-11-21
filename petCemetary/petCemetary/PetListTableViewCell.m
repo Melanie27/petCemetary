@@ -36,30 +36,30 @@
 -(void) layoutSubviews {
     [super layoutSubviews];
     
-    if (!self.petByOwner) {
+    if (!self.pet) {
         return;
         
     }
     
     
-    UIImage *image = self.petByOwner.feedImage;
-    if( self.petByOwner.feedImage == nil) {
+    UIImage *image = self.pet.feedImage;
+    if( self.pet.feedImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
         image = [UIImage imageNamed:imageName];
     }
     
-    CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
-    self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
+    //CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
+    //self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
     
-    imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
-    self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
+    //imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
+    //self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
-    self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petThumbnailView.frame), CGRectGetWidth(self.contentView.bounds),40);
+    //self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petThumbnailView.frame), CGRectGetWidth(self.contentView.bounds),40);
     
 }
 
-+ (CGFloat) heightForPetItem:(Pet *)petByOwner width:(CGFloat)width {
+/*+ (CGFloat) heightForPetItem:(Pet *)petByOwner width:(CGFloat)width {
     // Make a cell
     PetListTableViewCell *layoutCell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     
@@ -74,7 +74,7 @@
     
     // The height will be wherever the bottom of the comments label is
     return CGRectGetMaxY(layoutCell.textLabel.frame);
-}
+}*/
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -84,9 +84,9 @@
 }
 
 //override setter method to update the photo
--(void)setPetByOwner:(Pet*)petByOwner {
-    _petByOwner = petByOwner;
-    self.petThumbnailView.image = _petByOwner.feedImage;
+-(void)setPet:(Pet*)pet {
+    _pet = pet;
+    self.petThumbnailView.image = _pet.feedImage;
    
     
     

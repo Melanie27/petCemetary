@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @import FirebaseDatabase;
 @import FirebaseStorage;
+@import FirebaseAuth;
 
 @class PetsFeedTableViewController;
 @class PetsFeedTableViewCell;

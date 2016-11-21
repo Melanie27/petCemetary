@@ -58,24 +58,19 @@
     PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
     [cell.contentView layoutSubviews];
-    cell.petByOwner = [PCDataSource sharedInstance].petItems[indexPath.row];
-    
+    cell.pet = [PCDataSource sharedInstance].petItems[indexPath.row];
+    //cell.pet.ownerUID
     // Configure the cell...
-    //-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
-    //[[PCDataSource sharedInstance]retrieveUserWithUID:(NSString*)cell.question.askerUID andCompletion:^(Pet *pet) {
    
-
-     //cell.pet = [PCDataSource sharedInstance].petItems[indexPath.row];
-    //[PCDataSource sharedInstance]retrievePetWithUID:(NSString*)cell.pet.ownerUID andCompletion:andCompletion:^(Pet *pet) {
+   
+    [[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)cell.pet.ownerUID andCompletion:^(Pet *pet) {
         
-        
-        //[cell.profilePhoto setImage:user.profilePicture forState:UIControlStateNormal];
-        
-        
-    //}];
+    }];
+    
+    
     
     //TODO SDWebImage and Caching
-    NSString *petFeedUrlString = cell.petByOwner.feedImageString;
+    /*NSString *petFeedUrlString = cell.petByOwner.feedImageString;
     UIImage *image = cell.petByOwner.feedImage;
     
     if( cell.petByOwner.feedImage == nil) {
@@ -85,16 +80,19 @@
     
     
     [cell.petThumbnailView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
-                         placeholderImage:[UIImage imageNamed:@"5.jpg"]];
+                         placeholderImage:[UIImage imageNamed:@"5.jpg"]];*/
     
-    cell.textLabel.text = @"A quote or caption can go here";
+   
+    cell.imageView.image = [UIImage imageNamed:@"5.jpg"];
+    cell.textLabel.text = @"Edit Your pet's album";
+    cell.detailTextLabel.text = @"pet name";
     
     return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
+    /*Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
     UIImage *image = pet.feedImage;
     
     if( pet.feedImage == nil) {
@@ -111,7 +109,9 @@
     } else {
         NSLog(@"bad height %f",height);
         return 100.0;
-    }
+    }*/
+    
+    return 150;
 }
 
 
@@ -123,7 +123,7 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -133,7 +133,7 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

@@ -125,61 +125,46 @@
 }
 
 -(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion {
+    Pet *pet = [[Pet alloc] init];
+    Owner *owner = [[Owner alloc] init];
+    FIRUser *currentUser = [FIRAuth auth].currentUser;
     
+    NSLog(@"currentUSer %@", currentUser.uid);
+    
+    NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
     self.ref = [[FIRDatabase database] reference];
-    
-    FIRDatabaseQuery *getPetsByOwnerQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%@/", uid]] queryLimitedToFirst:10];
+    FIRDatabaseQuery *getPetsByOwnerQuery = [[self.ref queryOrderedByChild:@"/pets/"]queryLimitedToFirst:100];
+    //FIRDatabaseQuery *getPetsByOwnerQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%@/", uid]] queryLimitedToFirst:10];
     [getPetsByOwnerQuery
      observeEventType:FIRDataEventTypeValue
      withBlock:^(FIRDataSnapshot *snapshot) {
          //TODO - loop through the UIDs?
-         Pet *thePet = [[Pet alloc] init];
-         self.petsByOwner = @[];
+        self.petsByOwner = @[];
          NSInteger numPets = [snapshot.value[@"pets"] count];
-         for (NSInteger i = 0; i < numPets; i++) {
-             Pet *pet = [[Pet alloc] init];
-             NSLog(@"url %@", snapshot.value[@"pets"][i][@"feedPhoto"]);
-             pet.petName = snapshot.value[@"pets"][i][@"pet"];
-             pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
-             pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
-             
-             
-             pet.albumImages = snapshot.value[@"pets"][i][@"photos"];
-             pet.albumImageStrings = [pet.albumImages valueForKey:@"photoUrl"];
-             
-             
-             
-             for (NSString *string in pet.albumImageStrings) {
-                 pet.albumImageString = string;
-                 FIRStorage *storage = [FIRStorage storage];
-                 FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
-                 
-                 
-                 [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-                     
-                     [self.pptVC.tableView reloadData];
-                     
-                 }];
-             }
-             
-             self.petItems = [self.petItems arrayByAddingObject:pet];
-             if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
-                 
-                 
-                 FIRStorage *storage = [FIRStorage storage];
-                 FIRStorageReference *httpsReference = [storage referenceForURL:pet.feedImageString];
-                 
-                 
-                 [httpsReference downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-                     
-                     [self.pltVC.tableView reloadData];
-                     
-                 }];
-                 
-                 
-             }
-             
-         }
+         NSLog(@"numPets %ld", (long)numPets);
+          for (NSInteger i = 0; i < numPets; i++) {
+              pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
+              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
+              NSLog(@"currentUSer %@", currentUserString);
+              NSLog(@"petid %@", petString);
+              if( petString == currentUserString) {
+                  //get all the info
+                  NSLog(@"petName %@", pet.petName);
+              }
+          }
+         
+         
+        
+        
+        
+         //TODO find all pets with matching uid
+         self.petItems = @[];
+         
+         
+        
+        
+         
+         
          
      }];
      

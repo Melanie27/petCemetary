@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface Owner : NSObject
-@property (nonatomic, strong) NSString *ownerID;
+@property (nonatomic, strong) NSString *ownerUID;
 @property (nonatomic, strong) NSString *ownerName;
 @end
