@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PetListTableViewController : UITableViewController
+@class Pet;
 
+@interface PetListTableViewController : UITableViewController
+@property (nonatomic, strong) Pet *pet;
 @end

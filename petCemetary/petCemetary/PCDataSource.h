@@ -14,10 +14,11 @@
 @class PetsFeedTableViewCell;
 @class PetPhotosTableViewController;
 @class PetProfileViewController;
+@class PetListTableViewController;
 @class Pet;
 @class Owner;
 
-
+typedef void(^PetRetrievalCompletionBlock)(Pet *pet);
 @interface PCDataSource : NSObject
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
@@ -25,6 +26,7 @@
 
 +(instancetype) sharedInstance;
 @property (nonatomic, strong, readonly) NSArray *petItems;
+@property (nonatomic, strong, readonly) NSArray *petsByOwner;
 @property (nonatomic, strong, readonly) NSArray<Pet*> *petAlbumItems;
 
 
@@ -34,7 +36,8 @@
 @property (nonatomic, weak) PetsFeedTableViewController *pftVC;
 @property (nonatomic, weak) PetPhotosTableViewController *pptVC;
 @property (nonatomic, weak) PetProfileViewController *profileVC;
+@property (nonatomic, weak) PetListTableViewController *pltVC;
 
 -(NSString *)retrievePets;
-
+-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 @end

@@ -9,12 +9,14 @@
 #import "PCDataSource.h"
 #import "PetsFeedTableViewController.h"
 #import "PetPhotosTableViewController.h"
+#import "PetListTableViewController.h"
 #import "Pet.h"
 #import "Owner.h"
 
 @interface PCDataSource ()
     
     @property (nonatomic, strong) NSArray *petItems;
+    @property (nonatomic, strong) NSArray *petsByOwner;
     @property (nonatomic, strong) NSArray *petAlbumItems;
 
 @end
@@ -95,10 +97,7 @@
                      
                  }];
              }
-             
-             
-             
-             
+
              self.petItems = [self.petItems arrayByAddingObject:pet];
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
                 
@@ -122,6 +121,68 @@
     
     
     return retrievedPets;
+    
+}
+
+-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion {
+    
+    self.ref = [[FIRDatabase database] reference];
+    
+    FIRDatabaseQuery *getPetsByOwnerQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%@/", uid]] queryLimitedToFirst:10];
+    [getPetsByOwnerQuery
+     observeEventType:FIRDataEventTypeValue
+     withBlock:^(FIRDataSnapshot *snapshot) {
+         //TODO - loop through the UIDs?
+         Pet *thePet = [[Pet alloc] init];
+         self.petsByOwner = @[];
+         NSInteger numPets = [snapshot.value[@"pets"] count];
+         for (NSInteger i = 0; i < numPets; i++) {
+             Pet *pet = [[Pet alloc] init];
+             NSLog(@"url %@", snapshot.value[@"pets"][i][@"feedPhoto"]);
+             pet.petName = snapshot.value[@"pets"][i][@"pet"];
+             pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
+             pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
+             
+             
+             pet.albumImages = snapshot.value[@"pets"][i][@"photos"];
+             pet.albumImageStrings = [pet.albumImages valueForKey:@"photoUrl"];
+             
+             
+             
+             for (NSString *string in pet.albumImageStrings) {
+                 pet.albumImageString = string;
+                 FIRStorage *storage = [FIRStorage storage];
+                 FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
+                 
+                 
+                 [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                     
+                     [self.pptVC.tableView reloadData];
+                     
+                 }];
+             }
+             
+             self.petItems = [self.petItems arrayByAddingObject:pet];
+             if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
+                 
+                 
+                 FIRStorage *storage = [FIRStorage storage];
+                 FIRStorageReference *httpsReference = [storage referenceForURL:pet.feedImageString];
+                 
+                 
+                 [httpsReference downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                     
+                     [self.pltVC.tableView reloadData];
+                     
+                 }];
+                 
+                 
+             }
+             
+         }
+         
+     }];
+     
     
 }
 
