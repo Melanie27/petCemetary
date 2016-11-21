@@ -27,6 +27,7 @@
 		9B9759031DE0F07E004CE0E5 /* PostToAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9759021DE0F07E004CE0E5 /* PostToAlbumViewController.m */; };
 		9B9759061DE1022B004CE0E5 /* ownerPetPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9759051DE1022B004CE0E5 /* ownerPetPhotosTableViewController.m */; };
 		9B9759091DE103CF004CE0E5 /* OwnerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9759081DE103CF004CE0E5 /* OwnerTableViewCell.m */; };
+		9B97590F1DE3796E004CE0E5 /* PetListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B97590E1DE3796E004CE0E5 /* PetListTableViewController.m */; };
 		9BB12B2B1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BB12B2A1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m */; };
 		9BBBAF271DD642A500E3BD42 /* PetsFeedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBAF261DD642A400E3BD42 /* PetsFeedTableViewCell.m */; };
 		9BBBAF291DDA356C00E3BD42 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9BBBAF281DDA356C00E3BD42 /* 1.jpg */; };
@@ -100,6 +101,8 @@
 		9B9759051DE1022B004CE0E5 /* ownerPetPhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ownerPetPhotosTableViewController.m; sourceTree = "<group>"; };
 		9B9759071DE103CF004CE0E5 /* OwnerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OwnerTableViewCell.h; sourceTree = "<group>"; };
 		9B9759081DE103CF004CE0E5 /* OwnerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OwnerTableViewCell.m; sourceTree = "<group>"; };
+		9B97590D1DE3796E004CE0E5 /* PetListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PetListTableViewController.h; path = ../PetListTableViewController.h; sourceTree = "<group>"; };
+		9B97590E1DE3796E004CE0E5 /* PetListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PetListTableViewController.m; path = ../PetListTableViewController.m; sourceTree = "<group>"; };
 		9BB12B291DD4ED8700EBBBC5 /* PetsFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetsFeedTableViewController.h; sourceTree = "<group>"; };
 		9BB12B2A1DD4ED8700EBBBC5 /* PetsFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PetsFeedTableViewController.m; sourceTree = "<group>"; };
 		9BBBAF251DD642A400E3BD42 /* PetsFeedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PetsFeedTableViewCell.h; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 			children = (
 				9BBBAF301DDA374600E3BD42 /* Images */,
 				9B5B100A1DD558BB0014EED6 /* petCemetary.entitlements */,
+				9B97590D1DE3796E004CE0E5 /* PetListTableViewController.h */,
+				9B97590E1DE3796E004CE0E5 /* PetListTableViewController.m */,
 				9B5B100E1DD612A00014EED6 /* LoginViewController.h */,
 				9B5B100F1DD612A00014EED6 /* LoginViewController.m */,
 				9B5B10111DD615E50014EED6 /* UIViewController+Alerts.h */,
@@ -491,6 +496,7 @@
 				9B9759031DE0F07E004CE0E5 /* PostToAlbumViewController.m in Sources */,
 				9B24E63D1DDD307900B25ECF /* PCImageLibraryViewController.m in Sources */,
 				9BDB395C1DD63B84007A5679 /* Pet.m in Sources */,
+				9B97590F1DE3796E004CE0E5 /* PetListTableViewController.m in Sources */,
 				9BBBAF3A1DDAA22800E3BD42 /* PetProfileViewController.m in Sources */,
 				9BDB39591DD63AE0007A5679 /* PCDataSource.m in Sources */,
 				9B21FF4B1DD39C51008AC917 /* AppDelegate.m in Sources */,
