@@ -12,4 +12,5 @@
 
 @interface PetListTableViewController : UITableViewController
 @property (nonatomic, strong) Pet *pet;
+@property (nonatomic, strong) NSString *ownerUID;
 @end

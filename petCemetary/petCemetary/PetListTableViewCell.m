@@ -48,18 +48,18 @@
         image = [UIImage imageNamed:imageName];
     }
     
-    //CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
-    //self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
+    CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
+    self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
     
-    //imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
-    //self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
+    imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
+    self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
-    //self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petThumbnailView.frame), CGRectGetWidth(self.contentView.bounds),40);
+    self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petThumbnailView.frame), CGRectGetWidth(self.contentView.bounds),40);
     
 }
 
-/*+ (CGFloat) heightForPetItem:(Pet *)petByOwner width:(CGFloat)width {
++ (CGFloat) heightForPetItem:(Pet *)pet width:(CGFloat)width {
     // Make a cell
     PetListTableViewCell *layoutCell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     
@@ -67,14 +67,15 @@
     layoutCell.frame = CGRectMake(0, 0, width, CGFLOAT_MAX);
     
     // Give it the media item
-    layoutCell.petByOwner = petByOwner;
+    layoutCell.pet = pet;
+    //layoutCell.petsByOwner = petByOwner;
     
     // Make it adjust the image view and labels
     [layoutCell layoutSubviews];
     
     // The height will be wherever the bottom of the comments label is
     return CGRectGetMaxY(layoutCell.textLabel.frame);
-}*/
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

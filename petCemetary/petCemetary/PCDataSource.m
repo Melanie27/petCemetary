@@ -126,7 +126,7 @@
 
 -(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion {
     Pet *pet = [[Pet alloc] init];
-    Owner *owner = [[Owner alloc] init];
+    
     FIRUser *currentUser = [FIRAuth auth].currentUser;
     
     NSLog(@"currentUSer %@", currentUser.uid);
@@ -134,38 +134,53 @@
     NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
     self.ref = [[FIRDatabase database] reference];
     FIRDatabaseQuery *getPetsByOwnerQuery = [[self.ref queryOrderedByChild:@"/pets/"]queryLimitedToFirst:100];
-    //FIRDatabaseQuery *getPetsByOwnerQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%@/", uid]] queryLimitedToFirst:10];
+    
     [getPetsByOwnerQuery
      observeEventType:FIRDataEventTypeValue
      withBlock:^(FIRDataSnapshot *snapshot) {
-         //TODO - loop through the UIDs?
+        
         self.petsByOwner = @[];
          NSInteger numPets = [snapshot.value[@"pets"] count];
-         NSLog(@"numPets %ld", (long)numPets);
+         //NSLog(@"numPets %ld", (long)numPets);
           for (NSInteger i = 0; i < numPets; i++) {
               pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
               NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
-              NSLog(@"currentUSer %@", currentUserString);
-              NSLog(@"petid %@", petString);
-              if( petString == currentUserString) {
+              
+             //GET the pets associated with the logged in user
+              if( [petString isEqualToString:currentUserString]) {
                   //get all the info
+                  pet.petName = snapshot.value[@"pets"][i][@"pet"];
+                  pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
                   NSLog(@"petName %@", pet.petName);
+                  NSLog(@"petimage %@", pet.feedImageString);
+                  
+                  for (NSString *string in pet.albumImageStrings) {
+                      pet.albumImageString = string;
+                      FIRStorage *storage = [FIRStorage storage];
+                      FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
+                      
+                      
+                      [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                          if (error != nil) {
+                              NSLog(@"download url error");
+                          } else {
+                              [self.pltVC.tableView reloadData];
+                              completion(pet);
+                          }
+                      }];
+                  }
+                  
+                  
               }
+              
+              
           }
-         
-         
+         self.petsByOwner = [self.petItems arrayByAddingObject:pet];
+         NSLog (@"pets by owner array %@", self.petsByOwner);
+         NSLog (@"pc count %lu", self.petsByOwner.count);
         
-        
-        
-         //TODO find all pets with matching uid
-         self.petItems = @[];
-         
-         
-        
-        
-         
-         
-         
+         NSLog(@"complete?");
+ 
      }];
      
     

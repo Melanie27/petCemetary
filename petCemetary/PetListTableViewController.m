@@ -27,6 +27,9 @@
     PCDataSource *pc = [PCDataSource sharedInstance];
     
     pc.pltVC = self;
+     [[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)_ownerUID andCompletion:^(Pet *pet) {
+         
+     }];
     //[ps retrievePets];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -49,43 +52,50 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //return [PCDataSource sharedInstance].petsByOwner.count;
-    return [PCDataSource sharedInstance].petItems.count;
+    NSLog(@"pets by owner count %lu",  (unsigned long)[PCDataSource sharedInstance].petsByOwner.count);
+         return [PCDataSource sharedInstance].petsByOwner.count;
+    
+    
+    
+    //return [PCDataSource sharedInstance].petItems.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.delegate = self;
-    [cell.contentView layoutSubviews];
-    cell.pet = [PCDataSource sharedInstance].petItems[indexPath.row];
-    //cell.pet.ownerUID
+    //cell.delegate = self;
+    //[cell.contentView layoutSubviews];
+    //cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
+    //NSLog(@"cell pets %@", cell.pet);
     // Configure the cell...
    
    
     [[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)cell.pet.ownerUID andCompletion:^(Pet *pet) {
+        NSLog(@"hello");
+        cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
+        NSLog(@"cell pet %@", cell.pet);
+        cell.textLabel.text = cell.pet.petName;
+       
+        NSString *petFeedUrlString = cell.pet.feedImageString;
+        UIImage *image = cell.pet.feedImage;
+        [cell.petThumbnailView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
+                                 placeholderImage:[UIImage imageNamed:@"5.jpg"]];
         
+        if( cell.pet.feedImage == nil) {
+            NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
+            image = [UIImage imageNamed:imageName];
+        }
     }];
     
     
     
-    //TODO SDWebImage and Caching
-    /*NSString *petFeedUrlString = cell.petByOwner.feedImageString;
-    UIImage *image = cell.petByOwner.feedImage;
     
-    if( cell.petByOwner.feedImage == nil) {
-        NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
-        image = [UIImage imageNamed:imageName];
-    }
-    
-    
-    [cell.petThumbnailView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
-                         placeholderImage:[UIImage imageNamed:@"5.jpg"]];*/
     
    
-    cell.imageView.image = [UIImage imageNamed:@"5.jpg"];
-    cell.textLabel.text = @"Edit Your pet's album";
-    cell.detailTextLabel.text = @"pet name";
+    //cell.imageView.image = [UIImage imageNamed:@"5.jpg"];
+    
+    //cell.textLabel.text = @"Edit Your pet's album";
+    //cell.detailTextLabel.text = @"pet name";
     
     return cell;
 }
