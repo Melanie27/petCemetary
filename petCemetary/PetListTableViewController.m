@@ -27,7 +27,8 @@
     PCDataSource *pc = [PCDataSource sharedInstance];
     
     pc.pltVC = self;
-     [[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)_ownerUID andCompletion:^(Pet *pet) {
+    [pc retrievePets];
+    [[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)_ownerUID andCompletion:^(Pet *pet) {
          
      }];
     //[ps retrievePets];
@@ -53,26 +54,27 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSLog(@"pets by owner count %lu",  (unsigned long)[PCDataSource sharedInstance].petsByOwner.count);
-         return [PCDataSource sharedInstance].petsByOwner.count;
+         //return [PCDataSource sharedInstance].petsByOwner.count;
     
     
     
-    //return [PCDataSource sharedInstance].petItems.count;
+    return [PCDataSource sharedInstance].petItems.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    //cell.delegate = self;
-    //[cell.contentView layoutSubviews];
-    //cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
-    //NSLog(@"cell pets %@", cell.pet);
+   PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
     // Configure the cell...
    
    
     [[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)cell.pet.ownerUID andCompletion:^(Pet *pet) {
         NSLog(@"hello");
+        PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+        cell.delegate = self;
         cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
+        [cell.contentView layoutSubviews];
         NSLog(@"cell pet %@", cell.pet);
         cell.textLabel.text = cell.pet.petName;
        
@@ -85,18 +87,12 @@
             NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
             image = [UIImage imageNamed:imageName];
         }
+        
+        cell.textLabel.text = @"Edit Your pet's album";
+        cell.detailTextLabel.text = @"pet name";
     }];
     
-    
-    
-    
-    
-   
-    //cell.imageView.image = [UIImage imageNamed:@"5.jpg"];
-    
-    //cell.textLabel.text = @"Edit Your pet's album";
-    //cell.detailTextLabel.text = @"pet name";
-    
+
     return cell;
 }
 
