@@ -49,7 +49,7 @@
 -(NSString *)retrievePets {
     
     self.ref = [[FIRDatabase database] reference];
-    
+    FIRUser *currentUser = [FIRAuth auth].currentUser;
     FIRDatabaseQuery *getPetQuery = [[self.ref queryOrderedByChild:@"/pets/"]queryLimitedToFirst:1000];
     NSMutableString *retrievedPets = [[NSMutableString alloc] init];
     
@@ -60,6 +60,7 @@
          //NSLog(@"snapshot %@", snapshot);
          
          self.petItems = @[];
+         
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
              Pet *pet = [[Pet alloc] init];
@@ -84,6 +85,36 @@
              /*- (nonnull FIRStorageDownloadTask *)
             writeToFile:(nonnull NSURL *)fileURL
             completion:(nullable void (^)(NSURL *_Nullable, NSError *_Nullable))completion;*/
+            NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
+            NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
+            self.petsByOwner = @[];
+             if( [petString isEqualToString:currentUserString]) {
+                
+                 //get all the info
+                 pet.petName = snapshot.value[@"pets"][i][@"pet"];
+                 pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
+                 NSLog(@"petName %@", pet.petName);
+                 NSLog(@"petimage %@", pet.feedImageString);
+                 self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+                 for (NSString *string in pet.albumImageStrings) {
+                     pet.albumImageString = string;
+                     FIRStorage *storage = [FIRStorage storage];
+                     FIRStorageReference *httpsReference3 = [storage referenceForURL:pet.albumImageString];
+                     
+                     
+                     [httpsReference3 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                         if (error != nil) {
+                             NSLog(@"download url error");
+                         } else {
+                             [self.pltVC.tableView reloadData];
+                            
+                         }
+                     }];
+                 }
+                 
+                 
+             }
+             //self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
              
              for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
@@ -175,7 +206,7 @@
               
               
           }
-         self.petsByOwner = [self.petItems arrayByAddingObject:pet];
+         self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
          NSLog (@"pets by owner array %@", self.petsByOwner);
          NSLog (@"pc count %lu", self.petsByOwner.count);
         

@@ -28,9 +28,9 @@
     
     pc.pltVC = self;
     [pc retrievePets];
-    [[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)_ownerUID andCompletion:^(Pet *pet) {
+    //[[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)_ownerUID andCompletion:^(Pet *pet) {
          
-     }];
+     //}];
     //[ps retrievePets];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -54,11 +54,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSLog(@"pets by owner count %lu",  (unsigned long)[PCDataSource sharedInstance].petsByOwner.count);
-         //return [PCDataSource sharedInstance].petsByOwner.count;
+         return [PCDataSource sharedInstance].petsByOwner.count;
     
     
     
-    return [PCDataSource sharedInstance].petItems.count;
+    
 }
 
 
@@ -68,10 +68,7 @@
     
     // Configure the cell...
    
-   
-    [[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)cell.pet.ownerUID andCompletion:^(Pet *pet) {
-        NSLog(@"hello");
-        PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
         cell.delegate = self;
         cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
         [cell.contentView layoutSubviews];
@@ -88,9 +85,6 @@
             image = [UIImage imageNamed:imageName];
         }
         
-        cell.textLabel.text = @"Edit Your pet's album";
-        cell.detailTextLabel.text = @"pet name";
-    }];
     
 
     return cell;

@@ -20,6 +20,10 @@
 @class Owner;
 
 typedef void(^PetRetrievalCompletionBlock)(Pet *pet);
+
+
+typedef void (^NewPetCompletionBlock)(NSError *error);
+
 @interface PCDataSource : NSObject
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
@@ -41,4 +45,11 @@ typedef void(^PetRetrievalCompletionBlock)(Pet *pet);
 
 -(NSString *)retrievePets;
 -(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
+
+
+
+
+
+//handle the situation when new pets are posted
+- (void) requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler;
 @end
