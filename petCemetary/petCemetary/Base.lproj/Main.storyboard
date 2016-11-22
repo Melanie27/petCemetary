@@ -67,6 +67,9 @@
                                 <frame key="frameInset" minX="235" minY="576" width="117" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create Album"/>
+                                <connections>
+                                    <segue destination="dG4-pp-4ag" kind="show" identifier="showAlbum" id="XWW-ww-tJj"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Owner Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hWY-fK-1HE">
                                 <frame key="frameInset" minX="16" minY="464" width="336" height="30"/>
@@ -111,11 +114,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="bNQ-3W-Awj">
-                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="tid-sp-975">
-                            <connections>
-                                <segue destination="UDQ-cm-OfM" kind="show" identifier="petListByOwner" id="bGM-ea-mNK"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="bookmarks" id="tid-sp-975"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -129,13 +128,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pRu-g5-NUb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3032.8000000000002" y="-635.53223388305855"/>
+            <point key="canvasLocation" x="4596" y="-1301"/>
         </scene>
         <!--PCImageLibraryViewController-->
         <scene sceneID="rwZ-BJ-VcY">
             <objects>
                 <collectionViewController storyboardIdentifier="PCImageLibraryViewController" title="PCImageLibraryViewController" id="m5d-9B-uuN" customClass="PCImageLibraryViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="4zX-6B-shd">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="4zX-6B-shd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -164,7 +163,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGN-hc-b5L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5065" y="-627"/>
+            <point key="canvasLocation" x="6191" y="-1301"/>
         </scene>
         <!--Owner Pet Photos Table View Controller-->
         <scene sceneID="cGa-Ha-TKu">
@@ -201,7 +200,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh9-GU-2Je" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4415" y="-636"/>
+            <point key="canvasLocation" x="5372" y="-1301"/>
         </scene>
         <!--PetListTableViewController-->
         <scene sceneID="ot0-Sb-2XO">
@@ -232,6 +231,9 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="G1O-py-iGd" kind="show" identifier="editPetProfile" trigger="accessoryAction" id="7h4-SW-zmF"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -241,16 +243,34 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Your Pets" id="8bk-7E-LRt">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="ZKG-pc-Flg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZKG-pc-Flg">
                             <connections>
-                                <segue destination="dG4-pp-4ag" kind="show" identifier="ownerAlbumSegue" id="76e-OP-iWS"/>
+                                <segue destination="udi-lI-Pqx" kind="show" identifier="addPetProfile" id="HFf-8E-bJX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T0l-mA-n16" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3733.5999999999999" y="-636.4317841079461"/>
+            <point key="canvasLocation" x="3798" y="-615"/>
+        </scene>
+        <!--Edit Pet Profile View Controller-->
+        <scene sceneID="Z3W-LV-sEY">
+            <objects>
+                <viewController id="G1O-py-iGd" customClass="EditPetProfileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1vj-sU-1qL"/>
+                        <viewControllerLayoutGuide type="bottom" id="reE-Nz-jWD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UAb-Fb-p3j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jt7-JG-VUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4596" y="-616"/>
         </scene>
         <!--PetsFeedTableViewController-->
         <scene sceneID="eAI-0S-Oup">
@@ -303,9 +323,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Pet Cemetary" id="OwV-wE-AO9">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dM9-FI-Ccy">
+                        <barButtonItem key="rightBarButtonItem" title="My Pets" id="dM9-FI-Ccy">
                             <connections>
-                                <segue destination="udi-lI-Pqx" kind="show" identifier="addPet" id="Qge-SM-dps"/>
+                                <segue destination="UDQ-cm-OfM" kind="show" identifier="addPet" id="Y6n-4r-SIC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -690,7 +710,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3l8-FP-Xfd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Hf-qg-sSd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3Hf-qg-sSd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -18,6 +18,7 @@
 		9B24E63A1DDD2F5A00B25ECF /* CropBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B24E6391DDD2F5A00B25ECF /* CropBox.m */; };
 		9B24E63D1DDD307900B25ECF /* PCImageLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B24E63C1DDD307900B25ECF /* PCImageLibraryViewController.m */; };
 		9B24E6401DDD330800B25ECF /* UIImage+PCImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B24E63F1DDD330800B25ECF /* UIImage+PCImageUtilities.m */; };
+		9B54B3901DE4F2690064E62D /* EditPetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B54B38F1DE4F2690064E62D /* EditPetProfileViewController.m */; };
 		9B5B10091DD551FB0014EED6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B5B10081DD551FB0014EED6 /* GoogleService-Info.plist */; };
 		9B5B10101DD612A00014EED6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B100F1DD612A00014EED6 /* LoginViewController.m */; };
 		9B5B10131DD615E60014EED6 /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B10121DD615E60014EED6 /* UIViewController+Alerts.m */; };
@@ -85,6 +86,8 @@
 		9B24E63C1DDD307900B25ECF /* PCImageLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCImageLibraryViewController.m; sourceTree = "<group>"; };
 		9B24E63E1DDD330800B25ECF /* UIImage+PCImageUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PCImageUtilities.h"; sourceTree = "<group>"; };
 		9B24E63F1DDD330800B25ECF /* UIImage+PCImageUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PCImageUtilities.m"; sourceTree = "<group>"; };
+		9B54B38E1DE4F2690064E62D /* EditPetProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPetProfileViewController.h; sourceTree = "<group>"; };
+		9B54B38F1DE4F2690064E62D /* EditPetProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPetProfileViewController.m; sourceTree = "<group>"; };
 		9B5B10081DD551FB0014EED6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B5B100A1DD558BB0014EED6 /* petCemetary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = petCemetary.entitlements; sourceTree = "<group>"; };
 		9B5B100E1DD612A00014EED6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				9BBBAF421DDBAF3800E3BD42 /* PetPhotosTableViewCell.m */,
 				9BBBAF3E1DDB8AE000E3BD42 /* AddPetProfileViewController.h */,
 				9BBBAF3F1DDB8AE000E3BD42 /* AddPetProfileViewController.m */,
+				9B54B38E1DE4F2690064E62D /* EditPetProfileViewController.h */,
+				9B54B38F1DE4F2690064E62D /* EditPetProfileViewController.m */,
 				9B24E63E1DDD330800B25ECF /* UIImage+PCImageUtilities.h */,
 				9B24E63F1DDD330800B25ECF /* UIImage+PCImageUtilities.m */,
 				9B7746501DDE37D00064A912 /* PCFullScreenViewController.h */,
@@ -506,6 +511,7 @@
 				9BDB39591DD63AE0007A5679 /* PCDataSource.m in Sources */,
 				9B21FF4B1DD39C51008AC917 /* AppDelegate.m in Sources */,
 				9BBBAF401DDB8AE000E3BD42 /* AddPetProfileViewController.m in Sources */,
+				9B54B3901DE4F2690064E62D /* EditPetProfileViewController.m in Sources */,
 				9B9759061DE1022B004CE0E5 /* ownerPetPhotosTableViewController.m in Sources */,
 				9BBBAF3D1DDB809D00E3BD42 /* PetPhotosTableViewController.m in Sources */,
 				9B21FF481DD39C51008AC917 /* main.m in Sources */,
