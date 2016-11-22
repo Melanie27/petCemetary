@@ -61,7 +61,7 @@
      withBlock:^(FIRDataSnapshot *snapshot) {
          //init the array
          //NSLog(@"snapshot %@", snapshot);
-         
+         //TODO - what if someone deletes a pet how to prevent increment holes? 
          self.petItems = @[];
          
          NSInteger numPets = [snapshot.value[@"pets"] count];
