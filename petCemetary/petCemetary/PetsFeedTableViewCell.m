@@ -51,6 +51,8 @@
     if( self.petItem.feedImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
         image = [UIImage imageNamed:imageName];
+    } else {
+        NSLog(@"got image w/ height %f",self.petItem.feedImage.size.height);
     }
 
     CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
@@ -59,7 +61,7 @@
 
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
     
-   self.petImageView.contentMode = UIViewContentModeScaleAspectFit;
+   self.petImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
     
 }

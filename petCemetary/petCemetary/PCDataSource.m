@@ -63,11 +63,11 @@
          //NSLog(@"snapshot %@", snapshot);
          //TODO - what if someone deletes a pet how to prevent increment holes? 
          self.petItems = @[];
-         
+         self.petsByOwner = @[];
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
              Pet *pet = [[Pet alloc] init];
-             NSLog(@"url %@", snapshot.value[@"pets"][i][@"feedPhoto"]);
+             NSLog(@"url from datasource %@", snapshot.value[@"pets"][i][@"feedPhoto"]);
              pet.petName = snapshot.value[@"pets"][i][@"pet"];
              pet.petDOB = snapshot.value[@"pets"][i][@"dateOfBirth"];
              pet.petDOD = snapshot.value[@"pets"][i][@"dateOfDeath"];
@@ -94,7 +94,7 @@
             
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
-             self.petsByOwner = @[];
+             
              if( [petString isEqualToString:currentUserString]) {
                 Pet *pet = [[Pet alloc] init];
                  //get all the info
