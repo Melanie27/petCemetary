@@ -53,6 +53,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //THIS COUNT SHOULD BE 2
     NSLog(@"pets by owner count %lu",  (unsigned long)[PCDataSource sharedInstance].petsByOwner.count);
          return [PCDataSource sharedInstance].petsByOwner.count;
     
@@ -63,7 +64,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   //PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+  
     PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     // Configure the cell...
@@ -73,8 +74,9 @@
         cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
         [cell.contentView layoutSubviews];
         NSLog(@"cell pet %@", cell.pet);
+    
         cell.textLabel.text = cell.pet.petName;
-       
+        cell.detailTextLabel.text = cell.pet.petType;
         NSString *petFeedUrlString = cell.pet.feedImageString;
         UIImage *image = cell.pet.feedImage;
         [cell.petThumbnailView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]

@@ -19,6 +19,9 @@
     @property (nonatomic, strong) NSArray *petsByOwner;
     @property (nonatomic, strong) NSArray *petAlbumItems;
 
+    @property (nonatomic, assign) BOOL isRefreshing;
+    @property (nonatomic, assign) BOOL isLoadingOlderItems;
+
 @end
 
 @implementation PCDataSource
@@ -85,17 +88,20 @@
              /*- (nonnull FIRStorageDownloadTask *)
             writeToFile:(nonnull NSURL *)fileURL
             completion:(nullable void (^)(NSURL *_Nullable, NSError *_Nullable))completion;*/
-            NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
-            NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
-            self.petsByOwner = @[];
+            
+             NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
+             NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
+             self.petsByOwner = @[];
              if( [petString isEqualToString:currentUserString]) {
-                
+                Pet *pet = [[Pet alloc] init];
                  //get all the info
                  pet.petName = snapshot.value[@"pets"][i][@"pet"];
                  pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
                  NSLog(@"petName %@", pet.petName);
                  NSLog(@"petimage %@", pet.feedImageString);
+                 
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+                 NSLog(@"array pets %@", self.petsByOwner);
                  for (NSString *string in pet.albumImageStrings) {
                      pet.albumImageString = string;
                      FIRStorage *storage = [FIRStorage storage];
@@ -111,10 +117,10 @@
                          }
                      }];
                  }
-                 
+                 //self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
                  
              }
-             //self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+             
              
              for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
@@ -155,66 +161,46 @@
     
 }
 
--(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion {
-    Pet *pet = [[Pet alloc] init];
+
+-(void)requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler {
     
-    FIRUser *currentUser = [FIRAuth auth].currentUser;
-    
-    NSLog(@"currentUSer %@", currentUser.uid);
-    
-    NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
-    self.ref = [[FIRDatabase database] reference];
-    FIRDatabaseQuery *getPetsByOwnerQuery = [[self.ref queryOrderedByChild:@"/pets/"]queryLimitedToFirst:100];
-    
-    [getPetsByOwnerQuery
-     observeEventType:FIRDataEventTypeValue
-     withBlock:^(FIRDataSnapshot *snapshot) {
+    if(self.isRefreshing == NO) {
+        self.isRefreshing = YES;
         
-        self.petsByOwner = @[];
-         NSInteger numPets = [snapshot.value[@"pets"] count];
-         //NSLog(@"numPets %ld", (long)numPets);
-          for (NSInteger i = 0; i < numPets; i++) {
-              pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
-              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
-              
-             //GET the pets associated with the logged in user
-              if( [petString isEqualToString:currentUserString]) {
-                  //get all the info
-                  pet.petName = snapshot.value[@"pets"][i][@"pet"];
-                  pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
-                  NSLog(@"petName %@", pet.petName);
-                  NSLog(@"petimage %@", pet.feedImageString);
-                  
-                  for (NSString *string in pet.albumImageStrings) {
-                      pet.albumImageString = string;
-                      FIRStorage *storage = [FIRStorage storage];
-                      FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
-                      
-                      
-                      [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-                          if (error != nil) {
-                              NSLog(@"download url error");
-                          } else {
-                              [self.pltVC.tableView reloadData];
-                              completion(pet);
-                          }
-                      }];
-                  }
-                  
-                  
-              }
-              
-              
-          }
-         self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
-         NSLog (@"pets by owner array %@", self.petsByOwner);
-         NSLog (@"pc count %lu", self.petsByOwner.count);
+        Pet *pet = [[Pet alloc] init];
+        pet.feedImage = [UIImage imageNamed:@"5.jpg"];
+        pet.feedCaption = @"new feed caption";
+        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petItems"];
+        [mutableArrayWithKVO insertObject:pet atIndex:0];
         
-         NSLog(@"complete?");
+        self.isRefreshing = NO;
+        
+        if (completionHandler) {
+            completionHandler(nil);
+        }
+        
+    }
  
-     }];
-     
+}
+
+-(void)requestOldPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler {
     
+    if (self.isLoadingOlderItems == NO) {
+        self.isLoadingOlderItems = YES;
+        
+        Pet *pet = [[Pet alloc] init];
+        pet.feedImage = [UIImage imageNamed:@"5.jpg"];
+        pet.feedCaption = @"old feed caption";
+        
+        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petItems"];
+        [mutableArrayWithKVO addObject:pet];
+        
+        self.isLoadingOlderItems = NO;
+        
+        if (completionHandler) {
+            completionHandler(nil);
+        }
+    }
 }
 
 @end

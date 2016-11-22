@@ -20,8 +20,6 @@
 @class Owner;
 
 typedef void(^PetRetrievalCompletionBlock)(Pet *pet);
-
-
 typedef void (^NewPetCompletionBlock)(NSError *error);
 
 @interface PCDataSource : NSObject
@@ -44,7 +42,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 @property (nonatomic, weak) PetListTableViewController *pltVC;
 
 -(NSString *)retrievePets;
--(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
+//-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 
 
 
@@ -52,4 +50,6 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 
 //handle the situation when new pets are posted
 - (void) requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler;
+//infinite scrolling
+ - (void) requestOldPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler;
 @end
