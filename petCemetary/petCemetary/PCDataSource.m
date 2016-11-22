@@ -83,6 +83,15 @@
              
              pet.albumImages = snapshot.value[@"pets"][i][@"photos"];
              pet.albumImageStrings = [pet.albumImages valueForKey:@"photoUrl"];
+             pet.albumCaptionStrings = [pet.albumImages valueForKey:@"caption"];
+             
+             //Loop through array of captions
+             for (NSString *caption in pet.albumCaptionStrings) {
+                 pet.albumPhotoCaption = caption;
+                  NSLog(@"album caption strings %@", pet.albumCaptionStrings);
+             }
+             
+             
              
              //TODO write to disc??
              /*- (nonnull FIRStorageDownloadTask *)
@@ -120,6 +129,7 @@
                  //self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
                  
              }
+             
              
              
              for (NSString *string in pet.albumImageStrings) {

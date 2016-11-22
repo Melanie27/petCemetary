@@ -16,10 +16,9 @@
 @interface PetPhotosTableViewCell : UITableViewCell
 
 @property Pet *petAlbumItem;
-//@property (nonatomic, strong) Pet *petItem;
-//@property (strong, nonatomic) IBOutlet UILabel *photoCaptionLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *albumPhotoImageView;
 
-//@property (nonatomic, strong) IBOutlet UIImageView *petImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *albumPhotoImageView;
++ (CGFloat) heightForPetItem:(Pet *)petAlbumItem width:(CGFloat)width;
+
 @property (nonatomic, weak) id <PetPhotosTableViewCellDelegate> delegate;
 @end

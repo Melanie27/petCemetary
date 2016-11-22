@@ -66,6 +66,7 @@
     // Configure the cell...
     cell.petAlbumItem  = self.pet;
    
+   
     
     
     NSString *petPhotoUrlString = cell.petAlbumItem.albumImageStrings[indexPath.row];
@@ -75,7 +76,8 @@
    
     
     //TODO get the indiv image caption
-    cell.textLabel.text = cell.petAlbumItem.feedCaption;
+    NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
+    cell.textLabel.text = petCaptionString;
     return cell;
 }
 
@@ -88,8 +90,9 @@
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }
-    CGFloat height = (image.size.height / image.size.width) * CGRectGetWidth(self.view.frame);
-    
+     //CGFloat height =  [PetPhotosTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
+    //TODO - need to impose a max height on all Table cells
+    CGFloat height = 650;
     if (height > 50) {
         return height;
     } else {

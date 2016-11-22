@@ -56,6 +56,23 @@
     
 }
 
++ (CGFloat) heightForPetItem:(Pet *)petAlbumItem width:(CGFloat)width {
+    // Make a cell
+    PetPhotosTableViewCell *layoutCell = [[PetPhotosTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"albumCell"];
+    
+    // Set it to the given width, and the maximum possible height
+    layoutCell.frame = CGRectMake(0, 0, width, CGFLOAT_MAX);
+    
+    // Give it the media item
+    layoutCell.petAlbumItem = petAlbumItem;
+    
+    // Make it adjust the image view and labels
+    [layoutCell layoutSubviews];
+    
+    // The height will be wherever the bottom of the comments label is
+    return CGRectGetMaxY(layoutCell.textLabel.frame);
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -68,13 +85,11 @@
 }
 
 //override setter method to update the photo
--(void)setPetAlbumItem:(Pet*)petAlbumItem {
+/*-(void)setPetAlbumItem:(Pet*)petAlbumItem {
     _petAlbumItem = petAlbumItem;
     self.albumPhotoImageView.image = _petAlbumItem.albumImage;
-    
-    
-
-}
+ 
+}*/
 
 
 @end
