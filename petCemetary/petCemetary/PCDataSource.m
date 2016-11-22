@@ -166,6 +166,35 @@
 }
 
 
+
+/*-(void)addNewPet {
+    Pet *pet = [[Pet alloc] init];
+    NSString *savedPetName = self.petNameTextField.text;
+    NSString *savedAnimalType = self.animalTypeTextField.text;
+    NSString *savedAnimalBreed = self.animalBreedTextField.text;
+    NSString *savedPersonality = self.animalPersonalityTextField.text;
+    NSString *savedOwnerName = self.ownerNameTextField.text;
+    NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
+    self.ref = [[FIRDatabase database] reference];
+    FIRUser *userAuth = [FIRAuth auth].currentUser;
+    NSDictionary *childUpdates = @{
+                                   
+                                   [NSString stringWithFormat:@"/pets/%ld/pet/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedPetName,
+                                   [NSString stringWithFormat:@"/pets/%ld/animalType/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedAnimalType,
+                                   [NSString stringWithFormat:@"/pets/%ld/breed/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedAnimalBreed,
+                                   [NSString stringWithFormat:@"/pets/%ld/personality/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedPersonality,
+                                   [NSString stringWithFormat:@"/pets/%ld/ownerName/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedOwnerName,
+                                   [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:petImageString,
+                                   [NSString stringWithFormat:@"/pets/%ld/UID/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:userAuth.uid
+                                   };
+    
+    [_ref updateChildValues:childUpdates];
+}*/
+
+
+
+
+
 -(void)requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler {
     
     if(self.isRefreshing == NO) {
@@ -206,5 +235,6 @@
         }
     }
 }
+
 
 @end

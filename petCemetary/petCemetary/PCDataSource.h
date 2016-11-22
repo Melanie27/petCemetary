@@ -42,6 +42,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 @property (nonatomic, weak) PetListTableViewController *pltVC;
 
 -(NSString *)retrievePets;
+-(void)addNewPet;
 //-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 
 
