@@ -45,9 +45,14 @@
     }
     
     CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
-    imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
+   
     self.albumPhotoImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
+    self.albumPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
+    
+    self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.albumPhotoImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
     
 }
 
@@ -63,14 +68,13 @@
 }
 
 //override setter method to update the photo
-/*-(void)setPetAlbumItem:(Pet*)petAlbumItem {
+-(void)setPetAlbumItem:(Pet*)petAlbumItem {
     _petAlbumItem = petAlbumItem;
     self.albumPhotoImageView.image = _petAlbumItem.albumImage;
-    NSLog(@"pet %@", petAlbumItem);
-    //NSLog(@"pet image %@", _petItem.feedImage);
     
     
-}*/
+
+}
 
 
 @end

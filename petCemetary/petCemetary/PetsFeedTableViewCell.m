@@ -58,8 +58,8 @@
     
 
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
-    self.petImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
+   self.petImageView.contentMode = UIViewContentModeScaleAspectFit;
     self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
     
 }

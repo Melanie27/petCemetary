@@ -124,7 +124,7 @@
     [cell.petImageView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
                       placeholderImage:[UIImage imageNamed:@"5.jpg"]];
     
-    cell.textLabel.text = @"A quote or caption can go here";
+    cell.textLabel.text = cell.petItem.petName;
        return cell;
 }
 
