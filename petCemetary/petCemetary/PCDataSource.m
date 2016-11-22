@@ -79,17 +79,11 @@
              pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
              pet.treatsNumberString = snapshot.value[@"pets"][i][@"treats"];
              pet.feedImageURL = snapshot.value[@"pets"][i][@"feedPhoto"];
+             pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
+             pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
+             pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
              
-             
-             pet.albumImages = snapshot.value[@"pets"][i][@"photos"];
-             pet.albumImageStrings = [pet.albumImages valueForKey:@"photoUrl"];
-             pet.albumCaptionStrings = [pet.albumImages valueForKey:@"caption"];
-             
-             //Loop through array of captions
-             for (NSString *caption in pet.albumCaptionStrings) {
-                 pet.albumPhotoCaption = caption;
-                  NSLog(@"album caption strings %@", pet.albumCaptionStrings);
-             }
+            
              
              
              

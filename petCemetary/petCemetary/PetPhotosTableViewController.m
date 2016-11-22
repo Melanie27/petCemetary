@@ -84,7 +84,7 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     Pet *pet = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
-    UIImage *image = pet.albumImages[indexPath.row];
+    UIImage *image = pet.albumMedia[indexPath.row];
     
     if( pet.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
