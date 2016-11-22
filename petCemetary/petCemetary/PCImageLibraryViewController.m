@@ -36,7 +36,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // Do any additional setup after loading the view.
    
-    UIImage *cancelImage = [UIImage imageNamed:@"x"];
+    UIImage *cancelImage = [UIImage imageNamed:@"X"];
     UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithImage:cancelImage style:UIBarButtonItemStyleDone target:self action:@selector(cancelPressed:)];
     self.navigationItem.leftBarButtonItem = cancelButton;
 }

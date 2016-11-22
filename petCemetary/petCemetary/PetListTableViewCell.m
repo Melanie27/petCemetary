@@ -65,10 +65,8 @@
     
     // Set it to the given width, and the maximum possible height
     layoutCell.frame = CGRectMake(0, 0, width, CGFLOAT_MAX);
-    
-    // Give it the media item
     layoutCell.pet = pet;
-    //layoutCell.petsByOwner = petByOwner;
+   
     
     // Make it adjust the image view and labels
     [layoutCell layoutSubviews];
