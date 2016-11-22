@@ -63,8 +63,8 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+   //PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     // Configure the cell...
    
@@ -80,7 +80,8 @@
         [cell.petThumbnailView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
                                  placeholderImage:[UIImage imageNamed:@"5.jpg"]];
         
-        if( cell.pet.feedImage == nil) {
+    
+    if( cell.pet.feedImage == nil) {
             NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
             image = [UIImage imageNamed:imageName];
         }
@@ -92,7 +93,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    /*Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
+    Pet *pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
     UIImage *image = pet.feedImage;
     
     if( pet.feedImage == nil) {
@@ -109,9 +110,9 @@
     } else {
         NSLog(@"bad height %f",height);
         return 100.0;
-    }*/
+    }
     
-    return 150;
+   
 }
 
 

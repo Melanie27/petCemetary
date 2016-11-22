@@ -53,7 +53,7 @@
     
     
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
-    self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
+    self.petThumbnailView.frame = CGRectMake(0, 0, 100, 100);
     
     self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petThumbnailView.frame), CGRectGetWidth(self.contentView.bounds),40);
     
