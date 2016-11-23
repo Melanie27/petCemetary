@@ -140,6 +140,8 @@
              }
 
              self.petItems = [self.petItems arrayByAddingObject:pet];
+             
+             //TODO test if what user is uploading is a valid url format and send an alert if it is not
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
                 
                  

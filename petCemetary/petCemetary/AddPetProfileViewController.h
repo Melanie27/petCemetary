@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h> 
 @class Pet;
 
 @interface AddPetProfileViewController : UIViewController <UITextFieldDelegate>
