@@ -120,14 +120,15 @@
         image = [UIImage imageNamed:imageName];
     }
 
-    
+
     [cell.petImageView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
                       placeholderImage:[UIImage imageNamed:@"5.jpg"]
-        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             // set property saving the height and feed image
             // reload just this cell
+            image = cell.petItem.feedImage;
             
-        }
+        }];
     
     cell.textLabel.text = cell.petItem.petName;
        return cell;

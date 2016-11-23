@@ -8,6 +8,7 @@
 
 #import "PetListTableViewController.h"
 #import "PetListTableViewCell.h"
+#import "EditPetProfileViewController.h"
 #import "PCDataSource.h"
 #import "Pet.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -17,7 +18,7 @@
 @import FirebaseStorage;
 
 @interface PetListTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, PetListTableViewCellDelegate>
-
+    @property (nonatomic, strong)Pet *passPetToProfile;
 @end
 
 @implementation PetListTableViewController
@@ -28,10 +29,8 @@
     
     pc.pltVC = self;
     [pc retrievePets];
-    //[[PCDataSource sharedInstance]retrievePetWithUID:(NSString *)_ownerUID andCompletion:^(Pet *pet) {
-         
-     //}];
-    //[ps retrievePets];
+    
+   
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -117,6 +116,17 @@
    
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    NSInteger row = indexPath.row;
+    Pet *p;
+    p = pc.petItems[row];
+    self.passPetToProfile = pc.petItems[row];
+    pc.pet = self.passPetToProfile;
+    
+    [self performSegueWithIdentifier:@"editPetProfile" sender:self];
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -152,14 +162,21 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"editPetProfile"]){
+        EditPetProfileViewController *editProfileVC = (EditPetProfileViewController*)segue.destinationViewController;
+        editProfileVC.pet = self.passPetToProfile;
+        NSLog(@"segue to edit pet");
+    
+    }
+    
 }
-*/
+
 
 @end
