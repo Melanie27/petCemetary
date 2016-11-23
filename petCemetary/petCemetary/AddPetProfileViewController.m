@@ -10,14 +10,10 @@
 #import "PCDataSource.h"
 #import <Photos/Photos.h>
 
-@import Firebase;
-@import FirebaseDatabase;
-@import FirebaseStorage;
-
-@interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UITextFieldDelegate>
-//UIDatePicker *datePicker;
- @property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FIRStorage *storage;
+@interface AddPetProfileViewController () <UIImagePickerControllerDelegate> {
+    UIDatePicker *datePicker;
+    
+}
 @end
 
 @implementation AddPetProfileViewController
@@ -27,7 +23,40 @@
     // Do any additional setup after loading the view.
     self.title = @"Add Pet";
     [[PCDataSource sharedInstance]retrievePets];
+    self.dobTextField.delegate = self;
+    
+    //init date picker and optionally set its initial state
+    datePicker = [[UIDatePicker alloc] init];
+    [datePicker setDate:[NSDate date]];
+    // the date formatter used to convert string to date
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    // the specific format to use
+    dateFormatter.dateFormat = @"dd-MMM-yyyy";
+    // converting string to date
+    // set the mode
+    [datePicker setDatePickerMode:UIDatePickerModeDate];
+    // update the textfield with the date everytime it changes with selector defined below
+    [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+    
+}
 
+
+#pragma mark - date picker
+
+-(void)updateTextField:(id)sender {
+    
+    UIDatePicker *picker = (UIDatePicker*)self.dobTextField.inputView;
+    self.dobTextField.text = [self formatDate:picker.date];
+    NSLog(@"dob text %@", self.dobTextField.text);
+    
+}
+
+-(NSString *)formatDate:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    NSString *formattedDate = [dateFormatter stringFromDate:date];
+    return formattedDate;
 }
 
 - (void)didReceiveMemoryWarning {
