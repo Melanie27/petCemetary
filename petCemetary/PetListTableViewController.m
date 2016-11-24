@@ -108,11 +108,14 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //TODO this is grabbing the wrong pet
-    Pet *p = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
-    self.passPetToProfile = p;
-    //p.pet = self.passPetToProfile;
-    
+    //Only pet name and feed image string are available here
+
+    Pet *petListByOwner = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
+    self.passPetToProfile = petListByOwner;
+   
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    pc.pet = self.passPetToProfile;
+    NSLog(@"pc pet %@", pc.pet);
     [self performSegueWithIdentifier:@"editPetProfile" sender:self];
 }
 

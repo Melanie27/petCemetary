@@ -34,6 +34,11 @@
     NSLog(@"pet name  on edit %@", _pet.petName);
     NSLog(@"pet name  on edit %@", _pet.petDOB);
     NSLog(@"pet name  on edit %@", _pet.petPersonality);
+    NSString *petProfileString = _pet.feedImageString;
+    NSURL *petProfileUrl=[NSURL URLWithString:petProfileString];
+    UIImage *savedProfileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:petProfileUrl]];
+    
+    [self.uploadProfilePhotoButton setBackgroundImage:savedProfileImage forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

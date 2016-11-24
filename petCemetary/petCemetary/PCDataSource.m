@@ -100,8 +100,13 @@
                  //get all the info
                  pet.petName = snapshot.value[@"pets"][i][@"pet"];
                  pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
-                 NSLog(@"petName %@", pet.petName);
-                 NSLog(@"petimage %@", pet.feedImageString);
+                 pet.petPersonality = snapshot.value[@"pets"][i][@"personality"];
+                 pet.ownerName = snapshot.value[@"pets"][i][@"ownerName"];
+                 pet.petDOB = snapshot.value[@"pets"][i][@"dateOfBirth"];
+                 pet.petDOD = snapshot.value[@"pets"][i][@"dateOfDeath"];
+                 pet.petType = snapshot.value[@"pets"][i][@"animalType"];
+                 pet.petBreed = snapshot.value[@"pets"][i][@"breed"];
+                 
                  
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
                  NSLog(@"array pets %@", self.petsByOwner);
