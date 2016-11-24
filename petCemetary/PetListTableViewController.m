@@ -30,11 +30,6 @@
     pc.pltVC = self;
     [pc retrievePets];
     
-   
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
      //self.navigationItem.rightBarButtonItem = self.editButtonItem;
      [self.tableView registerClass:[PetListTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
@@ -52,13 +47,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //THIS COUNT SHOULD BE 2
-    NSLog(@"pets by owner count %lu",  (unsigned long)[PCDataSource sharedInstance].petsByOwner.count);
-         return [PCDataSource sharedInstance].petsByOwner.count;
-    
-    
-    
-    
+   
+    return [PCDataSource sharedInstance].petsByOwner.count;
+
 }
 
 
@@ -72,7 +63,7 @@
         cell.delegate = self;
         cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
         [cell.contentView layoutSubviews];
-        NSLog(@"cell pet %@", cell.pet);
+        //NSLog(@"cell pet %@", cell.pet);
     
         cell.textLabel.text = cell.pet.petName;
         cell.detailTextLabel.text = cell.pet.petType;
@@ -117,12 +108,10 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    PCDataSource *pc = [PCDataSource sharedInstance];
-    NSInteger row = indexPath.row;
-    Pet *p;
-    p = pc.petItems[row];
-    self.passPetToProfile = pc.petItems[row];
-    pc.pet = self.passPetToProfile;
+    //TODO this is grabbing the wrong pet
+    Pet *p = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
+    self.passPetToProfile = p;
+    //p.pet = self.passPetToProfile;
     
     [self performSegueWithIdentifier:@"editPetProfile" sender:self];
 }

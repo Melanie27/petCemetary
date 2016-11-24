@@ -14,11 +14,17 @@
 @interface PetsFeedTableViewCell ()
 
 //@property (nonatomic, strong) UIImageView *petImageView;
-
+@property(nonatomic, strong, )  UILabel *textLabel;
 
 @end
 
+
+
+
+
+
 @implementation PetsFeedTableViewCell
+
 
 
 -(id) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -30,8 +36,6 @@
         for (UIView *view in @[self.petImageView]) {
             [self.contentView addSubview:view];
         }
-    
-        
     }
     
     return self;
@@ -61,8 +65,11 @@
 
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
     
-   self.petImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
+    self.petImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.petNameLabel.frame= CGRectMake(5, CGRectGetMaxY(self.petImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
+    
+    self.textLabel.frame = CGRectMake(5, CGRectGetMaxY(self.petImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
+    
     
 }
 

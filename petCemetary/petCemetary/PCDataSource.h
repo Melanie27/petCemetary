@@ -16,6 +16,7 @@
 @class PetPhotosTableViewController;
 @class PetProfileViewController;
 @class PetListTableViewController;
+@class EditPetProfileViewController;
 @class Pet;
 @class Owner;
 
@@ -40,8 +41,10 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 @property (nonatomic, weak) PetPhotosTableViewController *pptVC;
 @property (nonatomic, weak) PetProfileViewController *profileVC;
 @property (nonatomic, weak) PetListTableViewController *pltVC;
+@property (nonatomic, weak) EditPetProfileViewController *editProfileVC;
 
 -(NSString *)retrievePets;
+
 -(void)addNewPet;
 //-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 

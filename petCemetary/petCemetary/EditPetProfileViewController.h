@@ -7,7 +7,10 @@
 //
 
 #import "AddPetProfileViewController.h"
-
+@class Pet;
 @interface EditPetProfileViewController : AddPetProfileViewController
 @property (nonatomic, strong) Pet *pet;
+
+
+
 @end

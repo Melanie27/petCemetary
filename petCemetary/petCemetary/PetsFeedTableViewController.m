@@ -29,6 +29,7 @@
 
 @end
 
+
 @implementation PetsFeedTableViewController
 
 //Override the table view controller's initializer to create an empty array
@@ -129,9 +130,11 @@
             image = cell.petItem.feedImage;
             
         }];
-    
+   
+    //cell.petNameLabel.text = cell.petItem.petName;
     cell.textLabel.text = cell.petItem.petName;
-       return cell;
+    
+    return cell;
 }
 
 

@@ -9,6 +9,7 @@
 #import "AddPetProfileViewController.h"
 #import "PCDataSource.h"
 #import <Photos/Photos.h>
+#import "Pet.h"
 
 @interface AddPetProfileViewController () <UIImagePickerControllerDelegate> {
     UIDatePicker *datePicker;
@@ -23,6 +24,8 @@
     // Do any additional setup after loading the view.
     self.title = @"Add Pet";
     [[PCDataSource sharedInstance]retrievePets];
+    
+    
     self.dobTextField.delegate = self;
     
     //init date picker and optionally set its initial state

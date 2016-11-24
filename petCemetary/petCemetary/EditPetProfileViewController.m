@@ -7,7 +7,8 @@
 //
 
 #import "EditPetProfileViewController.h"
-
+#import "PCDataSource.h"
+#import "Pet.h"
 @interface EditPetProfileViewController ()
 
 @end
@@ -16,8 +17,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Edit Profile";
+   
     // Do any additional setup after loading the view.
+    self.title = @"Edit Profile";
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    pc.editProfileVC = self;
+    [[PCDataSource sharedInstance] retrievePets];
+    self.petNameTextField.text = _pet.petName;
+    self.dobTextField.text = _pet.petDOB;
+    self.dodTextField.text = _pet.petDOD;
+    self.animalTypeTextField.text = _pet.petType;
+    self.animalBreedTextField.text = _pet.petBreed;
+    self.animalPersonalityTextField.text = _pet.petPersonality;
+    //self.ownerNameTextField.text = _pet.ownerName;
+    _pet.ownerName = self.ownerNameTextField.text;
+    NSLog(@"pet name  on edit %@", _pet.petName);
+    NSLog(@"pet name  on edit %@", _pet.petDOB);
+    NSLog(@"pet name  on edit %@", _pet.petPersonality);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,5 +50,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+-(void)viewWillAppear:(BOOL)animated {
+    self.animalBreedTextField.text = _pet.petBreed;
+}
 
 @end
