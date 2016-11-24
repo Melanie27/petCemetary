@@ -29,11 +29,8 @@
     self.animalTypeTextField.text = _pet.petType;
     self.animalBreedTextField.text = _pet.petBreed;
     self.animalPersonalityTextField.text = _pet.petPersonality;
-    //self.ownerNameTextField.text = _pet.ownerName;
-    _pet.ownerName = self.ownerNameTextField.text;
-    NSLog(@"pet name  on edit %@", _pet.petName);
-    NSLog(@"pet name  on edit %@", _pet.petDOB);
-    NSLog(@"pet name  on edit %@", _pet.petPersonality);
+    self.ownerNameTextField.text = _pet.ownerName;
+   
     NSString *petProfileString = _pet.feedImageString;
     NSURL *petProfileUrl=[NSURL URLWithString:petProfileString];
     UIImage *savedProfileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:petProfileUrl]];
