@@ -10,7 +10,15 @@
 
 @class Pet;
 
+@protocol PetListTableViewControllerDelegate <NSObject>
+//-(void)deleteItemViewController:(PetListTableViewController *)controller didFinishDeletingItem:(Pet *)pet;
+@end
+
 @interface PetListTableViewController : UITableViewController
 @property (nonatomic, strong) Pet *pet;
 @property (nonatomic, strong) NSString *ownerUID;
+@property (nonatomic, strong) Pet *deletedPet;
+
+@property (nonatomic, weak) id <PetListTableViewControllerDelegate> delegate;
+
 @end

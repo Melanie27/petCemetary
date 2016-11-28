@@ -36,6 +36,7 @@
 @property (nonatomic, strong) NSString *albumImageString;
 @property (nonatomic, strong) UIImage *albumImage;
 @property (nonatomic, strong) NSArray *albumMedia;
+@property (nonatomic, strong) NSObject *albumMediaObject;
 
 - (NSString *) newPet;
 

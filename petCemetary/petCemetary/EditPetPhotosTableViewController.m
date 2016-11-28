@@ -33,6 +33,8 @@
     }
     
      [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
+    
+    [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,6 +123,47 @@
         return 100.0;
     }
 }
+
+#pragma mark - Swipe to delete and KVO
+
+//KVO
+- (void) dealloc {
+    [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumPhotos"]) {
+        NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
+        
+        if (kindOfChange == NSKeyValueChangeRemoval) {
+            // Someone set a brand new images array
+            NSLog(@"item deleted");
+            [self.tableView reloadData];
+        }
+        
+        /*else if((kindOfChange = NSKeyValueChangeInsertion)) {
+            NSLog(@"item inserted");
+            [self.tableView reloadData];
+        }*/
+    }
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        //DELETE ALBUM PHOTO
+        PCDataSource *pc = [PCDataSource sharedInstance];
+        NSObject *petPhoto = [pc.albumPhotos objectAtIndex:[indexPath row]];
+        [[PCDataSource sharedInstance] deleteAlbumPhoto:petPhoto];
+        
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }
+}
+
+
 
 
 /*

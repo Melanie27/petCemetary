@@ -177,6 +177,73 @@
 }
 
 
+-(void)deletePet:(Pet *)pet andCompletion:(DeletionCompletionBlock)completion{
+    NSLog(@"delete this pet");
+    NSLog(@"delete this pet %@", pet);
+    NSObject *petToDelete = pet;
+    
+    //get the pet number
+    
+    self.ref = [[FIRDatabase database] reference];
+    [[self.ref child:pet] removeValue];
+    
+    
+    /*[getPetQuery
+     observeEventType:FIRDataEventTypeChildRemoved
+     withBlock:^(FIRDataSnapshot *snapshot) {
+    
+         NSLog(@"log for deletion %@", snapshot.value);
+         
+     }];*/
+}
+
+-(void)deleteAlbumPhoto:(NSObject*)albumPhoto {
+    self.ref = [[FIRDatabase database] reference];
+    FIRUser *currentUser = [FIRAuth auth].currentUser;
+    FIRDatabaseQuery *getPetQuery = [[self.ref queryOrderedByChild:@"/pets/"]queryLimitedToFirst:1000];
+    
+    
+    [getPetQuery
+     observeEventType:FIRDataEventTypeValue
+     withBlock:^(FIRDataSnapshot *snapshot) {
+         self.petItems = @[];
+         self.petsByOwner = @[];
+         NSInteger numPets = [snapshot.value[@"pets"] count];
+        
+         for (NSInteger i = 0; i < numPets; i++) {
+             Pet *pet = [[Pet alloc] init];
+             pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
+             NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
+             NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
+             self.albumPhotos = [[NSMutableArray alloc] init];
+             if( [petString isEqualToString:currentUserString]) {
+                 
+                 pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
+                 pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
+                 pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
+                 //[self.albumPhotos arrayByAddingObject:pet.albumMedia];
+                 NSLog(@"album media array %@", pet.albumMedia);
+                 //NSLog(@"album photos array %@", self.albumPhotos);
+             }
+             
+             self.petItems = [self.petItems arrayByAddingObject:pet];
+         }
+     
+     }];
+    
+    
+    /*NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumPhotos"];
+    if ([mutableArrayWithKVO count] != 0) {
+        NSLog(@"array of photos %@",self.albumPhotos);
+        NSLog(@"mutable array of photos %@", mutableArrayWithKVO);
+        [mutableArrayWithKVO removeObject:albumPhoto];
+        [self.albumPhotos removeObject:albumPhoto];
+    
+        //TODO Update database
+        }*/
+   // NSLog(@"array is null");
+}
+
 
 /*-(void)addNewPet {
     Pet *pet = [[Pet alloc] init];

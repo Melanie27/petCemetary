@@ -132,8 +132,20 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        // Delete the row from the data source Delete Pet
+        PCDataSource *pc = [PCDataSource sharedInstance];
+        Pet *pet = [pc.petItems objectAtIndex:[indexPath row]];
+        //[[PCDataSource sharedInstance] deletePet:pet];
+        
+        [[PCDataSource sharedInstance]deletePet:pet andCompletion:^(NSDictionary *snapshotValue) {
+            
+            NSLog(@"snap from block %@", snapshotValue);
+            //[cell.profilePhoto setImage:user.profilePicture forState:UIControlStateNormal];
+            
+            
+        }];
+        
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   

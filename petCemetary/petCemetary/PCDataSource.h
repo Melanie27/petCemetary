@@ -23,7 +23,7 @@
 
 typedef void(^PetRetrievalCompletionBlock)(Pet *pet);
 typedef void (^NewPetCompletionBlock)(NSError *error);
-
+typedef void(^DeletionCompletionBlock)(NSDictionary *snapshotValue);
 @interface PCDataSource : NSObject
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
@@ -33,6 +33,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 @property (nonatomic, strong, readonly) NSArray *petItems;
 @property (nonatomic, strong, readonly) NSArray *petsByOwner;
 @property (nonatomic, strong, readonly) NSArray<Pet*> *petAlbumItems;
+@property (nonatomic, strong) NSMutableArray *albumPhotos;
 
 
 //@property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
@@ -46,7 +47,8 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 @property (nonatomic, weak) EditPetPhotosTableViewController *editPhotosVC;
 
 -(NSString *)retrievePets;
-
+-(void)deleteAlbumPhoto:(NSObject *)albumPhoto;
+-(void)deletePet:(Pet*)pet andCompletion:(DeletionCompletionBlock)completion;
 //-(void)addNewPet;
 //-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 
