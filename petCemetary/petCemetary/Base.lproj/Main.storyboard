@@ -376,6 +376,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <segue destination="6Vi-Cz-wUg" kind="show" identifier="editPhotosSegue" id="ktB-cP-h94"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DOD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7RY-mR-KVG">
                                 <frame key="frameInset" minX="196" minY="381" width="163" height="30"/>
@@ -411,6 +414,50 @@
             </objects>
             <point key="canvasLocation" x="4606" y="-616"/>
         </scene>
+        <!--Edit Pet Photos Table View Controller-->
+        <scene sceneID="8qb-ni-gM9">
+            <objects>
+                <tableViewController id="6Vi-Cz-wUg" customClass="EditPetPhotosTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="227" sectionHeaderHeight="28" sectionFooterHeight="28" id="hB2-Ih-Mpb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="editCell" rowHeight="227" id="CdN-Uc-ApD" customClass="EditPetPhotosTableViewCell">
+                                <rect key="frame" x="0.0" y="92" width="375" height="227"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CdN-Uc-ApD" id="RXf-iX-TJJ">
+                                    <frame key="frameInset" width="375" height="226"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pet Caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWx-lR-1uE">
+                                            <frame key="frameInset" minX="8" minY="186" width="90" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="5.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="242-3t-TzA">
+                                            <frame key="frameInset" minX="62" minY="33" width="240" height="128"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="petCaptionLabel" destination="cWx-lR-1uE" id="gHR-TS-C3s"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="6Vi-Cz-wUg" id="X37-O8-Z9f"/>
+                            <outlet property="delegate" destination="6Vi-Cz-wUg" id="Hqj-DD-v3K"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="idZ-s1-h6O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5372" y="-616.64167916041981"/>
+        </scene>
         <!--PetsFeedTableViewController-->
         <scene sceneID="eAI-0S-Oup">
             <objects>
@@ -427,37 +474,23 @@
                                     <frame key="frameInset" width="342" height="299"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eH-MR-asb">
-                                            <frame key="frameInset" minX="69" minY="268" width="48" height="23"/>
-                                            <attributedString key="attributedText">
-                                                <fragment content="Label">
-                                                    <attributes>
-                                                        <font key="NSFont" size="18" name="Didot-Bold"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yed-Fd-J7S"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yed-Fd-J7S">
+                                            <frame key="frameInset" minX="54" minY="59" width="240" height="161"/>
+                                        </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Awj-Zb-gyG">
                                             <state key="normal" title="Button"/>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="4eH-MR-asb" firstAttribute="leading" secondItem="yed-Fd-J7S" secondAttribute="leading" id="MTX-NU-51y"/>
                                         <constraint firstItem="Awj-Zb-gyG" firstAttribute="top" secondItem="yed-Fd-J7S" secondAttribute="bottom" constant="3" id="Qwu-tR-HKh"/>
-                                        <constraint firstItem="4eH-MR-asb" firstAttribute="top" secondItem="Hkd-80-RW9" secondAttribute="topMargin" constant="9" id="Sne-RU-SPc"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="yed-Fd-J7S" secondAttribute="trailing" constant="40" id="Svt-kl-lXD"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Awj-Zb-gyG" secondAttribute="bottom" constant="39" id="WRj-Lw-e9K"/>
                                         <constraint firstItem="Awj-Zb-gyG" firstAttribute="leading" secondItem="Hkd-80-RW9" secondAttribute="leading" constant="164" id="XV3-0p-iF5"/>
-                                        <constraint firstItem="4eH-MR-asb" firstAttribute="leading" secondItem="Hkd-80-RW9" secondAttribute="leadingMargin" constant="46" id="Xft-BL-f5W"/>
-                                        <constraint firstItem="yed-Fd-J7S" firstAttribute="top" secondItem="4eH-MR-asb" secondAttribute="bottom" constant="19" id="ra9-KZ-NYq"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="petImageButton" destination="Awj-Zb-gyG" id="zIX-Sf-8jB"/>
                                     <outlet property="petImageView" destination="Awj-Zb-gyG" id="K8f-BL-tgb"/>
-                                    <outlet property="petNameLabel" destination="4eH-MR-asb" id="0n6-HI-umX"/>
                                     <segue destination="JWh-gx-xR0" kind="show" identifier="showProfilePage" id="Q0B-Yr-vHT"/>
                                 </connections>
                             </tableViewCell>

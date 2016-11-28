@@ -23,6 +23,8 @@
 		9B5B10101DD612A00014EED6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B100F1DD612A00014EED6 /* LoginViewController.m */; };
 		9B5B10131DD615E60014EED6 /* UIViewController+Alerts.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B10121DD615E60014EED6 /* UIViewController+Alerts.m */; };
 		9B5B10151DD61A530014EED6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B5B10141DD61A530014EED6 /* Assets.xcassets */; };
+		9B6826971DEC9B3A00494DCB /* EditPetPhotosTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6826961DEC9B3A00494DCB /* EditPetPhotosTableViewController.m */; };
+		9B68269A1DEC9DD600494DCB /* EditPetPhotosTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6826991DEC9DD600494DCB /* EditPetPhotosTableViewCell.m */; };
 		9B7746521DDE37D00064A912 /* PCFullScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7746511DDE37D00064A912 /* PCFullScreenViewController.m */; };
 		9B7746551DDE39E20064A912 /* PCCropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B7746541DDE39E20064A912 /* PCCropImageViewController.m */; };
 		9B9759031DE0F07E004CE0E5 /* PostToAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9759021DE0F07E004CE0E5 /* PostToAlbumViewController.m */; };
@@ -95,6 +97,10 @@
 		9B5B10111DD615E50014EED6 /* UIViewController+Alerts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alerts.h"; sourceTree = "<group>"; };
 		9B5B10121DD615E60014EED6 /* UIViewController+Alerts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alerts.m"; sourceTree = "<group>"; };
 		9B5B10141DD61A530014EED6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9B6826951DEC9B3A00494DCB /* EditPetPhotosTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPetPhotosTableViewController.h; sourceTree = "<group>"; };
+		9B6826961DEC9B3A00494DCB /* EditPetPhotosTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPetPhotosTableViewController.m; sourceTree = "<group>"; };
+		9B6826981DEC9DD600494DCB /* EditPetPhotosTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPetPhotosTableViewCell.h; sourceTree = "<group>"; };
+		9B6826991DEC9DD600494DCB /* EditPetPhotosTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPetPhotosTableViewCell.m; sourceTree = "<group>"; };
 		9B7746501DDE37D00064A912 /* PCFullScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCFullScreenViewController.h; sourceTree = "<group>"; };
 		9B7746511DDE37D00064A912 /* PCFullScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PCFullScreenViewController.m; sourceTree = "<group>"; };
 		9B7746531DDE39E20064A912 /* PCCropImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCCropImageViewController.h; sourceTree = "<group>"; };
@@ -199,10 +205,14 @@
 				9BBBAF391DDAA22800E3BD42 /* PetProfileViewController.m */,
 				9BBBAF3B1DDB809D00E3BD42 /* PetPhotosTableViewController.h */,
 				9BBBAF3C1DDB809D00E3BD42 /* PetPhotosTableViewController.m */,
-				9B9759011DE0F07E004CE0E5 /* PostToAlbumViewController.h */,
-				9B9759021DE0F07E004CE0E5 /* PostToAlbumViewController.m */,
 				9BBBAF411DDBAF3800E3BD42 /* PetPhotosTableViewCell.h */,
 				9BBBAF421DDBAF3800E3BD42 /* PetPhotosTableViewCell.m */,
+				9B6826951DEC9B3A00494DCB /* EditPetPhotosTableViewController.h */,
+				9B6826961DEC9B3A00494DCB /* EditPetPhotosTableViewController.m */,
+				9B6826981DEC9DD600494DCB /* EditPetPhotosTableViewCell.h */,
+				9B6826991DEC9DD600494DCB /* EditPetPhotosTableViewCell.m */,
+				9B9759011DE0F07E004CE0E5 /* PostToAlbumViewController.h */,
+				9B9759021DE0F07E004CE0E5 /* PostToAlbumViewController.m */,
 				9BBBAF3E1DDB8AE000E3BD42 /* AddPetProfileViewController.h */,
 				9BBBAF3F1DDB8AE000E3BD42 /* AddPetProfileViewController.m */,
 				9B54B38E1DE4F2690064E62D /* EditPetProfileViewController.h */,
@@ -502,7 +512,9 @@
 			files = (
 				9BBBAF431DDBAF3800E3BD42 /* PetPhotosTableViewCell.m in Sources */,
 				9B21FF4E1DD39C51008AC917 /* ViewController.m in Sources */,
+				9B6826971DEC9B3A00494DCB /* EditPetPhotosTableViewController.m in Sources */,
 				9BBBAF331DDA3EC900E3BD42 /* Owner.m in Sources */,
+				9B68269A1DEC9DD600494DCB /* EditPetPhotosTableViewCell.m in Sources */,
 				9B9759031DE0F07E004CE0E5 /* PostToAlbumViewController.m in Sources */,
 				9B24E63D1DDD307900B25ECF /* PCImageLibraryViewController.m in Sources */,
 				9BDB395C1DD63B84007A5679 /* Pet.m in Sources */,

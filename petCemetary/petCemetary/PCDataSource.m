@@ -106,6 +106,9 @@
                  pet.petDOD = snapshot.value[@"pets"][i][@"dateOfDeath"];
                  pet.petType = snapshot.value[@"pets"][i][@"animalType"];
                  pet.petBreed = snapshot.value[@"pets"][i][@"breed"];
+                 pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
+                 pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
+                 pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
                  
                  
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
@@ -121,6 +124,7 @@
                              NSLog(@"download url error");
                          } else {
                              [self.pltVC.tableView reloadData];
+                             //[self.editPhotosVC.tableView reloadData];
                             
                          }
                      }];
