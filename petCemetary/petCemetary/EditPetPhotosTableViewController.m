@@ -10,10 +10,16 @@
 #import "EditPetPhotosTableViewCell.h"
 #import "PCDataSource.h"
 #import "Pet.h"
-#import "PCImageLibraryViewController.h"
+//#import "PCImageLibraryViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <Photos/Photos.h>
+@import Firebase;
+@import FirebaseDatabase;
+@import FirebaseStorage;
 
-@interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, PCImageLibraryViewControllerDelegate, EditPetPhotosTableViewCellDelegate>
+@interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, EditPetPhotosTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (strong, nonatomic) FIRStorage *storage;
 
 @end
 
@@ -45,32 +51,63 @@
 #pragma mark - Camera PCImageLibraryViewControllerDelegate
 
 - (void) cameraPressed:(UIBarButtonItem *) sender {
-    
-    
-    UIViewController *imageVC;
-    
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
-        PCImageLibraryViewController *imageLibraryVC = [[PCImageLibraryViewController alloc] init];
-        imageLibraryVC.delegate = self;
-        imageVC = imageLibraryVC;
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+        NSLog(@"trigger the image library");
     }
     
-    if (imageVC) {
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:imageVC];
-        [self presentViewController:nav animated:YES completion:nil];
-    }
-    
-    return;
 }
 
-- (void) imageLibraryViewController:(PCImageLibraryViewController *)imageLibraryViewController didCompleteWithImage:(UIImage *)image {
-    [imageLibraryViewController dismissViewControllerAnimated:YES completion:^{
-        if (image) {
-            NSLog(@"Got an image!");
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //NSLog(@"pick an image %@",info);
+     NSLog(@"pick an image %@",chosenImage);
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    NSURL *petImageURL = info[UIImagePickerControllerReferenceURL];
+    NSString *imagePath = [petImageURL path];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:imagePath];
+    NSURL *docPathUrl = [NSURL fileURLWithPath:getImagePath];
+    NSLog(@"docPathUrl %@", docPathUrl);
+    //FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums"];
+    
+
+    
+    //NSString *localURLString = [docPathUrl path];
+   // NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+    FIRStorageReference *profileRef = [storageRef child:@"theFileName"];
+    NSLog(@"profileRef %@", profileRef);
+    
+    FIRStorageUploadTask *uploadTask = [profileRef putFile:docPathUrl metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+        if (error != nil) {
+            // Uh-oh, an error occurred!
+            NSLog(@"error %@", error);
         } else {
-            NSLog(@"Closed without an image.");
+            // Metadata contains file metadata such as size, content-type, and download URL.
+            NSURL *downloadURL = metadata.downloadURL;
+            NSLog(@"no error %@", downloadURL);
         }
     }];
+    
+   
+    Pet *pet = [[Pet alloc]init];
+    
+    NSDictionary *childUpdates = @{
+     
+     [NSString stringWithFormat:@"/pets/%ld/photos/%ld/", (unsigned long)pet.petNumber, (unsigned long)pet.photoNumber]:petImageURL
+     
+     };
+     
+     [_ref updateChildValues:childUpdates];
 }
 
 #pragma mark - Table view data source

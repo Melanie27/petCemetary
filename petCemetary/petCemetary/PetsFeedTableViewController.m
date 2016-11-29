@@ -168,7 +168,7 @@
     p = pc.petItems[row];
     self.passPetToProfile = pc.petItems[row];
     pc.pet = self.passPetToProfile;
-    
+    pc.petNumber = row;
     [self performSegueWithIdentifier:@"showProfilePage" sender:self];
 }
 

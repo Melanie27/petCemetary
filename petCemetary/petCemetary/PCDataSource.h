@@ -49,6 +49,7 @@ typedef void(^DeletionCompletionBlock)(NSDictionary *snapshotValue);
 -(NSString *)retrievePets;
 -(void)deleteAlbumPhoto:(NSObject *)albumPhoto;
 -(void)deletePet:(Pet*)pet andCompletion:(DeletionCompletionBlock)completion;
+-(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(PetRetrievalCompletionBlock)completion;
 //-(void)addNewPet;
 //-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 

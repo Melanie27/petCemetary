@@ -109,7 +109,7 @@
                  pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
                  pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
-                 
+                 //pet.petNumber = snapshot.value[@"pets"][i];
                  
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
                  NSLog(@"array pets %@", self.petsByOwner);
@@ -175,17 +175,33 @@
     return retrievedPets;
     
 }
+-(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(PetRetrievalCompletionBlock)completion{
 
+    Pet *pet = [[Pet alloc] init];
+    NSLog(@"Got an image!");
+    self.ref = [[FIRDatabase database] reference];
+    NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
+    NSDictionary *childUpdates = @{
+    //get this pet number
+                                   [NSString stringWithFormat:@"/pets/%ld/feedPhoto/%ld", (unsigned long)pet.petNumber,(unsigned long)pet.photoNumber ]:petImageString};
+    //child updates is going to captain, zero image
+    NSLog(@"child updates %@", childUpdates);
+    //[self.ref updateChildValues:childUpdates];
+    
+    //PHAsset *asset = nil;
+
+}
 
 -(void)deletePet:(Pet *)pet andCompletion:(DeletionCompletionBlock)completion{
+    //Pulling in the wrong pet
     NSLog(@"delete this pet");
     NSLog(@"delete this pet %@", pet);
-    NSObject *petToDelete = pet;
+    //NSObject *petToDelete = pet;
     
     //get the pet number
     
     self.ref = [[FIRDatabase database] reference];
-    [[self.ref child:pet] removeValue];
+    //[[self.ref child:pet] removeValue];
     
     
     /*[getPetQuery

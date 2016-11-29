@@ -9,5 +9,5 @@
 #import "PetPhotosTableViewController.h"
 #import "Pet.h"
 @interface EditPetPhotosTableViewController : PetPhotosTableViewController
-
+@property (nonatomic, assign) NSInteger petNumber;
 @end
