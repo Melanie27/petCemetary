@@ -66,9 +66,8 @@
          //TODO - what if someone deletes a pet how to prevent increment holes? 
          self.petItems = @[];
          self.albumPhotos = @[];
-         NSMutableArray *imagesArray = [[NSMutableArray alloc] init];
          self.petsByOwner = @[];
-         //NSInteger numPetsPhotos = [snapshot.value[@"pets"][i][@"feedPhoto"]count];
+         
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
              Pet *pet = [[Pet alloc] init];
@@ -88,20 +87,9 @@
              pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
              pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
              
-            
-             
              //create the array of photos
-             NSInteger numPhotos = pet.albumMedia.count;
-             self.petNumber =  numPhotos;
-             //for(NSInteger i = 0; i < numPhotos; i++) {
-                
-                 
-                 NSURL *imageURL = [NSURL URLWithString:pet.albumImageString];
-                 NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-                 pet.albumImage = [UIImage imageWithData:imageData];
-                 self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
-                 NSLog (@"media count %@", self.albumPhotos);
-            // }
+             self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
+             
              
              //TODO write to disc??
              /*- (nonnull FIRStorageDownloadTask *)
@@ -125,19 +113,11 @@
                  pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
                  pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
-                 //pet.petNumber = snapshot.value[@"pets"][i];
-                  //NSInteger numPhotos = [snapshot.value[@"photos"]count];
-                 //NSLog(@"num photos inner %ld", (long)numPhotos);
-                 //GET A COUNT OF THE NUMBER OF PHOTOS BELONING TO EACH PET
-                 //NSNumber *photosCount = [pet.albumImageString count];
-                 
-                 /**/
-                 
                  
                  
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
                  
-                 NSLog(@"array pets %@", self.petsByOwner);
+                 
                  for (NSString *string in pet.albumImageStrings) {
                      pet.albumImageString = string;
                      FIRStorage *storage = [FIRStorage storage];
@@ -177,8 +157,7 @@
              
              //TODO test if what user is uploading is a valid url format and send an alert if it is not
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
-                
-                 
+            
                  FIRStorage *storage = [FIRStorage storage];
                  FIRStorageReference *httpsReference = [storage referenceForURL:pet.feedImageString];
                  
