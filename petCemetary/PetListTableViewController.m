@@ -55,18 +55,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-    PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
+    //PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath ];
+    PetListTableViewCell *cell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"cell"];
     // Configure the cell...
    
-    
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.delegate = self;
         cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
         [cell.contentView layoutSubviews];
-        //NSLog(@"cell pet %@", cell.pet);
+        
     
         cell.textLabel.text = cell.pet.petName;
-        cell.detailTextLabel.text = cell.pet.petType;
+        cell.detailTextLabel.text = cell.pet.petBreed;
         NSString *petFeedUrlString = cell.pet.feedImageString;
         UIImage *image = cell.pet.feedImage;
         [cell.petThumbnailView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
@@ -115,7 +115,7 @@
    
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.pet = self.passPetToProfile;
-    NSLog(@"pc pet %@", pc.pet);
+    //NSLog(@"pc pet %@", pc.pet);
     [self performSegueWithIdentifier:@"editPetProfile" sender:self];
 }
 

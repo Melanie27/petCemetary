@@ -21,6 +21,7 @@
     if(self) {
         
         //init code
+        
         self.petThumbnailView = [[UIImageView alloc] init];
         for (UIView *view in @[self.petThumbnailView]) {
             [self.contentView addSubview:view];
@@ -51,17 +52,17 @@
     CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
     self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
-    
+     self.petThumbnailView.contentMode = UIViewContentModeScaleAspectFill;
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
-    self.petThumbnailView.frame = CGRectMake(0, 0, 100, 100);
+    self.petThumbnailView.frame = CGRectMake(20, 10, 120, 80);
     
-    self.textLabel.frame = CGRectMake(CGRectGetMaxX(self.petThumbnailView.frame), 5, CGRectGetWidth(self.contentView.bounds),40);
-    self.detailTextLabel.frame = CGRectMake(CGRectGetMaxX(self.textLabel.frame), CGRectGetMaxY(self.petThumbnailView.frame), CGRectGetWidth(self.contentView.bounds),40);
+    self.textLabel.frame = CGRectMake(160, 5, CGRectGetWidth(self.contentView.bounds),40);
+    self.detailTextLabel.frame = CGRectMake(160, CGRectGetMaxY(self.textLabel.frame), CGRectGetWidth(self.contentView.bounds),40);
 }
 
 + (CGFloat) heightForPetItem:(Pet *)pet width:(CGFloat)width {
     // Make a cell
-    PetListTableViewCell *layoutCell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    PetListTableViewCell *layoutCell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     
     // Set it to the given width, and the maximum possible height
     layoutCell.frame = CGRectMake(0, 0, width, CGFLOAT_MAX);

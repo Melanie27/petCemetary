@@ -29,7 +29,7 @@
     self.dodTextField.text = _pet.petDOD;
     self.animalTypeTextField.text = _pet.petType;
     self.animalBreedTextField.text = _pet.petBreed;
-    self.animalPersonalityTextField.text = _pet.petPersonality;
+    self.animalPersonalityTextView.text = _pet.petPersonality;
     self.ownerNameTextField.text = _pet.ownerName;
    
     NSString *petProfileString = _pet.feedImageString;

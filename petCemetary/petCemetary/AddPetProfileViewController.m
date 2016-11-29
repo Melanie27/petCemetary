@@ -99,7 +99,7 @@
     NSString *savedPetName = self.petNameTextField.text;
     NSString *savedAnimalType = self.animalTypeTextField.text;
     NSString *savedAnimalBreed = self.animalBreedTextField.text;
-    NSString *savedPersonality = self.animalPersonalityTextField.text;
+    NSString *savedPersonality = self.animalPersonalityTextView.text;
     NSString *savedOwnerName = self.ownerNameTextField.text;
     NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
     self.ref = [[FIRDatabase database] reference];
