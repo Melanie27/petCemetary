@@ -95,7 +95,7 @@
         }
     }];
     
-    
+    NSLog(@"uploadTask %@", uploadTask);
     Pet *pet = [[Pet alloc]init];
     
     NSDictionary *childUpdates = @{

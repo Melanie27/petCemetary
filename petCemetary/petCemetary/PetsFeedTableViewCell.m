@@ -14,7 +14,7 @@
 @interface PetsFeedTableViewCell ()
 
 //@property (nonatomic, strong) UIImageView *petImageView;
-@property(nonatomic, strong, )  UILabel *textLabel;
+//@property(nonatomic, strong, )  UILabel *textLabel;
 
 @end
 

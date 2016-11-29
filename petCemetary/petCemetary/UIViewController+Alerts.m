@@ -66,12 +66,14 @@ NS_DESIGNATED_INITIALIZER;
         [alert addAction:okAction];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+        
+        
+        /*UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                         message:message
                                                        delegate:nil
                                               cancelButtonTitle:nil
                                               otherButtonTitles:kOK, nil];
-        [alert show];
+        [alert show];*/
     }
 }
 
@@ -100,7 +102,7 @@ NS_DESIGNATED_INITIALIZER;
         [prompt addAction:okAction];
         [self presentViewController:prompt animated:YES completion:nil];
     } else {
-        SimpleTextPromptDelegate *prompt =
+        /*SimpleTextPromptDelegate *prompt =
         [[SimpleTextPromptDelegate alloc] initWithCompletionHandler:completion];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
                                                             message:message
@@ -108,7 +110,7 @@ NS_DESIGNATED_INITIALIZER;
                                                   cancelButtonTitle:@"Cancel"
                                                   otherButtonTitles:@"Ok", nil];
         alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-        [alertView show];
+        [alertView show];*/
     }
 }
 

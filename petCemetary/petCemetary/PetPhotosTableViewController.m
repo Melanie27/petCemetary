@@ -13,7 +13,7 @@
 #import "PCImageLibraryViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface PetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, PetPhotosTableViewCellDelegate, PCImageLibraryViewControllerDelegate>
+@interface PetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, PetPhotosTableViewCellDelegate>
 
 @end
 

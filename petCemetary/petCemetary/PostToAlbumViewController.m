@@ -10,7 +10,7 @@
 @import Firebase;
 @import FirebaseDatabase;
 
-@interface PostToAlbumViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIDocumentInteractionControllerDelegate>
+@interface PostToAlbumViewController () <UIDocumentInteractionControllerDelegate>
 
     @property (nonatomic, strong) UIImage *sourceImage;
     @property (nonatomic, strong) UIImageView *previewImageView;
@@ -67,6 +67,7 @@
     
 }
 
+
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
@@ -88,6 +89,7 @@
     
    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -176,7 +178,7 @@
                  }
              }];
              
-             
+             NSLog(@"uploadTask %@", uploadTask);
              
              
              
