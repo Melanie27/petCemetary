@@ -57,11 +57,11 @@
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
     
     self.petImageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.petNameLabel.frame= CGRectMake(5, CGRectGetMaxY(self.petImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
-    
-    self.textLabel.frame = CGRectMake(5, CGRectGetMaxY(self.petImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
     
     
+    self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petImageView.frame), CGRectGetWidth(self.contentView.bounds),50);
+    
+    //self.detailTextLabel.frame = CGRectMake(0, CGRectGetMaxY(self.petImageView.frame), CGRectGetWidth(self.contentView.bounds),30);
 }
 
 + (CGFloat) heightForPetItem:(Pet *)petItem width:(CGFloat)width {

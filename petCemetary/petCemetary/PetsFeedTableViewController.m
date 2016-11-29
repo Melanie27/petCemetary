@@ -106,7 +106,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     
-    PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    //PetsFeedTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    PetsFeedTableViewCell *cell = [[PetsFeedTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"cell"];
     cell.delegate = self;
     [cell.contentView layoutSubviews];
     cell.petItem = [PCDataSource sharedInstance].petItems[indexPath.row];
@@ -131,9 +132,24 @@
             
         }];
    
-    //cell.petNameLabel.text = cell.petItem.petName;
-    cell.textLabel.text = cell.petItem.petName;
     
+    NSMutableAttributedString *petNameString = [[NSMutableAttributedString alloc]initWithString:cell.petItem.petName];
+    
+    UIFont *font=[UIFont fontWithName:@"Zapfino" size:14.0f];
+    [petNameString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, cell.petItem.petName.length)];
+    
+    //NSMutableAttributedString *petDeathString = [[NSMutableAttributedString alloc]initWithString:cell.petItem.petDOD];
+    
+    //UIFont *fontSubtitle=[UIFont fontWithName:@"Zapfino" size:8.0f];
+    //[petDeathString addAttribute:NSFontAttributeName value:fontSubtitle range:NSMakeRange(0, cell.petItem.petDOD.length)];;
+   
+   
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    //cell.detailTextLabel.attributedText = petDeathString;
+    //cell.detailTextLabel.textAlignment = NSTextAlignmentCenter;
+
+    cell.textLabel.attributedText = petNameString;
+   
     return cell;
 }
 
@@ -151,7 +167,7 @@
     
    
     CGFloat height =  [PetsFeedTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
-    NSLog(@"height %ld", height);
+    NSLog(@"height %f", height);
 
     if (height > 50) {
         return height;
