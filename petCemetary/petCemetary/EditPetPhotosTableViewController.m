@@ -67,7 +67,7 @@
    
     
     
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     NSURL *petImageURL = info[UIImagePickerControllerReferenceURL];
     NSString *imagePath = [petImageURL path];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);

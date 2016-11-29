@@ -9,16 +9,9 @@
 #import "PCImageLibraryViewController.h"
 #import "PCCropImageViewController.h"
 #import <Photos/Photos.h>
-#import "Pet.h"
-#import "PCDataSource.h"
-@import Firebase;
-@import FirebaseDatabase;
-@import FirebaseStorage;
 
 @interface PCImageLibraryViewController () <PCCropImageViewControllerDelegate>
     @property (nonatomic, strong) PHFetchResult *result;
-    @property (strong, nonatomic) FIRDatabaseReference *ref;
-    @property (strong, nonatomic) FIRStorage *storage;
 @end
 
 @implementation PCImageLibraryViewController
@@ -176,61 +169,7 @@ static NSString * const reuseIdentifier = @"Cell";
          [self.navigationController pushViewController:cropVC animated:YES];
      }];
     
-    PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
-    imageRequestOptions.synchronous = YES;
-    [[PHImageManager defaultManager]
-     requestImageDataForAsset:asset
-     options:imageRequestOptions
-     resultHandler:^(NSData *imageData, NSString *dataUTI,
-                     UIImageOrientation orientation,
-                     NSDictionary *info)
-     {
-         
-         if ([info objectForKey:@"PHImageFileURLKey"]) {
-             
-             NSURL *localURL = [info objectForKey:@"PHImageFileURLKey"];
-             NSString *localURLString = [localURL path];
-             NSString *key = localURLString;
-             NSString *theFileName = [[key lastPathComponent] stringByDeletingPathExtension];
-             
-             
-             //UPLOAD TO FB
-             //[[PCDataSource sharedInstance] addImageToAlbum:asset andCompletion:^(Pet *snapshotValue) {
-                 
-             //}];
-             FIRStorage *storage = [FIRStorage storage];
-             FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petFeed/"];
-             FIRStorageReference *profileRef = [storageRef child:theFileName];
-             
-             FIRStorageUploadTask *uploadTask = [profileRef putFile:localURL metadata:nil completion:^(FIRStorageMetadata* metadata, NSError* error) {
-                 if (error != nil) {
-                     // Uh-oh, an error occurred!
-                     //NSLog(@"error %@", error);
-                 } else {
-                     // Metadata contains file metadata such as size, content-type, and download URL.
-                     NSURL *downloadURL = metadata.downloadURL;
-                     NSString *downloadURLString = [ downloadURL absoluteString];
-                     Pet *pet = [[Pet alloc] init];
-                     
-                     //push the selected photo to database
-                     //FIRDatabaseQuery *pathStringQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%ld/photos/%ld/",(long) //pet.petNumber, (long)pet.photoNumber]] queryLimitedToFirst:1000];
-                     
-                     
-                     
-                     NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/photos/%ld/",(long) pet.petNumber, (long)pet.photoNumber]:downloadURLString};
-                     
-                     [_ref updateChildValues:childUpdates];
-                     
-                     
-                 }
-             }];
-             
-             
-             
-             
-             
-         }
-     }];
+    
     
     
     

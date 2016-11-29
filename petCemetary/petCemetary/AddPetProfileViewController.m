@@ -11,7 +11,7 @@
 #import <Photos/Photos.h>
 #import "Pet.h"
 
-@interface AddPetProfileViewController () <UIImagePickerControllerDelegate> {
+@interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIDatePicker *datePicker;
     
 }
@@ -155,7 +155,7 @@
     //NSURL *docPathUrl = [NSURL URLWithString:getImagePath];
     NSURL *docPathUrl = [NSURL fileURLWithPath:getImagePath];
      NSLog(@"doc path url %@",docPathUrl);
-     FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
+     //FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petFeed/"];
    
