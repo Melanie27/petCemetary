@@ -294,9 +294,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pcBackgroundTrans-1" translatesAutoresizingMaskIntoConstraints="NO" id="2S5-aq-jPc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pcBackgroundTrans-1" translatesAutoresizingMaskIntoConstraints="NO" id="2S5-aq-jPc">
                                 <frame key="frameInset" minY="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k0A-71-tyG">
                                 <frame key="frameInset" minX="16" minY="102" width="128" height="128"/>
@@ -404,6 +403,11 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2S5-aq-jPc" firstAttribute="leading" secondItem="UAb-Fb-p3j" secondAttribute="leading" id="ICH-AU-WAs"/>
+                            <constraint firstAttribute="trailing" secondItem="2S5-aq-jPc" secondAttribute="trailing" id="fhI-0J-w1M"/>
+                            <constraint firstItem="2S5-aq-jPc" firstAttribute="top" secondItem="1vj-sU-1qL" secondAttribute="bottom" id="t75-Ix-kJ8"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="animalBreedTextField" destination="kzX-ge-lch" id="JRu-Uc-L47"/>

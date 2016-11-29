@@ -16,6 +16,7 @@
 @interface PCDataSource ()
     
     @property (nonatomic, strong) NSArray *petItems;
+@property (nonatomic, strong) NSArray *petMedia;
     @property (nonatomic, strong) NSArray *petsByOwner;
     @property (nonatomic, strong) NSArray *petAlbumItems;
 
@@ -63,6 +64,7 @@
          //NSLog(@"snapshot %@", snapshot);
          //TODO - what if someone deletes a pet how to prevent increment holes? 
          self.petItems = @[];
+         self.petMedia = @[];
         self.petAlbumItems = @[];
          self.petsByOwner = @[];
          NSInteger numPets = [snapshot.value[@"pets"] count];
@@ -112,7 +114,21 @@
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
                  //pet.petNumber = snapshot.value[@"pets"][i];
                  
+                 //GET A COUNT OF THE NUMBER OF PHOTOS BELONING TO EACH PET
+                 //NSNumber *photosCount = [pet.albumImageString count];
+                 
+                 for (Pet *media in pet.albumMedia) {
+                     pet.albumMediaObject = media;
+                     NSLog(@"media %@", media);
+                    //NSMutableArray *photoAlbumMedia = [self.petMedia arrayByAddingObject:media];
+                     self.petMedia = [self.petMedia arrayByAddingObject:media];
+                 
+                 }
+                 
+                
+                 
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+                 
                  NSLog(@"array pets %@", self.petsByOwner);
                  for (NSString *string in pet.albumImageStrings) {
                      pet.albumImageString = string;
@@ -131,7 +147,7 @@
                      }];
                  }
                  //self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
-                 self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
+                 //self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet.albumImageStrings];
              }
              
              

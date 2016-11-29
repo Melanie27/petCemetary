@@ -33,6 +33,7 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 +(instancetype) sharedInstance;
 @property (nonatomic, strong, readonly) NSArray *petItems;
 @property (nonatomic, strong, readonly) NSArray *petsByOwner;
+@property (nonatomic, strong, readonly) NSArray *petMedia;
 @property (nonatomic, strong, readonly) NSArray<Pet*> *petAlbumItems;
 @property (nonatomic, strong) NSMutableArray *albumPhotos;
 
