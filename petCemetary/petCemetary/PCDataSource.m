@@ -175,20 +175,51 @@
     return retrievedPets;
     
 }
--(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(PetRetrievalCompletionBlock)completion{
+-(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(ImagePickerCompletionBlock)completion {
 
-    Pet *pet = [[Pet alloc] init];
-    NSLog(@"Got an image!");
-    self.ref = [[FIRDatabase database] reference];
-    NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
-    NSDictionary *childUpdates = @{
-    //get this pet number
-                                   [NSString stringWithFormat:@"/pets/%ld/feedPhoto/%ld", (unsigned long)pet.petNumber,(unsigned long)pet.photoNumber ]:petImageString};
-    //child updates is going to captain, zero image
-    NSLog(@"child updates %@", childUpdates);
-    //[self.ref updateChildValues:childUpdates];
     
-    //PHAsset *asset = nil;
+    NSLog(@"Got an image!");
+    //TODO pull this info from the EditPetPhotosTableViewController
+    
+    /*UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    NSURL *petImageURL = info[UIImagePickerControllerReferenceURL];
+    NSString *imagePath = [petImageURL path];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:imagePath];
+    NSURL *docPathUrl = [NSURL fileURLWithPath:getImagePath];
+    NSLog(@"docPathUrl %@", docPathUrl);
+    //FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums"];
+
+    NSString *localURLString = [docPathUrl path];
+    NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+    FIRStorageReference *profileRef = [storageRef child:theFileName];
+    NSLog(@"profileRef %@", profileRef);
+    
+    FIRStorageUploadTask *uploadTask = [profileRef putFile:docPathUrl metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+        if (error != nil) {
+            // Uh-oh, an error occurred!
+            NSLog(@"error %@", error);
+        } else {
+            // Metadata contains file metadata such as size, content-type, and download URL.
+            NSURL *downloadURL = metadata.downloadURL;
+            NSLog(@"no error %@", downloadURL);
+        }
+    }];
+    
+    
+    Pet *pet = [[Pet alloc]init];
+    
+    NSDictionary *childUpdates = @{
+                                   
+                                   [NSString stringWithFormat:@"/pets/%ld/photos/%ld/", (unsigned long)pet.petNumber, (unsigned long)pet.photoNumber]:petImageURL
+                                   
+                                   };
+    
+    [_ref updateChildValues:childUpdates];*/
+   
 
 }
 

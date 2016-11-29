@@ -24,6 +24,7 @@
 typedef void(^PetRetrievalCompletionBlock)(Pet *pet);
 typedef void (^NewPetCompletionBlock)(NSError *error);
 typedef void(^DeletionCompletionBlock)(NSDictionary *snapshotValue);
+typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 @interface PCDataSource : NSObject
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
@@ -49,7 +50,7 @@ typedef void(^DeletionCompletionBlock)(NSDictionary *snapshotValue);
 -(NSString *)retrievePets;
 -(void)deleteAlbumPhoto:(NSObject *)albumPhoto;
 -(void)deletePet:(Pet*)pet andCompletion:(DeletionCompletionBlock)completion;
--(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(PetRetrievalCompletionBlock)completion;
+-(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(ImagePickerCompletionBlock)completion;
 //-(void)addNewPet;
 //-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 

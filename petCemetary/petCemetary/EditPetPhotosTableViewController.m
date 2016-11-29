@@ -64,11 +64,10 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    //NSLog(@"pick an image %@",info);
-     NSLog(@"pick an image %@",chosenImage);
+   
     
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     NSURL *petImageURL = info[UIImagePickerControllerReferenceURL];
     NSString *imagePath = [petImageURL path];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
@@ -80,11 +79,9 @@
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums"];
     
-
-    
-    //NSString *localURLString = [docPathUrl path];
-   // NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
-    FIRStorageReference *profileRef = [storageRef child:@"theFileName"];
+    NSString *localURLString = [docPathUrl path];
+    NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+    FIRStorageReference *profileRef = [storageRef child:theFileName];
     NSLog(@"profileRef %@", profileRef);
     
     FIRStorageUploadTask *uploadTask = [profileRef putFile:docPathUrl metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
@@ -98,16 +95,26 @@
         }
     }];
     
-   
+    
     Pet *pet = [[Pet alloc]init];
     
     NSDictionary *childUpdates = @{
-     
-     [NSString stringWithFormat:@"/pets/%ld/photos/%ld/", (unsigned long)pet.petNumber, (unsigned long)pet.photoNumber]:petImageURL
-     
-     };
-     
-     [_ref updateChildValues:childUpdates];
+                                   
+                                   [NSString stringWithFormat:@"/pets/%ld/photos/%ld/", (unsigned long)pet.petNumber, (unsigned long)pet.photoNumber]:petImageURL
+                                   
+                                   };
+    
+    [_ref updateChildValues:childUpdates];
+   
+    //TODO
+    //[[PCDataSource sharedInstance]addImageToAlbum:chosenImage andCompletion:^(NSDictionary *info) {
+        
+    //}];
+   
+    
+    
+    
+    
 }
 
 #pragma mark - Table view data source
