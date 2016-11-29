@@ -42,17 +42,17 @@
     if( self.petAlbumItem.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
         image = [UIImage imageNamed:imageName];
+    } else {
+        NSLog(@"got image w/ height %f",self.petAlbumItem.albumImage.size.height);
     }
     
     CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
-   
     self.albumPhotoImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
+    self.albumPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
     
-    self.albumPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
     
-     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
-    
-    self.textLabel.frame = CGRectMake(0, CGRectGetMaxY(self.albumPhotoImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
+    self.textLabel.frame = CGRectMake(5, CGRectGetMaxY(self.albumPhotoImageView.frame), CGRectGetWidth(self.contentView.bounds),40);
     
 }
 
@@ -85,11 +85,11 @@
 }
 
 //override setter method to update the photo
-/*-(void)setPetAlbumItem:(Pet*)petAlbumItem {
+-(void)setPetAlbumItem:(Pet*)petAlbumItem {
     _petAlbumItem = petAlbumItem;
     self.albumPhotoImageView.image = _petAlbumItem.albumImage;
  
-}*/
+}
 
 
 @end

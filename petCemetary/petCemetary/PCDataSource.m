@@ -63,6 +63,7 @@
          //NSLog(@"snapshot %@", snapshot);
          //TODO - what if someone deletes a pet how to prevent increment holes? 
          self.petItems = @[];
+        self.petAlbumItems = @[];
          self.petsByOwner = @[];
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
@@ -130,7 +131,7 @@
                      }];
                  }
                  //self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
-                 
+                 self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
              }
              
              

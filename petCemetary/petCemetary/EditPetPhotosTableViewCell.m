@@ -59,7 +59,7 @@
     
     self.albumPhotoImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
-    self.albumPhotoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.albumPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
     

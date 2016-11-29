@@ -23,7 +23,7 @@
     [super viewDidLoad];
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.pptVC = self;
-    //[pc retrievePhotoAlbums];
+    
     self.title = @"Photo Album";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -47,8 +47,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-     NSLog(@"count of album items %@", self.pet);
-    return self.pet.albumImageStrings.count;
+     NSLog(@"count of album items %lu", [PCDataSource sharedInstance].petAlbumItems.count);
+    //return self.pet.albumImageStrings.count;
+    return [PCDataSource sharedInstance].petAlbumItems.count;
 }
 
 
@@ -67,8 +68,6 @@
     [cell.albumPhotoImageView sd_setImageWithURL:[NSURL URLWithString:petPhotoUrlString]
                          placeholderImage:[UIImage imageNamed:@"5.jpg"]];
    
-    
-    //TODO get the indiv image caption
     NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
     cell.textLabel.text = petCaptionString;
     return cell;
@@ -77,20 +76,22 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     Pet *pet = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
-    UIImage *image = pet.albumMedia[indexPath.row];
+    NSLog(@"pet in feed %@", pet);
+    UIImage *image= pet.albumImage;
+    
     
     if( pet.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }
-     //CGFloat height =  [PetPhotosTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
+     CGFloat height =  [PetPhotosTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
     //TODO - need to impose a max height on all Table cells
-    CGFloat height = 650;
+    NSLog(@"height %f", height);
     if (height > 50) {
         return height;
     } else {
         NSLog(@"bad height %f",height);
-        return 100.0;
+        return 400.0;
     }
 }
 

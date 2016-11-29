@@ -8,19 +8,10 @@
 
 #import "PetsFeedTableViewCell.h"
 #import "Pet.h"
-#import "Owner.h"
-
 
 @interface PetsFeedTableViewCell ()
 
-//@property (nonatomic, strong) UIImageView *petImageView;
-//@property(nonatomic, strong, )  UILabel *textLabel;
-
 @end
-
-
-
-
 
 
 @implementation PetsFeedTableViewCell
