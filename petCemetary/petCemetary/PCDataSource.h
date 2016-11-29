@@ -34,8 +34,9 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 @property (nonatomic, strong, readonly) NSArray *petItems;
 @property (nonatomic, strong, readonly) NSArray *petsByOwner;
 @property (nonatomic, strong, readonly) NSArray *petMedia;
-@property (nonatomic, strong, readonly) NSArray<Pet*> *petAlbumItems;
-@property (nonatomic, strong) NSMutableArray *albumPhotos;
+@property (nonatomic, strong, readonly) NSArray *petAlbumItems;
+@property (nonatomic, strong, readonly) NSArray *albumPhotos;
+
 
 
 //@property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
@@ -49,6 +50,7 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 @property (nonatomic, weak) EditPetPhotosTableViewController *editPhotosVC;
 
 -(NSString *)retrievePets;
+
 -(void)deleteAlbumPhoto:(NSObject *)albumPhoto;
 -(void)deletePet:(Pet*)pet andCompletion:(DeletionCompletionBlock)completion;
 -(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(ImagePickerCompletionBlock)completion;

@@ -47,9 +47,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-     NSLog(@"count of album items %lu",  [PCDataSource sharedInstance].petMedia.count );
-    return self.pet.albumImageStrings.count;
-    //return [PCDataSource sharedInstance].albumPhotos.count;
+    
+    NSLog(@"count of album items %lu",  self.pet.albumMedia.count);
+    return self.pet.albumMedia.count;
+    
 }
 
 
@@ -75,13 +76,15 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //Pet *pet = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
+   
     Pet *pet = [PCDataSource sharedInstance].albumPhotos[indexPath.row];
     NSLog(@"pet in feed %@", pet);
-    UIImage *image= pet.albumImage;
+    Pet *petPlaceholders = [PCDataSource sharedInstance].petItems[indexPath.row];
+    //no album image property on photoAlbums
+    UIImage *image= petPlaceholders.albumImage;
     
     
-    if( pet.albumImage == nil) {
+    if( petPlaceholders.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }

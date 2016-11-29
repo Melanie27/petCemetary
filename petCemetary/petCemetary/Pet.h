@@ -37,7 +37,8 @@
 @property (nonatomic, assign) NSInteger photoNumber;
 @property (nonatomic, strong) UIImage *albumImage;
 @property (nonatomic, strong) NSArray *albumMedia;
-@property (nonatomic, strong) NSObject *albumMediaObject;
+@property (nonatomic, strong) NSArray *albumPhotos;
+
 
 
 - (NSString *) newPet;
