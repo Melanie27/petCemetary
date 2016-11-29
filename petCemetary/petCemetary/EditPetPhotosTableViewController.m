@@ -150,10 +150,12 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Pet *pet = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
-    UIImage *image = pet.albumImage;
+    Pet *pet = [PCDataSource sharedInstance].albumPhotos[indexPath.row];
+    Pet *petPlaceholders = [PCDataSource sharedInstance].petItems[indexPath.row];
+    //no album image property on photoAlbums so use the main object for placeholder
+    UIImage *image= petPlaceholders.albumImage;
     
-    if( pet.albumImage == nil) {
+    if( petPlaceholders.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }

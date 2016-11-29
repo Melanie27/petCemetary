@@ -144,7 +144,6 @@
                  FIRStorage *storage = [FIRStorage storage];
                  FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
                  
-                 
                  [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
                      
                      [self.pptVC.tableView reloadData];
