@@ -50,11 +50,15 @@
     }
     
     CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
-    self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
+    //self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
-     self.petThumbnailView.contentMode = UIViewContentModeScaleAspectFill;
+   
+    
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
-    self.petThumbnailView.frame = CGRectMake(20, 10, 120, 80);
+    
+    self.petThumbnailView.frame = CGRectMake(20, 10, 100, 100);
+    self.petThumbnailView.contentMode = UIViewContentModeScaleAspectFill;
+
     
     self.textLabel.frame = CGRectMake(160, 5, CGRectGetWidth(self.contentView.bounds),40);
     self.detailTextLabel.frame = CGRectMake(160, CGRectGetMaxY(self.textLabel.frame), CGRectGetWidth(self.contentView.bounds),40);
@@ -73,7 +77,7 @@
     [layoutCell layoutSubviews];
     
     // The height will be wherever the bottom of the comments label is
-    return CGRectGetMaxY(layoutCell.textLabel.frame);
+    return CGRectGetMaxY(layoutCell.petThumbnailView.frame);
 }
 
 
