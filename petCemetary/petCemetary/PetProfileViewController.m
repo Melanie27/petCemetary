@@ -10,9 +10,6 @@
 #import "PetProfileViewController.h"
 #import "PetPhotosTableViewController.h"
 #import "Pet.h"
-#import "Owner.h"
-#import "PCImageLibraryViewController.h"
-#import "PostToAlbumViewController.h"
 
 
 

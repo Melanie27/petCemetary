@@ -10,7 +10,6 @@
 #import "PetPhotosTableViewCell.h"
 #import "PCDataSource.h"
 #import "Pet.h"
-#import "PCImageLibraryViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, PetPhotosTableViewCellDelegate>
