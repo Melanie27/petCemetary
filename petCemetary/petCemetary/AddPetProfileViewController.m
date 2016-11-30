@@ -150,70 +150,34 @@
                                                // Metadata contains file metadata such as size, content-type, and download URL.
                                                //NSURL *downloadURL = metadata.downloadURL;
                                                NSLog(@"no error %@", metadata);
+                                                NSURL *downloadURL = metadata.downloadURL;
+                                                NSString *downloadURLString = [ downloadURL absoluteString];
+                                               
+                                               //push the selected photo to database
+                                               FIRDatabaseQuery *pathStringQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%ld/", (unsigned long)[PCDataSource sharedInstance].petItems.count]] queryLimitedToFirst:1000];
+                                               
+                                               [pathStringQuery
+                                                observeEventType:FIRDataEventTypeValue
+                                                withBlock:^(FIRDataSnapshot *snapshot) {
+                                                    //TODO - not seeing the correct image --WHAT IS THIS CODE DOING?? DO I NEED IT?
+                                                    //static NSInteger imageViewTag = 54321;
+                                                    //UIImageView *imgView = (UIImageView*)[[collectionView cellForItemAtIndexPath:indexPath] viewWithTag:imageViewTag];
+                                                    //UIImage *img = imgView.image;
+                                                    //[[BLCDataSource sharedInstance] setUserImage:img];
+                                                    
+                                                    
+                                                }];
+                                               
+        NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
+                                               
+                                               [self.ref updateChildValues:childUpdates];
+                                               
+                                               
                                            }
                                        }];
                                    }];
         
     }];
-   
-   
 
-    //PHFetchResult *allPhotosResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:nil];
-     //NSLog(@"data %@", result);
-                    
-    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-    
-    //NSURL *petImageURL = info[UIImagePickerControllerReferenceURL];
-    //NSLog(@"pet image url %@", petImageURL);
-    //NSString *imagePath = [petImageURL path];
-    //NSLog(@"path %@",imagePath);
-    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    //NSString *documentsDirectory = [paths objectAtIndex:0];
-    //NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:imagePath];
-     //NSLog(@"get image path %@",getImagePath);
-    //NSURL *docPathUrl = [NSURL URLWithString:getImagePath];
-    //NSURL *docPathUrl = [NSURL fileURLWithPath:getImagePath];
-    //NSLog(@"doc path url %@",docPathUrl);
-     //FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
-    FIRStorage *storage = [FIRStorage storage];
-    //FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petFeed/"];
-    
-    //NSString *localURLString = [docPathUrl path];
-    //NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
-   
-    /*FIRStorageReference *profileRef = [storageRef child:theFileName];
-     NSLog(@"profileRef %@", profileRef);
-    
-    
-    FIRStorageUploadTask *uploadTask = [profileRef putFile:docPathUrl metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
-        if (error != nil) {
-            // Uh-oh, an error occurred!
-            NSLog(@"error %@", error);
-        } else {
-            // Metadata contains file metadata such as size, content-type, and download URL.
-            //NSURL *downloadURL = metadata.downloadURL;
-            NSLog(@"no error %@", metadata);
-        }
-    }];*/
-    //NSLog(@"upload task %@", uploadTask);
-    
-    NSString *petImagePath  = [NSString stringWithFormat:@"%@", petImageURL];
-     NSLog(@"pet string %@",petImagePath);
-    NSDictionary *childUpdates = @{
-     
-                                   [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:petImageString
-                                   
-                                   };
-    
-    //[self.ref updateChildValues:childUpdates];
-    NSLog(@"child updates %@", childUpdates);
-   
 }
 @end
