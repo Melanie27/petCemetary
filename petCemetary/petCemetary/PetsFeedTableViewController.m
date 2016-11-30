@@ -135,15 +135,17 @@
             
         }];
    
+    if (cell.petItem.petName != nil) {
     
-    NSMutableAttributedString *petNameString = [[NSMutableAttributedString alloc]initWithString:cell.petItem.petName];
-    
-    UIFont *font=[UIFont fontWithName:@"Zapfino" size:16.0f];
-    [petNameString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, cell.petItem.petName.length)];
-    
-    
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    cell.textLabel.attributedText = petNameString;
+        NSMutableAttributedString *petNameString = [[NSMutableAttributedString alloc]initWithString:cell.petItem.petName];
+        
+        UIFont *font=[UIFont fontWithName:@"Zapfino" size:16.0f];
+        [petNameString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, cell.petItem.petName.length)];
+        
+        
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.attributedText = petNameString;
+    }
    
     return cell;
 }

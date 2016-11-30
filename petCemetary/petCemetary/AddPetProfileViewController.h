@@ -27,7 +27,7 @@
 @property (nonatomic) NSInteger petNumber;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRStorage *storage;
-
+//+ (PHFetchResult<PHAsset *> *)fetchAssetsInAssetCollection:(PHAssetCollection *)assetCollection options:(PHFetchOptions *)options;
 
 - (IBAction)savePetProfile:(id)sender;
 - (IBAction)uploadProfilePhoto:(id)sender;
