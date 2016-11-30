@@ -330,7 +330,7 @@
                                     </attributedString>
                                 </state>
                                 <connections>
-                                    <action selector="savePetProfile:" destination="udi-lI-Pqx" eventType="touchUpInside" id="gnp-06-kDe"/>
+                                    <action selector="saveEditedProfile:" destination="G1O-py-iGd" eventType="touchUpInside" id="hIP-E5-Peq"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DOB" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hLt-2c-vEl">

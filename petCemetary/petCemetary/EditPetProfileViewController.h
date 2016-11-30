@@ -10,8 +10,11 @@
 @class Pet;
 @interface EditPetProfileViewController : AddPetProfileViewController
 @property (nonatomic, strong) Pet *pet;
+@property (nonatomic) NSInteger petNumber;
 
 
+
+- (IBAction)saveEditedProfile:(id)sender;
 
 
 @end

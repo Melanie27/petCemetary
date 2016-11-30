@@ -25,6 +25,7 @@ typedef void(^PetRetrievalCompletionBlock)(Pet *pet);
 typedef void (^NewPetCompletionBlock)(NSError *error);
 typedef void(^DeletionCompletionBlock)(NSDictionary *snapshotValue);
 typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
+
 @interface PCDataSource : NSObject
 
 @property (strong, nonatomic) FIRDatabaseReference *ref;
@@ -49,13 +50,24 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 @property (nonatomic, weak) EditPetProfileViewController *editProfileVC;
 @property (nonatomic, weak) EditPetPhotosTableViewController *editPhotosVC;
 
+//Properties for saving and editing
+@property (nonatomic, strong) NSString *addPetName;
+@property (nonatomic, strong) NSString *addPetType;
+@property (nonatomic, strong) NSString *addPetBreed;
+@property (nonatomic, strong) NSString *addPetDOB;
+@property (nonatomic, strong) NSString *addPetDOD;
+@property (nonatomic, strong) NSString *addOwnerName;
+@property (nonatomic, strong) NSString *addPersonality;
+@property (strong) UIImage *addPetImage;
+
 -(NSString *)retrievePets;
+-(void)retrivePetWithUID:(NSString*)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 
 -(void)deleteAlbumPhoto:(NSObject *)albumPhoto;
 -(void)deletePet:(Pet*)pet andCompletion:(DeletionCompletionBlock)completion;
 -(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(ImagePickerCompletionBlock)completion;
 //-(void)addNewPet;
-//-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
+-(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 
 
 

@@ -71,7 +71,7 @@
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
              Pet *pet = [[Pet alloc] init];
-             NSLog(@"url from datasource %@", snapshot.value[@"pets"][i][@"feedPhoto"]);
+             //NSLog(@"url from datasource %@", snapshot.value[@"pets"][i][@"feedPhoto"]);
              pet.petName = snapshot.value[@"pets"][i][@"pet"];
              pet.petDOB = snapshot.value[@"pets"][i][@"dateOfBirth"];
              pet.petDOD = snapshot.value[@"pets"][i][@"dateOfDeath"];
@@ -363,6 +363,59 @@
         }
     }
 }
+
+-(void)retrivePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion {
+     Pet *thePet = [[Pet alloc] init];
+     self.ref = [[FIRDatabase database] reference];
+    
+    FIRDatabaseQuery *getPetInfoQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%@/pet", uid]] queryLimitedToFirst:10];
+    [getPetInfoQuery
+     observeEventType:FIRDataEventTypeValue
+     withBlock:^(FIRDataSnapshot *snapshot) {
+         
+         thePet.petName = snapshot.value[@"pet"];
+         thePet.ownerUID = snapshot.value[@"UID"];
+         
+         FIRStorage *storage = [FIRStorage storage];
+         FIRStorageReference *httpsReference = [storage referenceForURL:thePet.feedImageString];
+         
+         
+         [httpsReference downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+             if (error != nil) {
+                 NSLog(@"download url error");
+             } else {
+                 //NSLog(@"no download url error %@", URL);
+                 NSData *imageData = [NSData dataWithContentsOfURL:URL];
+                 thePet.feedImage = [UIImage imageWithData:imageData];
+                 
+                 completion(thePet);
+             }
+             
+         }];
+     
+     }];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end
