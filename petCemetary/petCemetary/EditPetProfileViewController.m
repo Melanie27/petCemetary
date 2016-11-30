@@ -13,11 +13,13 @@
 @import Firebase;
 @import FirebaseDatabase;
 
-@interface EditPetProfileViewController ()
+@interface EditPetProfileViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
 //@property (strong, nonatomic) FIRDatabaseReference *ref;
 @end
 
 @implementation EditPetProfileViewController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,9 +54,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) textViewDidBeginEditing:(UITextView *) textView {
-    [textView setText:@""];
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
+
+
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
@@ -69,13 +73,7 @@
     return YES;
 }
 
-//Enters Optional Pet Name
-- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
-    [theTextField resignFirstResponder];
-    
-   
-    return YES;
-}
+
 
 
 //TODO MOVE TO MODEL
