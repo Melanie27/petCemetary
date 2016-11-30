@@ -26,9 +26,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *animalBreed;
 
 @property (strong, nonatomic) IBOutlet UILabel *ownerNameLabel;
-@property (strong, nonatomic) IBOutlet UILabel *treatCountLabel;
 
-- (IBAction)addTreat:(id)sender;
+
+
 
 - (IBAction)viewMorePhotos:(id)sender;
 
