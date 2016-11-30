@@ -376,7 +376,8 @@
     }
 }
 
--(void)retrivePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion {
+//THIS WILL BE A PROBLEM IF ONE OWNER HAS MULTIPLE PETS
+/*-(void)retrivePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion {
      Pet *thePet = [[Pet alloc] init];
      self.ref = [[FIRDatabase database] reference];
     
@@ -415,7 +416,7 @@
     
     
     
-}
+}*/
 
 
 

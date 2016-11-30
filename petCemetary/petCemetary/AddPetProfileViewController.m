@@ -12,7 +12,7 @@
 #import "Pet.h"
 
 @interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
-    UIDatePicker *datePicker;
+    
     
 }
 @end
@@ -26,41 +26,12 @@
     [[PCDataSource sharedInstance]retrievePets];
     
     
-    self.dobTextField.delegate = self;
-    
-    //init date picker and optionally set its initial state
-    datePicker = [[UIDatePicker alloc] init];
-    [datePicker setDate:[NSDate date]];
-    // the date formatter used to convert string to date
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    // the specific format to use
-    dateFormatter.dateFormat = @"dd-MMM-yyyy";
-    // converting string to date
-    // set the mode
-    [datePicker setDatePickerMode:UIDatePickerModeDate];
-    // update the textfield with the date everytime it changes with selector defined below
-    [datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
-    
 }
 
 
 #pragma mark - date picker
 
--(void)updateTextField:(id)sender {
-    
-    UIDatePicker *picker = (UIDatePicker*)self.dobTextField.inputView;
-    self.dobTextField.text = [self formatDate:picker.date];
-    NSLog(@"dob text %@", self.dobTextField.text);
-    
-}
 
--(NSString *)formatDate:(NSDate *)date {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
-    NSString *formattedDate = [dateFormatter stringFromDate:date];
-    return formattedDate;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -75,9 +46,7 @@
     [textField resignFirstResponder];
    
     
-    
-    
-   
+
     return YES;
 }
 

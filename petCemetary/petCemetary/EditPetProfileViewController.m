@@ -37,7 +37,8 @@
     self.animalPersonalityTextView.text = _pet.petPersonality;
     self.ownerNameTextField.text = _pet.ownerName;
     
-    //TODO get current pet number
+    //TODO get current pet number - this retrieves from full list - need from user list
+   //Count how many pets this owner has
     self.petNumber = pc.petNumber;
     NSLog(@"pet number %ld", _petNumber);
    
