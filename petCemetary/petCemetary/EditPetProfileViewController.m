@@ -40,7 +40,7 @@
     //TODO get current pet number - this retrieves from full list - need from user list
    //Count how many pets this owner has
     self.petNumber = pc.petNumber;
-    NSLog(@"pet number %ld", _petNumber);
+    NSLog(@"pet number %ld", self.petNumber);
    
     NSString *petProfileString = _pet.feedImageString;
     NSURL *petProfileUrl=[NSURL URLWithString:petProfileString];
@@ -82,7 +82,7 @@
     //FIRUser *userAuth = [FIRAuth auth].currentUser;
     self.ref = [[FIRDatabase database] reference];
     
-    NSDictionary *descriptionUpdates = @{[NSString stringWithFormat:@"/pets/%ld/personality/", _petNumber]:self.animalPersonalityTextView.text};
+    NSDictionary *descriptionUpdates = @{[NSString stringWithFormat:@"/pets/%ld/personality/", self.petNumber]:self.animalPersonalityTextView.text};
     [self.ref updateChildValues:descriptionUpdates];
     
     

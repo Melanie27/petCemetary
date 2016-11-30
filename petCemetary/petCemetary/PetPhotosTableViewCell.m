@@ -85,11 +85,11 @@
 }
 
 //override setter method to update the photo
--(void)setPetAlbumItem:(Pet*)petAlbumItem {
+/*-(void)setPetAlbumItem:(Pet*)petAlbumItem {
     _petAlbumItem = petAlbumItem;
     self.albumPhotoImageView.image = _petAlbumItem.albumImage;
  
-}
+}*/
 
 
 @end

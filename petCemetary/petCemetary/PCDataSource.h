@@ -63,13 +63,13 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 
 -(NSString *)retrievePets;
 -(void )editPetInfo;
--(void)retrivePetWithUID:(NSString*)uid andCompletion:(PetRetrievalCompletionBlock)completion;
+//-(void)retrivePetWithUID:(NSString*)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 
 -(void)deleteAlbumPhoto:(NSObject *)albumPhoto;
 -(void)deletePet:(Pet*)pet andCompletion:(DeletionCompletionBlock)completion;
 -(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(ImagePickerCompletionBlock)completion;
 //-(void)addNewPet;
--(void)retrievePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion;
+
 
 
 
