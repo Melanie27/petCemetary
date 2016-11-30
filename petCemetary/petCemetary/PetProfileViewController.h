@@ -17,14 +17,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *morePhotosButton;
 @property (strong, nonatomic) IBOutlet UILabel *dateOfBirthLabel;
 @property (strong, nonatomic) IBOutlet UILabel *dateOfDeathLabel;
-
 @property (strong, nonatomic) IBOutlet UITextView *personalityTextView;
-
 @property (strong, nonatomic) IBOutlet UILabel *animalNameLabel;
-
 @property (strong, nonatomic) IBOutlet UILabel *animalType;
 @property (strong, nonatomic) IBOutlet UILabel *animalBreed;
-
 @property (strong, nonatomic) IBOutlet UILabel *ownerNameLabel;
 
 
