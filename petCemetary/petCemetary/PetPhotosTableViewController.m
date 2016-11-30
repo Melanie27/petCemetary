@@ -69,8 +69,16 @@
     [cell.albumPhotoImageView sd_setImageWithURL:[NSURL URLWithString:petPhotoUrlString]
                          placeholderImage:[UIImage imageNamed:@"5.jpg"]];
    
+    
+    //TODO handle captions that go to a second line
     NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
-    cell.textLabel.text = petCaptionString;
+    
+    NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
+    UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
+    [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
+    
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.attributedText = petCaptionMutableString;
     return cell;
 }
 
@@ -78,7 +86,7 @@
     
    
     Pet *pet = [PCDataSource sharedInstance].albumPhotos[indexPath.row];
-    NSLog(@"pet in feed %@", pet);
+    
     Pet *petPlaceholders = [PCDataSource sharedInstance].petItems[indexPath.row];
     //no album image property on photoAlbums
     UIImage *image= petPlaceholders.albumImage;
