@@ -10,6 +10,7 @@
 @import FirebaseDatabase;
 @import FirebaseStorage;
 @import FirebaseAuth;
+#import "EditPetProfileViewController.h"
 
 @class PetsFeedTableViewController;
 @class PetsFeedTableViewCell;
@@ -61,6 +62,7 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 @property (strong) UIImage *addPetImage;
 
 -(NSString *)retrievePets;
+-(void )editPetInfo;
 -(void)retrivePetWithUID:(NSString*)uid andCompletion:(PetRetrievalCompletionBlock)completion;
 
 -(void)deleteAlbumPhoto:(NSObject *)albumPhoto;

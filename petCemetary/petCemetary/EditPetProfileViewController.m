@@ -90,6 +90,7 @@
 }
 
 -(void)sendPetNameToFirebase {
+    //[[PCDataSource sharedInstance] editPetInfo];
     
     self.ref = [[FIRDatabase database] reference];
     
