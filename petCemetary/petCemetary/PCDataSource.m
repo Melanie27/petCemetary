@@ -49,6 +49,9 @@
     return self;
 }
 
+-(void)saveFeedPhoto {
+    
+}
 
 -(void)editPetInfo {
     self.ref = [[FIRDatabase database] reference];
@@ -170,6 +173,7 @@
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
             
                  FIRStorage *storage = [FIRStorage storage];
+                 //TODO need introspection here
                  FIRStorageReference *httpsReference = [storage referenceForURL:pet.feedImageString];
                  
                  

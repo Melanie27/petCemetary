@@ -13,6 +13,7 @@
 
 @interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate> {
     
+
     
 }
 @end
@@ -54,7 +55,7 @@
 }
 
 //TODO if certain fields are empty don't save
-//TODO check if this pet already exists before adding it
+//TODO check if this pet already exists before adding it - need unique id for pets
 //TODO - need to notify the feed when this happens
 
 -(void)sendPetInfoToFirebase {
@@ -66,8 +67,9 @@
     NSString *savedDOD = self.dodTextField.text;
     NSString *savedPersonality = self.animalPersonalityTextView.text;
     NSString *savedOwnerName = self.ownerNameTextField.text;
-    FIRUser *userAuth = [FIRAuth auth].currentUser;
     NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
+    FIRUser *userAuth = [FIRAuth auth].currentUser;
+    
     self.ref = [[FIRDatabase database] reference];
     NSDictionary *petInfoCreation = @{
                                         [NSString stringWithFormat:@"/pets/%ld/pet/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedPetName,
@@ -78,7 +80,8 @@
                                         [NSString stringWithFormat:@"/pets/%ld/ownerName/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedOwnerName,
                                         [NSString stringWithFormat:@"/pets/%ld/personality/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedPersonality,
                                         [NSString stringWithFormat:@"/pets/%ld/UID/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:userAuth.uid,
-                                        [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:petImageString,
+                                         [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:petImageString
+                                       
                                         
                                         };
     [self.ref updateChildValues:petInfoCreation];
@@ -89,11 +92,64 @@
 - (IBAction)savePetProfile:(id)sender {
     NSLog(@"this method should save the pet to the logged in user");
     [self sendPetInfoToFirebase];
+    [self sendPhotoToFirebase];
     
+}
+
+-(void)sendPhotoToFirebase {
     
+    /*PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[self.petImageURL] options:nil];
     
-    
-    
+    [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
+        
+        [asset requestContentEditingInputWithOptions:kNilOptions
+                                   completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
+                                       NSURL *imageURL = contentEditingInput.fullSizeImageURL;
+                                       NSLog(@"imageURL %@", imageURL );
+                                       NSString *localURLString = [imageURL path];
+                                       NSLog(@"local url string %@", localURLString);
+                                       NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+                                       [[PCDataSource sharedInstance]saveFeedPhoto];
+                                       //MOVE THIS STUFF
+                                       
+                                       
+                                       FIRStorage *storage = [FIRStorage storage];
+                                       FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petFeed/"];
+                                       FIRStorageReference *profileRef = [storageRef child:theFileName];
+                                       NSLog(@"profileRef %@", profileRef);
+                                       FIRStorageUploadTask *uploadTask = [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                                           if (error != nil) {
+                                               // Uh-oh, an error occurred!
+                                               NSLog(@"error %@", error);
+                                           } else {
+                                               NSURL *downloadURL = metadata.downloadURL;
+                                               NSString *downloadURLString = [ downloadURL absoluteString];
+                                               
+                                               //push the selected photo to database
+                                               FIRDatabaseQuery *pathStringQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%ld/", (unsigned long)[PCDataSource sharedInstance].petItems.count]] queryLimitedToFirst:1000];
+                                               
+                                               [pathStringQuery
+                                                observeEventType:FIRDataEventTypeValue
+                                                withBlock:^(FIRDataSnapshot *snapshot) {
+                                                    //TODO - not seeing the correct image --WHAT IS THIS CODE DOING?? DO I NEED IT?
+                                                    //static NSInteger imageViewTag = 54321;
+                                                    //UIImageView *imgView = (UIImageView*)[[collectionView cellForItemAtIndexPath:indexPath] viewWithTag:imageViewTag];
+                                                    //UIImage *img = imgView.image;
+                                                    //[[BLCDataSource sharedInstance] setUserImage:img];
+                                                    
+                                                    
+                                                }];
+                                               
+                                               NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
+                                               
+                                               [self.ref updateChildValues:childUpdates];
+                                               
+                                               
+                                           }
+                                       }];
+                                   }];
+        
+    }];*/
 }
 
 #pragma mark - UIImagePicker Delegate Methods
@@ -113,24 +169,16 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     self.ref = [[FIRDatabase database] reference];
-     NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
+    
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-     NSLog(@"pick an image %@",info);
     [self.uploadProfilePhotoButton setBackgroundImage:chosenImage forState:UIControlStateNormal];
     [picker dismissViewControllerAnimated:YES completion:NULL];
   
-    NSURL *petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
-    NSString *stringUrl = petImageURL.absoluteString;
-    
-    NSURL *assetURL = [NSURL URLWithString:stringUrl];
-     NSLog(@"asset url %@",assetURL);
-    //NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:stringUrl]];
-    //NSLog(@"data %@", data);
-    
-   PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[petImageURL] options:nil];
+    self.petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[self.petImageURL] options:nil];
     
     [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-        NSLog(@"asset %@", asset);
+        
         [asset requestContentEditingInputWithOptions:kNilOptions
                                    completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
                                        NSURL *imageURL = contentEditingInput.fullSizeImageURL;
@@ -138,6 +186,10 @@
                                        NSString *localURLString = [imageURL path];
                                        NSLog(@"local url string %@", localURLString);
                                        NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+                                       [[PCDataSource sharedInstance]saveFeedPhoto];
+                                       //MOVE THIS STUFF
+                                       
+                                       
                                        FIRStorage *storage = [FIRStorage storage];
                                        FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petFeed/"];
                                        FIRStorageReference *profileRef = [storageRef child:theFileName];
@@ -147,11 +199,8 @@
                                                // Uh-oh, an error occurred!
                                                NSLog(@"error %@", error);
                                            } else {
-                                               // Metadata contains file metadata such as size, content-type, and download URL.
-                                               //NSURL *downloadURL = metadata.downloadURL;
-                                               NSLog(@"no error %@", metadata);
-                                                NSURL *downloadURL = metadata.downloadURL;
-                                                NSString *downloadURLString = [ downloadURL absoluteString];
+                                               NSURL *downloadURL = metadata.downloadURL;
+                                               NSString *downloadURLString = [ downloadURL absoluteString];
                                                
                                                //push the selected photo to database
                                                FIRDatabaseQuery *pathStringQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%ld/", (unsigned long)[PCDataSource sharedInstance].petItems.count]] queryLimitedToFirst:1000];
@@ -168,7 +217,7 @@
                                                     
                                                 }];
                                                
-        NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
+                                               NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
                                                
                                                [self.ref updateChildValues:childUpdates];
                                                
@@ -178,6 +227,7 @@
                                    }];
         
     }];
+    
 
 }
 @end

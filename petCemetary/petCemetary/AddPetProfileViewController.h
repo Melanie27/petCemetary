@@ -25,12 +25,13 @@
 @property (strong, nonatomic) IBOutlet UITextField *dobTextField;
 @property (strong, nonatomic) IBOutlet UITextField *dodTextField;
 @property (nonatomic) NSInteger petNumber;
+@property (strong, nonatomic) NSURL *petImageURL;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRStorage *storage;
-//+ (PHFetchResult<PHAsset *> *)fetchAssetsInAssetCollection:(PHAssetCollection *)assetCollection options:(PHFetchOptions *)options;
+
 
 - (IBAction)savePetProfile:(id)sender;
 - (IBAction)uploadProfilePhoto:(id)sender;
-
+//- (IBAction)savePetProfile:(id)sender didFinishPickingMediaWithInfo:(NSDictionary *)info;
 
 @end
