@@ -20,7 +20,10 @@
 @interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, EditPetPhotosTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRStorage *storage;
-
+@property (strong, nonatomic) UIAlertController *alertVC;
+@property (strong, nonatomic) NSString *photoCaption;
+@property (strong, nonatomic) UITextField *captionTextfield;
+typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
 @end
 
 @implementation EditPetPhotosTableViewController
@@ -58,37 +61,61 @@
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
        
-        //TODO ask user if they want to write a caption
-         UIAlertController *alertVC;
-        //if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-            alertVC = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Add a caption for your image.", @"send image instructions") preferredStyle:UIAlertControllerStyleAlert];
-            
-            [alertVC addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                textField.placeholder = NSLocalizedString(@"Caption", @"Caption");
-            }];
-            
-            [alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"cancel button") style:UIAlertActionStyleCancel handler:nil]];
-            [alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", @"Send button") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                UITextField *textField = alertVC.textFields[0];
-                //[self sendImageToInstagramWithCaption:textField.text];
-            }]];
-         [self presentViewController:alertVC animated:YES completion:nil];
-         [self presentViewController:picker animated:YES completion:NULL];
+    [self presentViewController:picker animated:YES completion:NULL];
         //NSLog(@"trigger the image library");
+        /*[self presentViewController:picker animated:YES completion:^{
+            [self showViewController:self.alertVC ];
+        }];*/
+
     }
     
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-   
+- (void) showViewController:(UIViewController *)vc andGetCaption:(NSString *)photoCaption {
+    //TODO introspection
     
+    self.alertVC = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Add a caption for the image you just posted.", @"send image instructions") preferredStyle:UIAlertControllerStyleAlert];
+    
+    [self.alertVC addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = NSLocalizedString(@"Caption", @"Caption");
+    }];
+    
+    [self presentViewController:self.alertVC animated:YES completion:nil];
+    [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"cancel button") style:UIAlertActionStyleCancel handler:nil]];
+    [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", @"Send button") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        self.captionTextfield = self.alertVC.textFields[0];
+        NSLog(@"textfield text %@", self.captionTextfield);
+        self.photoCaption = self.captionTextfield.text;
+        NSLog(@"textfield  %@", self.photoCaption);
+
+        //[self sendImageToInstagramWithCaption:textField.text];
+    }]];
+    
+    //NSLog(@"photocap  %@", self.photoCaption);
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+  
+    
+    [self showViewController:self.alertVC sender:picker];
     
     self.ref = [[FIRDatabase database] reference];
     
-    //UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //[picker dismissViewControllerAnimated:YES completion:NULL];
+    //TODO show caption while image still on screen
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [self showViewController:self.alertVC andGetCaption:self.photoCaption];
+        if ((self.photoCaption == nil)) {
+            self.photoCaption = @"";
+            NSLog(@"photo caption in completion %@", self.photoCaption);
+        }
+        
+        
+        
+    }];
    
     
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+   
     
     self.petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[self.petImageURL] options:nil];
@@ -178,7 +205,11 @@
     
     //TODO get the indiv image caption
     NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
-    cell.textLabel.text = petCaptionString;
+    NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
+    UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
+     [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.attributedText = petCaptionMutableString;
     return cell;
 }
 

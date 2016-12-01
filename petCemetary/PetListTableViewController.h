@@ -18,6 +18,7 @@
 @property (nonatomic, strong) Pet *pet;
 @property (nonatomic, strong) NSString *ownerUID;
 @property (nonatomic, strong) Pet *deletedPet;
+@property (nonatomic) NSInteger petNumber;
 
 @property (nonatomic, weak) id <PetListTableViewControllerDelegate> delegate;
 

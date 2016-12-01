@@ -33,7 +33,7 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 //singleton to access call [PCDataSource sharedInstance]
 
 +(instancetype) sharedInstance;
-@property (nonatomic, strong, readonly) NSArray *petItems;
+@property (nonatomic, strong, readonly) NSArray<Pet *> *petItems;
 @property (nonatomic, strong, readonly) NSArray *petsByOwner;
 @property (nonatomic, strong, readonly) NSArray *petMedia;
 @property (nonatomic, strong, readonly) NSArray *petAlbumItems;
@@ -41,7 +41,7 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 
 
 
-//@property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
+@property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
 @property (nonatomic, strong) Pet *pet;
 @property (nonatomic, assign) NSInteger petNumber;
 @property (nonatomic, weak) PetsFeedTableViewController *pftVC;

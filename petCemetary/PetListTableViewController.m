@@ -58,7 +58,16 @@
     //PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath ];
     PetListTableViewCell *cell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"cell"];
     // Configure the cell...
+    Pet *pet;
    
+    NSArray *petsArray = [PCDataSource sharedInstance].petItems;
+    NSLog(@"pets array %@", petsArray);
+     self.petNumber =  [petsArray indexOfObject:_pet];
+    
+    
+    //[PCDataSource sharedInstance].petNumber = [petsArray indexOfObject:_pet];
+    NSLog(@"pets number %lu", pet.petNumber);
+    
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.delegate = self;
         cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
@@ -116,6 +125,7 @@
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.pet = self.passPetToProfile;
     //NSLog(@"pc pet %@", pc.pet);
+    
     [self performSegueWithIdentifier:@"editPetProfile" sender:self];
 }
 

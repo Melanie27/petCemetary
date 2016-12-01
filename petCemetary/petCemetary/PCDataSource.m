@@ -128,10 +128,23 @@
                  pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
                  pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
-                 
+                
+               
                  
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+                 NSEnumerator *ownerEnumerator = [self.petsByOwner objectEnumerator];
+                 id Pet;
+                 while (Pet = [ownerEnumerator nextObject]) {
+                     /* code to act on each element as it is returned */
+                     NSLog(@"enum %@", ownerEnumerator);
+                     //pet.petEnumerator = enumerator;
+                 }
                  
+                 pet.petEnumerator = ownerEnumerator;
+                 pet.petNumberString = [NSString stringWithFormat:@"%@", ownerEnumerator];
+                 NSLog(@"ownerEnum %@", pet.petNumberString);
+                 //NSNumber *petByOwner = [self.petsByOwner objectAtIndex:i];
+                 //NSLog(@"pet by owner %@", petByOwner);
                  
                  for (NSString *string in pet.albumImageStrings) {
                      pet.albumImageString = string;
@@ -167,8 +180,20 @@
              }
 
              self.petItems = [self.petItems arrayByAddingObject:pet];
+             pet.petNumber =  [self.petItems indexOfObject:_pet];
+             NSLog(@"pet num %ld", (long)pet.petNumber);
+            
+             NSEnumerator *enumerator = [self.petItems objectEnumerator];
+             id Pet;
+             while (Pet = [enumerator nextObject]) {
+                 /* code to act on each element as it is returned */
+                 NSLog(@"enum %@", enumerator);
+                 //pet.petEnumerator = enumerator;
+             }
              
-             
+             pet.petEnumerator = enumerator;
+             NSLog(@"Melanieenum %@", pet.petEnumerator);
+              
              //TODO test if what user is uploading is a valid url format and send an alert if it is not
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
             
