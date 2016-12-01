@@ -57,7 +57,23 @@
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
-        [self presentViewController:picker animated:YES completion:NULL];
+       
+        //TODO ask user if they want to write a caption
+         UIAlertController *alertVC;
+        //if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+            alertVC = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Add a caption for your image.", @"send image instructions") preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertVC addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = NSLocalizedString(@"Caption", @"Caption");
+            }];
+            
+            [alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"cancel button") style:UIAlertActionStyleCancel handler:nil]];
+            [alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", @"Send button") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                UITextField *textField = alertVC.textFields[0];
+                //[self sendImageToInstagramWithCaption:textField.text];
+            }]];
+         [self presentViewController:alertVC animated:YES completion:nil];
+         [self presentViewController:picker animated:YES completion:NULL];
         //NSLog(@"trigger the image library");
     }
     
@@ -103,13 +119,16 @@
                                                NSString *downloadURLString = [ downloadURL absoluteString];
                                                NSLog(@"downloadrul%@", downloadURL);
                                                //push the selected photo to database
-                                               //FIRDatabaseQuery *pathStringQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%ld/", (unsigned long)[PCDataSource sharedInstance].petItems.count]] queryLimitedToFirst:1000];
                                                
                                                
+                                               //TODO - if there is a caption post the string, OTHERWISE just create empty string
                                                
-                                               //NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
-                                               
-                                               //[self.ref updateChildValues:childUpdates];
+                                               NSDictionary *childUpdates = @{
+                                                                              [NSString stringWithFormat:@"/pets/%ld/photos/%ld/photoUrl/", (unsigned long)[PCDataSource sharedInstance].petItems.count-1,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
+                                                                               [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)[PCDataSource sharedInstance].petItems.count-1,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
+                                                                              };
+                                               NSLog(@"child updates %@", childUpdates);
+                                               [self.ref updateChildValues:childUpdates];
                                                
                                                
                                            }

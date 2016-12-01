@@ -70,6 +70,7 @@
    
     
     //TODO handle captions that go to a second line
+    
     NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
     
     NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
@@ -78,6 +79,7 @@
     
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.attributedText = petCaptionMutableString;
+    
     return cell;
 }
 
