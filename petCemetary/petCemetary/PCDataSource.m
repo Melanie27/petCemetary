@@ -187,7 +187,7 @@
              id Pet;
              while (Pet = [enumerator nextObject]) {
                  /* code to act on each element as it is returned */
-                 NSLog(@"enum %@", enumerator);
+                 //NSLog(@"enum %@", enumerator);
                  //pet.petEnumerator = enumerator;
              }
              
