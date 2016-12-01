@@ -58,7 +58,7 @@
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
         [self presentViewController:picker animated:YES completion:NULL];
-        NSLog(@"trigger the image library");
+        //NSLog(@"trigger the image library");
     }
     
 }
@@ -67,49 +67,64 @@
    
     
     
+    self.ref = [[FIRDatabase database] reference];
+    
     //UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    NSURL *petImageURL = info[UIImagePickerControllerReferenceURL];
-    NSString *imagePath = [petImageURL path];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:imagePath];
-    NSURL *docPathUrl = [NSURL fileURLWithPath:getImagePath];
-    NSLog(@"docPathUrl %@", docPathUrl);
-    //FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
-    FIRStorage *storage = [FIRStorage storage];
-    FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums"];
+   
     
-    NSString *localURLString = [docPathUrl path];
-    NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
-    FIRStorageReference *profileRef = [storageRef child:theFileName];
-    NSLog(@"profileRef %@", profileRef);
+    [picker dismissViewControllerAnimated:YES completion:NULL];
     
-    FIRStorageUploadTask *uploadTask = [profileRef putFile:docPathUrl metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
-        if (error != nil) {
-            // Uh-oh, an error occurred!
-            NSLog(@"error %@", error);
-        } else {
-            // Metadata contains file metadata such as size, content-type, and download URL.
-            NSURL *downloadURL = metadata.downloadURL;
-            NSLog(@"no error %@", downloadURL);
-        }
+    self.petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[self.petImageURL] options:nil];
+    
+    [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
+        
+        [asset requestContentEditingInputWithOptions:kNilOptions
+                                   completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
+                                       NSURL *imageURL = contentEditingInput.fullSizeImageURL;
+                                       NSLog(@"imageURL %@", imageURL );
+                                       NSString *localURLString = [imageURL path];
+                                       NSLog(@"local url string %@", localURLString);
+                                       NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+                                       //[[PCDataSource sharedInstance]saveAlbumPhoto];
+                                       //MOVE THIS STUFF
+                                       
+                                       
+                                       FIRStorage *storage = [FIRStorage storage];
+                                       FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
+                                       FIRStorageReference *profileRef = [storageRef child:theFileName];
+                                       NSLog(@"profileRef %@", profileRef);
+                                       FIRStorageUploadTask *uploadTask = [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                                           if (error != nil) {
+                                               // Uh-oh, an error occurred!
+                                               NSLog(@"error %@", error);
+                                           } else {
+                                               NSURL *downloadURL = metadata.downloadURL;
+                                               NSString *downloadURLString = [ downloadURL absoluteString];
+                                               NSLog(@"downloadrul%@", downloadURL);
+                                               //push the selected photo to database
+                                               //FIRDatabaseQuery *pathStringQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%ld/", (unsigned long)[PCDataSource sharedInstance].petItems.count]] queryLimitedToFirst:1000];
+                                               
+                                               
+                                               
+                                               //NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
+                                               
+                                               //[self.ref updateChildValues:childUpdates];
+                                               
+                                               
+                                           }
+                                       }];
+                                   }];
+        
     }];
     
-    NSLog(@"uploadTask %@", uploadTask);
-    Pet *pet = [[Pet alloc]init];
-    
-    NSDictionary *childUpdates = @{
+    //NSDictionary *childUpdates = @{
                                    
-                                   [NSString stringWithFormat:@"/pets/%ld/photos/%ld/", (unsigned long)pet.petNumber, (unsigned long)pet.photoNumber]:petImageURL
+                                   //[NSString stringWithFormat:@"/pets/%ld/photos/%ld/", (unsigned long)pet.petNumber, (unsigned long)pet.photoNumber]:petImageURL
                                    
-                                   };
+                                  // };
     
-    [_ref updateChildValues:childUpdates];
-   
-    //TODO
-    //[[PCDataSource sharedInstance]addImageToAlbum:chosenImage andCompletion:^(NSDictionary *info) {
-        
-    //}];
+    //[_ref updateChildValues:childUpdates];
    
     
     
