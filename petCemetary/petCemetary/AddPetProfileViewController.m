@@ -25,9 +25,8 @@
     // Do any additional setup after loading the view.
     self.title = @"Add Pet";
     [[PCDataSource sharedInstance]retrievePets];
-    PCDataSource *pc = [PCDataSource sharedInstance];
-    self.petNumber = pc.petNumber;
-    NSLog(@"pet number %ld", self.petNumber);
+    //PCDataSource *pc = [PCDataSource sharedInstance];
+   
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

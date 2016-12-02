@@ -128,7 +128,7 @@
                  pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
                  pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
-                
+                pet.petNumber =  [self.petItems indexOfObject:pet];
                
                  
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
@@ -187,7 +187,7 @@
             
              //THERES MY PET NUMBER
              pet.petNumber =  [self.petItems indexOfObject:pet];
-             NSLog(@"pet num MEL ?%ld", (long)pet.petNumber);
+             /*NSLog(@"pet num MEL ?%ld", (long)pet.petNumber);
             
              NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[self.petItems count]];
              NSEnumerator *enumerator = [self.petItems reverseObjectEnumerator];
@@ -197,7 +197,7 @@
              
              
              self.petItems = petItemsReversed;
-            NSLog(@"petITemsReverser %@", petItemsReversed);
+            NSLog(@"petITemsReverser %@", petItemsReversed);*/
              //TODO test if what user is uploading is a valid url format and send an alert if it is not
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
             

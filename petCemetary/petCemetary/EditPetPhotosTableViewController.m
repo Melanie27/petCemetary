@@ -20,6 +20,7 @@
 @interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, EditPetPhotosTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRStorage *storage;
+
 @property (strong, nonatomic) UIAlertController *alertVC;
 @property (strong, nonatomic) NSString *photoCaption;
 @property (strong, nonatomic) UITextField *captionTextfield;
@@ -44,6 +45,16 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
      [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
+    NSArray *petsArray = [PCDataSource sharedInstance].petItems;
+    Pet *pet;
+    for (Pet *pet in petsArray) {
+        self.petNumber = pet.petNumber;
+       NSLog(@"pets number on edit photo view %lu", self.petNumber);
+    }
+    
+    //self.petName = pet.petName;
+    //self.petNumber = pet.petNumber;
+    //NSLog(@"pets number on edit photo view hi %lu", pet.petNumber);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -154,7 +165,7 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
                                                //TODO - if there is a caption post the string, OTHERWISE just create empty string
                                                
                                                NSDictionary *childUpdates = @{
-                                                                              [NSString stringWithFormat:@"/pets/%ld/photos/%ld/photoUrl/", (unsigned long)[PCDataSource sharedInstance].petItems.count-1,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
+                                                                              [NSString stringWithFormat:@"/pets/%ld/photos/%ld/photoUrl/", self.petNumber,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
                                                                                [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)[PCDataSource sharedInstance].petItems.count-1,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
                                                                               };
                                                NSLog(@"child updates %@", childUpdates);
@@ -233,7 +244,7 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
     if (height > 50) {
         return height;
     } else {
-        NSLog(@"bad height %f",height);
+        //NSLog(@"bad height %f",height);
         return 100.0;
     }
 }

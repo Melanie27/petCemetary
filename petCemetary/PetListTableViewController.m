@@ -58,16 +58,15 @@
     //PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath ];
     PetListTableViewCell *cell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"cell"];
     // Configure the cell...
-    Pet *pet;
    
+   //TODO get full array here
     NSArray *petsArray = [PCDataSource sharedInstance].petItems;
-    NSLog(@"pets array %@", petsArray);
-     self.petNumber =  [petsArray indexOfObject:_pet];
+   
     
-    
-    //[PCDataSource sharedInstance].petNumber = [petsArray indexOfObject:_pet];
-    NSLog(@"pets number %lu", pet.petNumber);
-    
+    for (Pet *pet in petsArray) {
+        self.petNumber = pet.petNumber;
+        NSLog(@"pets number inloop %lu", self.petNumber);
+    }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.delegate = self;
         cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];

@@ -23,6 +23,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //TODO get current pet number - this retrieves from full list - need from user list
+    //Count how many pets this owner has
+    NSArray *petsArray = [PCDataSource sharedInstance].petItems;
+    Pet *pet = [[Pet alloc] init];
+    self.petNumber = 0;
+    for (Pet *pet in petsArray) {
+        self.petNumber = pet.petNumber;
+        NSLog(@"pets number on edit profile view %lu", self.petNumber);
+    }
+    //petsArray = [petsArray arrayByAddingObject:pet];
+    //TODO this is 0 get it out of loop
+    self.petNumber = pet.petNumber;
+    NSLog(@"pet number on edit profile melanie %ld", pet.petNumber);
    
     // Do any additional setup after loading the view.
     self.title = @"Edit Profile";
@@ -37,10 +50,8 @@
     self.animalPersonalityTextView.text = _pet.petPersonality;
     self.ownerNameTextField.text = _pet.ownerName;
     
-    //TODO get current pet number - this retrieves from full list - need from user list
-   //Count how many pets this owner has
-    self.petNumber = pc.petNumber;
-    NSLog(@"pet number %ld", self.petNumber);
+    
+    
    
     NSString *petProfileString = _pet.feedImageString;
     NSURL *petProfileUrl=[NSURL URLWithString:petProfileString];

@@ -16,6 +16,7 @@
 @interface PetListTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) Pet *pet;
+
 @property (strong, nonatomic) IBOutlet UILabel *petNameLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *petThumbnailView;
 + (CGFloat) heightForPetItem:(Pet *)petItem width:(CGFloat)width;

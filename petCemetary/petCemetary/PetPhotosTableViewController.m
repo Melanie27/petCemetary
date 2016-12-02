@@ -99,7 +99,7 @@
     }
      CGFloat height =  [PetPhotosTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
     //TODO - need to impose a max height on all Table cells
-    NSLog(@"height %f", height);
+    //NSLog(@"height %f", height);
     if (height > 50) {
         return height;
     } else {
