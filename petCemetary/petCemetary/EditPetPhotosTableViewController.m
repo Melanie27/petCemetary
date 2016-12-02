@@ -45,16 +45,8 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
      [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
-    NSArray *petsArray = [PCDataSource sharedInstance].petItems;
-    Pet *pet;
-    for (Pet *pet in petsArray) {
-        self.petNumber = pet.petNumber;
-       NSLog(@"pets number on edit photo view %lu", self.petNumber);
-    }
     
-    //self.petName = pet.petName;
-    //self.petNumber = pet.petNumber;
-    //NSLog(@"pets number on edit photo view hi %lu", pet.petNumber);
+    
 }
 
 - (void)didReceiveMemoryWarning {

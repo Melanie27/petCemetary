@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *dobTextField;
 @property (strong, nonatomic) IBOutlet UITextField *dodTextField;
 @property (nonatomic) NSInteger petNumber;
+@property (nonatomic) NSInteger newPetNumber;
 @property (strong, nonatomic) NSURL *petImageURL;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRStorage *storage;

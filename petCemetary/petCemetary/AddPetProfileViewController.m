@@ -25,7 +25,17 @@
     // Do any additional setup after loading the view.
     self.title = @"Add Pet";
     [[PCDataSource sharedInstance]retrievePets];
-    //PCDataSource *pc = [PCDataSource sharedInstance];
+    NSArray *petsArray = [PCDataSource sharedInstance].petItems;
+    NSUInteger index;
+    for (Pet *pet in petsArray) {
+        index = [petsArray indexOfObject:pet];
+        self.petNumber = index;
+        NSLog(@"petindex %lu", (unsigned long)index);
+        NSLog(@" addpet %ld", pet.petNumber);
+        pet.petNumber = self.petNumber;
+    }
+    NSLog(@"melpets addpet %ld", self.petNumber);
+    self.newPetNumber = self.petNumber + 1;
    
 }
 
@@ -55,10 +65,11 @@
 
 //TODO if certain fields are empty don't save
 //TODO check if this pet already exists before adding it - need unique id for pets
-//TODO - need to notify the feed when this happens
+
 
 -(void)sendPetInfoToFirebase {
     self.ref = [[FIRDatabase database] reference];
+    
     NSString *savedPetName = self.petNameTextField.text;
     NSString *savedAnimalType = self.animalTypeTextField.text;
     NSString *savedAnimalBreed = self.animalBreedTextField.text;
@@ -71,15 +82,15 @@
     
     self.ref = [[FIRDatabase database] reference];
     NSDictionary *petInfoCreation = @{
-                                        [NSString stringWithFormat:@"/pets/%ld/pet/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedPetName,
-                                        [NSString stringWithFormat:@"/pets/%ld/breed/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedAnimalBreed,
-                                        [NSString stringWithFormat:@"/pets/%ld/animalType/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedAnimalType,
-                                        [NSString stringWithFormat:@"/pets/%ld/dateOfBirth/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedDOB,
-                                        [NSString stringWithFormat:@"/pets/%ld/dateOfDeath/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedDOD,
-                                        [NSString stringWithFormat:@"/pets/%ld/ownerName/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedOwnerName,
-                                        [NSString stringWithFormat:@"/pets/%ld/personality/",(unsigned long)[PCDataSource sharedInstance].petItems.count]:savedPersonality,
-                                        [NSString stringWithFormat:@"/pets/%ld/UID/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:userAuth.uid,
-                                         [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:petImageString
+                                        [NSString stringWithFormat:@"/pets/%ld/pet/",(unsigned long)self.newPetNumber]:savedPetName,
+                                        [NSString stringWithFormat:@"/pets/%ld/breed/",(unsigned long)self.newPetNumber]:savedAnimalBreed,
+                                        [NSString stringWithFormat:@"/pets/%ld/animalType/",(unsigned long)self.newPetNumber]:savedAnimalType,
+                                        [NSString stringWithFormat:@"/pets/%ld/dateOfBirth/",(unsigned long)self.newPetNumber]:savedDOB,
+                                        [NSString stringWithFormat:@"/pets/%ld/dateOfDeath/",(unsigned long)self.newPetNumber]:savedDOD,
+                                        [NSString stringWithFormat:@"/pets/%ld/ownerName/",(unsigned long)self.newPetNumber]:savedOwnerName,
+                                        [NSString stringWithFormat:@"/pets/%ld/personality/",(unsigned long)(unsigned long)self.newPetNumber]:savedPersonality,
+                                        [NSString stringWithFormat:@"/pets/%ld/UID/", (unsigned long)(unsigned long)self.newPetNumber]:userAuth.uid,
+                                         [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)self.newPetNumber]:petImageString
                                        
                                         
                                         };

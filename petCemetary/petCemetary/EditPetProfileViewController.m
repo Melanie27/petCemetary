@@ -24,19 +24,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[PCDataSource sharedInstance]retrievePets];
     NSArray *petsArray = [PCDataSource sharedInstance].petItems;
     NSUInteger index;
     for (Pet *pet in petsArray) {
         index = [petsArray indexOfObject:pet];
         self.petNumber = index;
         NSLog(@"petindex %lu", (unsigned long)index);
+        NSLog(@" addpet %ld", pet.petNumber);
+        pet.petNumber = self.petNumber;
     }
-    NSLog(@"melpets %ld", self.petNumber);
+    NSLog(@"melpets addpet %ld", self.petNumber);
     // Do any additional setup after loading the view.
     self.title = @"Edit Profile";
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.editProfileVC = self;
-    [[PCDataSource sharedInstance] retrievePets];
+    //[[PCDataSource sharedInstance] retrievePets];
     self.petNameTextField.text = _pet.petName;
     self.dobTextField.text = _pet.petDOB;
     self.dodTextField.text = _pet.petDOD;
@@ -45,7 +48,7 @@
     self.animalPersonalityTextView.text = _pet.petPersonality;
     self.ownerNameTextField.text = _pet.ownerName;
     
-    
+   
     NSLog(@"pet.petName %@", _pet.petName);
     NSLog(@"pet.petNumber %lu", _pet.petNumber);
     self.petNumber = _pet.petNumber;
