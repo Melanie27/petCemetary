@@ -316,14 +316,32 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Animal Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rmJ-iD-8bq">
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Animal Breed" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="69s-b3-ZuL">
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="rmJ-iD-8bq" firstAttribute="top" secondItem="OAI-4g-JCH" secondAttribute="bottom" constant="18" id="2Cn-8X-JGe"/>
                             <constraint firstItem="OAI-4g-JCH" firstAttribute="leading" secondItem="UAb-Fb-p3j" secondAttribute="leadingMargin" constant="37" id="Cg3-c8-e8H"/>
                             <constraint firstItem="k0A-71-tyG" firstAttribute="top" secondItem="1vj-sU-1qL" secondAttribute="bottom" constant="8" symbolic="YES" id="IcD-MP-fmC"/>
+                            <constraint firstItem="rmJ-iD-8bq" firstAttribute="trailing" secondItem="OAI-4g-JCH" secondAttribute="trailing" id="K0J-iH-Z0w"/>
+                            <constraint firstItem="69s-b3-ZuL" firstAttribute="trailing" secondItem="rmJ-iD-8bq" secondAttribute="trailing" id="KiF-aB-hck"/>
                             <constraint firstItem="k0A-71-tyG" firstAttribute="centerX" secondItem="UAb-Fb-p3j" secondAttribute="centerX" id="PkP-4j-5cw"/>
+                            <constraint firstItem="rmJ-iD-8bq" firstAttribute="leading" secondItem="OAI-4g-JCH" secondAttribute="leading" id="Re2-8n-p4A"/>
+                            <constraint firstItem="69s-b3-ZuL" firstAttribute="top" secondItem="rmJ-iD-8bq" secondAttribute="bottom" constant="18" id="a2x-hN-iwr"/>
                             <constraint firstItem="OAI-4g-JCH" firstAttribute="centerX" secondItem="k0A-71-tyG" secondAttribute="centerX" id="ajh-WX-Laf"/>
                             <constraint firstItem="OAI-4g-JCH" firstAttribute="top" secondItem="k0A-71-tyG" secondAttribute="bottom" constant="17" id="gZt-pn-b9A"/>
+                            <constraint firstItem="69s-b3-ZuL" firstAttribute="leading" secondItem="rmJ-iD-8bq" secondAttribute="leading" id="qlR-UD-EdJ"/>
                         </constraints>
                     </view>
                     <connections>
