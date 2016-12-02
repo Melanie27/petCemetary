@@ -873,20 +873,21 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="RsC-Kl-loG" firstAttribute="top" secondItem="agR-zY-wyO" secondAttribute="bottom" constant="2" id="4ve-me-xoV"/>
                             <constraint firstItem="fTO-Zm-XJQ" firstAttribute="top" secondItem="vzT-LA-Fkt" secondAttribute="bottom" constant="26" id="5xp-Aw-0BJ"/>
-                            <constraint firstItem="agR-zY-wyO" firstAttribute="centerX" secondItem="fTO-Zm-XJQ" secondAttribute="centerX" id="8bQ-jy-6uU"/>
+                            <constraint firstItem="agR-zY-wyO" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leading" id="7Fo-eZ-B8n"/>
                             <constraint firstItem="vzT-LA-Fkt" firstAttribute="trailing" secondItem="fTO-Zm-XJQ" secondAttribute="trailing" id="9Nm-MS-YLl"/>
+                            <constraint firstItem="vzT-LA-Fkt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xcZ-VX-C1n" secondAttribute="bottom" constant="25" id="BzD-XX-VWo"/>
+                            <constraint firstItem="agR-zY-wyO" firstAttribute="centerX" secondItem="A9X-op-hCG" secondAttribute="centerX" id="Gj9-97-ufy"/>
                             <constraint firstItem="xcZ-VX-C1n" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" id="JnE-8a-jva"/>
                             <constraint firstItem="xcZ-VX-C1n" firstAttribute="top" secondItem="hPi-Vr-nEP" secondAttribute="bottom" constant="10.5" id="LBh-YF-ogK"/>
                             <constraint firstItem="A9X-op-hCG" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="95" id="Wl8-fP-1Ar"/>
-                            <constraint firstItem="agR-zY-wyO" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leading" id="ZIo-n1-bhf"/>
                             <constraint firstItem="fTO-Zm-XJQ" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="28" id="ZZr-6r-H8x" userLabel="Enter Password.leading = leadingMargin"/>
                             <constraint firstItem="fTO-Zm-XJQ" firstAttribute="centerX" secondItem="d6Z-dM-FKn" secondAttribute="centerX" id="aiE-ij-Av6"/>
                             <constraint firstItem="vzT-LA-Fkt" firstAttribute="leading" secondItem="fTO-Zm-XJQ" secondAttribute="leading" id="bvm-Og-LE0"/>
                             <constraint firstItem="0Q3-Rf-Y8M" firstAttribute="centerX" secondItem="A9X-op-hCG" secondAttribute="centerX" constant="-3" id="cdA-go-6fY"/>
                             <constraint firstItem="A9X-op-hCG" firstAttribute="trailing" secondItem="fTO-Zm-XJQ" secondAttribute="trailing" constant="-66" id="dQ9-wt-L7k"/>
                             <constraint firstItem="0Q3-Rf-Y8M" firstAttribute="top" secondItem="A9X-op-hCG" secondAttribute="bottom" constant="2" id="je6-m2-Yca"/>
-                            <constraint firstItem="RsC-Kl-loG" firstAttribute="top" secondItem="agR-zY-wyO" secondAttribute="bottom" constant="20" id="pN5-3H-eUJ"/>
                             <constraint firstItem="A9X-op-hCG" firstAttribute="top" secondItem="fTO-Zm-XJQ" secondAttribute="bottom" constant="52" id="wig-XW-fhJ"/>
                             <constraint firstItem="A9X-op-hCG" firstAttribute="centerY" secondItem="d6Z-dM-FKn" secondAttribute="centerY" constant="48" id="zR6-9g-VnE"/>
                         </constraints>
