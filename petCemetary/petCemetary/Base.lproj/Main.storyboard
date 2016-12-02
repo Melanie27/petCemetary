@@ -842,7 +842,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fTO-Zm-XJQ">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fTO-Zm-XJQ">
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -850,17 +850,16 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="A9X-op-hCG" firstAttribute="top" secondItem="fTO-Zm-XJQ" secondAttribute="bottom" constant="38" id="4a0-Ri-Gfn"/>
+                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="top" secondItem="vzT-LA-Fkt" secondAttribute="bottom" constant="30" id="5xp-Aw-0BJ"/>
                             <constraint firstItem="vzT-LA-Fkt" firstAttribute="trailing" secondItem="fTO-Zm-XJQ" secondAttribute="trailing" id="9Nm-MS-YLl"/>
                             <constraint firstItem="xcZ-VX-C1n" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" id="JnE-8a-jva"/>
-                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="top" secondItem="vzT-LA-Fkt" secondAttribute="bottom" constant="18" id="PLD-q1-i4n"/>
+                            <constraint firstItem="xcZ-VX-C1n" firstAttribute="top" secondItem="hPi-Vr-nEP" secondAttribute="bottom" constant="10.5" id="LBh-YF-ogK"/>
                             <constraint firstItem="A9X-op-hCG" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="93" id="Wl8-fP-1Ar"/>
-                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="28" id="ZZr-6r-H8x" userLabel="Enter Password.leading = leadingMargin"/>
-                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="centerX" secondItem="d6Z-dM-FKn" secondAttribute="centerX" id="aiE-ij-Av6"/>
+                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="26" id="ZZr-6r-H8x" userLabel="Enter Password.leading = leadingMargin"/>
+                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="centerX" secondItem="d6Z-dM-FKn" secondAttribute="centerX" constant="-2" id="aiE-ij-Av6"/>
                             <constraint firstItem="vzT-LA-Fkt" firstAttribute="leading" secondItem="fTO-Zm-XJQ" secondAttribute="leading" id="bvm-Og-LE0"/>
-                            <constraint firstItem="A9X-op-hCG" firstAttribute="trailing" secondItem="fTO-Zm-XJQ" secondAttribute="trailing" constant="-68" id="dQ9-wt-L7k"/>
-                            <constraint firstItem="RsC-Kl-loG" firstAttribute="top" secondItem="xcZ-VX-C1n" secondAttribute="bottom" constant="466" id="teN-NM-Qqd" userLabel="Bottom Layout Guide.top = Logout.bottom"/>
-                            <constraint firstItem="xcZ-VX-C1n" firstAttribute="top" secondItem="hPi-Vr-nEP" secondAttribute="bottom" constant="20" id="wjE-83-xMy"/>
+                            <constraint firstItem="A9X-op-hCG" firstAttribute="trailing" secondItem="fTO-Zm-XJQ" secondAttribute="trailing" constant="-66" id="dQ9-wt-L7k"/>
+                            <constraint firstItem="vzT-LA-Fkt" firstAttribute="top" secondItem="xcZ-VX-C1n" secondAttribute="bottom" constant="8" id="pvd-hO-VQR"/>
                             <constraint firstItem="A9X-op-hCG" firstAttribute="centerY" secondItem="d6Z-dM-FKn" secondAttribute="centerY" id="zR6-9g-VnE"/>
                         </constraints>
                     </view>
