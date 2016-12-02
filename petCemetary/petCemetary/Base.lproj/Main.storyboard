@@ -797,6 +797,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="pcBackgroundTrans-3" translatesAutoresizingMaskIntoConstraints="NO" id="6CI-Wz-e7D"/>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xcZ-VX-C1n">
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -873,10 +874,13 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vzT-LA-Fkt" firstAttribute="top" secondItem="6CI-Wz-e7D" secondAttribute="bottom" constant="-381" id="2FE-5Q-jOM"/>
                             <constraint firstItem="RsC-Kl-loG" firstAttribute="top" secondItem="agR-zY-wyO" secondAttribute="bottom" constant="2" id="4ve-me-xoV"/>
                             <constraint firstItem="fTO-Zm-XJQ" firstAttribute="top" secondItem="vzT-LA-Fkt" secondAttribute="bottom" constant="26" id="5xp-Aw-0BJ"/>
+                            <constraint firstItem="6CI-Wz-e7D" firstAttribute="top" secondItem="d6Z-dM-FKn" secondAttribute="top" id="5xp-XS-99F"/>
                             <constraint firstItem="agR-zY-wyO" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leading" id="7Fo-eZ-B8n"/>
                             <constraint firstItem="vzT-LA-Fkt" firstAttribute="trailing" secondItem="fTO-Zm-XJQ" secondAttribute="trailing" id="9Nm-MS-YLl"/>
+                            <constraint firstItem="6CI-Wz-e7D" firstAttribute="leading" secondItem="agR-zY-wyO" secondAttribute="leading" id="BnC-iu-jeM"/>
                             <constraint firstItem="vzT-LA-Fkt" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xcZ-VX-C1n" secondAttribute="bottom" constant="25" id="BzD-XX-VWo"/>
                             <constraint firstItem="agR-zY-wyO" firstAttribute="centerX" secondItem="A9X-op-hCG" secondAttribute="centerX" id="Gj9-97-ufy"/>
                             <constraint firstItem="xcZ-VX-C1n" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" id="JnE-8a-jva"/>
@@ -885,6 +889,7 @@
                             <constraint firstItem="fTO-Zm-XJQ" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="28" id="ZZr-6r-H8x" userLabel="Enter Password.leading = leadingMargin"/>
                             <constraint firstItem="fTO-Zm-XJQ" firstAttribute="centerX" secondItem="d6Z-dM-FKn" secondAttribute="centerX" id="aiE-ij-Av6"/>
                             <constraint firstItem="vzT-LA-Fkt" firstAttribute="leading" secondItem="fTO-Zm-XJQ" secondAttribute="leading" id="bvm-Og-LE0"/>
+                            <constraint firstItem="6CI-Wz-e7D" firstAttribute="trailing" secondItem="agR-zY-wyO" secondAttribute="trailing" id="caX-LU-7yF"/>
                             <constraint firstItem="0Q3-Rf-Y8M" firstAttribute="centerX" secondItem="A9X-op-hCG" secondAttribute="centerX" constant="-3" id="cdA-go-6fY"/>
                             <constraint firstItem="A9X-op-hCG" firstAttribute="trailing" secondItem="fTO-Zm-XJQ" secondAttribute="trailing" constant="-66" id="dQ9-wt-L7k"/>
                             <constraint firstItem="0Q3-Rf-Y8M" firstAttribute="top" secondItem="A9X-op-hCG" secondAttribute="bottom" constant="2" id="je6-m2-Yca"/>
@@ -931,6 +936,7 @@
         <image name="iconCollar" width="200" height="200"/>
         <image name="iconPersonality" width="128" height="128"/>
         <image name="pcBackgroundTrans-1" width="620" height="1136"/>
+        <image name="pcBackgroundTrans-3" width="620" height="1136"/>
         <image name="profilePlaceholder" width="128" height="128"/>
     </resources>
 </document>
