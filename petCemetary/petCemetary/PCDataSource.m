@@ -143,6 +143,9 @@
                  pet.petEnumerator = ownerEnumerator;
                  pet.petNumberString = [NSString stringWithFormat:@"%@", ownerEnumerator];
                  NSLog(@"ownerEnum %@", pet.petNumberString);
+                 
+                 
+                 
                  //NSNumber *petByOwner = [self.petsByOwner objectAtIndex:i];
                  //NSLog(@"pet by owner %@", petByOwner);
                  
@@ -179,21 +182,22 @@
                  }];
              }
 
-             self.petItems = [self.petItems arrayByAddingObject:pet];
-             pet.petNumber =  [self.petItems indexOfObject:_pet];
-             NSLog(@"pet num %ld", (long)pet.petNumber);
             
-             NSEnumerator *enumerator = [self.petItems objectEnumerator];
-             id Pet;
-             while (Pet = [enumerator nextObject]) {
-                 /* code to act on each element as it is returned */
-                 //NSLog(@"enum %@", enumerator);
-                 //pet.petEnumerator = enumerator;
+             self.petItems = [self.petItems arrayByAddingObject:pet];
+            
+             //THERES MY PET NUMBER
+             pet.petNumber =  [self.petItems indexOfObject:pet];
+             NSLog(@"pet num MEL ?%ld", (long)pet.petNumber);
+            
+             NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[self.petItems count]];
+             NSEnumerator *enumerator = [self.petItems reverseObjectEnumerator];
+             for (id element in enumerator) {
+                 [petItemsReversed addObject:element];
              }
              
-             pet.petEnumerator = enumerator;
-             NSLog(@"Melanieenum %@", pet.petEnumerator);
-              
+             
+             self.petItems = petItemsReversed;
+            NSLog(@"petITemsReverser %@", petItemsReversed);
              //TODO test if what user is uploading is a valid url format and send an alert if it is not
              if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
             
@@ -219,6 +223,16 @@
     return retrievedPets;
     
 }
+
+/*- (NSArray *)reversedArray {
+    NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[_petItems count]];
+    NSEnumerator *enumerator = [_petItems reverseObjectEnumerator];
+    for (id element in enumerator) {
+        [petItemsReversed addObject:element];
+    }
+    return petItemsReversed;
+}*/
+
 -(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(ImagePickerCompletionBlock)completion {
 
     

@@ -12,6 +12,8 @@
 
 @interface Pet : NSObject
 
+@property  float timeStamp;
+
 @property (nonatomic, assign) NSEnumerator *petEnumerator;
 @property (nonatomic, assign) NSInteger petNumber;
 @property (nonatomic, assign) NSString *petNumberString;

@@ -119,9 +119,12 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
     
     self.petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[self.petImageURL] options:nil];
+    //PHFetchResult *resultCollection = [PHAssetCollection fetchAssetCollectionsWithALAssetGroupURLs:@[self.petImageURL] options:nil];
     
+   
+    //NSLog(@"result collection array %@", resultCollection);
     [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-        
+    
         [asset requestContentEditingInputWithOptions:kNilOptions
                                    completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
                                        NSURL *imageURL = contentEditingInput.fullSizeImageURL;
