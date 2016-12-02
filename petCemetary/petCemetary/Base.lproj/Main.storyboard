@@ -22,6 +22,10 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQV-z5-a4J">
                                 <color key="backgroundColor" white="0.84999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="UQW-tn-wNs"/>
+                                    <constraint firstAttribute="height" constant="128" id="jMf-sd-NrK"/>
+                                </constraints>
                                 <state key="normal" backgroundImage="profilePlaceholder">
                                     <attributedString key="attributedTitle"/>
                                 </state>
@@ -915,6 +919,6 @@
         <image name="profilePlaceholder" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eU0-wu-7GJ"/>
+        <segue reference="DO5-3m-RZP"/>
     </inferredMetricsTieBreakers>
 </document>
