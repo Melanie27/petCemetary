@@ -55,18 +55,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-    //PetListTableViewCell *cell =[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath ];
+    
     PetListTableViewCell *cell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"cell"];
     // Configure the cell...
    
-   //TODO get full array here
-    NSArray *petsArray = [PCDataSource sharedInstance].petItems;
-   
     
-    for (Pet *pet in petsArray) {
-        self.petNumber = pet.petNumber;
-        NSLog(@"pets number inloop %lu", self.petNumber);
-    }
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.delegate = self;
         cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
@@ -75,6 +68,7 @@
     
         cell.textLabel.text = cell.pet.petName;
         cell.detailTextLabel.text = cell.pet.petBreed;
+       
         NSString *petFeedUrlString = cell.pet.feedImageString;
         UIImage *image = cell.pet.feedImage;
         [cell.petThumbnailView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
@@ -116,7 +110,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //Only pet name and feed image string are available here
+    
 
     Pet *petListByOwner = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
     self.passPetToProfile = petListByOwner;

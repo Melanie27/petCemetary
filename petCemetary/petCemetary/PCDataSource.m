@@ -105,11 +105,6 @@
              //create the array of photos
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
              
-             
-             //TODO write to disc??
-             /*- (nonnull FIRStorageDownloadTask *)
-            writeToFile:(nonnull NSURL *)fileURL
-            completion:(nullable void (^)(NSURL *_Nullable, NSError *_Nullable))completion;*/
             
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
@@ -128,26 +123,23 @@
                  pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
                  pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
-                pet.petNumber =  [self.petItems indexOfObject:pet];
-               
                  
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
-                 NSEnumerator *ownerEnumerator = [self.petsByOwner objectEnumerator];
+                 
+                 
+                 /*NSEnumerator *ownerEnumerator = [self.petsByOwner objectEnumerator];
                  id Pet;
                  while (Pet = [ownerEnumerator nextObject]) {
-                     /* code to act on each element as it is returned */
+                      code to act on each element as it is returned
                      NSLog(@"enum %@", ownerEnumerator);
-                     //pet.petEnumerator = enumerator;
+                     pet.petEnumerator = enumerator;
                  }
                  
                  pet.petEnumerator = ownerEnumerator;
                  pet.petNumberString = [NSString stringWithFormat:@"%@", ownerEnumerator];
-                 NSLog(@"ownerEnum %@", pet.petNumberString);
+                 NSLog(@"ownerEnum %@", pet.petNumberString);*/
                  
-                 
-                 
-                 //NSNumber *petByOwner = [self.petsByOwner objectAtIndex:i];
-                 //NSLog(@"pet by owner %@", petByOwner);
+                
                  
                  for (NSString *string in pet.albumImageStrings) {
                      pet.albumImageString = string;
@@ -166,6 +158,12 @@
                      }];
                  }
                  
+             }
+             
+             //set pet numbers
+             for (NSString *string in pet.petNumberStrings) {
+                 pet.petNumberString = string;
+                 NSLog(@"pets number string from data source %@", pet.petNumberString);
              }
              
              
@@ -187,15 +185,19 @@
             
              //THERES MY PET NUMBER
              pet.petNumber =  [self.petItems indexOfObject:pet];
-             /*NSLog(@"pet num MEL ?%ld", (long)pet.petNumber);
+             for (Pet *pet in self.petItems) {
+                 self.petNumber = pet.petNumber;
+                 
+             }
             
-             NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[self.petItems count]];
+             NSLog(@"pet num MEL ?%ld", (long)pet.petNumber);
+             pet.petNumberString = [NSString stringWithFormat:@"%ld", (long)pet.petNumber];
+             NSLog(@"pet num String %@", pet.petNumberString);
+             /*NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[self.petItems count]];
              NSEnumerator *enumerator = [self.petItems reverseObjectEnumerator];
              for (id element in enumerator) {
                  [petItemsReversed addObject:element];
              }
-             
-             
              self.petItems = petItemsReversed;
             NSLog(@"petITemsReverser %@", petItemsReversed);*/
              //TODO test if what user is uploading is a valid url format and send an alert if it is not

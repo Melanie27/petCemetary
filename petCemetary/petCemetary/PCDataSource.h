@@ -59,6 +59,7 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 @property (nonatomic, strong) NSString *addPetDOD;
 @property (nonatomic, strong) NSString *addOwnerName;
 @property (nonatomic, strong) NSString *addPersonality;
+@property (nonatomic) NSInteger addPetNumber;
 @property (strong) UIImage *addPetImage;
 
 -(NSString *)retrievePets;

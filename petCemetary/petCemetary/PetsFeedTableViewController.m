@@ -164,7 +164,7 @@
     
    
     CGFloat height =  [PetsFeedTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
-    NSLog(@"height %f", height);
+    //NSLog(@"height %f", height);
 
     if (height > 50) {
         return height;

@@ -23,20 +23,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //TODO get current pet number - this retrieves from full list - need from user list
-    //Count how many pets this owner has
+    
     NSArray *petsArray = [PCDataSource sharedInstance].petItems;
-    Pet *pet = [[Pet alloc] init];
-    self.petNumber = 0;
+    NSUInteger index;
     for (Pet *pet in petsArray) {
-        self.petNumber = pet.petNumber;
-        NSLog(@"pets number on edit profile view %lu", self.petNumber);
+        index = [petsArray indexOfObject:pet];
+        self.petNumber = index;
+        NSLog(@"petindex %lu", (unsigned long)index);
     }
-    //petsArray = [petsArray arrayByAddingObject:pet];
-    //TODO this is 0 get it out of loop
-    self.petNumber = pet.petNumber;
-    NSLog(@"pet number on edit profile melanie %ld", pet.petNumber);
-   
+    NSLog(@"melpets %ld", self.petNumber);
     // Do any additional setup after loading the view.
     self.title = @"Edit Profile";
     PCDataSource *pc = [PCDataSource sharedInstance];
@@ -51,7 +46,10 @@
     self.ownerNameTextField.text = _pet.ownerName;
     
     
-    
+    NSLog(@"pet.petName %@", _pet.petName);
+    NSLog(@"pet.petNumber %lu", _pet.petNumber);
+    self.petNumber = _pet.petNumber;
+    NSLog(@"pet.petNumber take 2 %lu", self.petNumber);
    
     NSString *petProfileString = _pet.feedImageString;
     NSURL *petProfileUrl=[NSURL URLWithString:petProfileString];
@@ -125,12 +123,11 @@
  
      if([segue.identifier isEqualToString:@"editPhotosSegue"]) {
          EditPetPhotosTableViewController *editPhotosVC = (EditPetPhotosTableViewController*)segue.destinationViewController;
-         NSLog(@"segue to album");
+         
          
          
          editPhotosVC.pet = self.pet;
-         //NSLog(@"vc  %@", editPhotosVC.pet);
-         //NSLog(@"self.pet %@", self.pet.petName);
+         
      }
  }
 
