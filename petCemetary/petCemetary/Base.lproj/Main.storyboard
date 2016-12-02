@@ -644,14 +644,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQs-Of-Jkl">
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owner Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7b-WP-zEL">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Melanie" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGn-xk-KzX">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AfE-An-nrD" firstAttribute="leading" secondItem="v2Q-Ia-p5g" secondAttribute="leading" id="2dO-8a-cDN"/>
+                            <constraint firstItem="PQs-Of-Jkl" firstAttribute="top" secondItem="6GT-B0-bA6" secondAttribute="bottom" constant="8" symbolic="YES" id="32H-nj-tYi"/>
                             <constraint firstItem="AfE-An-nrD" firstAttribute="trailing" secondItem="v2Q-Ia-p5g" secondAttribute="trailing" id="3IV-Ce-9G5"/>
                             <constraint firstItem="AfE-An-nrD" firstAttribute="top" secondItem="v2Q-Ia-p5g" secondAttribute="bottom" constant="8" symbolic="YES" id="3Za-wS-FfI"/>
                             <constraint firstItem="uCF-K8-y1X" firstAttribute="centerX" secondItem="OWa-Pq-Fiu" secondAttribute="centerX" id="4UT-bH-suV"/>
                             <constraint firstItem="v2Q-Ia-p5g" firstAttribute="top" secondItem="OWa-Pq-Fiu" secondAttribute="bottom" constant="8" symbolic="YES" id="5Vv-q5-37L"/>
+                            <constraint firstItem="PQs-Of-Jkl" firstAttribute="leading" secondItem="m7b-WP-zEL" secondAttribute="trailing" constant="3" id="6cI-QU-rDi"/>
                             <constraint firstItem="AfE-An-nrD" firstAttribute="leading" secondItem="o8X-OK-fHK" secondAttribute="trailing" constant="5" id="8Sp-dk-kXJ"/>
                             <constraint firstItem="v2Q-Ia-p5g" firstAttribute="centerX" secondItem="OWa-Pq-Fiu" secondAttribute="centerX" id="Ais-u7-oet"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pyO-m2-qro" secondAttribute="trailing" constant="54" id="BA7-zX-fgi"/>
@@ -661,10 +678,15 @@
                             <constraint firstItem="pyO-m2-qro" firstAttribute="leading" secondItem="v2Q-Ia-p5g" secondAttribute="trailing" constant="7" id="LZN-I4-mdC"/>
                             <constraint firstItem="6GT-B0-bA6" firstAttribute="trailing" secondItem="AfE-An-nrD" secondAttribute="trailing" id="MYt-Zw-hsB"/>
                             <constraint firstItem="v2Q-Ia-p5g" firstAttribute="bottom" secondItem="dpv-wY-TTB" secondAttribute="bottom" id="OHD-av-icG"/>
+                            <constraint firstItem="m7b-WP-zEL" firstAttribute="top" secondItem="zmI-p1-dR7" secondAttribute="bottom" constant="8" symbolic="YES" id="Pc5-19-R44"/>
+                            <constraint firstItem="PQs-Of-Jkl" firstAttribute="leading" secondItem="6GT-B0-bA6" secondAttribute="leading" id="UvC-lA-cgF"/>
+                            <constraint firstItem="gGn-xk-KzX" firstAttribute="baseline" secondItem="PQs-Of-Jkl" secondAttribute="baseline" id="V4p-hY-xq0"/>
                             <constraint firstItem="6GT-B0-bA6" firstAttribute="top" secondItem="AfE-An-nrD" secondAttribute="bottom" constant="8" symbolic="YES" id="Whh-KN-NAw"/>
                             <constraint firstItem="zfZ-Cn-xwD" firstAttribute="top" secondItem="pyO-m2-qro" secondAttribute="bottom" constant="7" id="Yjp-ri-9rk"/>
+                            <constraint firstItem="gGn-xk-KzX" firstAttribute="leading" secondItem="PQs-Of-Jkl" secondAttribute="trailing" id="ZQ9-MN-3Ih"/>
                             <constraint firstItem="TtA-ti-Pna" firstAttribute="baseline" secondItem="zmI-p1-dR7" secondAttribute="baseline" id="b7e-Gs-AXt"/>
                             <constraint firstItem="zfZ-Cn-xwD" firstAttribute="leading" secondItem="AfE-An-nrD" secondAttribute="trailing" constant="6" id="c3U-41-2lr"/>
+                            <constraint firstItem="PQs-Of-Jkl" firstAttribute="trailing" secondItem="6GT-B0-bA6" secondAttribute="trailing" id="eAz-np-M4R"/>
                             <constraint firstItem="zmI-p1-dR7" firstAttribute="top" secondItem="o8X-OK-fHK" secondAttribute="bottom" constant="7" id="fdO-sW-aDR"/>
                             <constraint firstItem="6GT-B0-bA6" firstAttribute="leading" secondItem="zmI-p1-dR7" secondAttribute="trailing" constant="2" id="fsF-2l-mPo"/>
                             <constraint firstItem="6GT-B0-bA6" firstAttribute="leading" secondItem="AfE-An-nrD" secondAttribute="leading" id="n0K-UQ-SZD"/>
