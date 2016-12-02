@@ -812,6 +812,42 @@
                                     <action selector="didTapSignOut:" destination="SKy-XN-VZw" eventType="touchUpInside" id="j4d-UJ-nHF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBd-H3-H1f">
+                                <frame key="frameInset" minX="258" minY="530" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="ZBA-21-rvE" kind="show" identifier="feedSegue" id="UOD-iH-fsF"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fTO-Zm-XJQ">
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agR-zY-wyO">
+                                <color key="backgroundColor" red="0.4431372549" green="0.70980392160000005" blue="0.090196078430000007" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="New? Register Here">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didCreateAccount:" destination="SKy-XN-VZw" eventType="touchUpInside" id="m3f-IH-hXC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Q3-Rf-Y8M">
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Forgot Password?">
+                                            <attributes>
+                                                <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" metaFont="system" size="15"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A9X-op-hCG" userLabel="Signin Account">
                                 <color key="backgroundColor" red="0.44313725490196076" green="0.70980392156862748" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
@@ -829,20 +865,7 @@
                                     <action selector="didTapEmailLogin:" destination="SKy-XN-VZw" eventType="touchUpInside" id="f9k-hb-StY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBd-H3-H1f">
-                                <frame key="frameInset" minX="258" minY="530" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="ZBA-21-rvE" kind="show" identifier="feedSegue" id="UOD-iH-fsF"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Email" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vzT-LA-Fkt">
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fTO-Zm-XJQ">
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -850,22 +873,29 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="top" secondItem="vzT-LA-Fkt" secondAttribute="bottom" constant="30" id="5xp-Aw-0BJ"/>
+                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="top" secondItem="vzT-LA-Fkt" secondAttribute="bottom" constant="26" id="5xp-Aw-0BJ"/>
+                            <constraint firstItem="agR-zY-wyO" firstAttribute="centerX" secondItem="fTO-Zm-XJQ" secondAttribute="centerX" id="8bQ-jy-6uU"/>
                             <constraint firstItem="vzT-LA-Fkt" firstAttribute="trailing" secondItem="fTO-Zm-XJQ" secondAttribute="trailing" id="9Nm-MS-YLl"/>
                             <constraint firstItem="xcZ-VX-C1n" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" id="JnE-8a-jva"/>
                             <constraint firstItem="xcZ-VX-C1n" firstAttribute="top" secondItem="hPi-Vr-nEP" secondAttribute="bottom" constant="10.5" id="LBh-YF-ogK"/>
-                            <constraint firstItem="A9X-op-hCG" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="93" id="Wl8-fP-1Ar"/>
-                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="26" id="ZZr-6r-H8x" userLabel="Enter Password.leading = leadingMargin"/>
-                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="centerX" secondItem="d6Z-dM-FKn" secondAttribute="centerX" constant="-2" id="aiE-ij-Av6"/>
+                            <constraint firstItem="A9X-op-hCG" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="95" id="Wl8-fP-1Ar"/>
+                            <constraint firstItem="agR-zY-wyO" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leading" id="ZIo-n1-bhf"/>
+                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" constant="28" id="ZZr-6r-H8x" userLabel="Enter Password.leading = leadingMargin"/>
+                            <constraint firstItem="fTO-Zm-XJQ" firstAttribute="centerX" secondItem="d6Z-dM-FKn" secondAttribute="centerX" id="aiE-ij-Av6"/>
                             <constraint firstItem="vzT-LA-Fkt" firstAttribute="leading" secondItem="fTO-Zm-XJQ" secondAttribute="leading" id="bvm-Og-LE0"/>
+                            <constraint firstItem="0Q3-Rf-Y8M" firstAttribute="centerX" secondItem="A9X-op-hCG" secondAttribute="centerX" constant="-3" id="cdA-go-6fY"/>
                             <constraint firstItem="A9X-op-hCG" firstAttribute="trailing" secondItem="fTO-Zm-XJQ" secondAttribute="trailing" constant="-66" id="dQ9-wt-L7k"/>
-                            <constraint firstItem="vzT-LA-Fkt" firstAttribute="top" secondItem="xcZ-VX-C1n" secondAttribute="bottom" constant="8" id="pvd-hO-VQR"/>
-                            <constraint firstItem="A9X-op-hCG" firstAttribute="centerY" secondItem="d6Z-dM-FKn" secondAttribute="centerY" id="zR6-9g-VnE"/>
+                            <constraint firstItem="0Q3-Rf-Y8M" firstAttribute="top" secondItem="A9X-op-hCG" secondAttribute="bottom" constant="2" id="je6-m2-Yca"/>
+                            <constraint firstItem="RsC-Kl-loG" firstAttribute="top" secondItem="agR-zY-wyO" secondAttribute="bottom" constant="20" id="pN5-3H-eUJ"/>
+                            <constraint firstItem="A9X-op-hCG" firstAttribute="top" secondItem="fTO-Zm-XJQ" secondAttribute="bottom" constant="52" id="wig-XW-fhJ"/>
+                            <constraint firstItem="A9X-op-hCG" firstAttribute="centerY" secondItem="d6Z-dM-FKn" secondAttribute="centerY" constant="48" id="zR6-9g-VnE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="suB-da-8qR"/>
                     <connections>
+                        <outlet property="emailField" destination="vzT-LA-Fkt" id="CwI-xr-fTd"/>
                         <outlet property="logoutAccount" destination="A9X-op-hCG" id="LHs-9o-xXu"/>
+                        <outlet property="passwordField" destination="fTO-Zm-XJQ" id="cOl-di-VbO"/>
                         <outlet property="questionsButton" destination="LBd-H3-H1f" id="NY5-WA-XIB"/>
                     </connections>
                 </viewController>
