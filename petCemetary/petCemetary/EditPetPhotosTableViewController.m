@@ -94,11 +94,11 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
     [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"cancel button") style:UIAlertActionStyleCancel handler:nil]];
     [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", @"Send button") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         self.captionTextfield = self.alertVC.textFields[0];
-        NSLog(@"textfield text %@", self.captionTextfield);
+        //NSLog(@"textfield text %@", self.captionTextfield);
         self.photoCaption = self.captionTextfield.text;
-        NSLog(@"textfield  %@", self.photoCaption);
+        //NSLog(@"textfield  %@", self.photoCaption);
 
-        //[self sendImageToInstagramWithCaption:textField.text];
+        
     }]];
     
     //NSLog(@"photocap  %@", self.photoCaption);
@@ -125,26 +125,21 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
     }];
    
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTable" object:self];
-    NSLog(@"notification fired");
+    //TODO GET THIS INTO MODEL
     
     self.petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[self.petImageURL] options:nil];
-    //PHFetchResult *resultCollection = [PHAssetCollection fetchAssetCollectionsWithALAssetGroupURLs:@[self.petImageURL] options:nil];
     
-   
-    //NSLog(@"result collection array %@", resultCollection);
     [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
     
         [asset requestContentEditingInputWithOptions:kNilOptions
                                    completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
                                        NSURL *imageURL = contentEditingInput.fullSizeImageURL;
-                                       NSLog(@"imageURL %@", imageURL );
+                                       //NSLog(@"imageURL %@", imageURL );
                                        NSString *localURLString = [imageURL path];
-                                       NSLog(@"local url string %@", localURLString);
+                                       //NSLog(@"local url string %@", localURLString);
                                        NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
-                                       //[[PCDataSource sharedInstance]saveAlbumPhoto];
-                                       //MOVE THIS STUFF
+                                       
                                        
                                       
                                        
