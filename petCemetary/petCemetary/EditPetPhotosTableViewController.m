@@ -45,9 +45,16 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
      [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
-    
-    
+
 }
+
+
+-(void)dealloc {
+   
+   
+    //[[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -118,7 +125,8 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
     }];
    
     
-   
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTable" object:self];
+    NSLog(@"notification fired");
     
     self.petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[self.petImageURL] options:nil];
@@ -138,6 +146,7 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
                                        //[[PCDataSource sharedInstance]saveAlbumPhoto];
                                        //MOVE THIS STUFF
                                        
+                                      
                                        
                                        FIRStorage *storage = [FIRStorage storage];
                                        FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
@@ -152,21 +161,34 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
                                                NSString *downloadURLString = [ downloadURL absoluteString];
                                                NSLog(@"downloadrul%@", downloadURL);
                                                //push the selected photo to database
+                                               Pet *pet = [[Pet alloc]init];
                                                
+                                              
+                                               NSUInteger index = 0;
+                                               NSLog(@"pet album media %lu", (unsigned long)pet.albumMedia.count);
+                                              
+                                               for (NSString *petMedia in pet.albumMedia) {
+                                                   index += ([petMedia isEqualToString:petMedia]?1:0);
+                                               }
                                                
+                                               NSLog(@"number of occurences %lu", (unsigned long)index);
                                                //TODO - if there is a caption post the string, OTHERWISE just create empty string
-                                               
+                                               //TODO - get the correct PET number
                                                NSDictionary *childUpdates = @{
-                                                                              [NSString stringWithFormat:@"/pets/%ld/photos/%ld/photoUrl/", self.petNumber,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
-                                                                               [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)[PCDataSource sharedInstance].petItems.count-1,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
+                                                                              [NSString stringWithFormat:@"/pets/5/photos/%ld/photoUrl/", (unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString//,
+                                                                              // [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)[PCDataSource sharedInstance].petItems.count-1,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
                                                                               };
-                                               NSLog(@"child updates %@", childUpdates);
+                                              
+                                               
+                                                NSLog(@"child updates from edit%@", childUpdates);
                                                [self.ref updateChildValues:childUpdates];
                                                
-                                               
+                                              
                                            }
                                        }];
                                    }];
+        
+        
         
     }];
     
@@ -177,7 +199,7 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
                                   // };
     
     //[_ref updateChildValues:childUpdates];
-   
+  
     
     
     
@@ -244,9 +266,9 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
 #pragma mark - Swipe to delete and KVO
 
 //KVO
-- (void) dealloc {
+/*- (void) dealloc {
     [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
-}
+}*/
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumPhotos"]) {

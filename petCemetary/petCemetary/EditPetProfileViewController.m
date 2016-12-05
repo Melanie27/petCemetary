@@ -27,14 +27,14 @@
     [[PCDataSource sharedInstance]retrievePets];
     NSArray *petsArray = [PCDataSource sharedInstance].petItems;
     NSUInteger index;
-    for (Pet *pet in petsArray) {
+    /*for (Pet *pet in petsArray) {
         index = [petsArray indexOfObject:pet];
         self.petNumber = index;
-        NSLog(@"petindex %lu", (unsigned long)index);
-        NSLog(@" addpet %ld", pet.petNumber);
+        //NSLog(@"petindex %lu", (unsigned long)index);
+        //NSLog(@" addpet %ld", pet.petNumber);
         pet.petNumber = self.petNumber;
-    }
-    NSLog(@"melpets addpet %ld", self.petNumber);
+    }*/
+    //NSLog(@"melpets addpet %ld", self.petNumber);
     // Do any additional setup after loading the view.
     self.title = @"Edit Profile";
     PCDataSource *pc = [PCDataSource sharedInstance];
@@ -49,11 +49,14 @@
     self.ownerNameTextField.text = _pet.ownerName;
     
    
-    NSLog(@"pet.petName %@", _pet.petName);
-    NSLog(@"pet.petNumber %lu", _pet.petNumber);
-    self.petNumber = _pet.petNumber;
-    NSLog(@"pet.petNumber take 2 %lu", self.petNumber);
+    //NSLog(@"pet.petName %@", _pet.petName);
+    //NSLog(@"pet.petNumber %lu", _pet.petNumber);
+    //self.petNumber = _pet.petNumber;
+    //NSLog(@"pet.petNumber take 2 %lu", self.petNumber);
    
+    self.petNumber = pc.petNumber;
+    NSLog(@"pet number from edit %ld", self.petNumber);
+    
     NSString *petProfileString = _pet.feedImageString;
     NSURL *petProfileUrl=[NSURL URLWithString:petProfileString];
     UIImage *savedProfileImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:petProfileUrl]];
@@ -100,14 +103,14 @@
     
 }
 
--(void)sendPetNameToFirebase {
+-(void)sendPetInfoToFirebase {
     //[[PCDataSource sharedInstance] editPetInfo];
     
     self.ref = [[FIRDatabase database] reference];
     
     NSDictionary *screenNameUpdates = @{
-        [NSString stringWithFormat:@"/pets/%ld/pet/", self.petNumber]:self.petNameTextField.text,
-        [NSString stringWithFormat:@"/pets/%ld/breed/",self.petNumber]:self.animalBreedTextField.text,
+        [NSString stringWithFormat:@"/pets/5/pet/"]:self.petNameTextField.text,
+        [NSString stringWithFormat:@"/pets/5/breed/"]:self.animalBreedTextField.text,
         [NSString stringWithFormat:@"/pets/%ld/animalType/",self.petNumber]:self.animalTypeTextField.text,
         [NSString stringWithFormat:@"/pets/%ld/dateOfBirth/",self.petNumber]:self.dobTextField.text,
         [NSString stringWithFormat:@"/pets/%ld/dateOfDeath/",self.petNumber]:self.dodTextField.text,
@@ -140,9 +143,10 @@
 
 
 - (IBAction)saveEditedProfile:(id)sender {
-    [self sendPetNameToFirebase];
+     NSLog(@"save everything at once edit");
+    [self sendPetInfoToFirebase];
     [self sendPersonalityToFirebase];
-    NSLog(@"save everything at once");
+   
 }
 
 @end

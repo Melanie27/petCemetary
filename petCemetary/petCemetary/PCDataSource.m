@@ -190,9 +190,9 @@
                  
              }
             
-             NSLog(@"pet num MEL ?%ld", (long)pet.petNumber);
-             pet.petNumberString = [NSString stringWithFormat:@"%ld", (long)pet.petNumber];
-             NSLog(@"pet num String %@", pet.petNumberString);
+             //NSLog(@"pet num MEL ?%ld", (long)pet.petNumber);
+             //pet.petNumberString = [NSString stringWithFormat:@"%ld", (long)pet.petNumber];
+             //NSLog(@"pet num String %@", pet.petNumberString);
              /*NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[self.petItems count]];
              NSEnumerator *enumerator = [self.petItems reverseObjectEnumerator];
              for (id element in enumerator) {

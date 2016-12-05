@@ -133,6 +133,7 @@
 
 
 - (IBAction)savePetProfile:(id)sender {
+    //TODO check if pet name exists otherwise send alert
     NSLog(@"this method should save the pet to the logged in user");
     [self sendPetInfoToFirebase];
     [self sendPhotoToFirebase];

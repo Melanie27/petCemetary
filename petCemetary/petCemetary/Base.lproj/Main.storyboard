@@ -111,9 +111,9 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="bNQ-3W-Awj">
                         <rightBarButtonItems>
-                            <barButtonItem style="plain" systemItem="camera" id="tid-sp-975">
+                            <barButtonItem systemItem="camera" id="tid-sp-975">
                                 <connections>
-                                    <segue destination="6Vi-Cz-wUg" kind="show" id="tK1-tJ-NQj"/>
+                                    <segue destination="6Vi-Cz-wUg" kind="show" identifier="editPhotosSegue" id="tK1-tJ-NQj"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="save" id="O9U-LO-ZYg">
@@ -142,7 +142,7 @@
         <scene sceneID="rwZ-BJ-VcY">
             <objects>
                 <collectionViewController storyboardIdentifier="PCImageLibraryViewController" title="PCImageLibraryViewController" id="m5d-9B-uuN" customClass="PCImageLibraryViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="4zX-6B-shd">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="4zX-6B-shd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -333,8 +333,16 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="ysf-Kc-MUO">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="camera" id="zeN-Rf-oni"/>
-                            <barButtonItem systemItem="save" id="I3m-zd-dXT"/>
+                            <barButtonItem systemItem="camera" id="zeN-Rf-oni">
+                                <connections>
+                                    <segue destination="6Vi-Cz-wUg" kind="show" identifier="editPhotosSegue" id="9b8-J3-Xdg"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="save" id="I3m-zd-dXT">
+                                <connections>
+                                    <action selector="saveEditedProfile:" destination="G1O-py-iGd" id="jTC-Vt-ARi"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -880,7 +888,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3l8-FP-Xfd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Hf-qg-sSd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3Hf-qg-sSd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -899,4 +907,7 @@
         <image name="iconPersonality" width="128" height="128"/>
         <image name="profilePlaceholder" width="128" height="128"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="tK1-tJ-NQj"/>
+    </inferredMetricsTieBreakers>
 </document>
