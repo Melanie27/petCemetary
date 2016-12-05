@@ -21,6 +21,7 @@
 
 - (IBAction)didTapSignOut:(id)sender;
 
+- (IBAction)IBActiondidRequestPasswordReset:(id)sender;
 
 
 @property (weak, nonatomic) IBOutlet UITextField *emailField;

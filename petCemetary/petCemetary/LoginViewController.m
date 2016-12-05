@@ -412,6 +412,9 @@ static NSString *const kChangePasswordText = @"Change Password";
     // [END signout]
 }
 
+- (IBAction)IBActiondidRequestPasswordReset:(id)sender {
+}
+
 // [START headless_google_auth]
 /*- (void)signIn:(GIDSignIn *)signIn
  didSignInForUser:(GIDGoogleUser *)user
