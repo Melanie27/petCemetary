@@ -24,6 +24,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"Add Pet";
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+   
+    
+    
     [[PCDataSource sharedInstance]retrievePets];
     NSArray *petsArray = [PCDataSource sharedInstance].petItems;
     NSUInteger index;
@@ -36,15 +41,53 @@
     }
     NSLog(@"melpets addpet %ld", self.petNumber);
     self.newPetNumber = self.petNumber + 1;
-   
+    
+
+    self.scrollView.contentSize = CGSizeMake(320, 1000);
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
 }
 
+- (void)keyboardFrameWillChange:(NSNotification *)notification
+{
+    CGRect keyboardEndFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardBeginFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    NSTimeInterval animationDuration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] integerValue];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    [UIView setAnimationCurve:animationCurve];
+    
+    CGRect newFrame = self.view.frame;
+    CGRect keyboardFrameEnd = [self.view convertRect:keyboardEndFrame toView:nil];
+    CGRect keyboardFrameBegin = [self.view convertRect:keyboardBeginFrame toView:nil];
+    
+    newFrame.origin.y -= (keyboardFrameBegin.origin.y - keyboardFrameEnd.origin.y);
+    self.view.frame = newFrame;
+    
+    [UIView commitAnimations];
+}
 
-#pragma mark - date picker
+
+- (void) viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    // #4
+    self.scrollView.frame = self.view.bounds;
+    
+    // #5
+    CGSize scrollViewFrameSize = self.scrollView.frame.size;
+    CGSize scrollViewContentSize = self.scrollView.contentSize;
+    
+    CGFloat scaleWidth = scrollViewFrameSize.width / scrollViewContentSize.width;
+    CGFloat scaleHeight = scrollViewFrameSize.height / scrollViewContentSize.height;
+    CGFloat minScale = MIN(scaleWidth, scaleHeight);
+    
+    self.scrollView.minimumZoomScale = minScale;
+    self.scrollView.maximumZoomScale = 1;
+}
 
 
 

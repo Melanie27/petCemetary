@@ -13,7 +13,7 @@
 @import FirebaseStorage;
 @class Pet;
 
-@interface AddPetProfileViewController : UIViewController <UITextFieldDelegate>
+@interface AddPetProfileViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *petNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *animalTypeTextField;
@@ -30,6 +30,7 @@
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) FIRStorage *storage;
 
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 - (IBAction)savePetProfile:(id)sender;
 - (IBAction)uploadProfilePhoto:(id)sender;
