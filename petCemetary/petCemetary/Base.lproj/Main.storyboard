@@ -808,11 +808,18 @@
                                     <action selector="didTapEmailLogin:" destination="SKy-XN-VZw" eventType="touchUpInside" id="f9k-hb-StY"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cei-6y-n8s">
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="v4R-rg-1WT" firstAttribute="leading" secondItem="rTH-JY-etq" secondAttribute="leading" id="4dB-ix-qJ0"/>
                             <constraint firstItem="v4R-rg-1WT" firstAttribute="trailing" secondItem="rTH-JY-etq" secondAttribute="trailing" id="E5x-3j-ufa"/>
+                            <constraint firstItem="cei-6y-n8s" firstAttribute="top" secondItem="A9X-op-hCG" secondAttribute="bottom" constant="24" id="EIv-p8-DM0"/>
+                            <constraint firstItem="cei-6y-n8s" firstAttribute="centerX" secondItem="A9X-op-hCG" secondAttribute="centerX" id="Hfz-p5-xzg"/>
                             <constraint firstItem="xcZ-VX-C1n" firstAttribute="leading" secondItem="d6Z-dM-FKn" secondAttribute="leadingMargin" id="JnE-8a-jva"/>
                             <constraint firstItem="xcZ-VX-C1n" firstAttribute="top" secondItem="hPi-Vr-nEP" secondAttribute="bottom" constant="10.5" id="LBh-YF-ogK"/>
                             <constraint firstItem="A9X-op-hCG" firstAttribute="centerX" secondItem="v4R-rg-1WT" secondAttribute="centerX" id="Odw-uE-5ZY"/>
