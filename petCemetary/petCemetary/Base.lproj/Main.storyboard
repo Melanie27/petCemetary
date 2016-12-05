@@ -18,7 +18,7 @@
                         <viewControllerLayoutGuide type="bottom" id="rdo-xo-maw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MRZ-GW-Uop">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQV-z5-a4J">
@@ -143,7 +143,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="PCImageLibraryViewController" title="PCImageLibraryViewController" id="m5d-9B-uuN" customClass="PCImageLibraryViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="4zX-6B-shd">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AUk-O1-TKP">
@@ -178,15 +178,15 @@
             <objects>
                 <tableViewController title="PetListTableViewController" id="UDQ-cm-OfM" customClass="PetListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="lzx-E8-acb">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" id="dkR-To-Lx3" customClass="PetListTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="667" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dkR-To-Lx3" id="sNn-D3-Rjz">
-                                    <frame key="frameInset" width="634" height="43"/>
+                                    <frame key="frameInset" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconPersonality" translatesAutoresizingMaskIntoConstraints="NO" id="Jh2-kc-hAe">
@@ -240,7 +240,7 @@
                         <viewControllerLayoutGuide type="bottom" id="reE-Nz-jWD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UAb-Fb-p3j">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k0A-71-tyG">
@@ -358,15 +358,15 @@
             <objects>
                 <tableViewController id="6Vi-Cz-wUg" customClass="EditPetPhotosTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="227" sectionHeaderHeight="28" sectionFooterHeight="28" id="hB2-Ih-Mpb">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="editCell" rowHeight="227" id="CdN-Uc-ApD" customClass="EditPetPhotosTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="667" height="227"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="227"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CdN-Uc-ApD" id="RXf-iX-TJJ">
-                                    <frame key="frameInset" width="667" height="226"/>
+                                    <frame key="frameInset" width="320" height="226"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pet Caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWx-lR-1uE">
@@ -402,15 +402,15 @@
             <objects>
                 <tableViewController title="PetsFeedTableViewController" id="ZBA-21-rvE" customClass="PetsFeedTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="5Te-Sc-RlR">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="cell" rowHeight="300" id="rX5-iT-ujj" customClass="PetsFeedTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="667" height="300"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rX5-iT-ujj" id="Hkd-80-RW9">
-                                    <frame key="frameInset" width="634" height="299"/>
+                                    <frame key="frameInset" width="287" height="299"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Awj-Zb-gyG">
@@ -455,7 +455,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ijG-6K-gCx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9g4-Pr-OkO">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWa-Pq-Fiu">
@@ -473,15 +473,6 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCF-K8-y1X">
-                                <color key="backgroundColor" red="0.26274509800000001" green="0.2901960784" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="More Photos ">
-                                    <color key="titleColor" red="0.4431372549" green="0.70980392160000005" blue="0.090196078430000007" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <segue destination="asp-Ic-rjJ" kind="show" identifier="albumSegue" id="P3h-e9-DWC"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpv-wY-TTB">
                                 <attributedString key="attributedText">
                                     <fragment content="11-01-2016">
@@ -641,6 +632,18 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCF-K8-y1X">
+                                <color key="backgroundColor" red="0.26274509800000001" green="0.2901960784" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="3XM-yY-IRF"/>
+                                </constraints>
+                                <state key="normal" title="View Photo Album">
+                                    <color key="titleColor" red="0.4431372549" green="0.70980392160000005" blue="0.090196078430000007" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="asp-Ic-rjJ" kind="show" identifier="albumSegue" id="P3h-e9-DWC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -648,14 +651,13 @@
                             <constraint firstItem="PQs-Of-Jkl" firstAttribute="top" secondItem="6GT-B0-bA6" secondAttribute="bottom" constant="8" symbolic="YES" id="32H-nj-tYi"/>
                             <constraint firstItem="AfE-An-nrD" firstAttribute="trailing" secondItem="v2Q-Ia-p5g" secondAttribute="trailing" id="3IV-Ce-9G5"/>
                             <constraint firstItem="AfE-An-nrD" firstAttribute="top" secondItem="v2Q-Ia-p5g" secondAttribute="bottom" constant="8" symbolic="YES" id="3Za-wS-FfI"/>
-                            <constraint firstItem="uCF-K8-y1X" firstAttribute="centerX" secondItem="OWa-Pq-Fiu" secondAttribute="centerX" id="4UT-bH-suV"/>
                             <constraint firstItem="v2Q-Ia-p5g" firstAttribute="top" secondItem="OWa-Pq-Fiu" secondAttribute="bottom" constant="8" symbolic="YES" id="5Vv-q5-37L"/>
                             <constraint firstItem="PQs-Of-Jkl" firstAttribute="leading" secondItem="m7b-WP-zEL" secondAttribute="trailing" constant="3" id="6cI-QU-rDi"/>
                             <constraint firstItem="AfE-An-nrD" firstAttribute="leading" secondItem="o8X-OK-fHK" secondAttribute="trailing" constant="5" id="8Sp-dk-kXJ"/>
+                            <constraint firstItem="uCF-K8-y1X" firstAttribute="centerX" secondItem="34w-Fd-pyW" secondAttribute="centerX" id="AQu-6O-npc"/>
                             <constraint firstItem="v2Q-Ia-p5g" firstAttribute="centerX" secondItem="OWa-Pq-Fiu" secondAttribute="centerX" id="Ais-u7-oet"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pyO-m2-qro" secondAttribute="trailing" constant="54" id="BA7-zX-fgi"/>
                             <constraint firstItem="34w-Fd-pyW" firstAttribute="leading" secondItem="9g4-Pr-OkO" secondAttribute="leadingMargin" id="BB9-p0-eMH"/>
-                            <constraint firstItem="ijG-6K-gCx" firstAttribute="top" secondItem="uCF-K8-y1X" secondAttribute="bottom" constant="8" symbolic="YES" id="Cbz-U0-AnD"/>
                             <constraint firstItem="AfE-An-nrD" firstAttribute="baseline" secondItem="o8X-OK-fHK" secondAttribute="baseline" id="EJf-kL-X0m"/>
                             <constraint firstItem="pyO-m2-qro" firstAttribute="baseline" secondItem="v2Q-Ia-p5g" secondAttribute="baseline" id="GjR-3f-pwp"/>
                             <constraint firstItem="pyO-m2-qro" firstAttribute="leading" secondItem="v2Q-Ia-p5g" secondAttribute="trailing" constant="7" id="LZN-I4-mdC"/>
@@ -665,6 +667,7 @@
                             <constraint firstItem="PQs-Of-Jkl" firstAttribute="leading" secondItem="6GT-B0-bA6" secondAttribute="leading" id="UvC-lA-cgF"/>
                             <constraint firstItem="gGn-xk-KzX" firstAttribute="baseline" secondItem="PQs-Of-Jkl" secondAttribute="baseline" id="V4p-hY-xq0"/>
                             <constraint firstItem="6GT-B0-bA6" firstAttribute="top" secondItem="AfE-An-nrD" secondAttribute="bottom" constant="8" symbolic="YES" id="Whh-KN-NAw"/>
+                            <constraint firstAttribute="bottom" secondItem="uCF-K8-y1X" secondAttribute="bottom" constant="20" symbolic="YES" id="Y3T-8S-XpQ"/>
                             <constraint firstItem="wOH-Dx-RGv" firstAttribute="baseline" secondItem="CUF-Yh-4bg" secondAttribute="baseline" id="YU2-OX-qyY"/>
                             <constraint firstItem="zfZ-Cn-xwD" firstAttribute="top" secondItem="pyO-m2-qro" secondAttribute="bottom" constant="10" id="Yjp-ri-9rk"/>
                             <constraint firstItem="gGn-xk-KzX" firstAttribute="leading" secondItem="PQs-Of-Jkl" secondAttribute="trailing" id="ZQ9-MN-3Ih"/>
@@ -678,6 +681,7 @@
                             <constraint firstItem="wOH-Dx-RGv" firstAttribute="leading" secondItem="PQs-Of-Jkl" secondAttribute="leading" id="jsJ-0A-KzF"/>
                             <constraint firstItem="wOH-Dx-RGv" firstAttribute="trailing" secondItem="PQs-Of-Jkl" secondAttribute="trailing" id="lvv-UW-Poj"/>
                             <constraint firstItem="6GT-B0-bA6" firstAttribute="leading" secondItem="AfE-An-nrD" secondAttribute="leading" id="n0K-UQ-SZD"/>
+                            <constraint firstItem="uCF-K8-y1X" firstAttribute="leading" secondItem="9g4-Pr-OkO" secondAttribute="leadingMargin" constant="83" id="o2y-mO-teg"/>
                             <constraint firstItem="34w-Fd-pyW" firstAttribute="top" secondItem="wOH-Dx-RGv" secondAttribute="bottom" constant="20" id="o3d-Kq-qqI"/>
                             <constraint firstItem="OWa-Pq-Fiu" firstAttribute="centerX" secondItem="9g4-Pr-OkO" secondAttribute="centerX" id="oUw-xh-dff"/>
                             <constraint firstItem="v2Q-Ia-p5g" firstAttribute="leading" secondItem="dpv-wY-TTB" secondAttribute="trailing" constant="6" id="szq-eK-XyX"/>
@@ -689,28 +693,34 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="animalBreed" destination="TtA-ti-Pna" id="s9B-CB-Lny"/>
                         <outlet property="animalNameLabel" destination="OWa-Pq-Fiu" id="TYt-mr-ml1"/>
+                        <outlet property="animalType" destination="zfZ-Cn-xwD" id="cf7-UG-Rs6"/>
+                        <outlet property="dateOfBirthLabel" destination="dpv-wY-TTB" id="ehe-ZM-C9U"/>
+                        <outlet property="dateOfDeathLabel" destination="pyO-m2-qro" id="LeW-lR-mMJ"/>
                         <outlet property="morePhotosButton" destination="uCF-K8-y1X" id="P1b-Wx-R4j"/>
+                        <outlet property="ownerNameLabel" destination="gGn-xk-KzX" id="Bzk-ki-sRf"/>
+                        <outlet property="personalityTextView" destination="34w-Fd-pyW" id="JfY-EW-3J2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7NO-qm-kJi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3776.811594202899" y="52.173913043478265"/>
+            <point key="canvasLocation" x="3776.8000000000002" y="51.724137931034484"/>
         </scene>
         <!--Pet Photos Table View Controller-->
         <scene sceneID="iLo-7Q-rC7">
             <objects>
                 <tableViewController id="asp-Ic-rjJ" customClass="PetPhotosTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="300" sectionHeaderHeight="28" sectionFooterHeight="28" id="MZd-rU-nbV">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="albumCell" id="chX-wv-hT0" customClass="PetPhotosTableViewCell">
-                                <rect key="frame" x="0.0" y="92" width="667" height="300"/>
+                                <rect key="frame" x="0.0" y="92" width="320" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="chX-wv-hT0" id="fwa-SQ-7RA">
-                                    <frame key="frameInset" width="667" height="299"/>
+                                    <frame key="frameInset" width="320" height="299"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Iu-2n-ORn">
@@ -751,7 +761,7 @@
                         <viewControllerLayoutGuide type="bottom" id="RsC-Kl-loG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="d6Z-dM-FKn">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xcZ-VX-C1n">
