@@ -28,10 +28,10 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
 @end
 
 @implementation EditPetPhotosTableViewController
-
+PCDataSource *pc;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    PCDataSource *pc = [PCDataSource sharedInstance];
+    pc = [PCDataSource sharedInstance];
      pc.editPhotosVC = self;
     [pc retrievePets];
     self.title = @"Edit Photo Album";
@@ -106,10 +106,10 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
   
-    
+    NSMutableDictionary *parameters = [@{} mutableCopy];
     [self showViewController:self.alertVC sender:picker];
     
-    self.ref = [[FIRDatabase database] reference];
+    ////////
     
     //[picker dismissViewControllerAnimated:YES completion:NULL];
     //TODO show caption while image still on screen
@@ -119,86 +119,16 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
             self.photoCaption = @"";
             NSLog(@"photo caption in completion %@", self.photoCaption);
         }
-        
-        
-        
-    }];
-   
-    
-    //TODO GET THIS INTO MODEL
-    
-    self.petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
-    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[self.petImageURL] options:nil];
-    
-    [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-    
-        [asset requestContentEditingInputWithOptions:kNilOptions
-                                   completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
-                                       NSURL *imageURL = contentEditingInput.fullSizeImageURL;
-                                       //NSLog(@"imageURL %@", imageURL );
-                                       NSString *localURLString = [imageURL path];
-                                       //NSLog(@"local url string %@", localURLString);
-                                       NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
-                                       
-                                       
-                                      
-                                       
-                                       FIRStorage *storage = [FIRStorage storage];
-                                       FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
-                                       FIRStorageReference *profileRef = [storageRef child:theFileName];
-                                       NSLog(@"profileRef %@", profileRef);
-                                       FIRStorageUploadTask *uploadTask = [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
-                                           if (error != nil) {
-                                               // Uh-oh, an error occurred!
-                                               NSLog(@"error %@", error);
-                                           } else {
-                                               NSURL *downloadURL = metadata.downloadURL;
-                                               NSString *downloadURLString = [ downloadURL absoluteString];
-                                               NSLog(@"downloadrul%@", downloadURL);
-                                               //push the selected photo to database
-                                               Pet *pet = [[Pet alloc]init];
-                                               
-                                              
-                                               NSUInteger index = 0;
-                                               NSLog(@"pet album media %lu", (unsigned long)pet.albumMedia.count);
-                                              
-                                               for (NSString *petMedia in pet.albumMedia) {
-                                                   index += ([petMedia isEqualToString:petMedia]?1:0);
-                                               }
-                                               
-                                               NSLog(@"number of occurences %lu", (unsigned long)index);
-                                               //TODO - if there is a caption post the string, OTHERWISE just create empty string
-                                               //TODO - get the correct PET number
-                                               NSDictionary *childUpdates = @{
-                                                                              [NSString stringWithFormat:@"/pets/5/photos/%ld/photoUrl/", (unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString//,
-                                                                              // [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)[PCDataSource sharedInstance].petItems.count-1,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
-                                                                              };
-                                              
-                                               
-                                                NSLog(@"child updates from edit%@", childUpdates);
-                                               [self.ref updateChildValues:childUpdates];
-                                               
-                                              
-                                           }
-                                       }];
-                                   }];
-        
-        
+
+        [parameters setObject:self.photoCaption forKey:@"photoCaption"];
+        [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
+
+        [pc addImageWithDataDictionary:parameters];
         
     }];
     
-    //NSDictionary *childUpdates = @{
-                                   
-                                   //[NSString stringWithFormat:@"/pets/%ld/photos/%ld/", (unsigned long)pet.petNumber, (unsigned long)pet.photoNumber]:petImageURL
-                                   
-                                  // };
     
-    //[_ref updateChildValues:childUpdates];
-  
-    
-    
-    
-    
+
 }
 
 #pragma mark - Table view data source
