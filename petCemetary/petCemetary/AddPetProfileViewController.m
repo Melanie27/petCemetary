@@ -43,7 +43,7 @@
     self.newPetNumber = self.petNumber + 1;
     
 
-    self.scrollView.contentSize = CGSizeMake(320, 1000);
+    
 }
 
 -(void)dealloc {
@@ -77,22 +77,6 @@
 }
 
 
-- (void) viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    // #4
-    self.scrollView.frame = self.view.bounds;
-    
-    // #5
-    CGSize scrollViewFrameSize = self.scrollView.frame.size;
-    CGSize scrollViewContentSize = self.scrollView.contentSize;
-    
-    CGFloat scaleWidth = scrollViewFrameSize.width / scrollViewContentSize.width;
-    CGFloat scaleHeight = scrollViewFrameSize.height / scrollViewContentSize.height;
-    CGFloat minScale = MIN(scaleWidth, scaleHeight);
-    
-    self.scrollView.minimumZoomScale = minScale;
-    self.scrollView.maximumZoomScale = 1;
-}
 
 
 
@@ -144,6 +128,7 @@
                                         };
     [self.ref updateChildValues:petInfoCreation];
 }
+
 
 
 
