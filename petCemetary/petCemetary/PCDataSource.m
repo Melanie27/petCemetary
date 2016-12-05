@@ -23,9 +23,10 @@
     @property (nonatomic, strong) NSArray *petMedia;
     @property (nonatomic, strong) NSArray *petsByOwner;
     @property (nonatomic, strong) NSArray *albumPhotos;
-
+@property (nonatomic, strong) NSString *petNumberString;
     @property (nonatomic, assign) BOOL isRefreshing;
     @property (nonatomic, assign) BOOL isLoadingOlderItems;
+ @property (nonatomic, assign) NSInteger petByNumber;
 
 
 @end
@@ -81,7 +82,7 @@
      observeEventType:FIRDataEventTypeValue
      withBlock:^(FIRDataSnapshot *snapshot) {
          //init the array
-         //NSLog(@"snapshot %@", snapshot);
+         
          //TODO - what if someone deletes a pet how to prevent increment holes? 
          self.petItems = @[];
          self.albumPhotos = @[];
@@ -130,21 +131,6 @@
                  
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
                  
-                 
-                 /*NSEnumerator *ownerEnumerator = [self.petsByOwner objectEnumerator];
-                 id Pet;
-                 while (Pet = [ownerEnumerator nextObject]) {
-                      code to act on each element as it is returned
-                     NSLog(@"enum %@", ownerEnumerator);
-                     pet.petEnumerator = enumerator;
-                 }
-                 
-                 pet.petEnumerator = ownerEnumerator;
-                 pet.petNumberString = [NSString stringWithFormat:@"%@", ownerEnumerator];
-                 NSLog(@"ownerEnum %@", pet.petNumberString);*/
-                 
-                
-                 
                  for (NSString *string in pet.albumImageStrings) {
                      pet.albumImageString = string;
                      FIRStorage *storage = [FIRStorage storage];
@@ -156,7 +142,7 @@
                              NSLog(@"download url error");
                          } else {
                              [self.pltVC.tableView reloadData];
-                             //[self.editPhotosVC.tableView reloadData];
+                             
                             
                          }
                      }];
@@ -169,9 +155,7 @@
                  pet.petNumberString = string;
                  NSLog(@"pets number string from data source %@", pet.petNumberString);
              }
-             
-             
-             
+
              for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
                  FIRStorage *storage = [FIRStorage storage];
@@ -193,10 +177,11 @@
                  self.petNumber = pet.petNumber;
                  
              }
+             
+             self.petByNumber = pet.petNumber;
+             NSLog(@"pet num no string ?%ld", (long)pet.petNumber);
+             NSLog(@"pet num MEL ?%ld", self.petByNumber);
             
-             //NSLog(@"pet num MEL ?%ld", (long)pet.petNumber);
-             //pet.petNumberString = [NSString stringWithFormat:@"%ld", (long)pet.petNumber];
-             //NSLog(@"pet num String %@", pet.petNumberString);
              /*NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[self.petItems count]];
              NSEnumerator *enumerator = [self.petItems reverseObjectEnumerator];
              for (id element in enumerator) {
@@ -273,26 +258,18 @@
                                            } else {
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
-                                               NSLog(@"downloadrul%@", downloadURL);
-                                               //push the selected photo to database
-                                               Pet *pet = [[Pet alloc]init];
+                                              
+                                               NSLog(@"pet num hi %ld",(long)self.petByNumber);
+                                               self.petByNumber = self.pet.petNumber;
                                                
-                                               
-                                               NSUInteger index = 0;
-                                               NSLog(@"pet album media %lu", (unsigned long)pet.albumMedia.count);
-                                               
-                                               for (NSString *petMedia in pet.albumMedia) {
-                                                   index += ([petMedia isEqualToString:petMedia]?1:0);
-                                               }
-                                               
-                                               NSLog(@"number of occurences %lu", (unsigned long)index);
-                                               //TODO - if there is a caption post the string, OTHERWISE just create empty string
+                                            //TODO - if there is a caption post the string, OTHERWISE just create empty string
                                                //TODO - get the correct PET number
-                                               NSDictionary *childUpdates = @{
-                                                                              [NSString stringWithFormat:@"/pets/5/photos/%ld/photoUrl/", (unsigned long)self.pet.albumMedia.count
-                                                                               //+ 1
-                                                                               ]:downloadURLString//,
-                                                                              // [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)[PCDataSource sharedInstance].petItems.count-1,(unsigned long)[PCDataSource sharedInstance].petMedia.count + 1]:downloadURLString,
+                                               //TODO - counting the right number - just going to wrong pet. always going to pet 0
+                                                                                              NSDictionary *childUpdates = @{
+                                                                              [NSString stringWithFormat:@"/pets/%ld/photos/%ld/photoUrl/", (unsigned long)self.pet.petNumber,(unsigned long)self.pet.albumMedia.count
+                                                                              
+                                                                               ]:downloadURLString,
+                                                                               [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)self.pet.petNumber,(unsigned long)self.pet.albumMedia.count]:downloadURLString,
                                                                               };
                                                
                                                
@@ -304,75 +281,9 @@
                                        }];
                                    }];
         
-        
-        
     }];
-    
-    //NSDictionary *childUpdates = @{
-    
-    //[NSString stringWithFormat:@"/pets/%ld/photos/%ld/", (unsigned long)pet.petNumber, (unsigned long)pet.photoNumber]:petImageURL
-    
-    // };
-    
-    //[_ref updateChildValues:childUpdates];
-    
-    
-    
-    
-    
 
 }
-
--(void)addImageToAlbum: (UIImage*)newPetImage andCompletion:(ImagePickerCompletionBlock)completion {
-
-    
-    NSLog(@"Got an image!");
-    //TODO pull this info from the EditPetPhotosTableViewController
-    
-    /*UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    NSURL *petImageURL = info[UIImagePickerControllerReferenceURL];
-    NSString *imagePath = [petImageURL path];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *getImagePath = [documentsDirectory stringByAppendingPathComponent:imagePath];
-    NSURL *docPathUrl = [NSURL fileURLWithPath:getImagePath];
-    NSLog(@"docPathUrl %@", docPathUrl);
-    //FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
-    FIRStorage *storage = [FIRStorage storage];
-    FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums"];
-
-    NSString *localURLString = [docPathUrl path];
-    NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
-    FIRStorageReference *profileRef = [storageRef child:theFileName];
-    NSLog(@"profileRef %@", profileRef);
-    
-    FIRStorageUploadTask *uploadTask = [profileRef putFile:docPathUrl metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
-        if (error != nil) {
-            // Uh-oh, an error occurred!
-            NSLog(@"error %@", error);
-        } else {
-            // Metadata contains file metadata such as size, content-type, and download URL.
-            NSURL *downloadURL = metadata.downloadURL;
-            NSLog(@"no error %@", downloadURL);
-        }
-    }];
-    
-    
-    Pet *pet = [[Pet alloc]init];
-    
-    NSDictionary *childUpdates = @{
-                                   
-                                   [NSString stringWithFormat:@"/pets/%ld/photos/%ld/", (unsigned long)pet.petNumber, (unsigned long)pet.photoNumber]:petImageURL
-                                   
-                                   };
-    
-    [_ref updateChildValues:childUpdates];*/
-   
-
-}
-
-
-
 
 
 
