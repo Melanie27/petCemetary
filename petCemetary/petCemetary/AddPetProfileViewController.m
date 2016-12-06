@@ -86,44 +86,22 @@
 
 -(void)sendPetInfoToFirebase {
     self.ref = [[FIRDatabase database] reference];
-    //NSMutableDictionary *addPetParameters = [@{} mutableCopy];
-    //[addPetParameters setObject:self.petNameTextField.text forKey:@"pet"];
+    NSMutableDictionary *addPetParameters = [@{} mutableCopy];
+    [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
+    [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
+     [addPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
+    [addPetParameters setObject:self.dobTextField.text forKey:@"dob"];
+    [addPetParameters setObject:self.dodTextField.text forKey:@"dod"];
     
-    //PCDataSource *pc = [PCDataSource sharedInstance];
-    //[pc addNewPetWithDataDictionary:addPetParameters];
+    [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
+    [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
     
-    
-    //NSMutableArray *addPetParameters = [@{} mutableCopy];
-    //[addPetParameters addObject:self.petNameTextField];
-    //PCDataSource *pc = [PCDataSource sharedInstance];
-    //[pc addNewPetWithDataDictionary:addPetParameters];
-    
-    NSString *savedPetName = self.petNameTextField.text;
-    NSLog(@"saved pet name %@", savedPetName);
-    NSString *savedAnimalType = self.animalTypeTextField.text;
-    NSString *savedAnimalBreed = self.animalBreedTextField.text;
-    NSString *savedDOB = self.dobTextField.text;
-    NSString *savedDOD = self.dodTextField.text;
-    NSString *savedPersonality = self.animalPersonalityTextView.text;
-    NSString *savedOwnerName = self.ownerNameTextField.text;
     NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
-    FIRUser *userAuth = [FIRAuth auth].currentUser;
+    [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
     
-    self.ref = [[FIRDatabase database] reference];
-    NSDictionary *petInfoCreation = @{
-                                        [NSString stringWithFormat:@"/pets/%ld/pet/",[PCDataSource sharedInstance].petItems.count]:savedPetName,
-                                        [NSString stringWithFormat:@"/pets/%ld/breed/",[PCDataSource sharedInstance].petItems.count]:savedAnimalBreed,
-                                        [NSString stringWithFormat:@"/pets/%ld/animalType/",[PCDataSource sharedInstance].petItems.count]:savedAnimalType,
-                                        [NSString stringWithFormat:@"/pets/%ld/dateOfBirth/",[PCDataSource sharedInstance].petItems.count]:savedDOB,
-                                        [NSString stringWithFormat:@"/pets/%ld/dateOfDeath/",[PCDataSource sharedInstance].petItems.count]:savedDOD,
-                                        [NSString stringWithFormat:@"/pets/%ld/ownerName/",[PCDataSource sharedInstance].petItems.count]:savedOwnerName,
-                                        [NSString stringWithFormat:@"/pets/%ld/personality/",[PCDataSource sharedInstance].petItems.count]:savedPersonality,
-                                        [NSString stringWithFormat:@"/pets/%ld/UID/", [PCDataSource sharedInstance].petItems.count]:userAuth.uid,
-                                         [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", [PCDataSource sharedInstance].petItems.count]:petImageString
-                                       
-                                        
-                                        };
-    [self.ref updateChildValues:petInfoCreation];
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    [pc addNewPetWithDataDictionary:addPetParameters];
+    
 }
 
 

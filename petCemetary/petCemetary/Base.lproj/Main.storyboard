@@ -137,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pRu-g5-NUb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4593" y="-1454"/>
+            <point key="canvasLocation" x="4603" y="-1354"/>
         </scene>
         <!--PetListTableViewController-->
         <scene sceneID="ot0-Sb-2XO">
@@ -874,6 +874,6 @@
         <image name="profilePlaceholder" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9b8-J3-Xdg"/>
+        <segue reference="tK1-tJ-NQj"/>
     </inferredMetricsTieBreakers>
 </document>

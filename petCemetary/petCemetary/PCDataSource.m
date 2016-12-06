@@ -193,7 +193,7 @@
              self.petItems = petItemsReversed;
             NSLog(@"petITemsReverser %@", petItemsReversed);*/
              //TODO test if what user is uploading is a valid url format and send an alert if it is not
-             if ([snapshot.value isKindOfClass:[NSDictionary class]]) {
+             if ([snapshot.value isKindOfClass:[NSDictionary class]] && (snapshot.value)) {
             
                  FIRStorage *storage = [FIRStorage storage];
                  //TODO need introspection here
@@ -268,16 +268,31 @@
 
 
 -(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters {
-    //TODO - this is coming in dictionary style messing things up
-    //self.ref = [[FIRDatabase database] reference];
-    NSLog(@"ehere you crahs?");
-    NSMutableDictionary *params = [addPetParameters mutableCopy];
-    //FIRUser *userAuth = [FIRAuth auth].currentUser;
-    /*NSDictionary *petInfoCreation = @{
-                                       [NSString stringWithFormat:@"/pets/%ld/",(unsigned long)self.petItems.count]:@[params[@"pet"]]
-                                       };*/
     
-    //[self.ref updateChildValues:petInfoCreation];
+    
+    NSString *petNameString = [addPetParameters valueForKey:@"petName"];
+    NSString *petTypeString = [addPetParameters valueForKey:@"petType"];
+    NSString *petBreedString = [addPetParameters valueForKey:@"petBreed"];
+    NSString *petDobString = [addPetParameters valueForKey:@"dob"];
+    NSString *petDodString = [addPetParameters valueForKey:@"dod"];
+    NSString *petPersonalityString = [addPetParameters valueForKey:@"personality"];
+    NSString *petOwnerString = [addPetParameters valueForKey:@"ownerName"];
+    NSString *petPlaceholderImageString = [addPetParameters valueForKey:@"placeholderImage"];
+    FIRUser *userAuth = [FIRAuth auth].currentUser;
+    NSDictionary *petInfoCreation = @{
+                                      [NSString stringWithFormat:@"/pets/%ld/pet",(unsigned long)self.petItems.count]:petNameString,
+                                      [NSString stringWithFormat:@"/pets/%ld/animalType",(unsigned long)self.petItems.count]:petTypeString,
+                                      [NSString stringWithFormat:@"/pets/%ld/breed",(unsigned long)self.petItems.count]:petBreedString,
+                                      [NSString stringWithFormat:@"/pets/%ld/dateOfBirth",(unsigned long)self.petItems.count]:petDobString,
+                                      [NSString stringWithFormat:@"/pets/%ld/dateOfDeath",(unsigned long)self.petItems.count]:petDodString,
+                                       [NSString stringWithFormat:@"/pets/%ld/personality",(unsigned long)self.petItems.count]:petPersonalityString,
+                                       [NSString stringWithFormat:@"/pets/%ld/ownerName",(unsigned long)self.petItems.count]:petOwnerString,
+                                       [NSString stringWithFormat:@"/pets/%ld/UID/", [PCDataSource sharedInstance].petItems.count]:userAuth.uid,
+                                      [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", [PCDataSource sharedInstance].petItems.count]:petPlaceholderImageString
+                                      };
+                                       
+    
+    [self.ref updateChildValues:petInfoCreation];
 }
 
 
@@ -285,17 +300,11 @@
 
 
 -(void)addImageWithDataDictionary:(NSDictionary *)parameters toCurrentPet:(Pet*)pet {
- //   self.ref = [[FIRDatabase database] reference];
+ 
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
     NSMutableDictionary *params = [parameters mutableCopy];
-    NSLog(@"current pet %ld", (long)pet.petNumber);
     NSString *captionString = [parameters valueForKey:@"photoCaption"];
-    //NSString *captionString = [parameters objectForKey:@"photoCaption"];
-  
-    NSLog(@"caption string %@", captionString);
-    
-    //TODO GET THIS INTO MODEL
-    
+
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[params[@"petImageURL"]] options:nil];
     
     [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
@@ -324,9 +333,8 @@
                                                NSString *downloadURLString = [ downloadURL absoluteString];
                                                
                                                self.pet.petNumber = pet.petNumber;
-                                               
                                                NSLog(@"pet items from upload %ld", self.pet.petNumber);
-                                                //NSLog(@"pet items from upload again %ld", pet.petNumber);
+                                               
                                                
                                                //TODO - get the correct PET number
                                                //TODO - counting the right number - just going to wrong pet. always going to pet 0
