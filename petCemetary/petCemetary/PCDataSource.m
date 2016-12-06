@@ -92,7 +92,7 @@
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
              Pet *pet = [[Pet alloc] init];
-             //NSLog(@"url from datasource %@", snapshot.value[@"pets"][i][@"feedPhoto"]);
+             
              pet.petName = snapshot.value[@"pets"][i][@"pet"];
              pet.petDOB = snapshot.value[@"pets"][i][@"dateOfBirth"];
              pet.petDOD = snapshot.value[@"pets"][i][@"dateOfDeath"];
@@ -109,7 +109,7 @@
              pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
              pet.petID = snapshot.value[@"pets"];
              
-             //NSLog(@"petID %@", pet);
+             
              //create the array of photos
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
              pet.petNumber = pet.petNumber++;
@@ -131,7 +131,7 @@
                  pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
                  pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
-                 //pet.petNumber = snapshot.value[@"pets"];
+                 pet.petNumber = pet.petNumber++;
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
                  
                  for (NSString *string in pet.albumImageStrings) {
@@ -145,18 +145,10 @@
                              NSLog(@"download url error");
                          } else {
                              [self.pltVC.tableView reloadData];
-                             
-                            
                          }
                      }];
                  }
-                 
-             }
-             
-             //set pet numbers
-             for (NSString *string in pet.petNumberStrings) {
-                 pet.petNumberString = string;
-                 NSLog(@"pets number string from data source %@", pet.petNumberString);
+  
              }
 
              for (NSString *string in pet.albumImageStrings) {
@@ -181,9 +173,9 @@
                  
              }
              
-             self.petByNumber = pet.petNumber;
+             //self.petByNumber = pet.petNumber;
              NSLog(@"pet num no string ?%ld", (long)pet.petNumber);
-             NSLog(@"pet num MEL ?%ld", self.petByNumber);
+             //NSLog(@"pet num MEL ?%ld", self.petByNumber);
             
              /*NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[self.petItems count]];
              NSEnumerator *enumerator = [self.petItems reverseObjectEnumerator];
@@ -205,10 +197,7 @@
                      [self.pftVC.tableView reloadData];
 
                  }];
-                 
-                 
              }
-             
          }
 
      }];
@@ -228,8 +217,10 @@
 }*/
 
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto {
+    //TODO should be able to post to current pet so doesnt interfere with adding info
+    
     NSMutableDictionary *params = [addPetPhoto mutableCopy];
-    //self.petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+    
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[params[@"petImageURL"]] options:nil];
     
     [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
@@ -256,12 +247,9 @@
                                                NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
                                                
                                                [self.ref updateChildValues:childUpdates];
-                                               
-                                               
                                            }
                                        }];
                                    }];
-        
     }];
     
    }
@@ -353,7 +341,6 @@
                                            }
                                        }];
                                    }];
-        
     }];
 
 }
@@ -426,31 +413,6 @@
         }*/
    // NSLog(@"array is null");
 }
-
-
-/*-(void)addNewPet {
-    Pet *pet = [[Pet alloc] init];
-    NSString *savedPetName = self.petNameTextField.text;
-    NSString *savedAnimalType = self.animalTypeTextField.text;
-    NSString *savedAnimalBreed = self.animalBreedTextField.text;
-    NSString *savedPersonality = self.animalPersonalityTextField.text;
-    NSString *savedOwnerName = self.ownerNameTextField.text;
-    NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
-    self.ref = [[FIRDatabase database] reference];
-    FIRUser *userAuth = [FIRAuth auth].currentUser;
-    NSDictionary *childUpdates = @{
-                                   
-                                   [NSString stringWithFormat:@"/pets/%ld/pet/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedPetName,
-                                   [NSString stringWithFormat:@"/pets/%ld/animalType/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedAnimalType,
-                                   [NSString stringWithFormat:@"/pets/%ld/breed/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedAnimalBreed,
-                                   [NSString stringWithFormat:@"/pets/%ld/personality/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedPersonality,
-                                   [NSString stringWithFormat:@"/pets/%ld/ownerName/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:savedOwnerName,
-                                   [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:petImageString,
-                                   [NSString stringWithFormat:@"/pets/%ld/UID/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:userAuth.uid
-                                   };
-    
-    [_ref updateChildValues:childUpdates];
-}*/
 
 
 
