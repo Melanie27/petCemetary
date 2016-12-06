@@ -32,8 +32,6 @@
 
 
 - (IBAction)savePetProfile:(id)sender;
-
-
 - (IBAction)uploadProfilePhoto:(id)sender;
 
 

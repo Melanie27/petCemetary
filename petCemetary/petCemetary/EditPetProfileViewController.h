@@ -15,6 +15,6 @@
 
 
 - (IBAction)saveEditedProfile:(id)sender;
-
+- (IBAction)uploadProfilePhoto:(id)sender;
 
 @end

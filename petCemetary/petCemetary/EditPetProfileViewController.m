@@ -12,7 +12,7 @@
 #import "Pet.h"
 
 
-@interface EditPetProfileViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
+@interface EditPetProfileViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
@@ -63,17 +63,6 @@
 }
 
 
-
--(void)sendPersonalityToFirebase {
-   
-    self.ref = [[FIRDatabase database] reference];
-    
-    NSDictionary *descriptionUpdates = @{[NSString stringWithFormat:@"/pets/5/personality/"]:self.animalPersonalityTextView.text};
-    [self.ref updateChildValues:descriptionUpdates];
-    
-    
-}
-
 -(void)sendPetInfoToFirebase {
     NSMutableDictionary *editPetParameters = [@{} mutableCopy];
     [editPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
@@ -88,9 +77,6 @@
     [pc editPetWithDataDictionary:editPetParameters];
     
 }
-
-
-
 
 #pragma mark - Navigation
 
@@ -109,10 +95,8 @@
 
 
 - (IBAction)saveEditedProfile:(id)sender {
-     NSLog(@"save everything at once edit");
     [self sendPetInfoToFirebase];
-    [self sendPersonalityToFirebase];
-   
+    
 }
 
 @end

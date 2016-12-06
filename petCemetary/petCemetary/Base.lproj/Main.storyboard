@@ -152,7 +152,7 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dkR-To-Lx3" id="sNn-D3-Rjz">
-                                    <frame key="frameInset" width="381" height="44"/>
+                                    <frame key="frameInset" width="381" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconPersonality" translatesAutoresizingMaskIntoConstraints="NO" id="Jh2-kc-hAe">
@@ -220,6 +220,7 @@
                                 </state>
                                 <connections>
                                     <action selector="uploadProfilePhoto:" destination="udi-lI-Pqx" eventType="touchUpInside" id="WDp-iZ-edk"/>
+                                    <action selector="uploadProfilePhoto:" destination="G1O-py-iGd" eventType="touchUpInside" id="yGx-mY-19u"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pet Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="klL-6M-7aC">
@@ -340,7 +341,7 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="227"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CdN-Uc-ApD" id="RXf-iX-TJJ">
-                                    <frame key="frameInset" width="414" height="227"/>
+                                    <frame key="frameInset" width="414" height="226"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pet Caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWx-lR-1uE">
@@ -384,7 +385,7 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rX5-iT-ujj" id="Hkd-80-RW9">
-                                    <frame key="frameInset" width="381" height="300"/>
+                                    <frame key="frameInset" width="381" height="299"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Awj-Zb-gyG">
@@ -694,7 +695,7 @@
                                 <rect key="frame" x="0.0" y="92" width="414" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="chX-wv-hT0" id="fwa-SQ-7RA">
-                                    <frame key="frameInset" width="414" height="300"/>
+                                    <frame key="frameInset" width="414" height="299"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Caption" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Iu-2n-ORn">
@@ -874,6 +875,6 @@
         <image name="profilePlaceholder" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tK1-tJ-NQj"/>
+        <segue reference="9b8-J3-Xdg"/>
     </inferredMetricsTieBreakers>
 </document>

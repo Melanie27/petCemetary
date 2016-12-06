@@ -256,7 +256,6 @@
 
 -(void)editPetWithDataDictionary:(NSDictionary *)editPetParameters {
     NSString *petNameString = [editPetParameters valueForKey:@"petName"];
-    NSLog(@"pet name string %@", petNameString);
     NSString *petTypeString = [editPetParameters valueForKey:@"petType"];
     NSString *petBreedString = [editPetParameters valueForKey:@"petBreed"];
     NSString *petDobString = [editPetParameters valueForKey:@"dob"];
