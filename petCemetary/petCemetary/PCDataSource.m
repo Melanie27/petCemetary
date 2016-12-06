@@ -289,7 +289,9 @@
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
     NSMutableDictionary *params = [parameters mutableCopy];
     NSLog(@"current pet %ld", (long)pet.petNumber);
-    NSString *captionString = [NSString stringWithFormat:@"%@", @[params[@"photoCaption"]]];
+    NSString *captionString = [parameters valueForKey:@"photoCaption"];
+    //NSString *captionString = [parameters objectForKey:@"photoCaption"];
+  
     NSLog(@"caption string %@", captionString);
     
     //TODO GET THIS INTO MODEL
@@ -324,7 +326,7 @@
                                                self.pet.petNumber = pet.petNumber;
                                                
                                                NSLog(@"pet items from upload %ld", self.pet.petNumber);
-                                                NSLog(@"pet items from upload again %ld", pet.petNumber);
+                                                //NSLog(@"pet items from upload again %ld", pet.petNumber);
                                                
                                                //TODO - get the correct PET number
                                                //TODO - counting the right number - just going to wrong pet. always going to pet 0

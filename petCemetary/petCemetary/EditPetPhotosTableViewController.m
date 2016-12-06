@@ -75,14 +75,13 @@ Pet *pet;
         
         
         [self presentViewController:picker animated:YES completion:NULL];
-        //NSLog(@"trigger the image library");
-        /*[self presentViewController:picker animated:YES completion:^{
-         [self showViewController:self.alertVC ];
-         }];*/
+       
         
     }
     
 }
+
+
 
 - (void) showViewController:(UIViewController *)vc andGetCaption:(NSString *)photoCaption {
     //TODO introspection
@@ -97,7 +96,7 @@ Pet *pet;
     [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"cancel button") style:UIAlertActionStyleCancel handler:nil]];
     [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", @"Send button") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         self.captionTextfield = self.alertVC.textFields[0];
-        NSLog(@"textfield text %@", self.captionTextfield);
+        
         self.photoCaption = self.captionTextfield.text;
         NSLog(@"textfield  %@", self.photoCaption);
         
@@ -109,44 +108,44 @@ Pet *pet;
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    NSMutableDictionary *parameters = [@{} mutableCopy];
-    [self showViewController:self.alertVC sender:picker];
+    
+    UIAlertController *alert = [UIAlertController
+                                alertControllerWithTitle: @"Add a caption for the image you just posted"
+                                message: @"Captions are Optional"
+                                preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
+                                               handler:^(UIAlertAction *action){
+                                                   
+                                                   
+                                                   UITextField *alertTextField = alert.textFields.firstObject;
+                                                    NSMutableDictionary *parameters = [@{} mutableCopy];
+                                                   NSLog(@"And the text is... %@!", alertTextField.text);
+                                                   //alertTextField.text = self.photoCaption;
+                                                   //save the caption here
+                                                  // NSLog(@"photo caption in completion %@", self.photoCaption);
+                                                   [parameters setObject:alertTextField.text forKey:@"photoCaption"];
+                                                   [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
+                                                    [pc addImageWithDataDictionary:parameters toCurrentPet:pc.pet];
+                                               }];
+    
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
+                                                   handler: nil];
     
     
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        
+        textField.placeholder = @"Text here";
+        
+    }];
     
-    /*NSArray *petsArray = [PCDataSource sharedInstance].petItems;
-    pc.pet = [[Pet alloc] init];
+    [alert addAction:ok];
+    [alert addAction:cancel];
     
     
-    __block Pet *pet = nil;
-    NSLog(@"current pet in vc %@", pc.pet);
-    for (Pet *pet in petsArray) {
-        //pc.pet.petNumber = pet.petNumber;
-        NSLog(@"pet %ld", (long)pet.petNumber);
-        pc.pet.petNumber = pet.petNumber;
-        NSLog(@"pet pc %ld", (long)pc.pet.petNumber);
-        pet.petNumber = pet.petNumber;
-    }
-    
-    NSLog(@"pet %ld", (long)pet.petNumber);*/
-   
-    
-    ////////
-    
-    //[picker dismissViewControllerAnimated:YES completion:NULL];
     //TODO show caption while image still on screen
     [picker dismissViewControllerAnimated:YES completion:^{
-        [self showViewController:self.alertVC andGetCaption:self.photoCaption];
-        //PASS THE CAPTION
-        if ((self.photoCaption == nil)) {
-            self.photoCaption = @"";
-            NSLog(@"photo caption in completion %@", self.photoCaption);
-        }
-        
-        [parameters setObject:self.photoCaption forKey:@"photoCaption"];
-        [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
-        
-        [pc addImageWithDataDictionary:parameters toCurrentPet:pc.pet];
+        [self presentViewController:alert animated:YES completion:nil];
         
     }];
     
