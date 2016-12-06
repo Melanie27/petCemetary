@@ -85,6 +85,7 @@
          
          //TODO - what if someone deletes a pet how to prevent increment holes? 
          self.petItems = @[];
+         //test if this exists
          self.albumPhotos = @[];
          self.petsByOwner = @[];
          
@@ -106,7 +107,9 @@
              pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
              pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
              pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
+             pet.petID = snapshot.value[@"pets"];
              
+             NSLog(@"petID %@", pet);
              //create the array of photos
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
              
@@ -224,6 +227,91 @@
     return petItemsReversed;
 }*/
 
+-(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto {
+    NSMutableDictionary *params = [addPetPhoto mutableCopy];
+    //self.petImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[params[@"petImageURL"]] options:nil];
+    
+    [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
+        
+        [asset requestContentEditingInputWithOptions:kNilOptions
+                                   completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
+                                       NSURL *imageURL = contentEditingInput.fullSizeImageURL;
+                                       NSLog(@"imageURL %@", imageURL );
+                                       NSString *localURLString = [imageURL path];
+                                       NSLog(@"local url string %@", localURLString);
+                                       NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+                                       //[[PCDataSource sharedInstance]saveFeedPhoto];
+                                       //MOVE THIS STUFF
+                                       
+                                       
+                                       FIRStorage *storage = [FIRStorage storage];
+                                       FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petFeed/"];
+                                       FIRStorageReference *profileRef = [storageRef child:theFileName];
+                                       NSLog(@"profileRef %@", profileRef);
+                                       FIRStorageUploadTask *uploadTask = [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                                           if (error != nil) {
+                                               // Uh-oh, an error occurred!
+                                               NSLog(@"error %@", error);
+                                           } else {
+                                               NSURL *downloadURL = metadata.downloadURL;
+                                               NSString *downloadURLString = [ downloadURL absoluteString];
+                                               
+                                               //push the selected photo to database
+                                               FIRDatabaseQuery *pathStringQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%ld/", (unsigned long)[PCDataSource sharedInstance].petItems.count]] queryLimitedToFirst:1000];
+                                               
+                                               
+                                               
+                                               NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
+                                               
+                                               [self.ref updateChildValues:childUpdates];
+                                               
+                                               
+                                           }
+                                       }];
+                                   }];
+        
+    }];
+    
+   }
+
+
+-(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters {
+    //TODO - this is coming in dictionary style messing things up
+    //self.ref = [[FIRDatabase database] reference];
+    NSLog(@"ehere you crahs?");
+    NSMutableDictionary *params = [addPetParameters mutableCopy];
+    //FIRUser *userAuth = [FIRAuth auth].currentUser;
+    NSDictionary *petInfoCreation = @{
+                                       [NSString stringWithFormat:@"/pets/%ld/",(unsigned long)self.petItems.count]:@[params[@"pet"]]
+                                       };
+    
+    [self.ref updateChildValues:petInfoCreation];
+}
+
+    //FIRUser *userAuth = [FIRAuth auth].currentUser;
+//NSMutableDictionary *params = [addPetParameters mutableCopy];
+//self.ref = [[FIRDatabase database] reference];
+//NSDictionary *petInfoCreation = @{
+                                 // [NSString stringWithFormat:@"/pets/%ld/pet/",(unsigned long)self.petItems.count]:@[params[@"petName"]],
+
+                                  //[NSString stringWithFormat:@"/pets/%ld/animalType/",(unsigned long)self.petItems.count]:@[params[@"animalBreed"]],
+
+
+
+                                  /*[NSString stringWithFormat:@"/pets/%ld/dateOfBirth/",(unsigned long)self.petItems.count]:@[params[@"dobTextField"]],
+                                  [NSString stringWithFormat:@"/pets/%ld/dateOfDeath/",(unsigned long)self.petItems.count]:@[params[@"dodTextField"]],
+                                  [NSString stringWithFormat:@"/pets/%ld/ownerName/",(unsigned long)self.petItems.count]:@[params[@"ownerNameTextField"]],
+                                  [NSString stringWithFormat:@"/pets/%ld/personality/",(unsigned long)(unsigned long)self.petItems.count]:@[params[@"animalPersonalityTextView"]],
+                                  [NSString stringWithFormat:@"/pets/%ld/UID/", (unsigned long)(unsigned long)self.petItems.count]:userAuth.uid,
+                                  [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)self.petItems.count]:@[params[@"placeholderPhoto"]]*/
+                                  
+                                  
+                                  //};
+//[self.ref updateChildValues:petInfoCreation];
+//}
+
+
 -(void)addImageWithDataDictionary:(NSDictionary *)parameters {
  //   self.ref = [[FIRDatabase database] reference];
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
@@ -333,9 +421,7 @@
                  pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
                  pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
-                 //[self.albumPhotos arrayByAddingObject:pet.albumMedia];
-                 NSLog(@"album media array %@", pet.albumMedia);
-                 //NSLog(@"album photos array %@", self.albumPhotos);
+                 
              }
              
              self.petItems = [self.petItems arrayByAddingObject:pet];

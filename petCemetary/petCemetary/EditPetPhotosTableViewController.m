@@ -12,10 +12,10 @@
 #import "Pet.h"
 //#import "PCImageLibraryViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <Photos/Photos.h>
-@import Firebase;
-@import FirebaseDatabase;
-@import FirebaseStorage;
+//#import <Photos/Photos.h>
+//@import Firebase;
+//@import FirebaseDatabase;
+//@import FirebaseStorage;
 
 @interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, EditPetPhotosTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (strong, nonatomic) FIRDatabaseReference *ref;
@@ -31,9 +31,9 @@ typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
 PCDataSource *pc;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    pc = [PCDataSource sharedInstance];
+   
      pc.editPhotosVC = self;
-    [pc retrievePets];
+    //[pc retrievePets];
     self.title = @"Edit Photo Album";
     // Do any additional setup after loading the view.
     
@@ -72,12 +72,7 @@ PCDataSource *pc;
         
        
     [self presentViewController:picker animated:YES completion:NULL];
-        //NSLog(@"trigger the image library");
-        /*[self presentViewController:picker animated:YES completion:^{
-            [self showViewController:self.alertVC ];
-        }];*/
-
-    }
+         }
     
 }
 
@@ -111,7 +106,7 @@ PCDataSource *pc;
     
     ////////
     
-    //[picker dismissViewControllerAnimated:YES completion:NULL];
+    
     //TODO show caption while image still on screen
     [picker dismissViewControllerAnimated:YES completion:^{
         [self showViewController:self.alertVC andGetCaption:self.photoCaption];
