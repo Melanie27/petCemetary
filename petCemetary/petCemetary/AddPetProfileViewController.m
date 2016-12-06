@@ -12,9 +12,7 @@
 #import "Pet.h"
 
 @interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate> {
-    
-
-    
+  
 }
 @end
 
@@ -62,14 +60,10 @@
 }
 
 
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 #pragma mark - Navigation
@@ -80,8 +74,8 @@
     // Pass the selected object to the new view controller.
 }
 
+
 //TODO if certain fields are empty don't save
-//TODO check if this pet already exists before adding it - need unique id for pets
 
 
 -(void)sendPetInfoToFirebase {
@@ -129,7 +123,6 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    //self.ref = [[FIRDatabase database] reference];
     NSMutableDictionary *parameters = [@{} mutableCopy];
     [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -139,11 +132,6 @@
     
     PCDataSource *pc = [PCDataSource sharedInstance];
     [pc addNewFeedPhotoWithDictionary:parameters];
-    
-    
-    
-    
-    
 
 }
 @end

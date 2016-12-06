@@ -10,21 +10,17 @@
 #import "EditPetPhotosTableViewController.h"
 #import "PCDataSource.h"
 #import "Pet.h"
-@import Firebase;
-@import FirebaseDatabase;
+
 
 @interface EditPetProfileViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate>
-//@property (strong, nonatomic) FIRDatabaseReference *ref;
+
 @end
 
 @implementation EditPetProfileViewController
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
     // Do any additional setup after loading the view.
     self.title = @"Edit Profile";
     PCDataSource *pc = [PCDataSource sharedInstance];
@@ -37,9 +33,6 @@
     self.animalBreedTextField.text = _pet.petBreed;
     self.animalPersonalityTextView.text = _pet.petPersonality;
     self.ownerNameTextField.text = _pet.ownerName;
-    
-   
-   
     
     NSString *petProfileString = _pet.feedImageString;
     NSURL *petProfileUrl=[NSURL URLWithString:petProfileString];
@@ -59,14 +52,10 @@
 }
 
 
-
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
     if([text isEqualToString:@"\n"]) {
         [textView resignFirstResponder];
-        //save text to Firebase
-        
-        
         return YES;
     }
     
@@ -75,32 +64,28 @@
 
 
 
-
-//TODO MOVE TO MODEL
 -(void)sendPersonalityToFirebase {
-    //FIRUser *userAuth = [FIRAuth auth].currentUser;
+   
     self.ref = [[FIRDatabase database] reference];
     
-    NSDictionary *descriptionUpdates = @{[NSString stringWithFormat:@"/pets/%ld/personality/", self.petNumber]:self.animalPersonalityTextView.text};
+    NSDictionary *descriptionUpdates = @{[NSString stringWithFormat:@"/pets/5/personality/"]:self.animalPersonalityTextView.text};
     [self.ref updateChildValues:descriptionUpdates];
     
     
 }
 
 -(void)sendPetInfoToFirebase {
-    //[[PCDataSource sharedInstance] editPetInfo];
+    NSMutableDictionary *editPetParameters = [@{} mutableCopy];
+    [editPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
+    [editPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
+    [editPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
+    [editPetParameters setObject:self.dobTextField.text forKey:@"dob"];
+    [editPetParameters setObject:self.dodTextField.text forKey:@"dod"];
+    [editPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
+    [editPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
     
-    self.ref = [[FIRDatabase database] reference];
-    
-    NSDictionary *screenNameUpdates = @{
-        [NSString stringWithFormat:@"/pets/5/pet/"]:self.petNameTextField.text,
-        [NSString stringWithFormat:@"/pets/5/breed/"]:self.animalBreedTextField.text,
-        [NSString stringWithFormat:@"/pets/%ld/animalType/",self.petNumber]:self.animalTypeTextField.text,
-        [NSString stringWithFormat:@"/pets/%ld/dateOfBirth/",self.petNumber]:self.dobTextField.text,
-        [NSString stringWithFormat:@"/pets/%ld/dateOfDeath/",self.petNumber]:self.dodTextField.text,
-        [NSString stringWithFormat:@"/pets/%ld/ownerName/",self.petNumber]:self.ownerNameTextField.text
-                                        };
-    [self.ref updateChildValues:screenNameUpdates];
+    PCDataSource *pc = [PCDataSource sharedInstance];
+    [pc editPetWithDataDictionary:editPetParameters];
     
 }
 
@@ -113,9 +98,6 @@
  
      if([segue.identifier isEqualToString:@"editPhotosSegue"]) {
          EditPetPhotosTableViewController *editPhotosVC = (EditPetPhotosTableViewController*)segue.destinationViewController;
-         
-         
-         
          editPhotosVC.pet = self.pet;
          
      }

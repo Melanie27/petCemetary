@@ -64,18 +64,16 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 @property (strong) UIImage *addPetImage;
 
 -(NSString *)retrievePets;
--(void )editPetInfo;
--(void )saveFeedPhoto;
 
 
 -(void)deleteAlbumPhoto:(NSObject *)albumPhoto;
 -(void)deletePet:(Pet*)pet andCompletion:(DeletionCompletionBlock)completion;
--(void)addImageWithDataDictionary:(NSDictionary*)parameters toCurrentPet:(Pet*)pet;
+
 
 -(void)addNewPetWithDataDictionary:(NSMutableDictionary *)addPetParameters;
-
+-(void)editPetWithDataDictionary:(NSMutableDictionary *)editPetParameters;
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto;
-
+-(void)addImageWithDataDictionary:(NSDictionary*)parameters toCurrentPet:(Pet*)pet;
 
 
 

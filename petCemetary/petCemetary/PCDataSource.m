@@ -254,9 +254,32 @@
     
    }
 
+-(void)editPetWithDataDictionary:(NSDictionary *)editPetParameters {
+    NSString *petNameString = [editPetParameters valueForKey:@"petName"];
+    NSLog(@"pet name string %@", petNameString);
+    NSString *petTypeString = [editPetParameters valueForKey:@"petType"];
+    NSString *petBreedString = [editPetParameters valueForKey:@"petBreed"];
+    NSString *petDobString = [editPetParameters valueForKey:@"dob"];
+    NSString *petDodString = [editPetParameters valueForKey:@"dod"];
+    NSString *petPersonalityString = [editPetParameters valueForKey:@"personality"];
+    NSString *petOwnerString = [editPetParameters valueForKey:@"ownerName"];
+    
+    NSDictionary *petInfoEdits = @{
+                                      [NSString stringWithFormat:@"/pets/5/pet"]:petNameString,
+                                      [NSString stringWithFormat:@"/pets/5/animalType"]:petTypeString,
+                                      [NSString stringWithFormat:@"/pets/5/breed"]:petBreedString,
+                                      [NSString stringWithFormat:@"/pets/5/dateOfBirth"]:petDobString,
+                                      [NSString stringWithFormat:@"/pets/5/dateOfDeath"]:petDodString,
+                                      [NSString stringWithFormat:@"/pets/5/personality"]:petPersonalityString,
+                                      [NSString stringWithFormat:@"/pets/5/ownerName"]:petOwnerString
+                                      
+                                      };
+    
+    
+    [self.ref updateChildValues:petInfoEdits];
+}
 
 -(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters {
-    
     
     NSString *petNameString = [addPetParameters valueForKey:@"petName"];
     NSString *petTypeString = [addPetParameters valueForKey:@"petType"];
@@ -275,16 +298,13 @@
                                       [NSString stringWithFormat:@"/pets/%ld/dateOfDeath",(unsigned long)self.petItems.count]:petDodString,
                                        [NSString stringWithFormat:@"/pets/%ld/personality",(unsigned long)self.petItems.count]:petPersonalityString,
                                        [NSString stringWithFormat:@"/pets/%ld/ownerName",(unsigned long)self.petItems.count]:petOwnerString,
-                                       [NSString stringWithFormat:@"/pets/%ld/UID/", [PCDataSource sharedInstance].petItems.count]:userAuth.uid,
-                                      [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", [PCDataSource sharedInstance].petItems.count]:petPlaceholderImageString
+                                       [NSString stringWithFormat:@"/pets/%ld/UID/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:userAuth.uid,
+                                      [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:petPlaceholderImageString
                                       };
                                        
     
     [self.ref updateChildValues:petInfoCreation];
 }
-
-
-
 
 
 -(void)addImageWithDataDictionary:(NSDictionary *)parameters toCurrentPet:(Pet*)pet {
@@ -305,9 +325,6 @@
                                        NSLog(@"uploading to album");
                                        NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
                                        
-                                       
-                                       
-                                       
                                        FIRStorage *storage = [FIRStorage storage];
                                        FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
                                        FIRStorageReference *profileRef = [storageRef child:theFileName];
@@ -321,7 +338,7 @@
                                                NSString *downloadURLString = [ downloadURL absoluteString];
                                                
                                                self.pet.petNumber = pet.petNumber;
-                                               NSLog(@"pet items from upload %ld", self.pet.petNumber);
+                                               //NSLog(@"pet items from upload %ld"(long), self.pet.petNumber);
                                                
                                                
                                                //TODO - get the correct PET number
