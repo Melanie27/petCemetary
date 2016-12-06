@@ -14,11 +14,14 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Photos/Photos.h>
+@import FirebaseDatabase;
+
 
 
 @interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, EditPetPhotosTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) UIAlertController *alertVC;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
 @end
 
 @implementation EditPetPhotosTableViewController
@@ -39,7 +42,7 @@ Pet *pet;
     
     [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
-    [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
+    //[[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
     
 }
 
@@ -178,7 +181,7 @@ Pet *pet;
  [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
  }*/
 
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+/*- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumPhotos"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         
@@ -192,25 +195,47 @@ Pet *pet;
          NSLog(@"item inserted");
          [self.tableView reloadData];
          }*/
-    }
-}
+   // }
+//}
 
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView beginUpdates];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Do whatever data deletion you need to do...
         // Delete the row from the data source
-        //DELETE ALBUM PHOTO
         PCDataSource *pc = [PCDataSource sharedInstance];
         NSObject *petPhoto = [pc.albumPhotos objectAtIndex:[indexPath row]];
-        [[PCDataSource sharedInstance] deleteAlbumPhoto:petPhoto];
+        NSLog(@"photo to delete %@", petPhoto);
+        // Create a reference to the file to delete
         
-        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        [self.ref removeValueWithCompletionBlock:^(NSError *error, FIRDatabaseReference  *ref) {
+            if (!error) {
+                // Save worked
+                NSLog(@"error %@", error);
+            }
+            else {
+                // cache for later, or notify user that there was an error and they should try again.
+                NSString *childUpdates = [NSString stringWithFormat:@"/pets/0/photos/"];
+                NSLog(@" value to remove %@", childUpdates);
+                [self.ref removeValue];
+            }
+        }];
+        
+       
+        
+        
+        //Firebase *fb =[[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"/pets/0/photos/0"]];
+       
+        
+         //NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/photos/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:petPhoto};
+        
+        //[fb removeValue];
+
+        //[[PCDataSource sharedInstance] deleteAlbumPhoto:petPhoto];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
     }
+  
 }
-
-
 
 
 @end

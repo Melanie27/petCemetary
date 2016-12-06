@@ -38,6 +38,7 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 @property (nonatomic, strong, readonly) NSArray *petMedia;
 @property (nonatomic, strong, readonly) NSArray *petAlbumItems;
 @property (nonatomic, strong, readonly) NSArray *albumPhotos;
+@property (nonatomic, strong, readonly) NSArray *albumMedia;
 
 
 
