@@ -25,9 +25,6 @@
     // Do any additional setup after loading the view.
     self.title = @"Add Pet";
     
-    PCDataSource *pc = [PCDataSource sharedInstance];
-    self.petNumber = pc.petNumber;
-    NSLog(@"pet number %ld", self.petNumber);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
@@ -95,6 +92,12 @@
     //PCDataSource *pc = [PCDataSource sharedInstance];
     //[pc addNewPetWithDataDictionary:addPetParameters];
     
+    
+    //NSMutableArray *addPetParameters = [@{} mutableCopy];
+    //[addPetParameters addObject:self.petNameTextField];
+    //PCDataSource *pc = [PCDataSource sharedInstance];
+    //[pc addNewPetWithDataDictionary:addPetParameters];
+    
     NSString *savedPetName = self.petNameTextField.text;
     NSLog(@"saved pet name %@", savedPetName);
     NSString *savedAnimalType = self.animalTypeTextField.text;
@@ -124,20 +127,13 @@
 }
 
 
-
-
 - (IBAction)savePetProfile:(id)sender {
     //TODO check if pet name exists otherwise send alert
     NSLog(@"this method should save the pet to the logged in user");
     [self sendPetInfoToFirebase];
-    //[self sendPhotoToFirebase];
     
 }
 
--(void)sendPhotoToFirebase {
-    //NSMutableDictionary *parameters = [@{} mutableCopy];
-    //[parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
-}
 
 #pragma mark - UIImagePicker Delegate Methods
 
@@ -149,7 +145,7 @@
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
         [self presentViewController:picker animated:YES completion:NULL];
-        //NSLog(@"trigger the image library");
+        
     }
    
 }

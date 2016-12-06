@@ -109,10 +109,10 @@
              pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
              pet.petID = snapshot.value[@"pets"];
              
-             NSLog(@"petID %@", pet);
+             //NSLog(@"petID %@", pet);
              //create the array of photos
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
-             
+             pet.petNumber = pet.petNumber++;
             
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
@@ -131,7 +131,7 @@
                  pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
                  pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
-                 
+                 //pet.petNumber = snapshot.value[@"pets"];
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
                  
                  for (NSString *string in pet.albumImageStrings) {
@@ -237,12 +237,8 @@
         [asset requestContentEditingInputWithOptions:kNilOptions
                                    completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
                                        NSURL *imageURL = contentEditingInput.fullSizeImageURL;
-                                       NSLog(@"imageURL %@", imageURL );
                                        NSString *localURLString = [imageURL path];
-                                       NSLog(@"local url string %@", localURLString);
                                        NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
-                                       //[[PCDataSource sharedInstance]saveFeedPhoto];
-                                       //MOVE THIS STUFF
                                        
                                        
                                        FIRStorage *storage = [FIRStorage storage];
@@ -256,12 +252,7 @@
                                            } else {
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
-                                               
-                                               //push the selected photo to database
-                                               FIRDatabaseQuery *pathStringQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%ld/", (unsigned long)[PCDataSource sharedInstance].petItems.count]] queryLimitedToFirst:1000];
-                                               
-                                               
-                                               
+
                                                NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
                                                
                                                [self.ref updateChildValues:childUpdates];
@@ -282,41 +273,24 @@
     NSLog(@"ehere you crahs?");
     NSMutableDictionary *params = [addPetParameters mutableCopy];
     //FIRUser *userAuth = [FIRAuth auth].currentUser;
-    NSDictionary *petInfoCreation = @{
+    /*NSDictionary *petInfoCreation = @{
                                        [NSString stringWithFormat:@"/pets/%ld/",(unsigned long)self.petItems.count]:@[params[@"pet"]]
-                                       };
+                                       };*/
     
-    [self.ref updateChildValues:petInfoCreation];
+    //[self.ref updateChildValues:petInfoCreation];
 }
 
-    //FIRUser *userAuth = [FIRAuth auth].currentUser;
-//NSMutableDictionary *params = [addPetParameters mutableCopy];
-//self.ref = [[FIRDatabase database] reference];
-//NSDictionary *petInfoCreation = @{
-                                 // [NSString stringWithFormat:@"/pets/%ld/pet/",(unsigned long)self.petItems.count]:@[params[@"petName"]],
-
-                                  //[NSString stringWithFormat:@"/pets/%ld/animalType/",(unsigned long)self.petItems.count]:@[params[@"animalBreed"]],
 
 
 
-                                  /*[NSString stringWithFormat:@"/pets/%ld/dateOfBirth/",(unsigned long)self.petItems.count]:@[params[@"dobTextField"]],
-                                  [NSString stringWithFormat:@"/pets/%ld/dateOfDeath/",(unsigned long)self.petItems.count]:@[params[@"dodTextField"]],
-                                  [NSString stringWithFormat:@"/pets/%ld/ownerName/",(unsigned long)self.petItems.count]:@[params[@"ownerNameTextField"]],
-                                  [NSString stringWithFormat:@"/pets/%ld/personality/",(unsigned long)(unsigned long)self.petItems.count]:@[params[@"animalPersonalityTextView"]],
-                                  [NSString stringWithFormat:@"/pets/%ld/UID/", (unsigned long)(unsigned long)self.petItems.count]:userAuth.uid,
-                                  [NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)self.petItems.count]:@[params[@"placeholderPhoto"]]*/
-                                  
-                                  
-                                  //};
-//[self.ref updateChildValues:petInfoCreation];
-//}
 
-
--(void)addImageWithDataDictionary:(NSDictionary *)parameters {
+-(void)addImageWithDataDictionary:(NSDictionary *)parameters toCurrentPet:(Pet*)pet {
  //   self.ref = [[FIRDatabase database] reference];
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
     NSMutableDictionary *params = [parameters mutableCopy];
-    
+    NSLog(@"current pet %ld", (long)pet.petNumber);
+    NSString *captionString = [NSString stringWithFormat:@"%@", @[params[@"photoCaption"]]];
+    NSLog(@"caption string %@", captionString);
     
     //TODO GET THIS INTO MODEL
     
@@ -327,9 +301,9 @@
         [asset requestContentEditingInputWithOptions:kNilOptions
                                    completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
                                        NSURL *imageURL = contentEditingInput.fullSizeImageURL;
-                                       //NSLog(@"imageURL %@", imageURL );
+                                       
                                        NSString *localURLString = [imageURL path];
-                                       //NSLog(@"local url string %@", localURLString);
+                                       NSLog(@"uploading to album");
                                        NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
                                        
                                        
@@ -346,18 +320,19 @@
                                            } else {
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
-                                              
-                                               NSLog(@"pet num hi %ld",(long)self.petByNumber);
-                                               self.petByNumber = self.pet.petNumber;
                                                
-                                            //TODO - if there is a caption post the string, OTHERWISE just create empty string
+                                               self.pet.petNumber = pet.petNumber;
+                                               
+                                               NSLog(@"pet items from upload %ld", self.pet.petNumber);
+                                                NSLog(@"pet items from upload again %ld", pet.petNumber);
+                                               
                                                //TODO - get the correct PET number
                                                //TODO - counting the right number - just going to wrong pet. always going to pet 0
                                                                                               NSDictionary *childUpdates = @{
                                                                               [NSString stringWithFormat:@"/pets/%ld/photos/%ld/photoUrl/", (unsigned long)self.pet.petNumber,(unsigned long)self.pet.albumMedia.count
                                                                               
                                                                                ]:downloadURLString,
-                                                                               [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)self.pet.petNumber,(unsigned long)self.pet.albumMedia.count]:downloadURLString,
+                                                                               [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)self.pet.petNumber,(unsigned long)self.pet.albumMedia.count]:captionString,
                                                                               };
                                                
                                                

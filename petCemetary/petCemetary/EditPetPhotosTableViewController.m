@@ -1,3 +1,4 @@
+
 //
 //  EditPetPhotosTableViewController.m
 //  petCemetary
@@ -12,7 +13,7 @@
 #import "Pet.h"
 //#import "PCImageLibraryViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-//#import <Photos/Photos.h>
+#import <Photos/Photos.h>
 //@import Firebase;
 //@import FirebaseDatabase;
 //@import FirebaseStorage;
@@ -24,15 +25,17 @@
 @property (strong, nonatomic) UIAlertController *alertVC;
 @property (strong, nonatomic) NSString *photoCaption;
 @property (strong, nonatomic) UITextField *captionTextfield;
+//@property (strong, nonatomic)Pet *pet;
 typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
 @end
 
 @implementation EditPetPhotosTableViewController
 PCDataSource *pc;
+Pet *pet;
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-     pc.editPhotosVC = self;
+    pc = [PCDataSource sharedInstance];
+    pc.editPhotosVC = self;
     //[pc retrievePets];
     self.title = @"Edit Photo Album";
     // Do any additional setup after loading the view.
@@ -42,16 +45,16 @@ PCDataSource *pc;
         self.navigationItem.rightBarButtonItem = cameraButton;
     }
     
-     [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
+    [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
-
+    
 }
 
 
 -(void)dealloc {
-   
-   
+    
+    
     //[[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
 }
 
@@ -70,9 +73,14 @@ PCDataSource *pc;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
-       
-    [self presentViewController:picker animated:YES completion:NULL];
-         }
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+        //NSLog(@"trigger the image library");
+        /*[self presentViewController:picker animated:YES completion:^{
+         [self showViewController:self.alertVC ];
+         }];*/
+        
+    }
     
 }
 
@@ -89,10 +97,10 @@ PCDataSource *pc;
     [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"cancel button") style:UIAlertActionStyleCancel handler:nil]];
     [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", @"Send button") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         self.captionTextfield = self.alertVC.textFields[0];
-        //NSLog(@"textfield text %@", self.captionTextfield);
+        NSLog(@"textfield text %@", self.captionTextfield);
         self.photoCaption = self.captionTextfield.text;
-        //NSLog(@"textfield  %@", self.photoCaption);
-
+        NSLog(@"textfield  %@", self.photoCaption);
+        
         
     }]];
     
@@ -100,30 +108,50 @@ PCDataSource *pc;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-  
+    
     NSMutableDictionary *parameters = [@{} mutableCopy];
     [self showViewController:self.alertVC sender:picker];
     
+    
+    
+    /*NSArray *petsArray = [PCDataSource sharedInstance].petItems;
+    pc.pet = [[Pet alloc] init];
+    
+    
+    __block Pet *pet = nil;
+    NSLog(@"current pet in vc %@", pc.pet);
+    for (Pet *pet in petsArray) {
+        //pc.pet.petNumber = pet.petNumber;
+        NSLog(@"pet %ld", (long)pet.petNumber);
+        pc.pet.petNumber = pet.petNumber;
+        NSLog(@"pet pc %ld", (long)pc.pet.petNumber);
+        pet.petNumber = pet.petNumber;
+    }
+    
+    NSLog(@"pet %ld", (long)pet.petNumber);*/
+   
+    
     ////////
     
-    
+    //[picker dismissViewControllerAnimated:YES completion:NULL];
     //TODO show caption while image still on screen
     [picker dismissViewControllerAnimated:YES completion:^{
         [self showViewController:self.alertVC andGetCaption:self.photoCaption];
+        //PASS THE CAPTION
         if ((self.photoCaption == nil)) {
             self.photoCaption = @"";
             NSLog(@"photo caption in completion %@", self.photoCaption);
         }
-
+        
         [parameters setObject:self.photoCaption forKey:@"photoCaption"];
         [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
-
-        [pc addImageWithDataDictionary:parameters];
+        
+        [pc addImageWithDataDictionary:parameters toCurrentPet:pc.pet];
         
     }];
     
     
-
+    
 }
 
 #pragma mark - Table view data source
@@ -143,10 +171,10 @@ PCDataSource *pc;
     EditPetPhotosTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"editCell" forIndexPath:indexPath];
     cell.delegate = self;
     [cell.contentView layoutSubviews];
-     cell.petAlbumItem  = self.pet;
+    cell.petAlbumItem  = self.pet;
     
     NSString *petPhotoUrlString = cell.petAlbumItem.albumImageStrings[indexPath.row];
-   
+    
     [cell.albumPhotoImageView sd_setImageWithURL:[NSURL URLWithString:petPhotoUrlString]
                                 placeholderImage:[UIImage imageNamed:@"5.jpg"]];
     
@@ -155,7 +183,7 @@ PCDataSource *pc;
     NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
     NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
     UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
-     [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
+    [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.attributedText = petCaptionMutableString;
     return cell;
@@ -172,7 +200,7 @@ PCDataSource *pc;
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }
-   CGFloat height =  [EditPetPhotosTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
+    CGFloat height =  [EditPetPhotosTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
     //TODO - need to impose a max height on all Table cells
     
     if (height > 50) {
@@ -187,8 +215,8 @@ PCDataSource *pc;
 
 //KVO
 /*- (void) dealloc {
-    [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
-}*/
+ [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
+ }*/
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumPhotos"]) {
@@ -201,9 +229,9 @@ PCDataSource *pc;
         }
         
         /*else if((kindOfChange = NSKeyValueChangeInsertion)) {
-            NSLog(@"item inserted");
-            [self.tableView reloadData];
-        }*/
+         NSLog(@"item inserted");
+         [self.tableView reloadData];
+         }*/
     }
 }
 
@@ -226,13 +254,15 @@ PCDataSource *pc;
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
+
+
+

@@ -43,6 +43,7 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 
 @property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
 @property (nonatomic, strong) Pet *pet;
+//@property (atomic, strong) Pet* currentPet;
 @property (nonatomic, assign) NSInteger petNumber;
 @property (nonatomic, weak) PetsFeedTableViewController *pftVC;
 @property (nonatomic, weak) PetPhotosTableViewController *pptVC;
@@ -69,9 +70,9 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 
 -(void)deleteAlbumPhoto:(NSObject *)albumPhoto;
 -(void)deletePet:(Pet*)pet andCompletion:(DeletionCompletionBlock)completion;
--(void)addImageWithDataDictionary:(NSDictionary*)parameters;
+-(void)addImageWithDataDictionary:(NSDictionary*)parameters toCurrentPet:(Pet*)pet;
 
--(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters;
+-(void)addNewPetWithDataDictionary:(NSMutableArray *)addPetParameters;
 
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto;
 
