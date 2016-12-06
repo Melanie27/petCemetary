@@ -89,9 +89,6 @@
      }
  }
 
--(void)viewWillAppear:(BOOL)animated {
-    self.animalBreedTextField.text = _pet.petBreed;
-}
 
 
 - (IBAction)saveEditedProfile:(id)sender {

@@ -11,22 +11,14 @@
 #import "EditPetPhotosTableViewCell.h"
 #import "PCDataSource.h"
 #import "Pet.h"
-//#import "PCImageLibraryViewController.h"
+
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Photos/Photos.h>
-//@import Firebase;
-//@import FirebaseDatabase;
-//@import FirebaseStorage;
+
 
 @interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, EditPetPhotosTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FIRStorage *storage;
 
 @property (strong, nonatomic) UIAlertController *alertVC;
-@property (strong, nonatomic) NSString *photoCaption;
-@property (strong, nonatomic) UITextField *captionTextfield;
-//@property (strong, nonatomic)Pet *pet;
-typedef void (^CaptionCompletionBlock)(NSString *photoCaption);
 @end
 
 @implementation EditPetPhotosTableViewController
@@ -36,7 +28,7 @@ Pet *pet;
     [super viewDidLoad];
     pc = [PCDataSource sharedInstance];
     pc.editPhotosVC = self;
-    //[pc retrievePets];
+    
     self.title = @"Edit Photo Album";
     // Do any additional setup after loading the view.
     
@@ -81,31 +73,6 @@ Pet *pet;
     
 }
 
-
-
-- (void) showViewController:(UIViewController *)vc andGetCaption:(NSString *)photoCaption {
-    //TODO introspection
-    
-    self.alertVC = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"Add a caption for the image you just posted.", @"send image instructions") preferredStyle:UIAlertControllerStyleAlert];
-    
-    [self.alertVC addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = NSLocalizedString(@"Caption", @"Caption");
-    }];
-    
-    [self presentViewController:self.alertVC animated:YES completion:nil];
-    [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"cancel button") style:UIAlertActionStyleCancel handler:nil]];
-    [self.alertVC addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send", @"Send button") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        self.captionTextfield = self.alertVC.textFields[0];
-        
-        self.photoCaption = self.captionTextfield.text;
-        NSLog(@"textfield  %@", self.photoCaption);
-        
-        
-    }]];
-    
-    //NSLog(@"photocap  %@", self.photoCaption);
-}
-
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     
@@ -120,10 +87,7 @@ Pet *pet;
                                                    
                                                    UITextField *alertTextField = alert.textFields.firstObject;
                                                     NSMutableDictionary *parameters = [@{} mutableCopy];
-                                                   NSLog(@"And the text is... %@!", alertTextField.text);
-                                                   //alertTextField.text = self.photoCaption;
-                                                   //save the caption here
-                                                  // NSLog(@"photo caption in completion %@", self.photoCaption);
+                                                   
                                                    [parameters setObject:alertTextField.text forKey:@"photoCaption"];
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
                                                     [pc addImageWithDataDictionary:parameters toCurrentPet:pc.pet];
@@ -143,14 +107,11 @@ Pet *pet;
     [alert addAction:cancel];
     
     
-    //TODO show caption while image still on screen
     [picker dismissViewControllerAnimated:YES completion:^{
         [self presentViewController:alert animated:YES completion:nil];
         
     }];
-    
-    
-    
+
 }
 
 #pragma mark - Table view data source
