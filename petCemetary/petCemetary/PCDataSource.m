@@ -54,22 +54,6 @@
     return self;
 }
 
--(void)saveFeedPhoto {
-    
-}
-
--(void)editPetInfo {
-    self.ref = [[FIRDatabase database] reference];
-    /*NSDictionary *screenNameUpdates = @{
-                                    [NSString stringWithFormat:@"/pets/%ld/pet/", self.petNumber]:self.petNameTextField.text,
-                                        [NSString stringWithFormat:@"/pets/%ld/breed/",self.petNumber]:self.animalBreedTextField.text,
-                                        [NSString stringWithFormat:@"/pets/%ld/animalType/",self.petNumber]:self.animalTypeTextField.text,
-                                        [NSString stringWithFormat:@"/pets/%ld/dateOfBirth/",self.petNumber]:self.dobTextField.text,
-                                        [NSString stringWithFormat:@"/pets/%ld/dateOfDeath/",self.petNumber]:self.dodTextField.text,
-                                        [NSString stringWithFormat:@"/pets/%ld/ownerName/",self.petNumber]:self.ownerNameTextField.text
-                                        };*/
-    //[self.ref updateChildValues:screenNameUpdates];
-}
 
 -(NSString *)retrievePets {
     
