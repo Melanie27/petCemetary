@@ -83,11 +83,12 @@
     NSMutableDictionary *addPetParameters = [@{} mutableCopy];
     [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
     [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
-     [addPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
+    [addPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
     [addPetParameters setObject:self.dobTextField.text forKey:@"dob"];
     [addPetParameters setObject:self.dodTextField.text forKey:@"dod"];
     
     [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
+    [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
     [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
     
     NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";

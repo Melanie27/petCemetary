@@ -14,9 +14,7 @@
 
 @property  float timeStamp;
 
-//@property (nonatomic, assign) NSEnumerator *petEnumerator;
-@property (nonatomic, assign) NSArray *petNumbers;
-@property (nonatomic, assign) NSString *petNumberString;
+
 @property (nonatomic, assign) NSInteger petNumber;
 
 @property (nonatomic, assign) NSString *petID;
@@ -35,8 +33,7 @@
 @property (nonatomic, strong) NSString *feedImageString;
 @property (nonatomic, strong) UIImage *feedImage;
 @property (nonatomic, strong) NSString *feedCaption;
-@property (nonatomic, strong) NSNumber *treatsNumber;
-@property (nonatomic, strong) NSString *treatsNumberString;
+
 
 
 

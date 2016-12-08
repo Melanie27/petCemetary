@@ -27,6 +27,7 @@
     pc.editProfileVC = self;
    //NSLog(@"pc.petNumber edit %ld", pc.pet.petNumber);
     self.petNameTextField.text = _pet.petName;
+    //TODO - dates in a certain format - alert if entered incorrectly
     self.dobTextField.text = _pet.petDOB;
     self.dodTextField.text = _pet.petDOD;
     self.animalTypeTextField.text = _pet.petType;
