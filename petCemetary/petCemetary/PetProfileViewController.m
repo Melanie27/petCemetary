@@ -25,7 +25,7 @@
     self.title = @"Pet Profile Page";
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.profileVC = self;
-    [pc retrievePets];
+    //[pc retrievePets];
     
     // Do any additional setup after loading the view.
    

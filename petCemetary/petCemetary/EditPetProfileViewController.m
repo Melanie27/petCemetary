@@ -25,7 +25,7 @@
     self.title = @"Edit Profile";
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.editProfileVC = self;
-   
+   //NSLog(@"pc.petNumber edit %ld", pc.pet.petNumber);
     self.petNameTextField.text = _pet.petName;
     self.dobTextField.text = _pet.petDOB;
     self.dodTextField.text = _pet.petDOD;

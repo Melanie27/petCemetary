@@ -14,8 +14,8 @@
 
 @property  float timeStamp;
 
-@property (nonatomic, assign) NSEnumerator *petEnumerator;
-@property (nonatomic, assign) NSArray *petNumberStrings;
+//@property (nonatomic, assign) NSEnumerator *petEnumerator;
+@property (nonatomic, assign) NSArray *petNumbers;
 @property (nonatomic, assign) NSString *petNumberString;
 @property (nonatomic, assign) NSInteger petNumber;
 

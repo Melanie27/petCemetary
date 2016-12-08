@@ -23,10 +23,10 @@
     @property (nonatomic, strong) NSArray *petMedia;
     @property (nonatomic, strong) NSArray *petsByOwner;
     @property (nonatomic, strong) NSArray *albumPhotos;
-@property (nonatomic, strong) NSString *petNumberString;
+
     @property (nonatomic, assign) BOOL isRefreshing;
     @property (nonatomic, assign) BOOL isLoadingOlderItems;
- @property (nonatomic, assign) NSInteger petByNumber;
+
 
 
 @end
@@ -67,12 +67,14 @@
      withBlock:^(FIRDataSnapshot *snapshot) {
          //init the array
          
-         //TODO - what if someone deletes a pet how to prevent increment holes? 
+         //TODO - what if someone deletes a pet how to prevent increment holes?
+         
          self.petItems = @[];
          //test if this exists
          self.albumPhotos = @[];
          self.petsByOwner = @[];
-         
+         //self.pet.petNumber = self.pet.petNumber++;
+         //NSLog(@"self.pet.petNumber %lu", self.pet.petNumber);
          NSInteger numPets = [snapshot.value[@"pets"] count];
          for (NSInteger i = 0; i < numPets; i++) {
              Pet *pet = [[Pet alloc] init];
@@ -92,11 +94,12 @@
              pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
              pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
              pet.petID = snapshot.value[@"pets"];
-             
+             pet.petNumbers = [pet.albumMedia valueForKey:@"pets"];
              
              //create the array of photos
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
-             pet.petNumber = pet.petNumber++;
+             
+             pet.petNumber = self.pet.petNumber++;
             
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
@@ -115,7 +118,12 @@
                  pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
                  pet.albumImageStrings = [pet.albumMedia valueForKey:@"photoUrl"];
                  pet.albumCaptionStrings = [pet.albumMedia valueForKey:@"caption"];
-                 pet.petNumber = pet.petNumber++;
+                 //THIS IS THE PLACE TO SET THE PET NUMBER
+                NSInteger numPets = [snapshot.value[@"pets"] count];
+                 for (NSInteger i = 0; i < numPets; i++) {
+                 pet.petNumber = self.pet.petNumber++;
+                }
+                 
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
                  
                  for (NSString *string in pet.albumImageStrings) {
@@ -157,10 +165,10 @@
                  
              }
              
-             //self.petByNumber = pet.petNumber;
+             
              NSLog(@"pet num no string ?%ld", (long)pet.petNumber);
              //NSLog(@"pet num MEL ?%ld", self.petByNumber);
-            
+             self.petNumber = pet.petNumber;
              /*NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[self.petItems count]];
              NSEnumerator *enumerator = [self.petItems reverseObjectEnumerator];
              for (id element in enumerator) {
@@ -260,6 +268,20 @@
     
     
     [self.ref updateChildValues:petInfoEdits];
+}
+
+-(void)deleteAlbumPhoto{
+    
+    NSDictionary *childUpdates = @{
+                                   [NSString stringWithFormat:@"/pets/0/photos/0"
+                                    
+                                    ]:[NSNull null]
+                                   };
+    
+    
+    NSLog(@"child updates from edit %@", childUpdates);
+    [self.ref updateChildValues:childUpdates];
+    //[self.ref updateChildValues:deletePhoto];
 }
 
 -(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters {

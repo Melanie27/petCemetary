@@ -30,7 +30,9 @@
     pc.pltVC = self;
     [pc retrievePets];
     
-     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSLog(@"pc.petNumber %ld", pc.pet.petNumber);
+
+    
      [self.tableView registerClass:[PetListTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
@@ -55,8 +57,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-    
-    PetListTableViewCell *cell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"cell"];
+        PetListTableViewCell *cell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"cell"];
     // Configure the cell...
    
     

@@ -205,29 +205,30 @@ Pet *pet;
         // Delete the row from the data source
         PCDataSource *pc = [PCDataSource sharedInstance];
         NSObject *petPhoto = [pc.albumPhotos objectAtIndex:[indexPath row]];
-        NSLog(@"photo to delete %@", petPhoto);
-        // Create a reference to the file to delete
+        [pc deleteAlbumPhoto];
         
-        [self.ref removeValueWithCompletionBlock:^(NSError *error, FIRDatabaseReference  *ref) {
+        NSLog(@"photo to delete %@", petPhoto);
+        //NSString *key = [[_ref child:@"pets"] childByAutoId].key;
+        //NSLog(@"key %@", key);
+        //NSDictionary *removePhoto = @{@"0": petPhoto};
+       
+        
+        
+        
+        /*[self.ref removeValueWithCompletionBlock:^(NSError *error, FIRDatabaseReference  *ref) {
             if (!error) {
                 // Save worked
                 NSLog(@"error %@", error);
             }
             else {
                 // cache for later, or notify user that there was an error and they should try again.
-                NSString *childUpdates = [NSString stringWithFormat:@"/pets/0/photos/"];
+                NSDictionary *childUpdates = [NSString stringWithFormat:@"/pets/0/photos/"];
                 NSLog(@" value to remove %@", childUpdates);
                 [self.ref removeValue];
             }
-        }];
+        }];*/
         
-       
-        
-        
-        //Firebase *fb =[[Firebase alloc] initWithUrl:[NSString stringWithFormat:@"/pets/0/photos/0"]];
-       
-        
-         //NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/photos/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:petPhoto};
+
         
         //[fb removeValue];
 
