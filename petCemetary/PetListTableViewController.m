@@ -139,8 +139,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source Delete Pet
         NSMutableDictionary *petID = [@{} mutableCopy];
-        NSLog(@"self.pet.petID %@", self.petID);
-        //[addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
         [petID setObject:self.petID forKey:@"petID"];
         PCDataSource *pc = [PCDataSource sharedInstance];
         [pc deletePetWithDataDictionary:petID];

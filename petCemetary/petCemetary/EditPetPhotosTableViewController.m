@@ -205,7 +205,8 @@ Pet *pet;
         // Delete the row from the data source
         PCDataSource *pc = [PCDataSource sharedInstance];
         NSObject *petPhoto = [pc.albumPhotos objectAtIndex:[indexPath row]];
-        [pc deleteAlbumPhoto];
+        NSMutableDictionary *photoID = [@{} mutableCopy];
+        [pc deleteAlbumPhotoWithDataDictionary];
         
         NSLog(@"photo to delete %@", petPhoto);
         

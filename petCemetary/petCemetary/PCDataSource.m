@@ -243,7 +243,7 @@
     [self.ref updateChildValues:petInfoEdits];
 }
 
--(void)deleteAlbumPhoto{
+-(void)deleteAlbumPhotoWithDataDictionary:(NSDictionary *)photoInfo {
     
     NSDictionary *childUpdates = @{
                                    [NSString stringWithFormat:@"/pets/%ld/photos/%lu", (long)self.pet.petNumber, (unsigned long)self.albumMedia.count
