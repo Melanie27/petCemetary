@@ -65,42 +65,67 @@
     [getPetQuery
      observeEventType:FIRDataEventTypeValue
      withBlock:^(FIRDataSnapshot *snapshot) {
-        
-         
-         //TODO - what if someone deletes a pet how to prevent increment holes?
-         NSString *key = [[self.ref child:@"pets"] childByAutoId].key;
-         self.petItems = @[];
-        
+        NSString *keyPetName = [[self.ref child:@"pet"] childByAutoId].key;
+         NSDictionary *allPets = snapshot.value[@"pets"];
+         for (Pet *pet in allPets) {
+          Pet *pet = [[Pet alloc] init];
+          
+          pet.petName = snapshot.value[@"pet"];
+          self.petItems = @[];
+
          self.albumPhotos = @[];
          self.petsByOwner = @[];
 
+         for (NSString *keyPath in allPets) {
+             Pet *pet = [[Pet alloc] init];
+             //NULL
+             //NSLog(@"keypath %@", [allPets valueForKeyPath:@"keyPath"]);
+             
+             NSLog(@"keyPath = %@",keyPath);
+             pet.petID =  keyPath;
+             NSLog(@"petid %@", pet.petID);
+             NSLog(@"please work2 %@", [allPets valueForKeyPath:keyPath]);
+            NSDictionary *elements = [allPets valueForKey:keyPath];
+             NSLog(@"elements %@", elements);
+             
+             NSArray *animalType = [elements valueForKey:@"animalType"];
+             NSLog(@"animal type %@", animalType);
+             
+             
+             NSInteger numElements = [elements count];
+             NSLog(@"numelements %lu", numElements);
+            
+             
+             int x;
+             for (x = 0;x <= numElements; x++) {
+                 //pet.petName =  [elements objectAtIndex:1];
+                 //NSLog(@"pet.petnemm %@", [elements objectAtIndex:0] );
+                }
+             
+             self.petItems = [self.petItems arrayByAddingObject:pet];
+             
+         }
+             
+             
          
-         NSDictionary *allPets = snapshot.value[@"pets"];
-         NSInteger numPets = [snapshot.value[@"pets"] count];
+     
+         self.petItems = [self.petItems arrayByAddingObject:pet];
+         
+         
+         
          
         
+       
          //for (NSInteger i = 0; i < numPets; i++) {
-         for (Pet *pet in allPets) {
-             
-          
-         
          
              
-             for (NSString *keyPath in snapshot.value[@"pets"]) {
-                 NSLog(@"keyPath = %@",keyPath);
-                  NSLog(@"please work2 %@", [allPets valueForKeyPath:keyPath]);
-                 NSArray *elements = [allPets valueForKeyPath:keyPath];
-                 
-                 for (NSString *result in elements) {
-                     NSArray *inner = [elements valueForKey:result];
-                     NSLog(@"result %@", result);
-                     NSLog(@"inner %@", inner);
-                     
-                 }
-                 
-                 
-                
-             }
+             
+           
+            
+             
+             
+             
+            
              //pet.petName = snapshot.value[@"pets"][i][@"pet"];
              //pet.petDOB = snapshot.value[@"pets"][i][@"dateOfBirth"];
              //pet.petDOD = snapshot.value[@"pets"][i][@"dateOfDeath"];
