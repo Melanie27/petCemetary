@@ -22,6 +22,8 @@
 
 @property (strong, nonatomic) UIAlertController *alertVC;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
+@property (nonatomic, strong)NSString *petID;
+@property (nonatomic, strong)NSString *photoID;
 @end
 
 @implementation EditPetPhotosTableViewController
@@ -149,6 +151,9 @@ Pet *pet;
     [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.attributedText = petCaptionMutableString;
+    
+    //cell.detailTextLabel.text = cell.pet.petID;
+    self.petID = cell.detailTextLabel.text;
     return cell;
 }
 
@@ -204,11 +209,17 @@ Pet *pet;
         // Do whatever data deletion you need to do...
         // Delete the row from the data source
         PCDataSource *pc = [PCDataSource sharedInstance];
+        NSArray *petPhotos = pc.albumPhotos;
+        NSLog(@"petPhotos %@", petPhotos);
         NSObject *petPhoto = [pc.albumPhotos objectAtIndex:[indexPath row]];
-        NSMutableDictionary *photoID = [@{} mutableCopy];
-        [pc deleteAlbumPhotoWithDataDictionary];
+        NSInteger petPhotoNumber = [petPhotos indexOfObject:petPhoto];
+        NSString *photoNumberString = [NSString stringWithFormat:@"%lu", (long)petPhotoNumber];
+        NSMutableDictionary *photoInfo = [@{} mutableCopy];
+        [photoInfo setObject:pc.pet.petID forKey:@"petID"];
+        [photoInfo setObject:photoNumberString forKey:@"photoID"];
+        [pc deleteAlbumPhotoWithDataDictionary:photoInfo];
         
-        NSLog(@"photo to delete %@", petPhoto);
+       
         
     
         

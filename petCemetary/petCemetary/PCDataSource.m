@@ -244,16 +244,17 @@
 }
 
 -(void)deleteAlbumPhotoWithDataDictionary:(NSDictionary *)photoInfo {
-    
+    NSString *petIDString = [photoInfo valueForKey:@"petID"];
+    NSString *photoIDString = [photoInfo valueForKey:@"photoID"];
     NSDictionary *childUpdates = @{
-                                   [NSString stringWithFormat:@"/pets/%ld/photos/%lu", (long)self.pet.petNumber, (unsigned long)self.albumMedia.count
+                                   [NSString stringWithFormat:@"/pets/%@/photos/%@", petIDString, photoIDString
                                     
                                     ]:[NSNull null]
                                    };
     
     
     NSLog(@"child updates from edit %@", childUpdates);
-    //[self.ref updateChildValues:childUpdates];
+    [self.ref updateChildValues:childUpdates];
     
 }
 

@@ -67,7 +67,7 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 -(NSString *)retrievePets;
 
 
--(void)deleteAlbumPhoto;
+-(void)deleteAlbumPhotoWithDataDictionary:(NSDictionary *)photoInfo;
 -(void)deletePetWithDataDictionary:(NSDictionary *)petID;
 
 
