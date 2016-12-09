@@ -842,7 +842,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="suB-da-8qR"/>
                     <connections>
+                        <outlet property="emailField" destination="rTH-JY-etq" id="CpZ-IV-JZE"/>
                         <outlet property="logoutAccount" destination="A9X-op-hCG" id="LHs-9o-xXu"/>
+                        <outlet property="passwordField" destination="v4R-rg-1WT" id="KhU-1s-iGR"/>
                         <outlet property="questionsButton" destination="LBd-H3-H1f" id="NY5-WA-XIB"/>
                     </connections>
                 </viewController>

@@ -103,14 +103,15 @@
              pet.albumMedia = albumMedia;
              pet.albumImageStrings = albumImageStrings;
              pet.albumCaptionStrings = albumImageCaptions;
-             self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+             
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
              
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
              if( [petString isEqualToString:currentUserString]) {
                  
-
+                 self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+                 
                  for (NSString *string in pet.albumImageStrings) {
                      pet.albumImageString = string;
                      if (!(pet.albumImageString == nil)) {
