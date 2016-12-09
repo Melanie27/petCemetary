@@ -72,7 +72,7 @@
 }
 
 
-- (void) refreshControlDidFire:(UIRefreshControl *) sender {
+/*- (void) refreshControlDidFire:(UIRefreshControl *) sender {
     [[PCDataSource sharedInstance] requestNewPetsWithCompletionHandler:^(NSError *error) {
         [sender endRefreshing];
     }];
@@ -89,7 +89,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self infiniteScrollIfNecessary];
-}
+}*/
 
 #pragma mark - Table view data source
 

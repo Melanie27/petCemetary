@@ -22,10 +22,9 @@
 @class Pet;
 @class Owner;
 
-typedef void(^PetRetrievalCompletionBlock)(Pet *pet);
+
 typedef void (^NewPetCompletionBlock)(NSError *error);
-typedef void(^DeletionCompletionBlock)(NSDictionary *snapshotValue);
-typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
+
 
 @interface PCDataSource : NSObject
 
@@ -44,7 +43,6 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 
 @property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
 @property (nonatomic, strong) Pet *pet;
-//@property (atomic, strong) Pet* currentPet;
 @property (nonatomic, assign) NSInteger petNumber;
 @property (nonatomic, weak) PetsFeedTableViewController *pftVC;
 @property (nonatomic, weak) PetPhotosTableViewController *pptVC;
@@ -61,8 +59,8 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 @property (nonatomic, strong) NSString *addPetDOD;
 @property (nonatomic, strong) NSString *addOwnerName;
 @property (nonatomic, strong) NSString *addPersonality;
-@property (nonatomic) NSInteger addPetNumber;
-@property (strong) UIImage *addPetImage;
+
+
 
 -(NSString *)retrievePets;
 
@@ -74,14 +72,14 @@ typedef void(^ImagePickerCompletionBlock)(NSDictionary *info);
 -(void)addNewPetWithDataDictionary:(NSMutableDictionary *)addPetParameters;
 -(void)editPetWithDataDictionary:(NSMutableDictionary *)editPetParameters;
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto;
--(void)addImageWithDataDictionary:(NSDictionary*)parameters toCurrentPet:(Pet*)pet;
+-(void)addImageWithDataDictionary:(NSDictionary*)parameters;
 
 
 
 
 
 //handle the situation when new pets are posted
-- (void) requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler;
+//- (void) requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler;
 //infinite scrolling
- - (void) requestOldPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler;
+ //- (void) requestOldPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler;
 @end

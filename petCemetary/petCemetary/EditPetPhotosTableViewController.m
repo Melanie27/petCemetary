@@ -92,10 +92,10 @@ Pet *pet;
                                                    
                                                    UITextField *alertTextField = alert.textFields.firstObject;
                                                     NSMutableDictionary *parameters = [@{} mutableCopy];
-                                                   
+                                                    [parameters setObject:pc.pet.petID forKey:@"petID"];
                                                    [parameters setObject:alertTextField.text forKey:@"photoCaption"];
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
-                                                    [pc addImageWithDataDictionary:parameters toCurrentPet:pc.pet];
+                                                    [pc addImageWithDataDictionary:parameters ];
                                                }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
@@ -110,8 +110,7 @@ Pet *pet;
     
     [alert addAction:ok];
     [alert addAction:cancel];
-    
-    
+
     [picker dismissViewControllerAnimated:YES completion:^{
         [self presentViewController:alert animated:YES completion:nil];
         
@@ -184,9 +183,9 @@ Pet *pet;
 //KVO
 /*- (void) dealloc {
  [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
- }*/
+ }
 
-/*- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumPhotos"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         
@@ -196,12 +195,12 @@ Pet *pet;
             [self.tableView reloadData];
         }
         
-        /*else if((kindOfChange = NSKeyValueChangeInsertion)) {
+        else if((kindOfChange = NSKeyValueChangeInsertion)) {
          NSLog(@"item inserted");
          [self.tableView reloadData];
-         }*/
-   // }
-//}
+         }
+    }
+}*/
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView beginUpdates];

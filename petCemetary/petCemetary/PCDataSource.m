@@ -268,8 +268,6 @@
 
 -(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters {
     NSString *key = [[self.ref child:@"pets"] childByAutoId].key;
-    NSLog(@"key %@", key);
-    [self.ref childByAutoId];
     NSString *petNameString = [addPetParameters valueForKey:@"petName"];
     NSString *petTypeString = [addPetParameters valueForKey:@"petType"];
     NSString *petBreedString = [addPetParameters valueForKey:@"petBreed"];
@@ -296,12 +294,12 @@
 }
 
 
--(void)addImageWithDataDictionary:(NSDictionary *)parameters toCurrentPet:(Pet*)pet {
+-(void)addImageWithDataDictionary:(NSDictionary *)parameters  {
  
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
     NSMutableDictionary *params = [parameters mutableCopy];
     NSString *captionString = [parameters valueForKey:@"photoCaption"];
-
+    NSString *petIDString = [parameters valueForKey:@"petID"];
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[params[@"petImageURL"]] options:nil];
     
     [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
@@ -309,9 +307,7 @@
         [asset requestContentEditingInputWithOptions:kNilOptions
                                    completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
                                        NSURL *imageURL = contentEditingInput.fullSizeImageURL;
-                                       
                                        NSString *localURLString = [imageURL path];
-                                       
                                        NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
                                        
                                        FIRStorage *storage = [FIRStorage storage];
@@ -325,25 +321,16 @@
                                            } else {
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
+          
+                        NSDictionary *childUpdates = @{
+                                [NSString stringWithFormat:@"/pets/%@/photos/%ld/photoUrl/", petIDString, self.pet.albumMedia.count]:downloadURLString,
+                                [NSString stringWithFormat:@"/pets/%@/photos/%ld/caption/", petIDString, self.pet.albumMedia.count]:captionString,
+                        };
                                                
-                                               
-                                              
-                                               
-                                               
-                                             
-                                                                                              NSDictionary *childUpdates = @{
-                                                                              [NSString stringWithFormat:@"/pets/%ld/photos/%ld/photoUrl/", (unsigned long)self.pet.petNumber,(unsigned long)self.pet.albumMedia.count
-                                                                              
-                                                                               ]:downloadURLString,
-                                                                               [NSString stringWithFormat:@"/pets/%ld/photos/%ld/caption/", (unsigned long)self.pet.petNumber,(unsigned long)self.pet.albumMedia.count]:captionString,
-                                                                              };
-                                               
-                                               
-                                               
-                                               [self.ref updateChildValues:childUpdates];
-                                           }
-                                       }];
-                                   }];
+                        [self.ref updateChildValues:childUpdates];
+                    }
+                }];
+        }];
     }];
 
 }
