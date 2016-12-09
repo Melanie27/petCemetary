@@ -88,8 +88,9 @@
             NSDictionary *elements = [allPets valueForKey:keyPath];
              NSLog(@"elements %@", elements);
              
-             NSArray *animalType = [elements valueForKey:@"animalType"];
+             NSString *animalType = [elements valueForKey:@"animalType"];
              NSLog(@"animal type %@", animalType);
+             pet.petType = animalType;
              
              
              NSInteger numElements = [elements count];
