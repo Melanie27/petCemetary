@@ -78,7 +78,7 @@
          for (NSString *keyPath in allPets) {
              Pet *pet = [[Pet alloc] init];
 
-             pet.petID =  keyPath;
+            
             
             NSDictionary *elements = [allPets valueForKey:keyPath];
             
@@ -92,14 +92,10 @@
              NSString *ownerName = [elements valueForKey:@"ownerName"];
              NSString *feedImageString = [elements valueForKey:@"feedPhoto"];
              NSArray *albumMedia = [elements valueForKey:@"photos"];
-             NSLog(@"albumMedia %@", albumMedia);
-             
-             
              NSArray *albumImageStrings = [albumMedia valueForKey:@"photoUrl"];
-             NSLog(@"media image strings %@", albumImageStrings);
              NSArray *albumImageCaptions = [albumMedia valueForKey:@"caption"];
-             NSLog(@"album captions %@", albumImageCaptions);
              
+             pet.petID =  keyPath;
              pet.petName = animalName;
              pet.petType = animalType;
              pet.petDOB = animalDob;
@@ -113,18 +109,13 @@
              pet.albumImageStrings = albumImageStrings;
              pet.albumCaptionStrings = albumImageCaptions;
              self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
-
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
              
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
              if( [petString isEqualToString:currentUserString]) {
                  
-                 
-                 
-                 
-                 
-                 
+
                  for (NSString *string in pet.albumImageStrings) {
                      pet.albumImageString = string;
                      if (!(pet.albumImageString == nil)) {
@@ -173,33 +164,6 @@
              }
              
          }
-             
-             
-         
-     
-             
-       
-         //for (NSInteger i = 0; i < numPets; i++) {
-
-             
-             //create the array of photos
-             //self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
-             
-             //pet.petNumber = self.pet.petNumber++;
-            
-             
-             
-            
-             
-            
-             //self.petItems = [self.petItems arrayByAddingObject:pet];
-            
-          
-             
-            
-             
-            
-         
 
      }];
     
@@ -292,6 +256,23 @@
     //[self.ref updateChildValues:childUpdates];
     
 }
+
+-(void)deletePetWithDataDictionary:(NSDictionary *)petID {
+     NSString *petIDString = [petID valueForKey:@"petID"];
+    
+   
+    NSDictionary *childUpdates = @{
+                                   [NSString stringWithFormat:@"/pets/%@/", petIDString
+                                    
+                                    ]:[NSNull null]
+                                   };
+    
+    
+    NSLog(@"child updates from edit %@", childUpdates);
+    [self.ref updateChildValues:childUpdates];
+    
+}
+
 
 -(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters {
     NSString *key = [[self.ref child:@"pets"] childByAutoId].key;

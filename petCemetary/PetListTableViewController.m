@@ -19,6 +19,7 @@
 
 @interface PetListTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, PetListTableViewCellDelegate>
     @property (nonatomic, strong)Pet *passPetToProfile;
+@property (nonatomic, strong)NSString *petID;
 @end
 
 @implementation PetListTableViewController
@@ -26,9 +27,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     PCDataSource *pc = [PCDataSource sharedInstance];
+    //pc.pet.petID = self.petID;
     
     pc.pltVC = self;
-    //[pc retrievePets];
+   
    
      [self.tableView registerClass:[PetListTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
@@ -65,8 +67,10 @@
         
     
         cell.textLabel.text = cell.pet.petName;
-        cell.detailTextLabel.text = cell.pet.petBreed;
-       
+        //cell.detailTextLabel.text = cell.pet.petBreed;
+    cell.detailTextLabel.text = cell.pet.petID;
+    self.petID = cell.detailTextLabel.text;
+       NSLog(@"pc.pet.petID %@", cell.pet.petID);
         NSString *petFeedUrlString = cell.pet.feedImageString;
         UIImage *image = cell.pet.feedImage;
         [cell.petThumbnailView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
@@ -115,7 +119,7 @@
    
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.pet = self.passPetToProfile;
-    //NSLog(@"pc pet %@", pc.pet);
+    
     
     [self performSegueWithIdentifier:@"editPetProfile" sender:self];
 }
@@ -134,17 +138,14 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source Delete Pet
+        NSMutableDictionary *petID = [@{} mutableCopy];
+        NSLog(@"self.pet.petID %@", self.petID);
+        //[addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
+        [petID setObject:self.petID forKey:@"petID"];
         PCDataSource *pc = [PCDataSource sharedInstance];
-        Pet *pet = [pc.petItems objectAtIndex:[indexPath row]];
-        //[[PCDataSource sharedInstance] deletePet:pet];
+        [pc deletePetWithDataDictionary:petID];
         
-        [[PCDataSource sharedInstance]deletePet:pet andCompletion:^(NSDictionary *snapshotValue) {
-            
-            NSLog(@"snap from block %@", snapshotValue);
-            //[cell.profilePhoto setImage:user.profilePicture forState:UIControlStateNormal];
-            
-            
-        }];
+        
         
         //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {

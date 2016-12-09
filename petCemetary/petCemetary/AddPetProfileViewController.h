@@ -24,6 +24,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *uploadProfilePhotoButton;
 @property (strong, nonatomic) IBOutlet UITextField *dobTextField;
 @property (strong, nonatomic) IBOutlet UITextField *dodTextField;
+
 @property (nonatomic) NSInteger petNumber;
 
 @property (strong, nonatomic) NSURL *petImageURL;

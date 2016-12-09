@@ -208,31 +208,9 @@ Pet *pet;
         [pc deleteAlbumPhoto];
         
         NSLog(@"photo to delete %@", petPhoto);
-        //NSString *key = [[_ref child:@"pets"] childByAutoId].key;
-        //NSLog(@"key %@", key);
-        //NSDictionary *removePhoto = @{@"0": petPhoto};
-       
         
+    
         
-        
-        /*[self.ref removeValueWithCompletionBlock:^(NSError *error, FIRDatabaseReference  *ref) {
-            if (!error) {
-                // Save worked
-                NSLog(@"error %@", error);
-            }
-            else {
-                // cache for later, or notify user that there was an error and they should try again.
-                NSDictionary *childUpdates = [NSString stringWithFormat:@"/pets/0/photos/"];
-                NSLog(@" value to remove %@", childUpdates);
-                [self.ref removeValue];
-            }
-        }];*/
-        
-
-        
-        //[fb removeValue];
-
-        //[[PCDataSource sharedInstance] deleteAlbumPhoto:petPhoto];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
     }
   
