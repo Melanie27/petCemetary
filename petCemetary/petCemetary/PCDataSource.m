@@ -89,30 +89,61 @@
              NSLog(@"elements %@", elements);
              
              NSString *animalType = [elements valueForKey:@"animalType"];
-             NSLog(@"animal type %@", animalType);
-             pet.petType = animalType;
-             
-             
-             NSInteger numElements = [elements count];
-             NSLog(@"numelements %lu", numElements);
+             NSString *animalDob = [elements valueForKey:@"dateOfBirth"];
+             NSString *animalDod = [elements valueForKey:@"dateOfDeath"];
+             NSString *animalBreed = [elements valueForKey:@"animalBreed"];
+             NSString *animalPersonality = [elements valueForKey:@"personality"];
+             NSString *ownerUID = [elements valueForKey:@"UID"];
+             NSString *ownerName = [elements valueForKey:@"ownerName"];
+             NSString *feedImageString = [elements valueForKey:@"feedPhoto"];
             
+             pet.petType = animalType;
+             pet.petDOB = animalDob;
+             pet.petDOD = animalDod;
+             pet.petBreed = animalBreed;
+             pet.petPersonality = animalPersonality;
+             pet.ownerUID = ownerUID;
+             pet.ownerName = ownerName;
+             pet.feedImageString = feedImageString;
+
              
-             int x;
-             for (x = 0;x <= numElements; x++) {
-                 //pet.petName =  [elements objectAtIndex:1];
-                 //NSLog(@"pet.petnemm %@", [elements objectAtIndex:0] );
-                }
+             
              
              self.petItems = [self.petItems arrayByAddingObject:pet];
+             if ([snapshot.value isKindOfClass:[NSDictionary class]] && (snapshot.value)) {
+                 
+                 FIRStorage *storage = [FIRStorage storage];
+                 //TODO need introspection here
+                 FIRStorageReference *httpsReference = [storage referenceForURL:pet.feedImageString];
+                 
+                 
+                 [httpsReference downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                     
+                     [self.pftVC.tableView reloadData];
+                     
+                 }];
+             }
              
          }
              
              
          
      
-         self.petItems = [self.petItems arrayByAddingObject:pet];
+         //self.petItems = [self.petItems arrayByAddingObject:pet];
          
-         
+             /*if ([snapshot.value isKindOfClass:[NSDictionary class]] && (snapshot.value)) {
+                 
+                 FIRStorage *storage = [FIRStorage storage];
+                 //TODO need introspection here
+                 FIRStorageReference *httpsReference = [storage referenceForURL:pet.feedImageString];
+                 
+                 
+                 [httpsReference downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                     
+                     [self.pftVC.tableView reloadData];
+                     
+                 }];
+             }*/
          
          
         
@@ -120,22 +151,6 @@
          //for (NSInteger i = 0; i < numPets; i++) {
          
              
-             
-           
-            
-             
-             
-             
-            
-             //pet.petName = snapshot.value[@"pets"][i][@"pet"];
-             //pet.petDOB = snapshot.value[@"pets"][i][@"dateOfBirth"];
-             //pet.petDOD = snapshot.value[@"pets"][i][@"dateOfDeath"];
-             //pet.petType = snapshot.value[@"pets"][i][@"animalType"];
-             //pet.petBreed = snapshot.value[@"pets"][i][@"breed"];
-             //pet.petPersonality = snapshot.value[@"pets"][i][@"personality"];
-             //pet.ownerUID = snapshot.value[@"pets"][i][@"UID"];
-             //pet.ownerName = snapshot.value[@"pets"][i][@"ownerName"];
-             //pet.feedImageString = snapshot.value[@"pets"][i][@"feedPhoto"];
              
              //pet.feedImageURL = snapshot.value[@"pets"][i][@"feedPhoto"];
              //pet.albumMedia = snapshot.value[@"pets"][i][@"photos"];
