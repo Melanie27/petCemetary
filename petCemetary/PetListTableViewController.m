@@ -28,11 +28,8 @@
     PCDataSource *pc = [PCDataSource sharedInstance];
     
     pc.pltVC = self;
-    [pc retrievePets];
-    
-    NSLog(@"pc.petNumber %ld", pc.pet.petNumber);
-
-    
+    //[pc retrievePets];
+   
      [self.tableView registerClass:[PetListTableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
