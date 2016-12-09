@@ -66,6 +66,8 @@
 
 -(void)sendPetInfoToFirebase {
     NSMutableDictionary *editPetParameters = [@{} mutableCopy];
+     PCDataSource *pc = [PCDataSource sharedInstance];
+    [editPetParameters setObject:pc.pet.petID forKey:@"petID"];
     [editPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
     [editPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
     [editPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
@@ -74,7 +76,7 @@
     [editPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
     [editPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
     
-    PCDataSource *pc = [PCDataSource sharedInstance];
+   
     [pc editPetWithDataDictionary:editPetParameters];
     
 }
