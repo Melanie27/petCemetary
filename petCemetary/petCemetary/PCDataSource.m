@@ -24,8 +24,8 @@
     @property (nonatomic, strong) NSArray *petsByOwner;
     @property (nonatomic, strong) NSArray *albumPhotos;
 
-    @property (nonatomic, assign) BOOL isRefreshing;
-    @property (nonatomic, assign) BOOL isLoadingOlderItems;
+    //@property (nonatomic, assign) BOOL isRefreshing;
+    //@property (nonatomic, assign) BOOL isLoadingOlderItems;
 
 
 
@@ -65,12 +65,9 @@
     [getPetQuery
      observeEventType:FIRDataEventTypeValue
      withBlock:^(FIRDataSnapshot *snapshot) {
-        //NSString *keyPetName = [[self.ref child:@"pet"] childByAutoId].key;
+       
          NSDictionary *allPets = snapshot.value[@"pets"];
-        
-         
-          
-         
+
              self.petItems = @[];
              self.albumPhotos = @[];
              self.petsByOwner = @[];
@@ -78,9 +75,7 @@
          for (NSString *keyPath in allPets) {
              Pet *pet = [[Pet alloc] init];
 
-            
-            
-            NSDictionary *elements = [allPets valueForKey:keyPath];
+             NSDictionary *elements = [allPets valueForKey:keyPath];
             
              NSString *animalName = [elements valueForKey:@"pet"];
              NSString *animalType = [elements valueForKey:@"animalType"];
@@ -132,7 +127,6 @@
                          }];
                      }
                  }
-                 
              }
              
              for (NSString *string in pet.albumImageStrings) {
@@ -254,23 +248,19 @@
                                    };
     
     
-    NSLog(@"child updates from edit %@", childUpdates);
+    
     [self.ref updateChildValues:childUpdates];
     
 }
 
 -(void)deletePetWithDataDictionary:(NSDictionary *)petID {
      NSString *petIDString = [petID valueForKey:@"petID"];
-    
-   
-    NSDictionary *childUpdates = @{
+     NSDictionary *childUpdates = @{
                                    [NSString stringWithFormat:@"/pets/%@/", petIDString
                                     
                                     ]:[NSNull null]
                                    };
     
-    
-    NSLog(@"child updates from edit %@", childUpdates);
     [self.ref updateChildValues:childUpdates];
     
 }
@@ -280,7 +270,6 @@
     NSString *key = [[self.ref child:@"pets"] childByAutoId].key;
     NSLog(@"key %@", key);
     [self.ref childByAutoId];
-    NSString *petIDString = [addPetParameters valueForKey:@"petID"];
     NSString *petNameString = [addPetParameters valueForKey:@"petName"];
     NSString *petTypeString = [addPetParameters valueForKey:@"petType"];
     NSString *petBreedString = [addPetParameters valueForKey:@"petBreed"];
@@ -322,13 +311,13 @@
                                        NSURL *imageURL = contentEditingInput.fullSizeImageURL;
                                        
                                        NSString *localURLString = [imageURL path];
-                                       NSLog(@"uploading to album");
+                                       
                                        NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
                                        
                                        FIRStorage *storage = [FIRStorage storage];
                                        FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
                                        FIRStorageReference *profileRef = [storageRef child:theFileName];
-                                       NSLog(@"profileRef %@", profileRef);
+                                      
                                        FIRStorageUploadTask *uploadTask = [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
                                            if (error != nil) {
                                                // Uh-oh, an error occurred!
@@ -337,12 +326,11 @@
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
                                                
-                                               self.pet.petNumber = pet.petNumber;
-                                               //NSLog(@"pet items from upload %ld"(long), self.pet.petNumber);
+                                               
+                                              
                                                
                                                
-                                               //TODO - get the correct PET number
-                                               //TODO - counting the right number - just going to wrong pet. always going to pet 0
+                                             
                                                                                               NSDictionary *childUpdates = @{
                                                                               [NSString stringWithFormat:@"/pets/%ld/photos/%ld/photoUrl/", (unsigned long)self.pet.petNumber,(unsigned long)self.pet.albumMedia.count
                                                                               
@@ -351,10 +339,8 @@
                                                                               };
                                                
                                                
-                                               NSLog(@"child updates from edit%@", childUpdates);
+                                               
                                                [self.ref updateChildValues:childUpdates];
-                                               
-                                               
                                            }
                                        }];
                                    }];
@@ -365,34 +351,11 @@
 
 
 
--(void)deletePet:(Pet *)pet andCompletion:(DeletionCompletionBlock)completion{
-    //Pulling in the wrong pet
-    NSLog(@"delete this pet");
-    NSLog(@"delete this pet %@", pet);
-    //NSObject *petToDelete = pet;
-    
-    //get the pet number
-    
-    self.ref = [[FIRDatabase database] reference];
-    //[[self.ref child:pet] removeValue];
-    
-    
-    /*[getPetQuery
-     observeEventType:FIRDataEventTypeChildRemoved
-     withBlock:^(FIRDataSnapshot *snapshot) {
-    
-         NSLog(@"log for deletion %@", snapshot.value);
-         
-     }];*/
-}
+//TODO - leave in or take out?
 
 
 
-
-
-
-
--(void)requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler {
+/*-(void)requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler {
     
     if(self.isRefreshing == NO) {
         self.isRefreshing = YES;
@@ -431,61 +394,9 @@
             completionHandler(nil);
         }
     }
-}
-
-//THIS WILL BE A PROBLEM IF ONE OWNER HAS MULTIPLE PETS
-/*-(void)retrivePetWithUID:(NSString *)uid andCompletion:(PetRetrievalCompletionBlock)completion {
-     Pet *thePet = [[Pet alloc] init];
-     self.ref = [[FIRDatabase database] reference];
-    
-    FIRDatabaseQuery *getPetInfoQuery = [[self.ref child:[NSString stringWithFormat:@"/pets/%@/pet", uid]] queryLimitedToFirst:10];
-    [getPetInfoQuery
-     observeEventType:FIRDataEventTypeValue
-     withBlock:^(FIRDataSnapshot *snapshot) {
-         
-         thePet.petName = snapshot.value[@"pet"];
-         thePet.ownerUID = snapshot.value[@"UID"];
-         
-         FIRStorage *storage = [FIRStorage storage];
-         FIRStorageReference *httpsReference = [storage referenceForURL:thePet.feedImageString];
-         
-         
-         [httpsReference downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-             if (error != nil) {
-                 NSLog(@"download url error");
-             } else {
-                 //NSLog(@"no download url error %@", URL);
-                 NSData *imageData = [NSData dataWithContentsOfURL:URL];
-                 thePet.feedImage = [UIImage imageWithData:imageData];
-                 
-                 completion(thePet);
-             }
-             
-         }];
-     
-     }];
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }*/
 
 
-
-
-
-
-
-
-
-
-
-
-
+    
 
 @end
