@@ -127,8 +127,8 @@ Pet *pet;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return self.pet.albumImageStrings.count;
+     return self.pet.albumMedia.count;
+    //return self.pet.albumImageStrings.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -138,19 +138,19 @@ Pet *pet;
     [cell.contentView layoutSubviews];
     cell.petAlbumItem  = self.pet;
     
-    NSString *petPhotoUrlString = cell.petAlbumItem.albumImageStrings[indexPath.row];
-    
+    //NSString *petPhotoUrlString = cell.petAlbumItem.albumImageStrings[indexPath.row];
+    NSString *petPhotoUrlString = cell.petAlbumItem.albumImageString;
     [cell.albumPhotoImageView sd_setImageWithURL:[NSURL URLWithString:petPhotoUrlString]
                                 placeholderImage:[UIImage imageNamed:@"5.jpg"]];
     
     
     //TODO get the indiv image caption
     NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
-    NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
+    //NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
     UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
-    [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
+    //[petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    cell.textLabel.attributedText = petCaptionMutableString;
+    //cell.textLabel.attributedText = petCaptionMutableString;
     
     //cell.detailTextLabel.text = cell.pet.petID;
     self.petID = cell.detailTextLabel.text;

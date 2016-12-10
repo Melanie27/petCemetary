@@ -23,6 +23,7 @@
     @property (nonatomic, strong) NSArray *petMedia;
     @property (nonatomic, strong) NSArray *petsByOwner;
     @property (nonatomic, strong) NSArray *albumPhotos;
+    @property (nonatomic, strong) NSArray *albumImageList;
 
     //@property (nonatomic, assign) BOOL isRefreshing;
     //@property (nonatomic, assign) BOOL isLoadingOlderItems;
@@ -87,6 +88,8 @@
              NSString *ownerName = [elements valueForKey:@"ownerName"];
              NSString *feedImageString = [elements valueForKey:@"feedPhoto"];
              NSDictionary *albumMedia = [elements valueForKey:@"photos"];
+             NSDictionary *mediaElements = [elements valueForKey:keyPath];
+            
              pet.petID =  keyPath;
              pet.petName = animalName;
              pet.petType = animalType;
@@ -98,19 +101,19 @@
              pet.ownerName = ownerName;
              pet.feedImageString = feedImageString;
              pet.albumMedia = albumMedia;
-             NSLog(@"album media %@", albumMedia);
+             
+           
+             self.petItems = [self.petItems arrayByAddingObject:pet];
             
             
              for (NSString *keyPath in albumMedia) {
                  
                  NSDictionary *mediaElements = [albumMedia valueForKey:keyPath];
-                 //NSLog(@"media elemets %@", mediaElements);
-                 
                  pet.albumImageString = [mediaElements valueForKey:@"photoUrl"];
                  NSLog(@"image string %@", pet.albumImageString);
                  pet.albumCaptionString = [mediaElements valueForKey:@"caption"];
-                 NSLog(@"image string %@", pet.albumCaptionString);
-                 
+                 NSLog(@"caption string %@", pet.albumCaptionString);
+                 NSLog(@"pet albume strings %@", pet.albumImageStrings);
                  FIRStorage *storage = [FIRStorage storage];
                  FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
                  
@@ -126,7 +129,7 @@
              
              
              
-             //self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
+             
              
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
@@ -154,7 +157,28 @@
                  }
              }
              
-             for (NSString *string in pet.albumImageStrings) {
+             for (NSString *keyPath in albumMedia) {
+                 
+                 NSDictionary *mediaElements = [albumMedia valueForKey:keyPath];
+                 pet.albumImageString = [mediaElements valueForKey:@"photoUrl"];
+                 NSLog(@"image string %@", pet.albumImageString);
+                 pet.albumCaptionString = [mediaElements valueForKey:@"caption"];
+                 NSLog(@"caption string %@", pet.albumCaptionString);
+                 NSLog(@"pet albume strings %@", pet.albumImageStrings);
+                 FIRStorage *storage = [FIRStorage storage];
+                 FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
+                 
+                 [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                     
+                     [self.pptVC.tableView reloadData];
+                     
+                 }];
+                 
+                 
+             }
+             
+             
+             /*(for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
                  FIRStorage *storage = [FIRStorage storage];
                  FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
@@ -164,10 +188,12 @@
                      [self.pptVC.tableView reloadData];
                      
                  }];
-             }
+             }*/
              
              self.petItems = [self.petItems arrayByAddingObject:pet];
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
+             
+             //THIS IS WORKING FOR FEED IMAGE
              
              if ([snapshot.value isKindOfClass:[NSDictionary class]] && (snapshot.value)) {
                  
