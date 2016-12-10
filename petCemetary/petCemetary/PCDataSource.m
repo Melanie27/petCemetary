@@ -86,9 +86,18 @@
              NSString *ownerUID = [elements valueForKey:@"UID"];
              NSString *ownerName = [elements valueForKey:@"ownerName"];
              NSString *feedImageString = [elements valueForKey:@"feedPhoto"];
-             NSArray *albumMedia = [elements valueForKey:@"photos"];
-             NSArray *albumImageStrings = [albumMedia valueForKey:@"photoUrl"];
-             NSArray *albumImageCaptions = [albumMedia valueForKey:@"caption"];
+             NSDictionary *albumMedia = [elements valueForKey:@"photos"];
+             NSLog(@"album media %@", albumMedia);
+             NSString *albumImage = [albumMedia valueForKey:@"photoUrl"];
+             //NSLog(@"album image string %@", albumImage );
+             NSString *albumCaption = [albumMedia valueForKey:@"caption"];
+             NSLog(@"album caption string %@", albumCaption );
+             
+             for (NSString *key in albumMedia) {
+                 id value = albumMedia[key];
+                 NSLog(@"Value: %@ for key: %@", value, key);
+                 pet.photoID = key;
+             }
              
              pet.petID =  keyPath;
              pet.petName = animalName;
@@ -101,8 +110,8 @@
              pet.ownerName = ownerName;
              pet.feedImageString = feedImageString;
              pet.albumMedia = albumMedia;
-             pet.albumImageStrings = albumImageStrings;
-             pet.albumCaptionStrings = albumImageCaptions;
+             //pet.albumImageStrings = albumImageStrings;
+             //pet.albumCaptionStrings = albumImageCaptions;
              
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
              
@@ -296,7 +305,8 @@
 
 
 -(void)addImageWithDataDictionary:(NSDictionary *)parameters  {
- 
+    NSString *photoKey = [[self.ref child:@"photos"] childByAutoId].key;
+    NSLog(@"photo key? %@", photoKey);
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
     NSMutableDictionary *params = [parameters mutableCopy];
     NSString *captionString = [parameters valueForKey:@"photoCaption"];
