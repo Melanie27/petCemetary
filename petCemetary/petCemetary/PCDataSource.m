@@ -88,15 +88,33 @@
              NSString *feedImageString = [elements valueForKey:@"feedPhoto"];
              NSDictionary *albumMedia = [elements valueForKey:@"photos"];
              NSLog(@"album media %@", albumMedia);
-             NSString *albumImage = [albumMedia valueForKey:@"photoUrl"];
-             //NSLog(@"album image string %@", albumImage );
-             NSString *albumCaption = [albumMedia valueForKey:@"caption"];
-             NSLog(@"album caption string %@", albumCaption );
+             
+             
              
              for (NSString *key in albumMedia) {
                  id value = albumMedia[key];
                  NSLog(@"Value: %@ for key: %@", value, key);
                  pet.photoID = key;
+                 NSString *albumImage = [value valueForKey:@"photoUrl"];
+                 NSString *albumCaption = [value valueForKey:@"caption"];
+                 NSLog(@"album Image %@", albumImage);
+                 NSArray *petAlbumStrings = [NSArray arrayWithObjects:albumImage, nil];
+                  NSLog(@"album array %@", petAlbumStrings);
+                 NSArray *petAlbumCaptions = [NSArray arrayWithObjects:albumCaption, nil];
+                 pet.albumImageStrings = petAlbumStrings;
+                 pet.albumCaptionStrings = petAlbumCaptions;
+                 for (NSString *string in pet.albumImageStrings) {
+                     pet.albumImageString = string;
+                     FIRStorage *storage = [FIRStorage storage];
+                     FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
+                     
+                     [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
+                         
+                         [self.pptVC.tableView reloadData];
+                         
+                     }];
+                 }
+
              }
              
              pet.petID =  keyPath;
@@ -117,6 +135,8 @@
              
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
+             
+             //Print a list of photos beloning to each user
              if( [petString isEqualToString:currentUserString]) {
                  
                  self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
@@ -139,7 +159,7 @@
                  }
              }
              
-             for (NSString *string in pet.albumImageStrings) {
+             /*for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
                  FIRStorage *storage = [FIRStorage storage];
                  FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
@@ -149,7 +169,7 @@
                      [self.pptVC.tableView reloadData];
                      
                  }];
-             }
+             }*/
              
              self.petItems = [self.petItems arrayByAddingObject:pet];
              
@@ -224,7 +244,8 @@
    }
 
 -(void)editPetWithDataDictionary:(NSDictionary *)editPetParameters {
-   NSString *petIDString = [editPetParameters valueForKey:@"petID"];
+   NSString *petPhotoString = [editPetParameters valueForKey:@"petPhoto"];
+    NSString *petIDString = [editPetParameters valueForKey:@"petID"];
     NSString *petNameString = [editPetParameters valueForKey:@"petName"];
     NSString *petTypeString = [editPetParameters valueForKey:@"petType"];
     NSString *petBreedString = [editPetParameters valueForKey:@"petBreed"];
