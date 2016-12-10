@@ -18,6 +18,7 @@
 @property (nonatomic, assign) NSInteger petNumber;
 
 @property (nonatomic, assign) NSString *petID;
+@property (nonatomic, assign) NSString *photoID;
 
 
 @property (nonatomic, assign) NSString *petDOB;
