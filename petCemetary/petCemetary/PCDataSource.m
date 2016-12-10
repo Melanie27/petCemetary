@@ -101,46 +101,28 @@
              NSLog(@"album media %@", albumMedia);
             
             
-             for (NSString *key in albumMedia) {
-                 id value = albumMedia[key];
-                 NSLog(@"Value: %@ for key: %@", value, key);
-                 for (NSString *caption in albumMedia) {
-                   pet.albumImageString = [value valueForKey:@"caption"];
-                     NSLog(@"pet album string %@", pet.albumImageString);
-                 }
-             }
-             
-             for (NSString *key in albumMedia) {
-                 //self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
-                 id value = albumMedia[key];
-             
+             for (NSString *keyPath in albumMedia) {
                  
-                 //NSLog(@"Value: %@ for key: %@", value, key);
-                 pet.photoID = key;
-                 //NSString *albumImage = [value valueForKey:@"photoUrl"];
-                 NSString *albumCaption = [value valueForKey:@"caption"];
+                 NSDictionary *mediaElements = [albumMedia valueForKey:keyPath];
+                 //NSLog(@"media elemets %@", mediaElements);
                  
-                 NSArray *petAlbumCaptions = [NSArray arrayWithObjects:albumCaption, nil];
+                 pet.albumImageString = [mediaElements valueForKey:@"photoUrl"];
+                 NSLog(@"image string %@", pet.albumImageString);
+                 pet.albumCaptionString = [mediaElements valueForKey:@"caption"];
+                 NSLog(@"image string %@", pet.albumCaptionString);
                  
-                 pet.albumCaptionStrings = petAlbumCaptions;
-                 //NSLog(@"album caption strings %@", pet.albumCaptionStrings);
-                 self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
-                 for (NSString *string in pet.albumImageStrings) {
-                     pet.albumImageString = string;
-                     FIRStorage *storage = [FIRStorage storage];
-                     FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
+                 FIRStorage *storage = [FIRStorage storage];
+                 FIRStorageReference *httpsReference2 = [storage referenceForURL:pet.albumImageString];
+                 
+                 [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
                      
-                     [httpsReference2 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-                         
-                         [self.pptVC.tableView reloadData];
-                         
-                         
-                     }];
-                 }
+                     [self.pptVC.tableView reloadData];
+                     
+                 }];
                  
                  
              }
-             
+                         
              
              
              
