@@ -93,6 +93,7 @@ Pet *pet;
                                                    UITextField *alertTextField = alert.textFields.firstObject;
                                                     NSMutableDictionary *parameters = [@{} mutableCopy];
                                                     [parameters setObject:pc.pet.petID forKey:@"petID"];
+                                                   //[parameters setObject:pc.pet.photoID forKey:@"photoID"];
                                                    [parameters setObject:alertTextField.text forKey:@"photoCaption"];
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
                                                     [pc addImageWithDataDictionary:parameters ];
@@ -208,14 +209,14 @@ Pet *pet;
         // Do whatever data deletion you need to do...
         // Delete the row from the data source
         PCDataSource *pc = [PCDataSource sharedInstance];
-        NSArray *petPhotos = pc.albumPhotos;
-        NSLog(@"petPhotos %@", petPhotos);
-        NSObject *petPhoto = [pc.albumPhotos objectAtIndex:[indexPath row]];
-        NSInteger petPhotoNumber = [petPhotos indexOfObject:petPhoto];
-        NSString *photoNumberString = [NSString stringWithFormat:@"%lu", (long)petPhotoNumber];
+        //NSArray *petPhotos = pc.albumPhotos;
+        //NSLog(@"petPhotos %@", petPhotos);
+        //NSObject *petPhoto = [pc.albumPhotos objectAtIndex:[indexPath row]];
+        //NSInteger petPhotoNumber = [petPhotos indexOfObject:petPhoto];
+        //NSString *photoNumberString = [NSString stringWithFormat:@"%lu", (long)petPhotoNumber];
         NSMutableDictionary *photoInfo = [@{} mutableCopy];
         [photoInfo setObject:pc.pet.petID forKey:@"petID"];
-        [photoInfo setObject:photoNumberString forKey:@"photoID"];
+        [photoInfo setObject:pc.pet.photoID forKey:@"photoID"];
         [pc deleteAlbumPhotoWithDataDictionary:photoInfo];
         
        

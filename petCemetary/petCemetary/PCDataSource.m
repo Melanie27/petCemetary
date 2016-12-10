@@ -326,8 +326,9 @@
 
 
 -(void)addImageWithDataDictionary:(NSDictionary *)parameters  {
+    
     NSString *photoKey = [[self.ref child:@"photos"] childByAutoId].key;
-    NSLog(@"photo key? %@", photoKey);
+    //NSLog(@"photo key? %@", photoKey);
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
     NSMutableDictionary *params = [parameters mutableCopy];
     NSString *captionString = [parameters valueForKey:@"photoCaption"];
@@ -355,8 +356,8 @@
                                                NSString *downloadURLString = [ downloadURL absoluteString];
           
                         NSDictionary *childUpdates = @{
-                                [NSString stringWithFormat:@"/pets/%@/photos/%ld/photoUrl/", petIDString, self.pet.albumMedia.count]:downloadURLString,
-                                [NSString stringWithFormat:@"/pets/%@/photos/%ld/caption/", petIDString, self.pet.albumMedia.count]:captionString,
+                                [NSString stringWithFormat:@"/pets/%@/photos/%@/photoUrl/", petIDString, photoKey]:downloadURLString,
+                                [NSString stringWithFormat:@"/pets/%@/photos/%@/caption/", petIDString, photoKey]:captionString,
                         };
                                                
                         [self.ref updateChildValues:childUpdates];
