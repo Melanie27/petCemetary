@@ -88,7 +88,7 @@
              NSString *ownerName = [elements valueForKey:@"ownerName"];
              NSString *feedImageString = [elements valueForKey:@"feedPhoto"];
              NSDictionary *albumMedia = [elements valueForKey:@"photos"];
-             NSDictionary *mediaElements = [elements valueForKey:keyPath];
+             
             
              pet.petID =  keyPath;
              pet.petName = animalName;
@@ -103,7 +103,7 @@
              pet.albumMedia = albumMedia;
              
            
-             self.petItems = [self.petItems arrayByAddingObject:pet];
+             
             
             
              for (NSString *keyPath in albumMedia) {

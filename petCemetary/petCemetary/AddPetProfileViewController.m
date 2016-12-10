@@ -22,9 +22,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"Add Pet";
-    
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    
     
 
 }
@@ -79,26 +80,37 @@
 
 
 -(void)sendPetInfoToFirebase {
-    //self.ref = [[FIRDatabase database] reference];
+    
     NSMutableDictionary *addPetParameters = [@{} mutableCopy];
     PCDataSource *pc = [PCDataSource sharedInstance];
-    //NSLog(@"pc.pet.petID %@", pc.pet.petID);
-    //[addPetParameters setObject:pc.pet.petID forKey:@"petID"];
-    [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
-    [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
-    [addPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
-    [addPetParameters setObject:self.dobTextField.text forKey:@"dob"];
-    [addPetParameters setObject:self.dodTextField.text forKey:@"dod"];
     
-    [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
-    [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
-    [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
+    if ( self.petNameTextField.text.length == 0) {
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle: @"Please add a pet name"
+                                    message: @""
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler: nil];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
+         
+    } else {
+        
+        [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
+        [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
+        [addPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
+        [addPetParameters setObject:self.dobTextField.text forKey:@"dob"];
+        [addPetParameters setObject:self.dodTextField.text forKey:@"dod"];
+        
+        [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
+        [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
+        NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
+        [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
+        [pc addNewPetWithDataDictionary:addPetParameters];
+    }
     
-    NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
-    [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
     
     
-    [pc addNewPetWithDataDictionary:addPetParameters];
+    
     
 }
 
