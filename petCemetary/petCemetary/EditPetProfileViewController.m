@@ -67,18 +67,41 @@
 -(void)sendPetInfoToFirebase {
     NSMutableDictionary *editPetParameters = [@{} mutableCopy];
      PCDataSource *pc = [PCDataSource sharedInstance];
-    [editPetParameters setObject:pc.pet.photoID forKey:@"photoID"];
-    [editPetParameters setObject:pc.pet.petID forKey:@"petID"];
-    [editPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
-    [editPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
-    [editPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
-    [editPetParameters setObject:self.dobTextField.text forKey:@"dob"];
-    [editPetParameters setObject:self.dodTextField.text forKey:@"dod"];
-    [editPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
-    [editPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
+    
+    if ( self.petNameTextField.text.length == 0) {
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle: @"Please add a pet name"
+                                    message: @""
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler: nil];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    } else {
+    
+        //[editPetParameters setObject:pc.pet.photoID forKey:@"photoID"];
+        [editPetParameters setObject:pc.pet.petID forKey:@"petID"];
+        [editPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
+        [editPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
+        [editPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
+        [editPetParameters setObject:self.dobTextField.text forKey:@"dob"];
+        [editPetParameters setObject:self.dodTextField.text forKey:@"dod"];
+        [editPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
+        [editPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
     
    
-    [pc editPetWithDataDictionary:editPetParameters];
+        [pc editPetWithDataDictionary:editPetParameters];
+        UIAlertController *alertSaved = [UIAlertController
+                                     alertControllerWithTitle: @"Updates to the profile are saved."
+                                     message: @"Please add photos of your pet to its album."
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler: nil];
+        [alertSaved addAction:cancel];
+        [self presentViewController:alertSaved animated:YES completion:^(){
+            //put your code here
+            //TODO ... push to the photo album?
+        }];
+    }
     
 }
 

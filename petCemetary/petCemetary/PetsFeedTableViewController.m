@@ -52,11 +52,7 @@
     
     ps.pftVC = self;
     [ps retrievePets];
-    
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(refreshControlDidFire:) forControlEvents:UIControlEventValueChanged];
-    
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -72,24 +68,6 @@
 }
 
 
-/*- (void) refreshControlDidFire:(UIRefreshControl *) sender {
-    [[PCDataSource sharedInstance] requestNewPetsWithCompletionHandler:^(NSError *error) {
-        [sender endRefreshing];
-    }];
-}
-
--(void) infiniteScrollIfNecessary {
-    NSIndexPath *bottomIndexPath = [[self.tableView indexPathsForVisibleRows] lastObject];
-    if(bottomIndexPath && bottomIndexPath.row == [PCDataSource sharedInstance].petItems.count - 1) {
-        // The last cell is on screen
-        [[PCDataSource sharedInstance] requestOldPetsWithCompletionHandler:nil];
-        NSLog(@"infinite");
-    }
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self infiniteScrollIfNecessary];
-}*/
 
 #pragma mark - Table view data source
 

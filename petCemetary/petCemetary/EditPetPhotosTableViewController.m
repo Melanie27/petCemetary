@@ -93,11 +93,12 @@ Pet *pet;
                                                    UITextField *alertTextField = alert.textFields.firstObject;
                                                     NSMutableDictionary *parameters = [@{} mutableCopy];
                                                     [parameters setObject:pc.pet.petID forKey:@"petID"];
-                                                   //[parameters setObject:pc.pet.photoID forKey:@"photoID"];
+                                                   
                                                    [parameters setObject:alertTextField.text forKey:@"photoCaption"];
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
-                                                    [pc addImageWithDataDictionary:parameters ];
-                                               }];
+                                                    [pc addImageWithDataDictionary:parameters];
+                                                                                                      
+                                                    }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
                                                    handler: nil];
@@ -114,7 +115,7 @@ Pet *pet;
 
     [picker dismissViewControllerAnimated:YES completion:^{
         [self presentViewController:alert animated:YES completion:nil];
-        
+       
     }];
 
 }
@@ -128,7 +129,7 @@ Pet *pet;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
      return self.pet.albumMedia.count;
-    //return self.pet.albumImageStrings.count;
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -145,9 +146,9 @@ Pet *pet;
     
     
     //TODO get the indiv image caption
-    NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
+    //NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
     //NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
-    UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
+    //UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
     //[petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     //cell.textLabel.attributedText = petCaptionMutableString;

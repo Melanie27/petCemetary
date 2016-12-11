@@ -33,6 +33,7 @@
    
    
      [self.tableView registerClass:[PetListTableViewCell class] forCellReuseIdentifier:@"cell"];
+    [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"petItems" options:0 context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -125,20 +126,38 @@
 }
 
 
+- (void) dealloc {
+    [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"petItems"];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"petItems"]) {
+        NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
+        
+        if (kindOfChange == NSKeyValueChangeRemoval) {
+            // Someone set a brand new images array
+            [self.tableView reloadData];
+        }
+    }
+}
 
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        
         // Delete the row from the data source Delete Pet
+       
         NSMutableDictionary *petID = [@{} mutableCopy];
         [petID setObject:self.petID forKey:@"petID"];
         PCDataSource *pc = [PCDataSource sharedInstance];
         [pc deletePetWithDataDictionary:petID];
         
+       
         
         
-        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+       
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   

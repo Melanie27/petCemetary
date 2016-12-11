@@ -101,11 +101,7 @@
              pet.ownerName = ownerName;
              pet.feedImageString = feedImageString;
              pet.albumMedia = albumMedia;
-             
-           
-             
-            
-            
+
              for (NSString *keyPath in albumMedia) {
                  
                  NSDictionary *mediaElements = [albumMedia valueForKey:keyPath];
@@ -266,7 +262,7 @@
    }
 
 -(void)editPetWithDataDictionary:(NSDictionary *)editPetParameters {
-   NSString *petPhotoString = [editPetParameters valueForKey:@"petPhoto"];
+   //NSString *petPhotoString = [editPetParameters valueForKey:@"petPhoto"];
     NSString *petIDString = [editPetParameters valueForKey:@"petID"];
     NSString *petNameString = [editPetParameters valueForKey:@"petName"];
     NSString *petTypeString = [editPetParameters valueForKey:@"petType"];
@@ -391,52 +387,6 @@
 }
 
 
-
-
-//TODO - leave in or take out?
-
-
-
-/*-(void)requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler {
-    
-    if(self.isRefreshing == NO) {
-        self.isRefreshing = YES;
-        
-        Pet *pet = [[Pet alloc] init];
-        pet.feedImage = [UIImage imageNamed:@"5.jpg"];
-        pet.feedCaption = @"new feed caption";
-        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petItems"];
-        [mutableArrayWithKVO insertObject:pet atIndex:0];
-        
-        self.isRefreshing = NO;
-        
-        if (completionHandler) {
-            completionHandler(nil);
-        }
-        
-    }
- 
-}
-
--(void)requestOldPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler {
-    
-    if (self.isLoadingOlderItems == NO) {
-        self.isLoadingOlderItems = YES;
-        
-        Pet *pet = [[Pet alloc] init];
-        pet.feedImage = [UIImage imageNamed:@"5.jpg"];
-        pet.feedCaption = @"old feed caption";
-        
-        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petItems"];
-        [mutableArrayWithKVO addObject:pet];
-        
-        self.isLoadingOlderItems = NO;
-        
-        if (completionHandler) {
-            completionHandler(nil);
-        }
-    }
-}*/
 
 
     

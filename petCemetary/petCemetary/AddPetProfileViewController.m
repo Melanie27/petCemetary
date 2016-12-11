@@ -103,9 +103,20 @@
         
         [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
         [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
-        NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2Fspooky.png?alt=media&token=58e1b0af-a087-4028-a208-90ff8622f850";
+        NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
         [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
         [pc addNewPetWithDataDictionary:addPetParameters];
+        UIAlertController *alertSaved = [UIAlertController
+                                    alertControllerWithTitle: @"Thank you for starting your pet's memorial"
+                                    message: @"Please add photos of your pet to its album."
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler: nil];
+        [alertSaved addAction:cancel];
+        [self presentViewController:alertSaved animated:YES completion:^(){
+            //put your code here
+            //TODO ... push to the photo album?
+        }];
+        
     }
     
     
@@ -116,8 +127,7 @@
 
 
 - (IBAction)savePetProfile:(id)sender {
-    //TODO check if pet name exists otherwise send alert
-    NSLog(@"this method should save the pet to the logged in user");
+    
     [self sendPetInfoToFirebase];
     
 }
@@ -147,7 +157,9 @@
     [self.uploadProfilePhotoButton setBackgroundImage:chosenImage forState:UIControlStateNormal];
     
     PCDataSource *pc = [PCDataSource sharedInstance];
+    //TODO THIS ISNT SAving
     [pc addNewFeedPhotoWithDictionary:parameters];
+   
 
 }
 @end

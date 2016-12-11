@@ -78,8 +78,5 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 
 
 
-//handle the situation when new pets are posted
-//- (void) requestNewPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler;
-//infinite scrolling
- //- (void) requestOldPetsWithCompletionHandler:(NewPetCompletionBlock)completionHandler;
+
 @end

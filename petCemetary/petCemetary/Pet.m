@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self) {
-        _albumMedia = @[];
+        //_albumMedia = @[];
     }
     return self;
 }
