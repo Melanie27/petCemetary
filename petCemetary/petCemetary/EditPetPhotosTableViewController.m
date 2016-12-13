@@ -164,26 +164,25 @@ Pet *pet;
     
     
     //TODO get the indiv image caption
-    //NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
-    //NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
-    //UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
-    //[petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
+    NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
+    NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
+    UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
+    [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
-    //cell.textLabel.attributedText = petCaptionMutableString;
+    cell.textLabel.attributedText = petCaptionMutableString;
     
     //cell.detailTextLabel.text = cell.pet.petID;
-    self.petID = cell.detailTextLabel.text;
+    self.pet.petType = cell.detailTextLabel.text;
     return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //Pet *pet = [PCDataSource sharedInstance].albumPhotos[indexPath.row];
-    Pet *petPlaceholders = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
-    //no album image property on photoAlbums so use the main object for placeholder
-    UIImage *image= petPlaceholders.albumImage;
+    Pet *pet = [PCDataSource sharedInstance].albumPhotos[indexPath.row];
     
-    if( petPlaceholders.albumImage == nil) {
+    UIImage *image = pet.albumImages[indexPath.row];
+    
+    if( pet.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }
@@ -193,7 +192,7 @@ Pet *pet;
     if (height > 50) {
         return height;
     } else {
-        //NSLog(@"bad height %f",height);
+        NSLog(@"bad height %f",height);
         return 100.0;
     }
 }
