@@ -139,31 +139,33 @@
              
              
              
-             
+              pet.albumImageStrings = @[];
              for (id key in pet.albumMedia)
              {
                  id value = [pet.albumMedia objectForKey:key];
                  NSLog(@"value %@", value);
                  self.albumMediaValues = [[NSDictionary alloc] initWithDictionary:value];
+                 pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
                  
-                 
+                
+                 pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
+                 NSLog(@" pet.albumImageStrings %@",  pet.albumImageStrings);
+
                  
              }
              
+             /*pet.albumImageStrings = @[];
+             NSInteger numMediaValues = pet.albumMedia.count;
+             for (NSInteger i = 0; i <numMediaValues; i ++) {
+                 pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
+                
+                 //THIS LOOP is giving the same photo
+                 pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
+                 NSLog(@" pet.albumImageStrings %@",  pet.albumImageStrings);
              
-             pet.albumCaptionStrings = @[];
-             pet.albumImageStrings = @[];
-             NSLog(@" outside albumMediaValues %@", self.albumMediaValues);
-             pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
+             }*/
              
-             NSLog(@"albumImageStrings %@", pet.albumImageStrings);
-            
-             
-             pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
-            
-             NSLog(@" pet.albumImageStrings %@",  pet.albumImageStrings);
-             
-             
+
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
              if( [petString isEqualToString:currentUserString]) {
