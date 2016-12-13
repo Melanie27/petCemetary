@@ -94,7 +94,7 @@
         [self presentViewController:alert animated:YES completion:nil];
          
     } else {
-        
+        //[addPetParameters setObject:pc.pet.petID forKey:@"petID"];
         [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
         [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
         [addPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
@@ -118,11 +118,7 @@
         }];
         
     }
-    
-    
-    
-    
-    
+ 
 }
 
 
@@ -149,6 +145,8 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+   //TODO NEED TO PASS THIS INFO INTO SEND PET INFO FUNCTION
+    
     NSMutableDictionary *parameters = [@{} mutableCopy];
     [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
@@ -156,9 +154,9 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.uploadProfilePhotoButton setBackgroundImage:chosenImage forState:UIControlStateNormal];
     
-    PCDataSource *pc = [PCDataSource sharedInstance];
+    //PCDataSource *pc = [PCDataSource sharedInstance];
     //TODO THIS ISNT SAving
-    [pc addNewFeedPhotoWithDictionary:parameters];
+    //[pc addNewFeedPhotoWithDictionary:parameters];
    
 
 }

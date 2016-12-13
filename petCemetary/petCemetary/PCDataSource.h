@@ -32,8 +32,8 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 //singleton to access call [PCDataSource sharedInstance]
 
 +(instancetype) sharedInstance;
-@property (nonatomic, strong, readonly) NSArray<Pet *> *petItems;
-@property (nonatomic, strong, readonly) NSArray *petsByOwner;
+@property (nonatomic, strong) NSArray<Pet *> *petItems;
+@property (nonatomic, strong) NSArray<Pet *> *petsByOwner;
 @property (nonatomic, strong, readonly) NSArray *petMedia;
 @property (nonatomic, strong, readonly) NSArray *petAlbumItems;
 @property (nonatomic, strong, readonly) NSArray *albumPhotos;
@@ -41,7 +41,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 
 
 
-@property (nonatomic, strong, readonly) NSArray<Pet *> *pets;
+//@property (nonatomic, strong) NSArray<Pet *> *pets;
 @property (nonatomic, strong) Pet *pet;
 @property (nonatomic, assign) NSInteger petNumber;
 @property (nonatomic, weak) PetsFeedTableViewController *pftVC;

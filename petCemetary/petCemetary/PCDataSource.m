@@ -67,7 +67,7 @@
     return [self.petsByOwner objectsAtIndexes:indexes];
 }
 
-- (void) insertObject:(Pet *)object inPetItemsAtIndex:(NSUInteger)index {
+/*- (void) insertObject:(Pet *)object inPetItemsAtIndex:(NSUInteger)index {
     [_petsByOwner insertObject:object atIndex:index];
 }
 
@@ -78,7 +78,7 @@
 
 - (void) replaceObjectInPetItemsAtIndex:(NSUInteger)index withObject:(id)object {
     [_petsByOwner replaceObjectAtIndex:index withObject:object];
-}
+}*/
 
 
 -(NSString *)retrievePets {
@@ -94,9 +94,9 @@
        
          NSDictionary *allPets = snapshot.value[@"pets"];
 
-             self.petItems = [[NSMutableArray alloc] init];
+             self.petItems = @[];
              self.albumPhotos = @[];
-             self.petsByOwner = [[NSMutableArray alloc] init];
+             self.petsByOwner = @[];
 
          for (NSString *keyPath in allPets) {
              Pet *pet = [[Pet alloc] init];
@@ -251,7 +251,7 @@
 
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto {
     //TODO should be able to post to current pet so doesnt interfere with adding info
-    
+    NSString *key = [[self.ref child:@"pets"] childByAutoId].key;
     NSMutableDictionary *params = [addPetPhoto mutableCopy];
     
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[params[@"petImageURL"]] options:nil];
@@ -277,7 +277,7 @@
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
 
-                                               NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%ld/feedPhoto/", (unsigned long)[PCDataSource sharedInstance].petItems.count]:downloadURLString};
+                                               NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%@/feedPhoto/", key]:downloadURLString};
                                                
                                                [self.ref updateChildValues:childUpdates];
                                            }
@@ -341,13 +341,15 @@
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petsByOwner"];
     [mutableArrayWithKVO removeObject:pet];
     NSLog(@"pet Item to delete %@", pet);
-    [self.petsByOwner removeObject:pet];
+    //[self.petsByOwner removeObject:pet];
     
 }
 
 
 -(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters {
     NSString *key = [[self.ref child:@"pets"] childByAutoId].key;
+    //NSString *key = [addPetParameters valueForKey:@"petID"];
+    
     NSString *petNameString = [addPetParameters valueForKey:@"petName"];
     NSString *petTypeString = [addPetParameters valueForKey:@"petType"];
     NSString *petBreedString = [addPetParameters valueForKey:@"petBreed"];
