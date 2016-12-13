@@ -24,6 +24,7 @@
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (nonatomic, strong)NSString *petID;
 @property (nonatomic, strong)NSString *photoID;
+@property BOOL *needToReloadData;
 @end
 
 @implementation EditPetPhotosTableViewController
@@ -44,10 +45,27 @@ Pet *pet;
     
     [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
-    //[[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
+    [pc addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
     
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    [pc removeObserver:self forKeyPath:@"albumPhotos"];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //if (self.needToReloadData == YES) {
+        [self.tableView reloadData];
+    //}
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    //if (keyPath isEqualToString:@"configurationItem") {
+       // [self.needToRefreshData = YES];
+    //}
+}
 
 -(void)dealloc {
     
@@ -210,11 +228,9 @@ Pet *pet;
         // Do whatever data deletion you need to do...
         // Delete the row from the data source
         PCDataSource *pc = [PCDataSource sharedInstance];
-        //NSArray *petPhotos = pc.albumPhotos;
-        //NSLog(@"petPhotos %@", petPhotos);
-        //NSObject *petPhoto = [pc.albumPhotos objectAtIndex:[indexPath row]];
-        //NSInteger petPhotoNumber = [petPhotos indexOfObject:petPhoto];
-        //NSString *photoNumberString = [NSString stringWithFormat:@"%lu", (long)petPhotoNumber];
+        
+       
+        
         NSMutableDictionary *photoInfo = [@{} mutableCopy];
         [photoInfo setObject:pc.pet.petID forKey:@"petID"];
         [photoInfo setObject:pc.pet.photoID forKey:@"photoID"];

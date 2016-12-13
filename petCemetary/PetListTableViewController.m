@@ -137,8 +137,38 @@
         if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
             [self.tableView reloadData];
+        } else if (kindOfChange == NSKeyValueChangeInsertion ||
+                     kindOfChange == NSKeyValueChangeRemoval ||
+                     kindOfChange == NSKeyValueChangeReplacement) {
+            // We have an incremental change: inserted, deleted, or replaced images
+            
+            // Get a list of the index (or indices) that changed
+            NSIndexSet *indexSetOfChanges = change[NSKeyValueChangeIndexesKey];
+            
+            // #1 - Convert this NSIndexSet to an NSArray of NSIndexPaths (which is what the table view animation methods require)
+            NSMutableArray *indexPathsThatChanged = [NSMutableArray array];
+            [indexSetOfChanges enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+                NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:idx inSection:0];
+                [indexPathsThatChanged addObject:newIndexPath];
+            }];
+            
+            // #2 - Call `beginUpdates` to tell the table view we're about to make changes
+            [self.tableView beginUpdates];
+            
+            // Tell the table view what the changes are
+            if (kindOfChange == NSKeyValueChangeInsertion) {
+                [self.tableView insertRowsAtIndexPaths:indexPathsThatChanged withRowAnimation:UITableViewRowAnimationAutomatic];
+            } else if (kindOfChange == NSKeyValueChangeRemoval) {
+                [self.tableView deleteRowsAtIndexPaths:indexPathsThatChanged withRowAnimation:UITableViewRowAnimationAutomatic];
+            } else if (kindOfChange == NSKeyValueChangeReplacement) {
+                [self.tableView reloadRowsAtIndexPaths:indexPathsThatChanged withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+            
+            // Tell the table view that we're done telling it about changes, and to complete the animation
+            [self.tableView endUpdates];
         }
     }
+
 }
 
 
@@ -147,12 +177,14 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         
-        // Delete the row from the data source Delete Pet
-       
+        // Delete the row from the data source Delete Pet - this is working but it doesnt immediately disappear
+       //Pet: 0x600000383dc0>
         NSMutableDictionary *petID = [@{} mutableCopy];
         [petID setObject:self.petID forKey:@"petID"];
         PCDataSource *pc = [PCDataSource sharedInstance];
-        [pc deletePetWithDataDictionary:petID];
+        Pet *pet = [pc.petsByOwner objectAtIndex:[indexPath row]];
+        NSLog(@"pet to delete %@", pet);
+        [pc deletePetWithDataDictionary:petID andPet:pet];
         
        
         
@@ -160,7 +192,7 @@
        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 
 
