@@ -157,8 +157,8 @@ Pet *pet;
     [cell.contentView layoutSubviews];
     cell.petAlbumItem  = self.pet;
     
-    //NSString *petPhotoUrlString = cell.petAlbumItem.albumImageStrings[indexPath.row];
-    NSString *petPhotoUrlString = cell.petAlbumItem.albumImageString;
+    NSString *petPhotoUrlString = cell.petAlbumItem.albumImageStrings[indexPath.row];
+    
     [cell.albumPhotoImageView sd_setImageWithURL:[NSURL URLWithString:petPhotoUrlString]
                                 placeholderImage:[UIImage imageNamed:@"5.jpg"]];
     
@@ -178,8 +178,8 @@ Pet *pet;
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Pet *pet = [PCDataSource sharedInstance].albumPhotos[indexPath.row];
-    Pet *petPlaceholders = [PCDataSource sharedInstance].petItems[indexPath.row];
+    //Pet *pet = [PCDataSource sharedInstance].albumPhotos[indexPath.row];
+    Pet *petPlaceholders = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
     //no album image property on photoAlbums so use the main object for placeholder
     UIImage *image= petPlaceholders.albumImage;
     

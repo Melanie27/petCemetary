@@ -36,7 +36,7 @@
     self.animalBreed.text = _pet.petBreed;
     self.personalityTextView.text = _pet.petPersonality;
     self.ownerNameLabel.text = _pet.ownerName;
-    //self.photoAlbumImages = _pet.albumImageStrings;
+    self.photoAlbumImages = _pet.albumImageStrings;
     
     
 }

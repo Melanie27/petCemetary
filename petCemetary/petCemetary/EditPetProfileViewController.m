@@ -79,7 +79,7 @@
         
     } else {
     
-        [editPetParameters setObject:pc.pet.photoID forKey:@"photoID"];
+        //[editPetParameters setObject:pc.pet.photoID forKey:@"photoID"];
         [editPetParameters setObject:pc.pet.petID forKey:@"petID"];
         [editPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
         [editPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
