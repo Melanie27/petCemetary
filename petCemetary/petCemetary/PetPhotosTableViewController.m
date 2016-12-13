@@ -47,8 +47,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSLog(@"count of album items %lu",  self.pet.albumMedia.count);
-    return self.pet.albumMedia.count;
+    NSLog(@"count of album items %lu",  self.pet.albumImageStrings.count);
+    //return self.pet.albumMedia.count;
+     NSLog(@"count of album items %@", self.pet);
+    return self.pet.albumImageStrings.count;
     
 }
 
@@ -63,7 +65,7 @@
     // Configure the cell...
     cell.petAlbumItem  = self.pet;
 
-    NSString *petPhotoUrlString = cell.petAlbumItem.albumImageStrings[indexPath.row];
+      NSString *petPhotoUrlString = cell.petAlbumItem.albumImageStrings[indexPath.row];
     
     
     [cell.albumPhotoImageView sd_setImageWithURL:[NSURL URLWithString:petPhotoUrlString]
@@ -72,10 +74,10 @@
     
     //TODO handle captions that go to a second line
     
-    NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
+    //NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
     
     //NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
-    UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
+    //UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
     //[petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
     
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -87,11 +89,11 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
    
-    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
+     Pet *pet = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
     
-    Pet *petPlaceholders = [PCDataSource sharedInstance].petItems[indexPath.row];
+    Pet *petPlaceholders = [PCDataSource sharedInstance].petAlbumItems[indexPath.row];
     //no album image property on photoAlbums
-    UIImage *image= petPlaceholders.albumImage;
+    UIImage *image = pet.albumImages[indexPath.row];
     
     
     if( petPlaceholders.albumImage == nil) {

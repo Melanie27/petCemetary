@@ -32,7 +32,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 //singleton to access call [PCDataSource sharedInstance]
 
 +(instancetype) sharedInstance;
-@property (nonatomic, strong) NSArray<Pet *> *petItems;
+@property (nonatomic, strong, readonly) NSArray<Pet *> *petItems;
 @property (nonatomic, strong) NSArray<Pet *> *petsByOwner;
 @property (nonatomic, strong, readonly) NSArray *petMedia;
 @property (nonatomic, strong, readonly) NSArray *petAlbumItems;
