@@ -150,9 +150,10 @@
                  pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
                  pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
                  pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
-                 pet.albumCaptionStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumCaptionString];
+                 pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
                  NSLog(@" pet.albumImageStrings %@",  pet.albumImageStrings);
-                 //pet.albumImage = [UIImage imageWithData:imageData];
+                 NSLog(@" pet.albumCaptionStrings %@",  pet.albumCaptionStrings);
+                 
                  self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
 
                  

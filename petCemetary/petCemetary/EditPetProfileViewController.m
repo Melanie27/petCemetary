@@ -78,7 +78,7 @@
         [self presentViewController:alert animated:YES completion:nil];
         
     } else {
-    
+        //TODO sometimes when I get here pet ID looks like 0x0000608000054eb0, which crashes
         //[editPetParameters setObject:pc.pet.photoID forKey:@"photoID"];
         [editPetParameters setObject:pc.pet.petID forKey:@"petID"];
         [editPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
