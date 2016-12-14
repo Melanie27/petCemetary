@@ -227,8 +227,16 @@ Pet *pet;
         // Do whatever data deletion you need to do...
         // Delete the row from the data source
         PCDataSource *pc = [PCDataSource sharedInstance];
-        
-       
+        //NSLog(@"album image strings %@", pc.pet.albumImageStrings);
+        for (id key in pc.pet.albumMedia) {
+            id value = [pet.albumMedia objectForKey:key];
+            NSLog(@"value hi %@", value);
+            NSLog(@"key hi %@", key);
+            pc.pet.photoID = key;
+            
+        }
+         //PointOfInterest *item = [ds.arrayOfPOIs objectAtIndex:[indexPath row]];
+        //NSLog(@"photo id %@", pc.pet.albumMedia);
         
         NSMutableDictionary *photoInfo = [@{} mutableCopy];
         [photoInfo setObject:pc.pet.petID forKey:@"petID"];

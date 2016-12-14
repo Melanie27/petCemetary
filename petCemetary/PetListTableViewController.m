@@ -68,8 +68,8 @@
         
     
         cell.textLabel.text = cell.pet.petName;
-        //cell.detailTextLabel.text = cell.pet.petBreed;
-    cell.detailTextLabel.text = cell.pet.petID;
+        cell.detailTextLabel.text = cell.pet.petType;
+    //cell.detailTextLabel.text = cell.pet.petID;
     self.petID = cell.detailTextLabel.text;
        NSLog(@"pc.pet.petID %@", cell.pet.petID);
         NSString *petFeedUrlString = cell.pet.feedImageString;
