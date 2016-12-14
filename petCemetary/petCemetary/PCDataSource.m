@@ -135,7 +135,7 @@
              pet.albumMedia = albumMedia;
              
              
-             self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+             
              self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
              self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
              
@@ -151,8 +151,7 @@
                  pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
                  pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
                  pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
-                 NSLog(@" pet.albumImageStrings %@",  pet.albumImageStrings);
-                 NSLog(@" pet.albumCaptionStrings %@",  pet.albumCaptionStrings);
+                 
                  
                  self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
 
@@ -163,6 +162,39 @@
              NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
              NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
              if( [petString isEqualToString:currentUserString]) {
+                 Pet *pet = [[Pet alloc] init];
+                 pet.petID =  keyPath;
+                 pet.petName = animalName;
+                 pet.petType = animalType;
+                 pet.petDOB = animalDob;
+                 pet.petDOD = animalDod;
+                 pet.petBreed = animalBreed;
+                 pet.petPersonality = animalPersonality;
+                 pet.ownerUID = ownerUID;
+                 pet.ownerName = ownerName;
+                 pet.feedImageString = feedImageString;
+                 pet.albumMedia = albumMedia;
+
+                 
+                 self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+                 pet.albumCaptionStrings = @[];
+                 pet.albumImageStrings = @[];
+                 for (id key in pet.albumMedia)
+                 {
+                     id value = [pet.albumMedia objectForKey:key];
+                     NSLog(@"value %@", value);
+                     self.albumMediaValues = [[NSDictionary alloc] initWithDictionary:value];
+                     pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
+                     pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
+                     pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
+                     pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
+                     
+                     
+                     self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
+                     
+                     
+                 }
+                 
                  
                  
                  for (NSString *string in pet.albumImageStrings) {
