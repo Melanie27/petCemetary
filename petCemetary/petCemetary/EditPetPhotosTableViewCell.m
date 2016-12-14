@@ -57,7 +57,9 @@
     
     self.albumPhotoImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
-    self.albumPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
+    //self.albumPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
+    //THIS allows to see entire delete button
+    self.albumPhotoImageView.contentMode = UIViewContentModeScaleToFill;
     
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
     
