@@ -103,6 +103,30 @@
     [_petsByOwner replaceObjectAtIndex:index withObject:object];
 }
 
+- (NSUInteger) countOfAlbumMedia {
+    return self.albumMedia.count;
+}
+
+- (id) objectInAlbumMediaAtIndex:(NSUInteger)index {
+    return [self.albumMedia objectAtIndex:index];
+}
+
+- (NSArray *) albumMediaAtIndexes:(NSIndexSet *)indexes {
+    return [self.albumMedia objectsAtIndexes:indexes];
+}
+
+- (void) insertObject:(Pet *)object inAlbumMediaAtIndex:(NSUInteger)index {
+    [_petItems insertObject:object atIndex:index];
+}
+
+
+- (void) removeObjectFromAlbumMediaAtIndex:(NSUInteger)index {
+    [_albumMedia removeObjectAtIndex:index];
+}
+
+- (void) replaceObjectInAlbumMediaAtIndex:(NSUInteger)index withObject:(id)object {
+    [_albumMedia replaceObjectAtIndex:index withObject:object];
+}
 
 
 -(NSString *)retrievePets {
@@ -183,7 +207,7 @@
                 pet.albumImageStrings = @[];
                 for (id key in pet.albumMedia) {
                     id value = [pet.albumMedia objectForKey:key];
-                    NSLog(@"value %@", value);
+                    //NSLog(@"value %@", value);
                     self.albumMediaValues = [[NSDictionary alloc] initWithDictionary:value];
                     pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
                     pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
@@ -314,7 +338,7 @@
     [self.ref updateChildValues:petInfoEdits];
 }
 
--(void)deleteAlbumPhotoWithDataDictionary:(NSDictionary *)photoInfo {
+-(void)deleteAlbumPhotoWithDataDictionary:(NSDictionary *)photoInfo andPet:(NSObject*)petMedia{
     NSString *petIDString = [photoInfo valueForKey:@"petID"];
     NSString *photoIDString = [photoInfo valueForKey:@"photoID"];
     NSDictionary *childUpdates = @{
@@ -326,6 +350,13 @@
     
     
     [self.ref updateChildValues:childUpdates];
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
+    
+    NSLog(@"pet we are working with %@", petMedia);
+     NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
+    
+    [mutableArrayWithKVO removeObject:petMedia];
+    [_albumMedia removeObject:petMedia];
     
 }
 
@@ -338,10 +369,11 @@
                                     
                                     ]:[NSNull null]
                                    };
-    NSLog(@"child updates %@", childUpdates);
+   
     [self.ref updateChildValues:childUpdates];
     
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petsByOwner"];
+     NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
     [mutableArrayWithKVO removeObject:pet];
    
     [_petsByOwner removeObject:pet];
@@ -384,7 +416,7 @@
 }
 
 
--(void)addImageWithDataDictionary:(NSDictionary *)parameters  {
+-(void)addImageWithDataDictionary:(NSDictionary *)parameters andPet:(Pet*)pet {
     
     NSString *photoKey = [[self.ref child:@"photos"] childByAutoId].key;
     self.pet.photoID = photoKey;
@@ -427,6 +459,11 @@
                                         
         }];
     }];
+    
+    //NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
+    //[mutableArrayWithKVO addObject:pet];
+    
+    //[_albumMedia addObject:pet];
 
 }
 

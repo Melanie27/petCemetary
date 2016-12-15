@@ -81,14 +81,18 @@ Pet *pet;
     UIAlertAction *ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
                                                handler:^(UIAlertAction *action){
                                                    
-                                                   
+                                                   Pet *pet = [[Pet alloc] init];
                                                    UITextField *alertTextField = alert.textFields.firstObject;
                                                     NSMutableDictionary *parameters = [@{} mutableCopy];
                                                     [parameters setObject:pc.pet.petID forKey:@"petID"];
                                                    
                                                    [parameters setObject:alertTextField.text forKey:@"photoCaption"];
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
-                                                    [pc addImageWithDataDictionary:parameters];
+                                                   
+                                                   [pc addImageWithDataDictionary:parameters andPet:pet];
+                                                   
+                                                   
+                                                  
                                                                                                       
                                                     }];
     
@@ -189,33 +193,37 @@ Pet *pet;
                 NSLog(@"item deleted");
                 [self.tableView reloadData];
             }
+        
+            else if (kindOfChange == NSKeyValueChangeInsertion) {
+                NSLog(@"item inserted");
+                [self.tableView reloadData];
+            }
         }
     }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView beginUpdates];
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Do whatever data deletion you need to do...
-        // Delete the row from the data source
-        PCDataSource *pc = [PCDataSource sharedInstance];
         
+        PCDataSource *pc = [PCDataSource sharedInstance];
+        //Pet *pet = [pc.petsByOwner objectAtIndex:[indexPath row]];
+        NSObject *mediaToDelete = [pc.albumMedia objectAtIndex:[indexPath row]];
+        NSLog(@"media to delete %@", mediaToDelete);
         for (id key in pc.pet.albumMedia) {
-            
             pc.pet.photoID = key;
-            
         }
        
         
         NSMutableDictionary *photoInfo = [@{} mutableCopy];
         [photoInfo setObject:pc.pet.petID forKey:@"petID"];
         [photoInfo setObject:pc.pet.photoID forKey:@"photoID"];
-        [pc deleteAlbumPhotoWithDataDictionary:photoInfo];
+        [pc deleteAlbumPhotoWithDataDictionary:photoInfo andPet:mediaToDelete];
         
        
         
     
         
-        //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationTop];
+        
        
     }
      [tableView endUpdates];
