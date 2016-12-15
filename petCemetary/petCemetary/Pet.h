@@ -45,6 +45,7 @@
 @property (nonatomic, strong) UIImage *albumImage;
 @property (nonatomic, strong) NSArray *albumImages;
 @property (nonatomic, strong) NSDictionary *albumMedia;
+@property (nonatomic, strong) NSString *photoIDString;
 
 
 

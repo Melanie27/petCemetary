@@ -21,7 +21,7 @@
 @interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, EditPetPhotosTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) UIAlertController *alertVC;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
+//@property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (nonatomic, strong)NSString *petID;
 @property (nonatomic, strong)NSString *photoID;
 @property BOOL *needToReloadData;
@@ -45,11 +45,11 @@ Pet *pet;
     
     [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
-     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumMedia" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    //TODO add observer to the key?
+    
+    [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumMedia" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {
@@ -183,6 +183,7 @@ Pet *pet;
  }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+   
     if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumMedia"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];

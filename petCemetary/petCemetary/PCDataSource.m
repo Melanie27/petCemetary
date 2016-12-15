@@ -139,6 +139,7 @@
          self.petItems =  [NSMutableArray new];
          self.petsByOwner = [NSMutableArray new];
          self.albumMedia = [NSMutableArray new];
+         self.albumMediaKeys = [NSMutableArray new];
          for (NSString *keyPath in allPets) {
             Pet *pet = [[Pet alloc] init];
 
@@ -178,7 +179,9 @@
                  pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
                 
                  [self.albumMedia addObject:pet.albumMedia];
+                
             }
+             
              
             
             NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
@@ -208,7 +211,9 @@
                     pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
                     pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
                     pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
+                    
                    [self.albumMedia addObject:pet.albumMedia];
+                   
                     
                 }
 
@@ -347,6 +352,7 @@
     [self.ref updateChildValues:childUpdates];
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
     
+    //TODO not sure why this isn't working
     NSLog(@"pet we are working with %@", petMedia);
      NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
     
@@ -368,7 +374,7 @@
     [self.ref updateChildValues:childUpdates];
     
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petsByOwner"];
-     NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
+    
     [mutableArrayWithKVO removeObject:pet];
    
     [_petsByOwner removeObject:pet];
