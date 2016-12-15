@@ -13,9 +13,7 @@
 #import "Pet.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@import Firebase;
-@import FirebaseDatabase;
-@import FirebaseStorage;
+
 
 @interface PetListTableViewController () <UIGestureRecognizerDelegate, UITableViewDelegate, UITableViewDataSource, PetListTableViewCellDelegate>
     @property (nonatomic, strong)Pet *passPetToProfile;
@@ -27,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     PCDataSource *pc = [PCDataSource sharedInstance];
-    //pc.pet.petID = self.petID;
+    
     
     pc.pltVC = self;
    

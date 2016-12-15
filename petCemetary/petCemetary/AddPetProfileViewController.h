@@ -8,9 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h> 
-@import Firebase;
-@import FirebaseDatabase;
-@import FirebaseStorage;
+
 @class Pet;
 
 @interface AddPetProfileViewController : UIViewController <UITextFieldDelegate>
@@ -28,8 +26,6 @@
 
 
 @property (strong, nonatomic) NSURL *petImageURL;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) FIRStorage *storage;
 
 
 - (IBAction)savePetProfile:(id)sender;
