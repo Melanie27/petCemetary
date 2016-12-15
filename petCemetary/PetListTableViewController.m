@@ -33,7 +33,7 @@
    
    
      [self.tableView registerClass:[PetListTableViewCell class] forCellReuseIdentifier:@"cell"];
-    [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"petItems" options:0 context:nil];
+    [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"petItems" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,20 +58,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
         PetListTableViewCell *cell = [[PetListTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:@"cell"];
-    // Configure the cell...
-   
-    
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.delegate = self;
         cell.pet = [PCDataSource sharedInstance].petsByOwner[indexPath.row];
         [cell.contentView layoutSubviews];
-        
-    
         cell.textLabel.text = cell.pet.petName;
         cell.detailTextLabel.text = cell.pet.petType;
-    //cell.detailTextLabel.text = cell.pet.petID;
-    self.petID = cell.detailTextLabel.text;
-       //NSLog(@"pc.pet.petID %@", cell.pet.petID);
+   
+        self.petID = cell.detailTextLabel.text;
+    
         NSString *petFeedUrlString = cell.pet.feedImageString;
         UIImage *image = cell.pet.feedImage;
         [cell.petThumbnailView sd_setImageWithURL:[NSURL URLWithString:petFeedUrlString]
@@ -133,7 +128,9 @@
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"petItems"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
-        
+        NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+        NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];
+        NSLog(@"Observed: %@ of %@ was changed from %@ to %@," keypath, object, oldValue, newValue);
         if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
             [self.tableView reloadData];

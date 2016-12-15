@@ -123,7 +123,7 @@
             pet.feedImageString = feedImageString;
             pet.albumMedia = albumMedia;
              
-            [self.petItems addObject:pet];
+            //[self.petItems addObject:pet];
              
              
             self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
@@ -206,8 +206,8 @@
                      
                  }];
              }
-             //self.petItems = [self.petItems addObject:pet];
-            //self.petItems = [self.petItems arrayByAddingObject:pet];
+              [self.petItems addObject:pet];
+            
             
             if ([snapshot.value isKindOfClass:[NSDictionary class]] && (snapshot.value)) {
                  
@@ -329,7 +329,7 @@
     
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petItems"];
     [mutableArrayWithKVO removeObject:pet];
-    NSLog(@"pet %@", pet);
+    NSLog(@"mutable array with KVO %@", mutableArrayWithKVO);
     [_petItems removeObject:pet];
     
 }
