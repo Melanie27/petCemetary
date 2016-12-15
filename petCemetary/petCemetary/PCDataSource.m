@@ -21,7 +21,7 @@
 
     
     @property (nonatomic, strong) NSArray *petMedia;
-    @property (nonatomic, strong) NSArray *petAlbumItems;
+
 
     //@property (nonatomic, strong) NSArray *albumImageList;
     @property (nonatomic, strong) NSDictionary *albumMediaValues;
@@ -118,10 +118,9 @@
          //NSString *keyPetName = [[self.ref child:@"pet"] childByAutoId].key;
          NSDictionary *allPets = snapshot.value[@"pets"];
          self.petItems =  [NSMutableArray new];
-         
          self.petsByOwner = [NSMutableArray new];
 
-         self.petAlbumItems = @[];
+         
          
          for (NSString *keyPath in allPets) {
             Pet *pet = [[Pet alloc] init];
@@ -149,14 +148,7 @@
             pet.ownerName = ownerName;
             pet.feedImageString = feedImageString;
             pet.albumMedia = albumMedia;
-             
-            
-             
-             
-            self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
-             
-             
-             
+
             pet.albumCaptionStrings = @[];
             pet.albumImageStrings = @[];
             for (id key in pet.albumMedia) {
