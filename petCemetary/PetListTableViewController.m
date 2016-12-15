@@ -33,7 +33,7 @@
    
    
      [self.tableView registerClass:[PetListTableViewCell class] forCellReuseIdentifier:@"cell"];
-    [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"petItems" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+    [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"petsByOwner" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -122,24 +122,20 @@
 
 
 - (void) dealloc {
-    [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"petItems"];
+    [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"petsByOwner"];
 }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"petItems"]) {
+    if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"petsByOwner"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
         NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];
         NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
         if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
-           
-            NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petItems"];
-            //NSMutableArray *mutableArrayWithKVO2 = [self mutableArrayValueForKey:@"petOwnerItems"];
-            [mutableArrayWithKVO removeObject:object];
-            //[mutableArrayWithKVO2 removeObject:object];
-            NSLog(@"mutable array with KVO %@", mutableArrayWithKVO);
-           
+
+             [self.tableView reloadData];
+        } else if (kindOfChange == NSKeyValueChangeInsertion) {
              [self.tableView reloadData];
         }
     }
@@ -155,8 +151,7 @@
         PCDataSource *pc = [PCDataSource sharedInstance];
         NSMutableDictionary *petID = [@{} mutableCopy];
         Pet *pet = [pc.petsByOwner objectAtIndex:[indexPath row]];
-        NSLog(@"pet to delete %@", pet);
-        NSLog(@"pet to delete %@", pet.petID);
+        
         [petID setObject:pet.petID forKey:@"petID"];
         
         

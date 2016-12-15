@@ -78,6 +78,31 @@
     [_petItems replaceObjectAtIndex:index withObject:object];
 }
 
+- (NSUInteger) countOfPetsByOwner {
+    return self.petsByOwner.count;
+}
+
+- (id) objectInPetsByOwnerAtIndex:(NSUInteger)index {
+    return [self.petsByOwner objectAtIndex:index];
+}
+
+- (NSArray *) petsByOwnerAtIndexes:(NSIndexSet *)indexes {
+    return [self.petsByOwner objectsAtIndexes:indexes];
+}
+
+- (void) insertObject:(Pet *)object inPetsByOwnerAtIndex:(NSUInteger)index {
+    [_petsByOwner insertObject:object atIndex:index];
+}
+
+
+- (void) removeObjectFromPetsByOwnerAtIndex:(NSUInteger)index {
+    [_petsByOwner removeObjectAtIndex:index];
+}
+
+- (void) replaceObjectInPetsByOwnerAtIndex:(NSUInteger)index withObject:(id)object {
+    [_petsByOwner replaceObjectAtIndex:index withObject:object];
+}
+
 
 -(NSString *)retrievePets {
     
@@ -93,7 +118,8 @@
          NSDictionary *allPets = snapshot.value[@"pets"];
          self.petItems =  [NSMutableArray new];
          self.albumPhotos = @[];
-         self.petsByOwner = @[];
+         self.petsByOwner = [NSMutableArray new];
+
          self.petAlbumItems = @[];
          
          for (NSString *keyPath in allPets) {
@@ -164,7 +190,7 @@
                 pet.feedImageString = feedImageString;
                 pet.albumMedia = albumMedia;
 
-                self.petsByOwner = [self.petsByOwner arrayByAddingObject:pet];
+                [self.petsByOwner addObject:pet];
                 pet.albumCaptionStrings = @[];
                 pet.albumImageStrings = @[];
                 for (id key in pet.albumMedia) {
@@ -318,7 +344,7 @@
 -(void)deletePetWithDataDictionary:(NSDictionary *)petID andPet:(Pet*)pet {
     
     NSString *petIDString = [petID valueForKey:@"petID"];
-    NSLog(@"petIDString %@", petIDString);
+    
      NSDictionary *childUpdates = @{
                                    [NSString stringWithFormat:@"/pets/%@/", petIDString
                                     
@@ -327,15 +353,15 @@
     NSLog(@"child updates %@", childUpdates);
     [self.ref updateChildValues:childUpdates];
     
-    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petItems"];
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petsByOwner"];
     [mutableArrayWithKVO removeObject:pet];
-    NSLog(@"mutable array with KVO %@", mutableArrayWithKVO);
-    [_petItems removeObject:pet];
+   
+    [_petsByOwner removeObject:pet];
     
 }
 
 
--(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters {
+-(void)addNewPetWithDataDictionary:(NSDictionary *)addPetParameters andPet:(Pet*)pet {
     NSString *key = [[self.ref child:@"pets"] childByAutoId].key;
     //NSString *key = [addPetParameters valueForKey:@"petID"];
     
@@ -362,6 +388,11 @@
                                        
     
     [self.ref updateChildValues:petInfoCreation];
+    
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petsByOwner"];
+    [mutableArrayWithKVO addObject:pet];
+    
+    [_petsByOwner addObject:pet];
 }
 
 

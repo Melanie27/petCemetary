@@ -33,7 +33,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 
 +(instancetype) sharedInstance;
 @property (nonatomic, strong) NSMutableArray<Pet *> *petItems;
-@property (nonatomic, strong) NSArray<Pet *> *petsByOwner;
+@property (nonatomic, strong) NSMutableArray<Pet *> *petsByOwner;
 @property (nonatomic, strong, readonly) NSArray *petMedia;
 @property (nonatomic, strong, readonly) NSArray *petAlbumItems;
 @property (nonatomic, strong, readonly) NSArray *albumPhotos;
@@ -69,7 +69,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 -(void)deletePetWithDataDictionary:(NSDictionary *)petID andPet:(Pet*)pet;
 
 
--(void)addNewPetWithDataDictionary:(NSMutableDictionary *)addPetParameters;
+-(void)addNewPetWithDataDictionary:(NSMutableDictionary *)addPetParameters andPet:(Pet*)pet;
 -(void)editPetWithDataDictionary:(NSMutableDictionary *)editPetParameters;
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto;
 -(void)addImageWithDataDictionary:(NSDictionary*)parameters;

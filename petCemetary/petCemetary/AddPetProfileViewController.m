@@ -95,6 +95,7 @@
          
     } else {
         //[addPetParameters setObject:pc.pet.petID forKey:@"petID"];
+        Pet *pet = [[Pet alloc] init];
         [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
         [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
         [addPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
@@ -105,7 +106,7 @@
         [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
         NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
         [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
-        [pc addNewPetWithDataDictionary:addPetParameters];
+        [pc addNewPetWithDataDictionary:addPetParameters andPet:pet];
         UIAlertController *alertSaved = [UIAlertController
                                     alertControllerWithTitle: @"Thank you for starting your pet's memorial"
                                     message: @"Please add photos of your pet to its album."
