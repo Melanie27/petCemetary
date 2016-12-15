@@ -9,7 +9,6 @@
 #import "PetPhotosTableViewController.h"
 #import "Pet.h"
 @interface EditPetPhotosTableViewController : PetPhotosTableViewController
-@property (nonatomic, assign) NSInteger petNumber;
 @property (strong, nonatomic) NSURL *petImageURL;
 
 @end

@@ -159,7 +159,6 @@
     p = pc.petItems[row];
     self.passPetToProfile = pc.petItems[row];
     pc.pet = self.passPetToProfile;
-    pc.petNumber = row;
     [self performSegueWithIdentifier:@"showProfilePage" sender:self];
 }
 
@@ -205,7 +204,6 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"showProfilePage"]) {
-        NSLog(@"holla");
         PetProfileViewController *petProfileVC = (PetProfileViewController*)segue.destinationViewController;
         petProfileVC.pet = self.passPetToProfile;
        

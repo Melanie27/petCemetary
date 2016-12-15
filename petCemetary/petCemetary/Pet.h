@@ -15,7 +15,7 @@
 @property  float timeStamp;
 
 
-@property (nonatomic, assign) NSInteger petNumber;
+
 
 @property (nonatomic, assign) NSString *petID;
 @property (nonatomic, assign) NSString *photoID;
@@ -37,12 +37,11 @@
 
 
 
-
+//ALBUM MEDIA
 @property (nonatomic, strong) NSArray *albumCaptionStrings;
 @property (nonatomic, strong) NSString *albumCaptionString;
 @property (nonatomic, strong) NSArray *albumImageStrings;
 @property (nonatomic, strong) NSString *albumImageString;
-@property (nonatomic, assign) NSInteger photoNumber;
 @property (nonatomic, strong) UIImage *albumImage;
 @property (nonatomic, strong) NSArray *albumImages;
 @property (nonatomic, strong) NSDictionary *albumMedia;

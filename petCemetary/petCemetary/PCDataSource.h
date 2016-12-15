@@ -34,16 +34,12 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 +(instancetype) sharedInstance;
 @property (nonatomic, strong) NSMutableArray<Pet *> *petItems;
 @property (nonatomic, strong) NSMutableArray<Pet *> *petsByOwner;
-@property (nonatomic, strong, readonly) NSMutableArray *petMedia;
-
-
 @property (nonatomic, strong) NSMutableArray *albumMedia;
 
 
 
-//@property (nonatomic, strong) NSArray<Pet *> *pets;
+
 @property (nonatomic, strong) Pet *pet;
-@property (nonatomic, assign) NSInteger petNumber;
 @property (nonatomic, weak) PetsFeedTableViewController *pftVC;
 @property (nonatomic, weak) PetPhotosTableViewController *pptVC;
 @property (nonatomic, weak) PetProfileViewController *profileVC;
@@ -63,20 +59,14 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 
 
 -(NSString *)retrievePets;
+-(void)deletePetWithDataDictionary:(NSDictionary *)petID andPet:(Pet*)pet;
+-(void)addNewPetWithDataDictionary:(NSMutableDictionary *)addPetParameters andPet:(Pet*)pet;
+
 
 
 -(void)deleteAlbumPhotoWithDataDictionary:(NSDictionary *)photoInfo andPet:(NSObject*)petMedia;
--(void)deletePetWithDataDictionary:(NSDictionary *)petID andPet:(Pet*)pet;
-
-
--(void)addNewPetWithDataDictionary:(NSMutableDictionary *)addPetParameters andPet:(Pet*)pet;
 -(void)editPetWithDataDictionary:(NSMutableDictionary *)editPetParameters;
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto;
 -(void)addImageWithDataDictionary:(NSDictionary*)parameters andPet:(Pet*)pet;;
-
-
-
-
-
 
 @end

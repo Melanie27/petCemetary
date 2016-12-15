@@ -25,7 +25,7 @@
     self.title = @"Edit Profile";
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.editProfileVC = self;
-   //NSLog(@"pc.petNumber edit %ld", pc.pet.petNumber);
+   
     self.petNameTextField.text = _pet.petName;
     //TODO - dates in a certain format - alert if entered incorrectly
     self.dobTextField.text = _pet.petDOB;

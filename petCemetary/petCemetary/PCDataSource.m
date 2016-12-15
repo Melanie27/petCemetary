@@ -19,11 +19,6 @@
 
 @interface PCDataSource ()
 
-    
-    //@property (nonatomic, strong) NSArray *petMedia;
-
-
-    //@property (nonatomic, strong) NSArray *albumImageList;
     @property (nonatomic, strong) NSDictionary *albumMediaValues;
 
 
@@ -175,14 +170,14 @@
             pet.albumImageStrings = @[];
             for (id key in pet.albumMedia) {
                  id value = [pet.albumMedia objectForKey:key];
-                 NSLog(@"value %@", value);
+                 //NSLog(@"value from retrieve pets %@", value);
                  self.albumMediaValues = [[NSDictionary alloc] initWithDictionary:value];
                  pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
                  pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
                  pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
                  pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
                 
-                [self.albumMedia addObject:pet.albumMedia];
+                 [self.albumMedia addObject:pet.albumMedia];
             }
              
             
@@ -207,13 +202,13 @@
                 pet.albumImageStrings = @[];
                 for (id key in pet.albumMedia) {
                     id value = [pet.albumMedia objectForKey:key];
-                    //NSLog(@"value %@", value);
+                    NSLog(@"value %@", value);
                     self.albumMediaValues = [[NSDictionary alloc] initWithDictionary:value];
                     pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
                     pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
                     pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
                     pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
-                   
+                   [self.albumMedia addObject:pet.albumMedia];
                     
                 }
 
