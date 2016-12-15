@@ -45,33 +45,11 @@ Pet *pet;
     
     [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
-    [pc addObserver:self forKeyPath:@"albumPhotos" options:0 context:nil];
+     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    [pc removeObserver:self forKeyPath:@"albumPhotos"];
-}
 
-- (void)viewWillAppear:(BOOL)animated {
-    //[super viewWillAppear:animated];
-    if (self.needToReloadData == YES) {
-        [self.tableView reloadData];
-    }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    //if (keyPath isEqualToString:@"configurationItem") {
-       // [self.needToRefreshData = YES];
-    //}
-}
-
--(void)dealloc {
-    
-    
-    //[[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
-}
 
 
 - (void)didReceiveMemoryWarning {
@@ -200,26 +178,23 @@ Pet *pet;
 #pragma mark - Swipe to delete and KVO
 
 //KVO
-/*- (void) dealloc {
+- (void) dealloc {
  [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
  }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumPhotos"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
-        
-        if (kindOfChange == NSKeyValueChangeRemoval) {
+        NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+        NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];
+        NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
+            if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
-            NSLog(@"item deleted");
-            [self.tableView reloadData];
+                NSLog(@"item deleted");
+                [self.tableView reloadData];
+            }
         }
-        
-        else if((kindOfChange = NSKeyValueChangeInsertion)) {
-         NSLog(@"item inserted");
-         [self.tableView reloadData];
-         }
     }
-}*/
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView beginUpdates];

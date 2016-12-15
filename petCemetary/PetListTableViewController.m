@@ -130,10 +130,17 @@
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
         NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];
-        NSLog(@"Observed: %@ of %@ was changed from %@ to %@," keypath, object, oldValue, newValue);
+        NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
         if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
-            [self.tableView reloadData];
+           
+            NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petItems"];
+            //NSMutableArray *mutableArrayWithKVO2 = [self mutableArrayValueForKey:@"petOwnerItems"];
+            [mutableArrayWithKVO removeObject:object];
+            //[mutableArrayWithKVO2 removeObject:object];
+            NSLog(@"mutable array with KVO %@", mutableArrayWithKVO);
+           
+             [self.tableView reloadData];
         }
     }
 
@@ -145,8 +152,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         
-        // Delete the row from the data source Delete Pet - this is working but it doesnt immediately disappear
-       //Pet: 0x600000383dc0>
         PCDataSource *pc = [PCDataSource sharedInstance];
         NSMutableDictionary *petID = [@{} mutableCopy];
         Pet *pet = [pc.petsByOwner objectAtIndex:[indexPath row]];

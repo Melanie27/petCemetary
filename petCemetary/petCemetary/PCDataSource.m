@@ -123,7 +123,7 @@
             pet.feedImageString = feedImageString;
             pet.albumMedia = albumMedia;
              
-            //[self.petItems addObject:pet];
+            
              
              
             self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
