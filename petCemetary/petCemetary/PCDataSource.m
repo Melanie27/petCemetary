@@ -20,7 +20,7 @@
 @interface PCDataSource ()
 
     
-    @property (nonatomic, strong) NSArray *petMedia;
+    //@property (nonatomic, strong) NSArray *petMedia;
 
 
     //@property (nonatomic, strong) NSArray *albumImageList;
@@ -119,9 +119,7 @@
          NSDictionary *allPets = snapshot.value[@"pets"];
          self.petItems =  [NSMutableArray new];
          self.petsByOwner = [NSMutableArray new];
-
-         
-         
+         self.albumMedia = [NSMutableArray new];
          for (NSString *keyPath in allPets) {
             Pet *pet = [[Pet alloc] init];
 
@@ -159,11 +157,8 @@
                  pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
                  pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
                  pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
-                 
-                 
                 
-
-                 
+                [self.albumMedia addObject:pet.albumMedia];
             }
              
             

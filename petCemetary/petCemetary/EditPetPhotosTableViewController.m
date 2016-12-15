@@ -45,7 +45,7 @@ Pet *pet;
     
     [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
-     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"petItems" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumMedia" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
 }
 
@@ -66,12 +66,8 @@ Pet *pet;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
-        
         [self presentViewController:picker animated:YES completion:NULL];
-       
-        
     }
-    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -179,11 +175,11 @@ Pet *pet;
 
 //KVO
 - (void) dealloc {
- [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"petItems"];
+ [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumMedia"];
  }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"petItems"]) {
+    if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumMedia"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
         NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];

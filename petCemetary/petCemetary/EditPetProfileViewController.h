@@ -10,7 +10,6 @@
 @class Pet;
 @interface EditPetProfileViewController : AddPetProfileViewController
 @property (nonatomic, strong) Pet *pet;
-//@property (nonatomic) NSInteger petNumber;
 @property (nonatomic, strong) NSString *petNumberString;
 
 

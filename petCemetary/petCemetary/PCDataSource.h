@@ -34,10 +34,10 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 +(instancetype) sharedInstance;
 @property (nonatomic, strong) NSMutableArray<Pet *> *petItems;
 @property (nonatomic, strong) NSMutableArray<Pet *> *petsByOwner;
-@property (nonatomic, strong, readonly) NSArray *petMedia;
+@property (nonatomic, strong, readonly) NSMutableArray *petMedia;
 
 
-@property (nonatomic, strong, readonly) NSArray *albumMedia;
+@property (nonatomic, strong) NSMutableArray *albumMedia;
 
 
 
