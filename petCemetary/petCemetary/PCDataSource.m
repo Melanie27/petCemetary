@@ -22,7 +22,7 @@
     
     @property (nonatomic, strong) NSArray *petMedia;
     @property (nonatomic, strong) NSArray *petAlbumItems;
-    @property (nonatomic, strong) NSArray *albumPhotos;
+
     //@property (nonatomic, strong) NSArray *albumImageList;
     @property (nonatomic, strong) NSDictionary *albumMediaValues;
 
@@ -104,6 +104,7 @@
 }
 
 
+
 -(NSString *)retrievePets {
     
     self.ref = [[FIRDatabase database] reference];
@@ -117,7 +118,7 @@
          //NSString *keyPetName = [[self.ref child:@"pet"] childByAutoId].key;
          NSDictionary *allPets = snapshot.value[@"pets"];
          self.petItems =  [NSMutableArray new];
-         self.albumPhotos = @[];
+         
          self.petsByOwner = [NSMutableArray new];
 
          self.petAlbumItems = @[];
@@ -153,7 +154,7 @@
              
              
             self.petAlbumItems = [self.petAlbumItems arrayByAddingObject:pet];
-            self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
+             
              
              
             pet.albumCaptionStrings = @[];
@@ -168,7 +169,7 @@
                  pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
                  
                  
-                 self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
+                
 
                  
             }
@@ -201,7 +202,7 @@
                     pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
                     pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
                     pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
-                    self.albumPhotos = [self.albumPhotos arrayByAddingObject:pet];
+                   
                     
                 }
 

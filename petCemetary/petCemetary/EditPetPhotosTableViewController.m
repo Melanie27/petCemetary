@@ -45,7 +45,7 @@ Pet *pet;
     
     [self.tableView registerClass:[EditPetPhotosTableViewCell class] forCellReuseIdentifier:@"editCell"];
     
-     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"albumPhotos" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
+     [[PCDataSource sharedInstance] addObserver:self forKeyPath:@"petItems" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     
 }
 
@@ -156,7 +156,7 @@ Pet *pet;
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    Pet *pet = [PCDataSource sharedInstance].albumPhotos[indexPath.row];
+    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
     
     UIImage *image = pet.albumImages[indexPath.row];
     
@@ -179,11 +179,11 @@ Pet *pet;
 
 //KVO
 - (void) dealloc {
- [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumPhotos"];
+ [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"petItems"];
  }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumPhotos"]) {
+    if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"petItems"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
         NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];

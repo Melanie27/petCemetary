@@ -87,7 +87,7 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
    
-    Pet *pet = [PCDataSource sharedInstance].albumPhotos[indexPath.row];
+    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
     
     UIImage *image = pet.albumImages[indexPath.row];
     

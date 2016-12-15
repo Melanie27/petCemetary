@@ -36,7 +36,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 @property (nonatomic, strong) NSMutableArray<Pet *> *petsByOwner;
 @property (nonatomic, strong, readonly) NSArray *petMedia;
 @property (nonatomic, strong, readonly) NSArray *petAlbumItems;
-@property (nonatomic, strong, readonly) NSArray *albumPhotos;
+
 @property (nonatomic, strong, readonly) NSArray *albumMedia;
 
 
