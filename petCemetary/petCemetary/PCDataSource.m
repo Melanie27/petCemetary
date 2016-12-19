@@ -151,7 +151,7 @@
             NSString *ownerUID = [elements valueForKey:@"UID"];
             NSString *ownerName = [elements valueForKey:@"ownerName"];
             NSString *feedImageString = [elements valueForKey:@"feedPhoto"];
-            NSDictionary *albumMedia = [elements valueForKey:@"photos"];
+            NSMutableDictionary *albumMedia = [elements valueForKey:@"photos"];
              
             pet.petID =  keyPath;
             pet.petName = animalName;
@@ -349,7 +349,7 @@
      NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
     
     [mutableArrayWithKVO removeObject:petMedia];
-    [_albumMedia removeObject:petMedia];
+    [self.pet.albumMedia removeObjectForKey:photoIDString];
     
 }
 

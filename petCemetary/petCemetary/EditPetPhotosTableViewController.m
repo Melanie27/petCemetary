@@ -21,7 +21,6 @@
 @interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, EditPetPhotosTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) UIAlertController *alertVC;
-//@property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (nonatomic, strong)NSString *petID;
 @property (nonatomic, strong)NSString *photoID;
 @property BOOL *needToReloadData;
@@ -90,16 +89,12 @@ Pet *pet;
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
                                                    
                                                    [pc addImageWithDataDictionary:parameters andPet:pet];
-                                                   
-                                                   
-                                                  
-                                                                                                      
+                                             
                                                     }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
                                                    handler: nil];
-    
-    
+
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         
         textField.placeholder = @"Text here";
@@ -129,7 +124,7 @@ Pet *pet;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //[[PCDataSource sharedInstance] addImageWithDataDictionary:];
+   
     EditPetPhotosTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"editCell" forIndexPath:indexPath];
     cell.delegate = self;
     [cell.contentView layoutSubviews];
@@ -140,17 +135,14 @@ Pet *pet;
     [cell.albumPhotoImageView sd_setImageWithURL:[NSURL URLWithString:petPhotoUrlString]
                                 placeholderImage:[UIImage imageNamed:@"5.jpg"]];
     
-    
-    //TODO get the indiv image caption
     NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
     NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
     UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
     [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.attributedText = petCaptionMutableString;
-    
-    //cell.detailTextLabel.text = cell.pet.petID;
     self.pet.petType = cell.detailTextLabel.text;
+    
     return cell;
 }
 
@@ -179,7 +171,7 @@ Pet *pet;
 
 //KVO
 - (void) dealloc {
- [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumMedia"];
+    [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumMedia"];
  }
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -220,6 +212,7 @@ Pet *pet;
         [photoInfo setObject:pc.pet.photoID forKey:@"photoID"];
         [pc deleteAlbumPhotoWithDataDictionary:photoInfo andPet:mediaToDelete];
         
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
        
         
     
@@ -228,7 +221,7 @@ Pet *pet;
        
     }
      [tableView endUpdates];
-  
+     [tableView reloadData];
 }
 
 
