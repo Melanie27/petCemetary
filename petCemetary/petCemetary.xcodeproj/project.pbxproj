@@ -59,7 +59,7 @@
 
 /* Begin PBXFileReference section */
 		8C18959F1EAB3AAFAC7DAF2F /* libPods-petCemetary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-petCemetary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9B21FF431DD39C51008AC917 /* petCemetary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = petCemetary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B21FF431DD39C51008AC917 /* Pet Cemetery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pet Cemetery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B21FF471DD39C51008AC917 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9B21FF491DD39C51008AC917 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9B21FF4A1DD39C51008AC917 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		9B21FF441DD39C51008AC917 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9B21FF431DD39C51008AC917 /* petCemetary.app */,
+				9B21FF431DD39C51008AC917 /* Pet Cemetery.app */,
 				9B21FF5F1DD39C51008AC917 /* petCemetaryTests.xctest */,
 				9B21FF6A1DD39C51008AC917 /* petCemetaryUITests.xctest */,
 			);
@@ -292,7 +292,7 @@
 			);
 			name = petCemetary;
 			productName = petCemetary;
-			productReference = 9B21FF431DD39C51008AC917 /* petCemetary.app */;
+			productReference = 9B21FF431DD39C51008AC917 /* Pet Cemetery.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9B21FF5E1DD39C51008AC917 /* petCemetaryTests */ = {
@@ -642,8 +642,8 @@
 				DEVELOPMENT_TEAM = GG272MAP9U;
 				INFOPLIST_FILE = petCemetary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.melaniemcganney.petCemetary;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.melaniemcganney.petCemetery;
+				PRODUCT_NAME = "Pet Cemetery";
 			};
 			name = Debug;
 		};
@@ -656,8 +656,8 @@
 				DEVELOPMENT_TEAM = GG272MAP9U;
 				INFOPLIST_FILE = petCemetary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.melaniemcganney.petCemetary;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.melaniemcganney.petCemetery;
+				PRODUCT_NAME = "Pet Cemetery";
 			};
 			name = Release;
 		};
