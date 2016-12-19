@@ -252,7 +252,7 @@ NS_DESIGNATED_INITIALIZER;
     return self;
 }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+/*- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == alertView.firstOtherButtonIndex) {
         _completionHandler(YES, [alertView textFieldAtIndex:0].text);
     } else {
@@ -260,6 +260,6 @@ NS_DESIGNATED_INITIALIZER;
     }
     _completionHandler = nil;
     _retainedSelf = nil;
-}
+}*/
 
 @end
