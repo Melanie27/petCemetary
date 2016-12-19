@@ -290,7 +290,8 @@
                                        FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petFeed/"];
                                        FIRStorageReference *profileRef = [storageRef child:theFileName];
                                        NSLog(@"profileRef %@", profileRef);
-                                       FIRStorageUploadTask *uploadTask = [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                                       
+                                       [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
                                            if (error != nil) {
                                                // Uh-oh, an error occurred!
                                                NSLog(@"error %@", error);
@@ -436,7 +437,8 @@
                                        FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
                                        FIRStorageReference *profileRef = [storageRef child:theFileName];
                                       
-                                       FIRStorageUploadTask *uploadTask = [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                                       
+                                       [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
                                            if (error != nil) {
                                                // Uh-oh, an error occurred!
                                                NSLog(@"error %@", error);
