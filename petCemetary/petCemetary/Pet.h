@@ -8,14 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class Owner;
+
 
 @interface Pet : NSObject
-
-@property  float timeStamp;
-
-
-
 
 @property (nonatomic, assign) NSString *petID;
 @property (nonatomic, assign) NSString *photoID;
@@ -29,7 +24,6 @@
 @property (nonatomic, strong) NSString *petPersonality;
 @property (nonatomic, strong) NSString *ownerName;
 @property (nonatomic, strong) NSString *ownerUID;
- @property (nonatomic, strong) Owner *owner;
 @property (nonatomic, strong) NSURL *feedImageURL;
 @property (nonatomic, strong) NSString *feedImageString;
 @property (nonatomic, strong) UIImage *feedImage;
@@ -48,8 +42,5 @@
 @property (nonatomic, strong) NSString *photoIDString;
 
 
-
-
-- (NSString *) newPet;
 
 @end

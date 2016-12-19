@@ -11,7 +11,6 @@
 #import "PetsFeedTableViewCell.h"
 #import "PetProfileViewController.h"
 #import "Pet.h"
-#import "Owner.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 
