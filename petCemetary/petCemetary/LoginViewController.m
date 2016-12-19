@@ -713,12 +713,15 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (error) {
         NSString *message = [NSString stringWithFormat:@"%@ (%ld)\n%@", error.domain, (long)error.code,
                              error.localizedDescription];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:resultsTitle
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:kOKButtonText, nil];
-        [alert show];
+        UIAlertController *alert = [UIAlertController
+                                    alertControllerWithTitle: resultsTitle
+                                    message: message
+                                    preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *ok = [UIAlertAction actionWithTitle:kOKButtonText style:UIAlertActionStyleCancel
+                                                       handler: nil];
+        
+        [alert addAction:ok];
+        
         return;
     }
     //    [self.tableView reloadData];
