@@ -182,8 +182,6 @@
                 
             }
              
-             
-            
             NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
             NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
             if( [petString isEqualToString:currentUserString]) {
@@ -201,6 +199,7 @@
                 pet.albumMedia = albumMedia;
 
                 [self.petsByOwner addObject:pet];
+                
                 pet.albumCaptionStrings = @[];
                 pet.albumImageStrings = @[];
                 for (id key in pet.albumMedia) {
@@ -245,7 +244,12 @@
                  }];
              }
               [self.petItems addObject:pet];
-            
+             
+             //Print Feed Items in reverse order
+             //self.petItems = [[[self.petItems reverseObjectEnumerator] allObjects] mutableCopy];
+             
+             
+
             
             if ([snapshot.value isKindOfClass:[NSDictionary class]] && (snapshot.value)) {
                  
@@ -265,14 +269,6 @@
     
 }
 
-/*- (NSArray *)reversedArray {
-    NSMutableArray *petItemsReversed = [NSMutableArray arrayWithCapacity:[_petItems count]];
-    NSEnumerator *enumerator = [_petItems reverseObjectEnumerator];
-    for (id element in enumerator) {
-        [petItemsReversed addObject:element];
-    }
-    return petItemsReversed;
-}*/
 
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto {
     //TODO should be able to post to current pet so doesnt interfere with adding info
