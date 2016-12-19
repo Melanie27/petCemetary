@@ -21,7 +21,6 @@
 
     @property (nonatomic, strong) NSDictionary *albumMediaValues;
 
-
 @end
 
 @implementation PCDataSource
@@ -247,10 +246,7 @@
              
              //Print Feed Items in reverse order
              //self.petItems = [[[self.petItems reverseObjectEnumerator] allObjects] mutableCopy];
-             
-             
 
-            
             if ([snapshot.value isKindOfClass:[NSDictionary class]] && (snapshot.value)) {
                  
                 FIRStorage *storage = [FIRStorage storage];
