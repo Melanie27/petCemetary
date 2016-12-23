@@ -11,6 +11,7 @@
 #import "PetPhotosTableViewController.h"
 #import "PetListTableViewController.h"
 #import "Pet.h"
+#import "Owner.h"
 #import <Photos/Photos.h>
 @import Firebase;
 @import FirebaseDatabase;

@@ -7,7 +7,7 @@
 //
 
 #import "Pet.h"
-
+#import "Owner.h"
 
 @implementation Pet
 - (instancetype)init
