@@ -11,7 +11,6 @@
 #import "PetPhotosTableViewController.h"
 #import "PetListTableViewController.h"
 #import "Pet.h"
-#import "Owner.h"
 #import <Photos/Photos.h>
 @import Firebase;
 @import FirebaseDatabase;
@@ -242,7 +241,8 @@
                      
                  }];
              }
-              [self.petItems addObject:pet];
+            
+             [self.petItems addObject:pet];
              
              //Print Feed Items in reverse order
              //self.petItems = [[[self.petItems reverseObjectEnumerator] allObjects] mutableCopy];

@@ -86,17 +86,15 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-   
-    Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
-    
-    UIImage *image = pet.albumImages[indexPath.row];
+
+    UIImage *image = self.pet.albumImages[indexPath.row];
     
     
-    if( pet.albumImage == nil) {
+    if( self.pet.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"5.jpg"];
         image = [UIImage imageNamed:imageName];
     }
-     CGFloat height =  [PetPhotosTableViewCell heightForPetItem:pet width:CGRectGetWidth(self.view.frame)];
+     CGFloat height =  [PetPhotosTableViewCell heightForPetItem:self.pet width:CGRectGetWidth(self.view.frame)];
     //TODO - need to impose a max height on all Table cells
     //NSLog(@"height %f", height);
     if (height > 50) {
