@@ -109,7 +109,7 @@
 }
 
 - (void) insertObject:(Pet *)object inAlbumMediaAtIndex:(NSUInteger)index {
-    [_petItems insertObject:object atIndex:index];
+    [_albumMedia insertObject:object atIndex:index];
 }
 
 
@@ -412,9 +412,12 @@
 
 -(void)addImageWithDataDictionary:(NSDictionary *)parameters andPet:(Pet*)pet {
     
+    
+    //NSString *key = [self.ref child:@"pets" ] queryEqualToValue:<#(nullable id)#> childKey:<#(nullable NSString *)#>];
     NSString *photoKey = [[self.ref child:@"photos"] childByAutoId].key;
     self.pet.photoID = photoKey;
-    //NSLog(@"photo key? %@", photoKey);
+    NSLog(@"photo key? %@", photoKey);
+    //NSLog(@"pet key? %@", key);
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
     NSMutableDictionary *params = [parameters mutableCopy];
     NSString *captionString = [parameters valueForKey:@"photoCaption"];
@@ -454,6 +457,11 @@
                                         
         }];
     }];
+    
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
+    
+    [mutableArrayWithKVO addObject:pet];
+    [self.pet.albumMedia setObject:photoKey forKey:@"albumMedia"];
     
     //NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
     //[mutableArrayWithKVO addObject:pet];

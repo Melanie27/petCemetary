@@ -14,7 +14,7 @@
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <Photos/Photos.h>
-//@import FirebaseDatabase;
+
 
 
 
@@ -80,10 +80,11 @@ Pet *pet;
     UIAlertAction *ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
                                                handler:^(UIAlertAction *action){
                                                    
-                                                   Pet *pet = [[Pet alloc] init];
+                                                   Pet *pet = self.pet;
                                                    UITextField *alertTextField = alert.textFields.firstObject;
                                                     NSMutableDictionary *parameters = [@{} mutableCopy];
-                                                    [parameters setObject:pc.pet.petID forKey:@"petID"];
+                                                   //TODO CRASHING WHEN you add multiple photos, pet id not set second time
+                                                   [parameters setObject:pc.pet.petID forKey:@"petID"];
                                                    
                                                    [parameters setObject:alertTextField.text forKey:@"photoCaption"];
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
@@ -199,11 +200,15 @@ Pet *pet;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         PCDataSource *pc = [PCDataSource sharedInstance];
-        //Pet *pet = [pc.petsByOwner objectAtIndex:[indexPath row]];
+       
         NSObject *mediaToDelete = [pc.albumMedia objectAtIndex:[indexPath row]];
         NSLog(@"media to delete %@", mediaToDelete);
+        //TODO - getting the wrong key for deletion
+        
         for (id key in pc.pet.albumMedia) {
             pc.pet.photoID = key;
+            NSLog(@"key %@", key);
+            
         }
        
         
