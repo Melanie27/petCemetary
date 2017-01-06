@@ -68,6 +68,6 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 -(void)deleteAlbumPhotoWithDataDictionary:(NSDictionary *)photoInfo andPet:(NSObject*)petMedia;
 -(void)editPetWithDataDictionary:(NSMutableDictionary *)editPetParameters;
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto;
--(void)addImageWithDataDictionary:(NSDictionary*)parameters andPet:(Pet*)pet;;
+-(void)addImageWithDataDictionary:(NSDictionary*)parameters andPet:(NSObject*)petMedia;
 
 @end

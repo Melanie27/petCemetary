@@ -65,6 +65,8 @@ Pet *pet;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
+        NSLog(@"sender %@", sender);
+        NSLog(@"pet id check from camera%@", pc.pet.petID);
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
@@ -84,14 +86,15 @@ Pet *pet;
                                                    UITextField *alertTextField = alert.textFields.firstObject;
                                                     NSMutableDictionary *parameters = [@{} mutableCopy];
                                                    //TODO CRASHING WHEN you add multiple photos, pet id not set second time
+                                                   NSLog(@"pet id check %@", pc.pet.petID);
                                                    [parameters setObject:pc.pet.petID forKey:@"petID"];
                                                    
                                                    [parameters setObject:alertTextField.text forKey:@"photoCaption"];
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
                                                    
                                                    [pc addImageWithDataDictionary:parameters andPet:pet];
-                                             
-                                                    }];
+                                                   
+                                                }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
                                                    handler: nil];
@@ -107,6 +110,8 @@ Pet *pet;
 
     [picker dismissViewControllerAnimated:YES completion:^{
         [self presentViewController:alert animated:YES completion:nil];
+        //need to reload pet data
+        [picker pushViewController:pc.editPhotosVC animated:YES];
        
     }];
 
@@ -181,7 +186,7 @@ Pet *pet;
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
         NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
         NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];
-        NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
+        
             if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
                 NSLog(@"item deleted");
@@ -190,6 +195,7 @@ Pet *pet;
         
             else if (kindOfChange == NSKeyValueChangeInsertion) {
                 NSLog(@"item inserted");
+                NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
                 [self.tableView reloadData];
             }
         }

@@ -405,12 +405,11 @@
     
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"petsByOwner"];
     [mutableArrayWithKVO addObject:pet];
-    
     [_petsByOwner addObject:pet];
 }
 
 
--(void)addImageWithDataDictionary:(NSDictionary *)parameters andPet:(Pet*)pet {
+-(void)addImageWithDataDictionary:(NSDictionary *)parameters andPet:(NSObject*)petMedia {
     
     
     //NSString *key = [self.ref child:@"pets" ] queryEqualToValue:<#(nullable id)#> childKey:<#(nullable NSString *)#>];
@@ -460,13 +459,8 @@
     
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
     
-    [mutableArrayWithKVO addObject:pet];
-    [self.pet.albumMedia setObject:photoKey forKey:@"albumMedia"];
-    
-    //NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
-    //[mutableArrayWithKVO addObject:pet];
-    
-    //[_albumMedia addObject:pet];
+    [mutableArrayWithKVO addObject:petMedia];
+    [_albumMedia addObject:petMedia];
 
 }
 
