@@ -180,57 +180,6 @@
                 
             }
              
-            NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
-            NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
-            if( [petString isEqualToString:currentUserString]) {
-                //Pet *pet2 = [[Pet alloc] init];
-                //pet2.petID =  keyPath;
-                //NSLog(@"setting petID %@",keyPath);
-                //pet2.petName = animalName;
-                //pet2.petType = animalType;
-                //pet2.petDOB = animalDob;
-                //pet2.petDOD = animalDod;
-                //pet2.petBreed = animalBreed;
-               // pet2.petPersonality = animalPersonality;
-                //pet2.ownerUID = ownerUID;
-                //pet2.ownerName = ownerName;
-                //pet2.feedImageString = feedImageString;
-                //pet2.albumMedia = albumMedia;
-
-                [self.petsByOwner addObject:pet];
-                
-                //pet2.albumCaptionStrings = @[];
-                //pet2.albumImageStrings = @[];
-                //for (id key in pet.albumMedia) {
-                    //id value = [pet.albumMedia objectForKey:key];
-                    //NSLog(@"value %@", value);
-                    //self.albumMediaValues = [[NSDictionary alloc] initWithDictionary:value];
-                    //pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
-                    //pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
-                    //pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
-                    //pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
-                    
-                   //[self.albumMedia addObject:pet.albumMedia];
-                   
-                    
-                //}
-
-                for (NSString *string in pet.albumImageStrings) {
-                    pet.albumImageString = string;
-                    if (!(pet.albumImageString == nil)) {
-                        FIRStorage *storage = [FIRStorage storage];
-                        FIRStorageReference *httpsReference3 = [storage referenceForURL:pet.albumImageString];
-                        [httpsReference3 downloadURLWithCompletion:^(NSURL* URL, NSError* error){
-                            if (error != nil) {
-                                NSLog(@"download url error");
-                            } else {
-                                [self.pltVC.tableView reloadData];
-                            }
-                        }];
-                     }
-                 }
-             }
-             
              for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
                  FIRStorage *storage = [FIRStorage storage];
@@ -242,11 +191,21 @@
                      
                  }];
              }
-            
+
+             
+            NSString *petString = [NSString stringWithFormat:@"%@", pet.ownerUID];
+            NSString *currentUserString = [NSString stringWithFormat:@"%@", currentUser.uid];
+            if( [petString isEqualToString:currentUserString]) {
+               
+
+                [self.petsByOwner addObject:pet];
+
+             }
+             
+             
              [self.petItems addObject:pet];
              
-             //Print Feed Items in reverse order
-             //self.petItems = [[[self.petItems reverseObjectEnumerator] allObjects] mutableCopy];
+            
              if (pet.feedImageString == nil) {
                  NSLog(@"no feed image string");
              }
@@ -460,10 +419,10 @@
         }];
     }];
     
-    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
+    //NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
     
-    [mutableArrayWithKVO addObject:petMedia];
-    [_albumMedia addObject:petMedia];
+    //[mutableArrayWithKVO addObject:petMedia];
+    //[_albumMedia addObject:petMedia];
 
 }
 
