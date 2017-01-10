@@ -176,9 +176,10 @@
                  pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
                  pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
                 
-                 [self.albumMedia addObject:pet.albumMedia];
+                
                 
             }
+            [self.albumMedia addObject:pet.albumMedia];
              
              for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
