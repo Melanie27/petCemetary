@@ -66,7 +66,7 @@ Pet *pet;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
         NSLog(@"sender %@", sender);
-        NSLog(@"pet id check from camera%@", pc.pet.petID);
+        //NSLog(@"pet id check from camera%@", pc.pet.petID);
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
@@ -82,7 +82,7 @@ Pet *pet;
     UIAlertAction *ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
                                                handler:^(UIAlertAction *action){
                                                    
-                                                   Pet *pet = self.pet;
+                                                   //Pet *pet = self.pet;
                                                    UITextField *alertTextField = alert.textFields.firstObject;
                                                     NSMutableDictionary *parameters = [@{} mutableCopy];
                                                    //TODO CRASHING WHEN you add multiple photos, pet id not set second time
@@ -110,8 +110,7 @@ Pet *pet;
 
     [picker dismissViewControllerAnimated:YES completion:^{
         [self presentViewController:alert animated:YES completion:nil];
-        //need to reload pet data
-        [picker pushViewController:pc.editPhotosVC animated:YES];
+        
        
     }];
 
