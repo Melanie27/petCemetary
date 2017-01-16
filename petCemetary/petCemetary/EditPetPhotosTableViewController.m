@@ -93,7 +93,7 @@ Pet *pet;
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
                                                    
                                                    [pc addImageWithDataDictionary:parameters andPet:pet];
-                                                   
+                                                   [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                                                 }];
     
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
@@ -210,11 +210,16 @@ Pet *pet;
         NSLog(@"media to delete %@", mediaToDelete);
         //TODO - getting the wrong key for deletion
         
+        /*
         for (id key in pc.pet.albumMedia) {
             pc.pet.photoID = key;
+            pc.pet.photoID = pc.albumMedia[indexPath.row].photoID;
+
             NSLog(@"key %@", key);
             
         }
+        */
+        //pc.pet.photoID = mediaToDelete
        
         
         NSMutableDictionary *photoInfo = [@{} mutableCopy];

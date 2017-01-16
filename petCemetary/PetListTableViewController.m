@@ -63,7 +63,7 @@
         cell.textLabel.text = cell.pet.petName;
         cell.detailTextLabel.text = cell.pet.petType;
    
-        self.petID = cell.detailTextLabel.text;
+  //      self.petID = cell.detailTextLabel.text;
     
         NSString *petFeedUrlString = cell.pet.feedImageString;
         UIImage *image = cell.pet.feedImage;
