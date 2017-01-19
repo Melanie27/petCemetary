@@ -112,7 +112,12 @@
         
        
         NSString *petImageString = self.downloadURLString;
-        //NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
+        if ([self.downloadURLString length] == 0) {
+            NSLog(@"no image was uploaded" );
+            petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
+            [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
+        }
+        
         [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
         [pc addNewPetWithDataDictionary:addPetParameters andPet:pet];
         UIAlertController *alertSaved = [UIAlertController
@@ -154,11 +159,11 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-   //TODO NEED TO PASS THIS INFO INTO SEND PET INFO FUNCTION
+   
     
-    NSString *imageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
-    NSLog(@"chosen Image url %@", imageURL);
-    //self.imageURL = imageURL;
+    
+    
+   
     
     NSMutableDictionary *parameters = [@{} mutableCopy];
     [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
@@ -166,7 +171,7 @@
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.uploadProfilePhotoButton setBackgroundImage:chosenImage forState:UIControlStateNormal];
-    NSLog(@"chosen Image %@", chosenImage);
+    
     //PCDataSource *pc = [PCDataSource sharedInstance];
     //TODO THIS ISNT SAving
     //[pc addNewFeedPhotoWithDictionary:parameters];

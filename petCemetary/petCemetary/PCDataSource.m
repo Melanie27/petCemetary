@@ -232,14 +232,10 @@
 }
 
 
--(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto {
-    //TODO should be able to post to current pet so doesnt interfere with adding info
+/*-(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto {
+    NSMutableDictionary *parameters = [addPetPhoto mutableCopy];
     
-    //NSString *key = [[self.ref child:@"pets"] childByAutoId].key;
-    
-    NSMutableDictionary *params = [addPetPhoto mutableCopy];
-    NSString *petIDString = [addPetPhoto valueForKey:@"petID"];
-    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[params[@"petImageURL"]] options:nil];
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[parameters[@"petImageURL"]] options:nil];
     
     [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
         
@@ -249,11 +245,10 @@
                                        NSString *localURLString = [imageURL path];
                                        NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
                                        
-                                       
                                        FIRStorage *storage = [FIRStorage storage];
-                                       FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petFeed/"];
+                                       FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
                                        FIRStorageReference *profileRef = [storageRef child:theFileName];
-                                       NSLog(@"profileRef %@", profileRef);
+                                       
                                        
                                        [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
                                            if (error != nil) {
@@ -262,16 +257,15 @@
                                            } else {
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
-
-                                               NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%@/feedPhoto/", petIDString]:downloadURLString};
-                                               
-                                               [self.ref updateChildValues:childUpdates];
+                                               //TODO - pass the variable back to AddpetProfileVC
+                                               //self.downloadURLString = downloadURLString;
                                            }
                                        }];
+                                       
                                    }];
     }];
     
-   }
+   }*/
 
 -(void)editPetWithDataDictionary:(NSDictionary *)editPetParameters {
    //NSString *petPhotoString = [editPetParameters valueForKey:@"petPhoto"];
