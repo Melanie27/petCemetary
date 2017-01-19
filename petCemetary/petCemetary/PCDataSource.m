@@ -179,8 +179,11 @@
                 
                 
             }
-            [self.albumMedia addObject:pet.albumMedia];
-             
+            
+            
+             //TODO Introspection here incase there are no album photos
+             //[self.albumMedia addObject:pet.albumMedia];
+                          
              for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
                  FIRStorage *storage = [FIRStorage storage];
@@ -231,9 +234,11 @@
 
 -(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto {
     //TODO should be able to post to current pet so doesnt interfere with adding info
-    NSString *key = [[self.ref child:@"pets"] childByAutoId].key;
-    NSMutableDictionary *params = [addPetPhoto mutableCopy];
     
+    //NSString *key = [[self.ref child:@"pets"] childByAutoId].key;
+    
+    NSMutableDictionary *params = [addPetPhoto mutableCopy];
+    NSString *petIDString = [addPetPhoto valueForKey:@"petID"];
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[params[@"petImageURL"]] options:nil];
     
     [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
@@ -258,7 +263,7 @@
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
 
-                                               NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%@/feedPhoto/", key]:downloadURLString};
+                                               NSDictionary *childUpdates = @{[NSString stringWithFormat:@"/pets/%@/feedPhoto/", petIDString]:downloadURLString};
                                                
                                                [self.ref updateChildValues:childUpdates];
                                            }
@@ -378,7 +383,7 @@
     //NSString *key = [self.ref child:@"pets" ] queryEqualToValue:<#(nullable id)#> childKey:<#(nullable NSString *)#>];
     NSString *photoKey = [[self.ref child:@"photos"] childByAutoId].key;
     self.pet.photoID = photoKey;
-    NSLog(@"photo key? %@", photoKey);
+    //NSLog(@"photo key? %@", photoKey);
     //NSLog(@"pet key? %@", key);
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
     NSMutableDictionary *params = [parameters mutableCopy];

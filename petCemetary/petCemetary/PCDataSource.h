@@ -19,6 +19,7 @@
 @class PetListTableViewController;
 @class EditPetProfileViewController;
 @class EditPetPhotosTableViewController;
+@class AddPetProfilePhotoViewController;
 @class Pet;
 @class Owner;
 
@@ -47,7 +48,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 @property (nonatomic, weak) PetListTableViewController *pltVC;
 @property (nonatomic, weak) EditPetProfileViewController *editProfileVC;
 @property (nonatomic, weak) EditPetPhotosTableViewController *editPhotosVC;
-
+@property (nonatomic, weak) AddPetProfilePhotoViewController *appVC;
 //Properties for saving and editing
 @property (nonatomic, strong) NSString *addPetName;
 @property (nonatomic, strong) NSString *addPetType;

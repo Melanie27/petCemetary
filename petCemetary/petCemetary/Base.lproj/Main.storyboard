@@ -12,49 +12,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Add Pet Profile Photo-->
-        <scene sceneID="4Mz-Kj-F6E">
-            <objects>
-                <viewController title="Add Pet Profile Photo" id="sqS-3r-kuH" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Gaw-3l-IqH"/>
-                        <viewControllerLayoutGuide type="bottom" id="D8V-RQ-m7H"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="62W-WB-i18">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugs-Pg-tOm">
-                                <rect key="frame" x="123" y="269" width="128" height="128"/>
-                                <color key="backgroundColor" white="0.84999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="F33-d2-Lfw"/>
-                                    <constraint firstAttribute="height" constant="128" id="a6M-WY-uNk"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="profilePlaceholder">
-                                    <attributedString key="attributedTitle"/>
-                                </state>
-                                <connections>
-                                    <action selector="uploadProfilePhoto:" destination="udi-lI-Pqx" eventType="touchUpInside" id="Rb8-6i-dUb"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="LB0-Cn-gix">
-                        <barButtonItem key="rightBarButtonItem" title="Add Profile" id="kEe-QA-46F">
-                            <connections>
-                                <segue destination="udi-lI-Pqx" kind="show" identifier="addPetProfile" id="Fbr-wa-QBG"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2hy-k9-zDN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3863" y="-1352"/>
-        </scene>
         <!--AddPetProfileViewController-->
         <scene sceneID="EZW-vY-yET">
             <objects>
@@ -68,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lQV-z5-a4J">
-                                <rect key="frame" x="122.5" y="105" width="128" height="128"/>
+                                <rect key="frame" x="123" y="105" width="128" height="128"/>
                                 <color key="backgroundColor" white="0.84999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="UQW-tn-wNs"/>
@@ -78,7 +35,7 @@
                                     <attributedString key="attributedTitle"/>
                                 </state>
                                 <connections>
-                                    <action selector="uploadProfilePhoto:" destination="udi-lI-Pqx" eventType="touchUpInside" id="Gtd-mX-tP9"/>
+                                    <action selector="uploadProfilePhoto:" destination="udi-lI-Pqx" eventType="touchUpInside" id="9uA-3J-Afi"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pet Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tG2-gI-cCp">
@@ -164,18 +121,11 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="bNQ-3W-Awj">
-                        <rightBarButtonItems>
-                            <barButtonItem title="Album" id="tid-sp-975">
-                                <connections>
-                                    <segue destination="6Vi-Cz-wUg" kind="show" identifier="editPhotosSegue" id="tK1-tJ-NQj"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Save" id="O9U-LO-ZYg">
-                                <connections>
-                                    <action selector="savePetProfile:" destination="udi-lI-Pqx" id="Zjj-Mb-f2K"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="O9U-LO-ZYg">
+                            <connections>
+                                <action selector="savePetProfile:" destination="udi-lI-Pqx" id="Zjj-Mb-f2K"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -210,13 +160,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconPersonality" translatesAutoresizingMaskIntoConstraints="NO" id="Jh2-kc-hAe">
-                                            <rect key="frame" x="8" y="4" width="39" height="35.5"/>
+                                            <rect key="frame" x="8" y="4" width="39" height="36"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="39" id="rjN-Ru-uqn"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Each Cell will segue to pet's album" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptH-zQ-9ms">
-                                            <rect key="frame" x="61" y="11.5" width="264" height="20.5"/>
+                                            <rect key="frame" x="61" y="11" width="264" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -244,7 +194,7 @@
                     <navigationItem key="navigationItem" title="Your Pets" id="8bk-7E-LRt">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZKG-pc-Flg">
                             <connections>
-                                <segue destination="sqS-3r-kuH" kind="show" identifier="addPetProfilePhoto" id="OV8-Gd-8kq"/>
+                                <segue destination="udi-lI-Pqx" kind="show" id="S15-Lt-FQw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -453,7 +403,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Awj-Zb-gyG">
-                                            <rect key="frame" x="164" y="222.5" width="46" height="30"/>
+                                            <rect key="frame" x="164" y="222" width="46" height="30"/>
                                             <state key="normal" title="Button"/>
                                         </button>
                                     </subviews>
@@ -515,7 +465,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpv-wY-TTB">
-                                <rect key="frame" x="68.5" y="128" width="92" height="21"/>
+                                <rect key="frame" x="69" y="128" width="92" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="11-01-2016">
                                         <attributes>
@@ -526,7 +476,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2Q-Ia-p5g">
-                                <rect key="frame" x="166.5" y="128" width="42" height="21"/>
+                                <rect key="frame" x="167" y="128" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="nai-Tw-MT0"/>
                                     <constraint firstAttribute="height" constant="21" id="zox-1b-0C8"/>
@@ -542,7 +492,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pyO-m2-qro">
-                                <rect key="frame" x="215.5" y="128" width="89.5" height="21"/>
+                                <rect key="frame" x="216" y="128" width="89" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="11-02-2030">
                                         <attributes>
@@ -554,7 +504,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8X-OK-fHK">
-                                <rect key="frame" x="71.5" y="157.5" width="90" height="20"/>
+                                <rect key="frame" x="72" y="158" width="90" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Animal Type">
                                         <attributes>
@@ -565,7 +515,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfE-An-nrD">
-                                <rect key="frame" x="166.5" y="157" width="42" height="20.5"/>
+                                <rect key="frame" x="167" y="157" width="42" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="-">
                                         <attributes>
@@ -577,7 +527,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6GT-B0-bA6">
-                                <rect key="frame" x="166.5" y="185.5" width="42" height="20.5"/>
+                                <rect key="frame" x="167" y="186" width="42" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="-">
                                         <attributes>
@@ -589,7 +539,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmI-p1-dR7">
-                                <rect key="frame" x="64.5" y="184.5" width="100" height="20"/>
+                                <rect key="frame" x="65" y="185" width="100" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Animal Breed">
                                         <attributes>
@@ -600,7 +550,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TtA-ti-Pna">
-                                <rect key="frame" x="206.5" y="184.5" width="43.5" height="20"/>
+                                <rect key="frame" x="207" y="185" width="44" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Tabby">
                                         <attributes>
@@ -611,13 +561,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQs-Of-Jkl">
-                                <rect key="frame" x="166.5" y="214" width="42" height="20.5"/>
+                                <rect key="frame" x="167" y="215" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7b-WP-zEL">
-                                <rect key="frame" x="68" y="212.5" width="95.5" height="20"/>
+                                <rect key="frame" x="68" y="213" width="96" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Owner Name">
                                         <attributes>
@@ -628,7 +578,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGn-xk-KzX">
-                                <rect key="frame" x="208.5" y="214.5" width="57" height="20"/>
+                                <rect key="frame" x="209" y="216" width="57" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Melanie">
                                         <attributes>
@@ -639,7 +589,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUF-Yh-4bg">
-                                <rect key="frame" x="76" y="243" width="79.5" height="20"/>
+                                <rect key="frame" x="76" y="245" width="80" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Personality">
                                         <attributes>
@@ -650,7 +600,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOH-Dx-RGv">
-                                <rect key="frame" x="166.5" y="242.5" width="42" height="20.5"/>
+                                <rect key="frame" x="167" y="244" width="42" height="21"/>
                                 <attributedString key="attributedText">
                                     <fragment content="-">
                                         <attributes>
@@ -662,7 +612,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="34w-Fd-pyW">
-                                <rect key="frame" x="16" y="283" width="343" height="76"/>
+                                <rect key="frame" x="16" y="285" width="343" height="76"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="76" id="9uR-pM-Ex7"/>
@@ -678,7 +628,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfZ-Cn-xwD">
-                                <rect key="frame" x="214.5" y="159" width="25" height="20"/>
+                                <rect key="frame" x="215" y="159" width="25" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Cat">
                                         <attributes>
@@ -822,7 +772,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xcZ-VX-C1n">
-                                <rect key="frame" x="16" y="74.5" width="43" height="27.5"/>
+                                <rect key="frame" x="16" y="75" width="43" height="28"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Logout">
@@ -859,7 +809,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A9X-op-hCG" userLabel="Signin Account">
-                                <rect key="frame" x="137.5" y="239" width="100" height="50"/>
+                                <rect key="frame" x="138" y="239" width="100" height="50"/>
                                 <color key="backgroundColor" red="0.44313725490196076" green="0.70980392156862748" blue="0.090196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="k9X-Lx-dmt"/>
@@ -946,7 +896,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3l8-FP-Xfd" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Hf-qg-sSd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="3Hf-qg-sSd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -965,7 +915,4 @@
         <image name="iconPersonality" width="128" height="128"/>
         <image name="profilePlaceholder" width="128" height="128"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="tK1-tJ-NQj"/>
-    </inferredMetricsTieBreakers>
 </document>

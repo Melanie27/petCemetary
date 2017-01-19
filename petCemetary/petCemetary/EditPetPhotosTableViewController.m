@@ -65,7 +65,7 @@ Pet *pet;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
-        NSLog(@"sender %@", sender);
+        //NSLog(@"sender %@", sender);
         //NSLog(@"pet id check from camera%@", pc.pet.petID);
         [self presentViewController:picker animated:YES completion:NULL];
     }

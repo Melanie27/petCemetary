@@ -11,9 +11,10 @@
 #import <Photos/Photos.h>
 #import "Pet.h"
 
-@interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate> {
-  
-}
+@interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
+
+@property (nonatomic, strong) NSString *downloadURLString;
+
 @end
 
 @implementation AddPetProfileViewController
@@ -96,6 +97,9 @@
     } else {
         //[addPetParameters setObject:pc.pet.petID forKey:@"petID"];
         Pet *pet = [[Pet alloc] init];
+        NSLog(@"Image url string %@", self.downloadURLString);
+        //upload self.imageURL to db
+        
         [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
         [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
         [addPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
@@ -104,7 +108,11 @@
         
         [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
         [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
-        NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
+        
+        
+       
+        NSString *petImageString = self.downloadURLString;
+        //NSString *petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
         [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
         [pc addNewPetWithDataDictionary:addPetParameters andPet:pet];
         UIAlertController *alertSaved = [UIAlertController
@@ -148,16 +156,49 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
    //TODO NEED TO PASS THIS INFO INTO SEND PET INFO FUNCTION
     
+    NSString *imageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+    NSLog(@"chosen Image url %@", imageURL);
+    //self.imageURL = imageURL;
+    
     NSMutableDictionary *parameters = [@{} mutableCopy];
     [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.uploadProfilePhotoButton setBackgroundImage:chosenImage forState:UIControlStateNormal];
-    
+    NSLog(@"chosen Image %@", chosenImage);
     //PCDataSource *pc = [PCDataSource sharedInstance];
     //TODO THIS ISNT SAving
     //[pc addNewFeedPhotoWithDictionary:parameters];
+    
+    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[parameters[@"petImageURL"]] options:nil];
+    
+    [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
+        
+        [asset requestContentEditingInputWithOptions:kNilOptions
+                                   completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
+                                       NSURL *imageURL = contentEditingInput.fullSizeImageURL;
+                                       NSString *localURLString = [imageURL path];
+                                       NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+                                       
+                                       FIRStorage *storage = [FIRStorage storage];
+                                       FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
+                                       FIRStorageReference *profileRef = [storageRef child:theFileName];
+                                       
+                                       
+                                       [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                                           if (error != nil) {
+                                               // Uh-oh, an error occurred!
+                                               NSLog(@"error %@", error);
+                                           } else {
+                                               NSURL *downloadURL = metadata.downloadURL;
+                                               NSString *downloadURLString = [ downloadURL absoluteString];
+                                               self.downloadURLString = downloadURLString;
+                                           }
+                                       }];
+                                       
+                                   }];
+    }];
    
 
 }
