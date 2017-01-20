@@ -206,25 +206,25 @@ Pet *pet;
         
         PCDataSource *pc = [PCDataSource sharedInstance];
        
-        NSObject *mediaToDelete = [pc.albumMedia objectAtIndex:[indexPath row]];
-        NSLog(@"media to delete %@", mediaToDelete);
-        //TODO - getting the wrong key for deletion
+        //NSObject *mediaToDelete = [pc.albumMedia objectAtIndex:[indexPath row]];
+        //NSLog(@"media to delete %@", mediaToDelete);
         
-        /*
-        for (id key in pc.pet.albumMedia) {
-            pc.pet.photoID = key;
-            pc.pet.photoID = pc.albumMedia[indexPath.row].photoID;
+        
+       NSArray *keys = [pc.pet.albumMedia allKeys];
+        NSObject *mediaToDelete = [keys objectAtIndex:[indexPath row]];
+        NSLog(@"keys %@", keys);
+        NSLog(@"mediatodelete %@", mediaToDelete);
+        
+        
+        
+        
 
-            NSLog(@"key %@", key);
-            
-        }
-        */
-        //pc.pet.photoID = mediaToDelete
+        
        
         
         NSMutableDictionary *photoInfo = [@{} mutableCopy];
         [photoInfo setObject:pc.pet.petID forKey:@"petID"];
-        [photoInfo setObject:pc.pet.photoID forKey:@"photoID"];
+        //[photoInfo setObject:pc.pet.photoID forKey:@"photoID"];
         [pc deleteAlbumPhotoWithDataDictionary:photoInfo andPet:mediaToDelete];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

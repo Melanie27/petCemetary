@@ -96,7 +96,7 @@
     [_petsByOwner replaceObjectAtIndex:index withObject:object];
 }
 
-- (NSUInteger) countOfAlbumMedia {
+/*- (NSUInteger) countOfAlbumMedia {
     return self.albumMedia.count;
 }
 
@@ -119,7 +119,7 @@
 
 - (void) replaceObjectInAlbumMediaAtIndex:(NSUInteger)index withObject:(id)object {
     [_albumMedia replaceObjectAtIndex:index withObject:object];
-}
+}*/
 
 
 -(NSString *)retrievePets {
@@ -136,7 +136,7 @@
          NSDictionary *allPets = snapshot.value[@"pets"];
          self.petItems =  [NSMutableArray new];
          self.petsByOwner = [NSMutableArray new];
-         self.albumMedia = [NSMutableArray new];
+         self.albumMedia = [NSMutableDictionary new];
          self.albumMediaKeys = [NSMutableArray new];
          for (NSString *keyPath in allPets) {
             Pet *pet = [[Pet alloc] init];

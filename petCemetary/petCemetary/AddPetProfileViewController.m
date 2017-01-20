@@ -109,8 +109,6 @@
         [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
         [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
         
-        
-       
         NSString *petImageString = self.downloadURLString;
         if ([self.downloadURLString length] == 0) {
             NSLog(@"no image was uploaded" );
