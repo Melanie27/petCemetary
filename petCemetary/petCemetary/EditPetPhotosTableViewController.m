@@ -219,12 +219,13 @@ Pet *pet;
         
         
 
-        
+        //pc.pet.photoIDString = mediaToDelete;
        
+        pc.pet.photoIDString =[NSString stringWithFormat:@"%@", mediaToDelete];
         
         NSMutableDictionary *photoInfo = [@{} mutableCopy];
         [photoInfo setObject:pc.pet.petID forKey:@"petID"];
-        //[photoInfo setObject:pc.pet.photoID forKey:@"photoID"];
+        [photoInfo setObject:pc.pet.photoIDString forKey:@"photoID"];
         [pc deleteAlbumPhotoWithDataDictionary:photoInfo andPet:mediaToDelete];
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -235,7 +236,7 @@ Pet *pet;
         
        
     }
-     [tableView endUpdates];
+     //[tableView endUpdates];
      [tableView reloadData];
 }
 

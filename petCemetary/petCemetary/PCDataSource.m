@@ -96,30 +96,30 @@
     [_petsByOwner replaceObjectAtIndex:index withObject:object];
 }
 
-/*- (NSUInteger) countOfAlbumMedia {
+- (NSUInteger) countOfAlbumMedia {
     return self.albumMedia.count;
 }
 
 - (id) objectInAlbumMediaAtIndex:(NSUInteger)index {
-    return [self.albumMedia objectAtIndex:index];
+    return [self.albumMediaKeys objectAtIndex:index];
 }
 
 - (NSArray *) albumMediaAtIndexes:(NSIndexSet *)indexes {
-    return [self.albumMedia objectsAtIndexes:indexes];
+    return [self.albumMediaKeys objectsAtIndexes:indexes];
 }
 
 - (void) insertObject:(Pet *)object inAlbumMediaAtIndex:(NSUInteger)index {
-    [_albumMedia insertObject:object atIndex:index];
+    [_albumMediaKeys insertObject:object atIndex:index];
 }
 
 
 - (void) removeObjectFromAlbumMediaAtIndex:(NSUInteger)index {
-    [_albumMedia removeObjectAtIndex:index];
+    [_albumMediaKeys removeObjectAtIndex:index];
 }
 
 - (void) replaceObjectInAlbumMediaAtIndex:(NSUInteger)index withObject:(id)object {
-    [_albumMedia replaceObjectAtIndex:index withObject:object];
-}*/
+    [_albumMediaKeys replaceObjectAtIndex:index withObject:object];
+}
 
 
 -(NSString *)retrievePets {
@@ -308,11 +308,11 @@
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
     
     //TODO not sure why this isn't working
-    NSLog(@"pet we are working with %@", petMedia);
-     NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
+    NSLog(@"pet we are working with %@, photo we are working with %@", petMedia, photoIDString);
+     //NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
     
-    [mutableArrayWithKVO removeObject:petMedia];
-    [self.pet.albumMedia removeObjectForKey:photoIDString];
+    [self.albumMediaKeys removeObject:photoIDString];
+    //[self.pet.albumMedia removeObjectForKey:photoIDString];
     
 }
 
