@@ -169,7 +169,7 @@
             pet.albumImageStrings = @[];
             for (id key in pet.albumMedia) {
                  id value = [pet.albumMedia objectForKey:key];
-                 //NSLog(@"value from retrieve pets %@", value);
+                
                  self.albumMediaValues = [[NSDictionary alloc] initWithDictionary:value];
                  pet.albumImageString = [ self.albumMediaValues valueForKey:@"photoUrl"];
                  pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
@@ -305,14 +305,14 @@
     
     
     [self.ref updateChildValues:childUpdates];
-    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
+    NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMediaKeys"];
     
     //TODO not sure why this isn't working
     NSLog(@"pet we are working with %@, photo we are working with %@", petMedia, photoIDString);
-     //NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
-    
+     NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
+    [mutableArrayWithKVO removeObject:photoIDString];
+    //[self.albumMediaKeys removeObject:photoIDString];
     [self.albumMediaKeys removeObject:photoIDString];
-    //[self.pet.albumMedia removeObjectForKey:photoIDString];
     
 }
 

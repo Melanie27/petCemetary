@@ -126,9 +126,7 @@
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"petsByOwner"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
-        NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
-        NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];
-        NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
+        
         if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
 

@@ -65,8 +65,7 @@ Pet *pet;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
-        //NSLog(@"sender %@", sender);
-        //NSLog(@"pet id check from camera%@", pc.pet.petID);
+        
         [self presentViewController:picker animated:YES completion:NULL];
     }
 }
@@ -82,11 +81,10 @@ Pet *pet;
     UIAlertAction *ok = [UIAlertAction actionWithTitle: @"OK" style: UIAlertActionStyleDefault
                                                handler:^(UIAlertAction *action){
                                                    
-                                                   //Pet *pet = self.pet;
+                                                  
                                                    UITextField *alertTextField = alert.textFields.firstObject;
                                                     NSMutableDictionary *parameters = [@{} mutableCopy];
-                                                   //TODO CRASHING WHEN you add multiple photos, pet id not set second time
-                                                   NSLog(@"pet id check %@", pc.pet.petID);
+                                                  
                                                    [parameters setObject:pc.pet.petID forKey:@"petID"];
                                                    
                                                    [parameters setObject:alertTextField.text forKey:@"photoCaption"];
@@ -153,8 +151,6 @@ Pet *pet;
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //Pet *pet = [PCDataSource sharedInstance].petItems[indexPath.row];
-    
     UIImage *image = pet.albumImages[indexPath.row];
     
     if( self.pet.albumImage == nil) {
@@ -188,55 +184,37 @@ Pet *pet;
         
             if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
-                NSLog(@"item deleted");
+                NSLog(@"photo album item deleted");
+                NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
                 [self.tableView reloadData];
             }
         
             else if (kindOfChange == NSKeyValueChangeInsertion) {
-                NSLog(@"item inserted");
-                NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
+                
                 [self.tableView reloadData];
             }
         }
     }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView beginUpdates];
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         PCDataSource *pc = [PCDataSource sharedInstance];
-       
-        //NSObject *mediaToDelete = [pc.albumMedia objectAtIndex:[indexPath row]];
-        //NSLog(@"media to delete %@", mediaToDelete);
-        
-        
-       NSArray *keys = [pc.pet.albumMedia allKeys];
+              NSArray *keys = [pc.pet.albumMedia allKeys];
         NSObject *mediaToDelete = [keys objectAtIndex:[indexPath row]];
-        NSLog(@"keys %@", keys);
-        NSLog(@"mediatodelete %@", mediaToDelete);
-        
-        
-        
-        
-
-        //pc.pet.photoIDString = mediaToDelete;
-       
-        pc.pet.photoIDString =[NSString stringWithFormat:@"%@", mediaToDelete];
+                pc.pet.photoIDString =[NSString stringWithFormat:@"%@", mediaToDelete];
         
         NSMutableDictionary *photoInfo = [@{} mutableCopy];
         [photoInfo setObject:pc.pet.petID forKey:@"petID"];
         [photoInfo setObject:pc.pet.photoIDString forKey:@"photoID"];
         [pc deleteAlbumPhotoWithDataDictionary:photoInfo andPet:mediaToDelete];
         
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-       
-        
-    
-        
-        
-       
+         [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+  
     }
-     //[tableView endUpdates];
+    
      [tableView reloadData];
 }
 
