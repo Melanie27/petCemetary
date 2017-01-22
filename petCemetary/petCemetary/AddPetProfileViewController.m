@@ -102,7 +102,7 @@
         
         [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
         [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
-        [addPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
+       
         [addPetParameters setObject:self.dobTextField.text forKey:@"dob"];
         [addPetParameters setObject:self.dodTextField.text forKey:@"dod"];
         

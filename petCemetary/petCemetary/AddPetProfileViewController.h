@@ -15,7 +15,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *petNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *animalTypeTextField;
-@property (strong, nonatomic) IBOutlet UITextField *animalBreedTextField;
+
 
 @property (strong, nonatomic) IBOutlet UITextView *animalPersonalityTextView;
 @property (strong, nonatomic) IBOutlet UITextField *ownerNameTextField;

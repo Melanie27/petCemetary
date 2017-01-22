@@ -146,7 +146,6 @@
             NSString *animalType = [elements valueForKey:@"animalType"];
             NSString *animalDob = [elements valueForKey:@"dateOfBirth"];
             NSString *animalDod = [elements valueForKey:@"dateOfDeath"];
-            NSString *animalBreed = [elements valueForKey:@"animalBreed"];
             NSString *animalPersonality = [elements valueForKey:@"personality"];
             NSString *ownerUID = [elements valueForKey:@"UID"];
             NSString *ownerName = [elements valueForKey:@"ownerName"];
@@ -158,7 +157,6 @@
             pet.petType = animalType;
             pet.petDOB = animalDob;
             pet.petDOD = animalDod;
-            pet.petBreed = animalBreed;
             pet.petPersonality = animalPersonality;
             pet.ownerUID = ownerUID;
             pet.ownerName = ownerName;
@@ -272,7 +270,6 @@
     NSString *petIDString = [editPetParameters valueForKey:@"petID"];
     NSString *petNameString = [editPetParameters valueForKey:@"petName"];
     NSString *petTypeString = [editPetParameters valueForKey:@"petType"];
-    NSString *petBreedString = [editPetParameters valueForKey:@"petBreed"];
     NSString *petDobString = [editPetParameters valueForKey:@"dob"];
     NSString *petDodString = [editPetParameters valueForKey:@"dod"];
     NSString *petPersonalityString = [editPetParameters valueForKey:@"personality"];
@@ -281,7 +278,6 @@
     NSDictionary *petInfoEdits = @{
                                       [NSString stringWithFormat:@"/pets/%@/pet", petIDString]:petNameString,
                                       [NSString stringWithFormat:@"/pets/%@/animalType", petIDString]:petTypeString,
-                                      [NSString stringWithFormat:@"/pets/%@/breed", petIDString]:petBreedString,
                                       [NSString stringWithFormat:@"/pets/%@/dateOfBirth", petIDString]:petDobString,
                                       [NSString stringWithFormat:@"/pets/%@/dateOfDeath", petIDString]:petDodString,
                                       [NSString stringWithFormat:@"/pets/%@/personality", petIDString]:petPersonalityString,
@@ -343,7 +339,6 @@
     
     NSString *petNameString = [addPetParameters valueForKey:@"petName"];
     NSString *petTypeString = [addPetParameters valueForKey:@"petType"];
-    NSString *petBreedString = [addPetParameters valueForKey:@"petBreed"];
     NSString *petDobString = [addPetParameters valueForKey:@"dob"];
     NSString *petDodString = [addPetParameters valueForKey:@"dod"];
     NSString *petPersonalityString = [addPetParameters valueForKey:@"personality"];
@@ -353,7 +348,6 @@
     NSDictionary *petInfoCreation = @{
                                       [NSString stringWithFormat:@"/pets/%@/pet",key]:petNameString,
                                       [NSString stringWithFormat:@"/pets/%@/animalType",key]:petTypeString,
-                                      [NSString stringWithFormat:@"/pets/%@/breed",key]:petBreedString,
                                       [NSString stringWithFormat:@"/pets/%@/dateOfBirth",key]:petDobString,
                                       [NSString stringWithFormat:@"/pets/%@/dateOfDeath",key]:petDodString,
                                        [NSString stringWithFormat:@"/pets/%@/personality",key]:petPersonalityString,

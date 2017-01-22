@@ -25,7 +25,6 @@
 @property (nonatomic, assign) NSString *petDOD;
 @property (nonatomic, strong) NSString *petName;
 @property (nonatomic, strong) NSString *petType;
-@property (nonatomic, strong) NSString *petBreed;
 @property (nonatomic, strong) NSString *petPersonality;
 @property (nonatomic, strong) NSString *ownerName;
 @property (nonatomic, strong) NSString *ownerUID;

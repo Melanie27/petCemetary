@@ -20,7 +20,6 @@
 @property (strong, nonatomic) IBOutlet UITextView *personalityTextView;
 @property (strong, nonatomic) IBOutlet UILabel *animalNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *animalType;
-@property (strong, nonatomic) IBOutlet UILabel *animalBreed;
 @property (strong, nonatomic) IBOutlet UILabel *ownerNameLabel;
 
 

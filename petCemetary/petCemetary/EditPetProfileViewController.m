@@ -31,7 +31,6 @@
     self.dobTextField.text = _pet.petDOB;
     self.dodTextField.text = _pet.petDOD;
     self.animalTypeTextField.text = _pet.petType;
-    self.animalBreedTextField.text = _pet.petBreed;
     self.animalPersonalityTextView.text = _pet.petPersonality;
     self.ownerNameTextField.text = _pet.ownerName;
     
@@ -96,7 +95,6 @@
         [editPetParameters setObject:pc.pet.petID forKey:@"petID"];
         [editPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
         [editPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
-        [editPetParameters setObject:self.animalBreedTextField.text forKey:@"petBreed"];
         [editPetParameters setObject:self.dobTextField.text forKey:@"dob"];
         [editPetParameters setObject:self.dodTextField.text forKey:@"dod"];
         [editPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];

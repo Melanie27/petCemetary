@@ -52,7 +52,6 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 //Properties for saving and editing
 @property (nonatomic, strong) NSString *addPetName;
 @property (nonatomic, strong) NSString *addPetType;
-@property (nonatomic, strong) NSString *addPetBreed;
 @property (nonatomic, strong) NSString *addPetDOB;
 @property (nonatomic, strong) NSString *addPetDOD;
 @property (nonatomic, strong) NSString *addOwnerName;

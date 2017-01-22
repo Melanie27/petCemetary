@@ -25,7 +25,7 @@
     self.title = @"Pet Profile Page";
     PCDataSource *pc = [PCDataSource sharedInstance];
     pc.profileVC = self;
-    //[pc retrievePets];
+    
     
     // Do any additional setup after loading the view.
    
@@ -33,7 +33,6 @@
     self.dateOfBirthLabel.text = _pet.petDOB;
     self.dateOfDeathLabel.text = _pet.petDOD;
     self.animalType.text = _pet.petType;
-    self.animalBreed.text = _pet.petBreed;
     self.personalityTextView.text = _pet.petPersonality;
     self.ownerNameLabel.text = _pet.ownerName;
     self.photoAlbumImages = _pet.albumImageStrings;
