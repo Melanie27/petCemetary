@@ -11,7 +11,8 @@
 @interface AppDelegate ()
 
 @end
-
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <FBSDKShareKit/FBSDKShareKit.h>
 @import Firebase;
 @import FirebaseDatabase;
 @import FirebaseStorage;
@@ -22,6 +23,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+didFinishLaunchingWithOptions:launchOptions];
     [FIRApp configure];
     [FIRStorage storage];
     return YES;

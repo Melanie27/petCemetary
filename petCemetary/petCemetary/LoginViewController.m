@@ -10,6 +10,8 @@
 #import "UIViewController+Alerts.h"
 #import "AppDelegate.h"
 #import "PetsFeedTableViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @import Firebase;
 
@@ -76,6 +78,14 @@ static NSString *const kChangePasswordText = @"Change Password";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.passwordField.secureTextEntry = YES;
+    FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
+    // Optional: Place the button in the center of your view.
+    loginButton.center = self.view.center;
+    [self.view addSubview:loginButton];
+    if ([FBSDKAccessToken currentAccessToken]) {
+        // User is logged in, do work such as go to next view controller.
+        
+    }
     
 }
 
@@ -84,6 +94,50 @@ static NSString *const kChangePasswordText = @"Change Password";
     
 }
 
+- (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
+              error:(NSError *)error {
+                if (error == nil) {
+                    FIRAuthCredential *credential = [FIRFacebookAuthProvider
+                                                     credentialWithAccessToken:[FBSDKAccessToken currentAccessToken]
+                                                     .tokenString];
+                    [[FIRAuth auth] signInWithCredential:credential
+                                              completion:^(FIRUser *user, NSError *error) {
+                                                  UIAlertController *picker = [UIAlertController alertControllerWithTitle:@"Select Provider"
+                                                                                                                  message:nil
+                                                                                                           preferredStyle:UIAlertControllerStyleActionSheet];
+                                                  UIAlertAction *action;
+                                                  action = [UIAlertAction actionWithTitle:@"Facebook" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                                                      FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+                                                      [loginManager logInWithReadPermissions:@[ @"public_profile", @"email" ]fromViewController:self
+                                                                                     handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                                                                         if (error) {
+                                                                                             [self showMessagePrompt:error.localizedDescription];
+                                                                                         } else if (result.isCancelled) {
+                                                                                             NSLog(@"FBLogin cancelled");
+                                                                                         } else {
+                                                                                             // [START headless_facebook_auth]
+                                                                                             FIRAuthCredential *credential = [FIRFacebookAuthProvider
+                                                                                                                              credentialWithAccessToken:[FBSDKAccessToken currentAccessToken].tokenString];
+                                                                                             // [END headless_facebook_auth]
+                                                                                             [self firebaseLoginWithCredential:credential];
+                                                                                         }
+                                                                                     }];
+                                                      
+                                                  }];
+                                                   [picker addAction:action];
+                                                  [self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+                                              
+                                                  if (error) {
+                                                      // ...
+                                                      return;
+                                                  }
+                                              }
+                     ];
+                }
+                 else {
+                    NSLog(@"%@", error.localizedDescription);
+                }
+}
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -107,7 +161,7 @@ static NSString *const kChangePasswordText = @"Change Password";
                                          [self showMessagePrompt:error.localizedDescription];
                                          return;
                                      }
-                                     NSLog(@"success2, %@", user);
+                                     //NSLog(@"success2, %@", user);
                                      [self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
                                  }];
                                  // [END_EXCLUDE]
@@ -287,49 +341,29 @@ static NSString *const kChangePasswordText = @"Change Password";
                 }];
             }
                 break;
-                /*case AuthTwitter:
-                 {
-                 action = [UIAlertAction actionWithTitle:@"Twitter" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                 [[Twitter sharedInstance] logInWithCompletion:^(TWTRSession *session, NSError *error) {
-                 if (session) {
-                 // [START headless_twitter_auth]
-                 FIRAuthCredential *credential =
-                 [FIRTwitterAuthProvider credentialWithToken:session.authToken
-                 secret:session.authTokenSecret];
-                 // [END headless_twitter_auth]
-                 [self firebaseLoginWithCredential:credential];
-                 } else {
-                 [self showMessagePrompt:error.localizedDescription];
-                 }
-                 }];
-                 }];
-                 }
-                 break;
+                
                  case AuthFacebook: {
-                 action = [UIAlertAction actionWithTitle:@"Facebook" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                 FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
-                 [loginManager
-                 logInWithReadPermissions:@[ @"public_profile", @"email" ]
-                 fromViewController:self
-                 handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                 if (error) {
-                 [self showMessagePrompt:error.localizedDescription];
-                 } else if (result.isCancelled) {
-                 NSLog(@"FBLogin cancelled");
-                 } else {
-                 // [START headless_facebook_auth]
-                 FIRAuthCredential *credential = [FIRFacebookAuthProvider
-                 credentialWithAccessToken:[FBSDKAccessToken currentAccessToken]
-                 .tokenString];
-                 // [END headless_facebook_auth]
-                 [self firebaseLoginWithCredential:credential];
-                 }
-                 }];
+                     action = [UIAlertAction actionWithTitle:@"Facebook" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                         FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+                         [loginManager logInWithReadPermissions:@[ @"public_profile", @"email" ]fromViewController:self
+                                                        handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                                            if (error) {
+                                                                [self showMessagePrompt:error.localizedDescription];
+                                                            } else if (result.isCancelled) {
+                                                                NSLog(@"FBLogin cancelled");
+                                                            } else {
+                                                                // [START headless_facebook_auth]
+                                                                FIRAuthCredential *credential = [FIRFacebookAuthProvider
+                                                                                                 credentialWithAccessToken:[FBSDKAccessToken currentAccessToken].tokenString];
+                                                                // [END headless_facebook_auth]
+                                                                [self firebaseLoginWithCredential:credential];
+                                                            }
+                                                        }];
                  
-                 }];
-                 }
+                                                    }];
+                                            }
                  break;
-                 case AuthGoogle: {
+                 /*case AuthGoogle: {
                  action = [UIAlertAction actionWithTitle:@"Google" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                  [GIDSignIn sharedInstance].clientID = [FIRApp defaultApp].options.clientID;
                  [GIDSignIn sharedInstance].uiDelegate = self;
@@ -337,8 +371,8 @@ static NSString *const kChangePasswordText = @"Change Password";
                  [[GIDSignIn sharedInstance] signIn];
                  
                  }];
-                 }
-                 break;*/
+                 }*/
+                 break;
             case AuthAnonymous: {
                 action = [UIAlertAction actionWithTitle:@"Anonymous" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [self showSpinner:^{

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @import FirebaseDatabase;
-
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 @interface LoginViewController : UIViewController
 
 
@@ -23,7 +23,7 @@
 
 - (IBAction)IBActiondidRequestPasswordReset:(id)sender;
 
-
+@property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 
 @property (nonatomic, strong) IBOutlet UIButton *createAccount;
