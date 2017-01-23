@@ -10,6 +10,7 @@
 #import "PCDataSource.h"
 #import <Photos/Photos.h>
 #import "Pet.h"
+#import "EditPetPhotosTableViewController.h"
 
 @interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
@@ -95,10 +96,9 @@
         [self presentViewController:alert animated:YES completion:nil];
          
     } else {
-        //[addPetParameters setObject:pc.pet.petID forKey:@"petID"];
+       
         Pet *pet = [[Pet alloc] init];
-        NSLog(@"Image url string %@", self.downloadURLString);
-        //upload self.imageURL to db
+        
         
         [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
         [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
@@ -111,7 +111,7 @@
         
         NSString *petImageString = self.downloadURLString;
         if ([self.downloadURLString length] == 0) {
-            NSLog(@"no image was uploaded" );
+            //NSLog(@"no image was uploaded" );
             petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
             [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
         }
@@ -125,11 +125,13 @@
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler: nil];
         [alertSaved addAction:cancel];
         [self presentViewController:alertSaved animated:YES completion:^(){
-            //put your code here
-            //TODO ... push to the photo album?
+            
+           
         }];
         
     }
+    
+    
  
 }
 
@@ -137,6 +139,9 @@
 - (IBAction)savePetProfile:(id)sender {
     
     [self sendPetInfoToFirebase];
+    //EditPetPhotosTableViewController *editPhotosVC = [[EditPetPhotosTableViewController alloc] init];
+    
+    //[self.navigationController pushViewController:editPhotosVC animated:YES];
     
 }
 

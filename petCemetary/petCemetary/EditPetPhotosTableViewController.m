@@ -179,13 +179,13 @@ Pet *pet;
    
     if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumMedia"]) {
         NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
-        NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
-        NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];
+        //NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
+        //NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];
         
             if (kindOfChange == NSKeyValueChangeRemoval) {
             // Someone set a brand new images array
-                NSLog(@"photo album item deleted");
-                NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
+                //NSLog(@"photo album item deleted");
+                //NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
                 [self.tableView reloadData];
             }
         
