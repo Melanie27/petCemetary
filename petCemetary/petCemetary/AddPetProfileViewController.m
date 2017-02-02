@@ -139,11 +139,16 @@
 - (IBAction)savePetProfile:(id)sender {
     
     [self sendPetInfoToFirebase];
-    //EditPetPhotosTableViewController *editPhotosVC = [[EditPetPhotosTableViewController alloc] init];
+   
     
-    //[self.navigationController pushViewController:editPhotosVC animated:YES];
     
 }
+
+//-(void)sendToPhotoAlbum {
+    //EditPetPhotosTableViewController *editPhotosVC = [[EditPetPhotosTableViewController alloc] init];
+    //[self.navigationController pushViewController:editPhotosVC animated:YES];
+    //NSLog(@"yo");
+//}
 
 
 #pragma mark - UIImagePicker Delegate Methods
@@ -162,18 +167,15 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-   
-    
-    
-    
-   
-    
+
     NSMutableDictionary *parameters = [@{} mutableCopy];
     [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    
+    //NSData *chosenImageData2ndChoice = UIImageJPEGRepresentation(chosenImage, 1.0);
+    //NSData *chosenImageData = [NSData dataWithContentsOfURL:[info objectForKey:@"UIImagePickerControllerReferenceURL"]];
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.uploadProfilePhotoButton setBackgroundImage:chosenImage forState:UIControlStateNormal];
+    //[self.uploadProfilePhotoButton setBackgroundImage:chosenImageData forState:UIControlStateNormal];
     
     //PCDataSource *pc = [PCDataSource sharedInstance];
     //TODO THIS ISNT SAving
@@ -197,11 +199,13 @@
                                        [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
                                            if (error != nil) {
                                                // Uh-oh, an error occurred!
-                                               NSLog(@"error %@", error);
+                                               NSLog(@"Firebase Image Storage error %@ (%@)", error, imageURL);
                                            } else {
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
                                                self.downloadURLString = downloadURLString;
+                                               
+                                               
                                            }
                                        }];
                                        
