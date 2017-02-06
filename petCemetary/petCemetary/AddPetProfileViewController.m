@@ -170,16 +170,23 @@
 
     NSMutableDictionary *parameters = [@{} mutableCopy];
     [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
+    NSURL *profileImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
+    PHFetchResult *result2 = [PHAsset fetchAssetsWithALAssetURLs:@[profileImageURL] options:nil];
+    PHAsset *asset = result2.firstObject;
+    
+    PHImageManager *manager = [PHImageManager defaultManager];
+    [manager requestImageForAsset:asset targetSize:CGSizeMake(100, 100) contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        NSLog(@" resulttttt %@",result);
+    }];
+    
+
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    //NSData *chosenImageData2ndChoice = UIImageJPEGRepresentation(chosenImage, 1.0);
-    //NSData *chosenImageData = [NSData dataWithContentsOfURL:[info objectForKey:@"UIImagePickerControllerReferenceURL"]];
+    NSData *chosenImageData = [NSData dataWithContentsOfURL:profileImageURL];
+   
+
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [self.uploadProfilePhotoButton setBackgroundImage:chosenImage forState:UIControlStateNormal];
-    //[self.uploadProfilePhotoButton setBackgroundImage:chosenImageData forState:UIControlStateNormal];
     
-    //PCDataSource *pc = [PCDataSource sharedInstance];
-    //TODO THIS ISNT SAving
-    //[pc addNewFeedPhotoWithDictionary:parameters];
     
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[parameters[@"petImageURL"]] options:nil];
     
@@ -187,19 +194,38 @@
         
         [asset requestContentEditingInputWithOptions:kNilOptions
                                    completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
-                                       NSURL *imageURL = contentEditingInput.fullSizeImageURL;
-                                       NSString *localURLString = [imageURL path];
-                                       NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+                                       //NSURL *imageURL = contentEditingInput.fullSizeImageURL;
+                                       //NSString *localURLString = [imageURL path];
+                                      // NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
+                                       
+                                       UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+                                       NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+
+                                       NSString *imageSubdirectory = [documentsDirectory stringByAppendingPathComponent:@"MySubfolderName"];
+                                       
+                                       NSString *filePathString = [imageSubdirectory stringByAppendingPathComponent:@"MyImageName.jpg"];
+                                       NSURL *fileURL = [NSURL fileURLWithPath:filePathString];
+                                       
+                                       NSString *theFileName = [imageSubdirectory lastPathComponent];
+                                       NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85f);
+                                       //[imageData writeToURL:fileURL atomically:YES];
+                                       [chosenImageData writeToURL:fileURL atomically:YES];
+                                       
+                                       FIRStorageMetadata *newMetadata = [[FIRStorageMetadata alloc] init];
+                                      
+                                       newMetadata.contentType = @"image/jpeg";
+
                                        
                                        FIRStorage *storage = [FIRStorage storage];
                                        FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
                                        FIRStorageReference *profileRef = [storageRef child:theFileName];
                                        
-                                       
-                                       [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                                       //NSURL *filePath = [NSURL fileURLWithPath:theFileName];
+                                       //put data must be NSDATA
+                                       [profileRef putFile:fileURL metadata:newMetadata completion:^(FIRStorageMetadata *metadata, NSError *error) {
                                            if (error != nil) {
                                                // Uh-oh, an error occurred!
-                                               NSLog(@"Firebase Image Storage error %@ (%@)", error, imageURL);
+                                               NSLog(@"Firebase Image Storage error %@ (%@)", error, fileURL);
                                            } else {
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
