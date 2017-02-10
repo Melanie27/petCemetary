@@ -166,7 +166,8 @@
    
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info {
+//didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
     NSMutableDictionary *parameters = [@{} mutableCopy];
     [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
@@ -189,30 +190,30 @@
     
     
     PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[parameters[@"petImageURL"]] options:nil];
-    
+    __block NSInteger resultLoopCount = 0;
     [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-        
+        resultLoopCount++;
         [asset requestContentEditingInputWithOptions:kNilOptions
                                    completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
                                        //NSURL *imageURL = contentEditingInput.fullSizeImageURL;
                                        //NSString *localURLString = [imageURL path];
                                       // NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
                                        
-                                       UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-                                       NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                                      NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+                                       //NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 
-                                       NSString *imageSubdirectory = [documentsDirectory stringByAppendingPathComponent:@"MySubfolderName"];
+                                       NSURL *imageSubdirectory = [tmpDirURL URLByAppendingPathComponent:@"MySubfolderName"];
                                        
-                                       NSString *filePathString = [imageSubdirectory stringByAppendingPathComponent:@"MyImageName.jpg"];
-                                       NSURL *fileURL = [NSURL fileURLWithPath:filePathString];
+                                       NSURL *filePathURL = [imageSubdirectory URLByAppendingPathComponent:@"MyImageName1.jpg"];
+                                       //NSURL *fileURL = [NSURL fileURLWithPath:filePathString];
                                        
                                        NSString *theFileName = [imageSubdirectory lastPathComponent];
                                        NSData *imageData = UIImageJPEGRepresentation(chosenImage, 0.85f);
-                                       //[imageData writeToURL:fileURL atomically:YES];
-                                       [chosenImageData writeToURL:fileURL atomically:YES];
+                                       BOOL writeSucceeded = [imageData writeToURL:filePathURL atomically:YES];
+                                       //[chosenImageData writeToURL:fileURL atomically:YES];
                                        
                                        FIRStorageMetadata *newMetadata = [[FIRStorageMetadata alloc] init];
-                                      
+                                       NSLog(@"wrote (%@) success = %@ loop %ld",filePathURL,writeSucceeded?@"true":@"false",resultLoopCount);
                                        newMetadata.contentType = @"image/jpeg";
 
                                        
@@ -222,10 +223,10 @@
                                        
                                        //NSURL *filePath = [NSURL fileURLWithPath:theFileName];
                                        //put data must be NSDATA
-                                       [profileRef putFile:fileURL metadata:newMetadata completion:^(FIRStorageMetadata *metadata, NSError *error) {
+                                       [profileRef putFile:filePathURL metadata:newMetadata completion:^(FIRStorageMetadata *metadata, NSError *error) {
                                            if (error != nil) {
                                                // Uh-oh, an error occurred!
-                                               NSLog(@"Firebase Image Storage error %@ (%@)", error, fileURL);
+                                               NSLog(@"Firebase Image Storage error %@ (%@)", error, filePathURL);
                                            } else {
                                                NSURL *downloadURL = metadata.downloadURL;
                                                NSString *downloadURLString = [ downloadURL absoluteString];
