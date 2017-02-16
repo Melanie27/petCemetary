@@ -368,11 +368,10 @@
 -(void)addImageWithDataDictionary:(NSDictionary *)parameters andPet:(NSObject*)petMedia {
     
     
-    //NSString *key = [self.ref child:@"pets" ] queryEqualToValue:<#(nullable id)#> childKey:<#(nullable NSString *)#>];
+    
     NSString *photoKey = [[self.ref child:@"photos"] childByAutoId].key;
     self.pet.photoID = photoKey;
-    //NSLog(@"photo key? %@", photoKey);
-    //NSLog(@"pet key? %@", key);
+    
     NSAssert(self.ref != nil, @"self.ref should be defined by now");
     NSMutableDictionary *params = [parameters mutableCopy];
     NSString *captionString = [parameters valueForKey:@"photoCaption"];
