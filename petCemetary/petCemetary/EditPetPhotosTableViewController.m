@@ -16,6 +16,11 @@
 #import <Photos/Photos.h>
 
 
+@import Firebase;
+@import FirebaseDatabase;
+@import FirebaseStorage;
+
+
 
 
 @interface EditPetPhotosTableViewController () <UITableViewDelegate, UITableViewDataSource, EditPetPhotosTableViewCellDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -25,6 +30,7 @@
 @property (nonatomic, strong)NSString *photoID;
 @property BOOL *needToReloadData;
 @property (nonatomic, strong) NSString *downloadURLString;
+@property (strong, nonatomic) FIRDatabaseReference *ref;
 @end
 
 @implementation EditPetPhotosTableViewController
@@ -137,10 +143,23 @@ Pet *pet;
                                                             self.downloadURLString = downloadURLString;
                                                             NSLog(@"no error printe metadata %@", metadata);
                                                             //TODO Dismiss view controller back to pet list
+                                                            self.ref = [[FIRDatabase database] reference];
+
+                                                            NSString *photoKey = [[self.ref child:@"photos"] childByAutoId].key;
+                                                            self.pet.photoID = photoKey;
+                                                            NSMutableDictionary *params = [parameters mutableCopy];
+                                                            NSString *captionString = [parameters valueForKey:@"photoCaption"];
+                                                            NSString *petIDString = [parameters valueForKey:@"petID"];
+                                                            NSDictionary *childUpdates = @{
+                                                                                           [NSString stringWithFormat:@"/pets/%@/photos/%@/photoUrl/", petIDString, photoKey]:downloadURLString,
+                                                                                           [NSString stringWithFormat:@"/pets/%@/photos/%@/caption/", petIDString, photoKey]:captionString,
+                                                                                           };
+                                                            
+                                                            [self.ref updateChildValues:childUpdates];
                                                         }
                                                     }];
                                                    
-                                                   ///[pc addImageWithDataDictionary:parameters andPet:pet];
+                                                //[pc addImageWithDataDictionary:parameters andPet:pet];
                                                    
                                                    
                                                    
