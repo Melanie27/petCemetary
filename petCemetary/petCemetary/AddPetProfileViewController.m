@@ -167,9 +167,60 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info {
-//didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
-    NSMutableDictionary *parameters = [@{} mutableCopy];
+    UIImage *originalImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    NSLog(@"print info %@", originalImage);
+    
+    UIImage *editedImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    UIImage *selectedImageFromPicker;
+    
+    if(editedImage) {
+        selectedImageFromPicker = editedImage;
+        
+        
+    } else {
+        selectedImageFromPicker = originalImage;
+        
+    }
+    
+    [self.uploadProfilePhotoButton setBackgroundImage:selectedImageFromPicker forState:UIControlStateNormal];
+    
+    FIRStorage *storage = [FIRStorage storage];
+    FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
+    
+    NSString *imageID = [[NSUUID UUID] UUIDString];
+    NSString *imageName = [NSString stringWithFormat:@"Profile Pictures/%@.jpg",imageID];
+    FIRStorageReference *profileRef = [storageRef child:imageName];
+    FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
+    metadata.contentType = @"image/jpeg";
+    NSData *uploadData = UIImageJPEGRepresentation(selectedImageFromPicker, 0.8);
+    
+    
+    
+    [profileRef putData:uploadData metadata:metadata completion:^
+     (FIRStorageMetadata *metadata, NSError *error) {
+         if (error != nil) {
+             // Uh-oh, an error occurred!
+             NSLog(@"Firebase Image Storage error %@", error);
+         } else {
+             
+             NSURL *downloadURL = metadata.downloadURL;
+             NSString *downloadURLString = [ downloadURL absoluteString];
+             self.downloadURLString = downloadURLString;
+             NSLog(@"no error printe metadata %@", metadata);
+             
+         }
+     }];
+    
+    
+    
+    
+    //didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+    /*NSMutableDictionary *parameters = [@{} mutableCopy];
     [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
     NSURL *profileImageURL = [info objectForKey:@"UIImagePickerControllerReferenceURL"];
     PHFetchResult *result2 = [PHAsset fetchAssetsWithALAssetURLs:@[profileImageURL] options:nil];
@@ -181,8 +232,8 @@
     }];
     
 
-    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
-    NSData *chosenImageData = [NSData dataWithContentsOfURL:profileImageURL];
+    //UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //NSData *chosenImageData = [NSData dataWithContentsOfURL:profileImageURL];
    
 
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -237,7 +288,7 @@
                                        }];
                                        
                                    }];
-    }];
+    }];*/
    
 
 }
