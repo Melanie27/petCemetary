@@ -62,8 +62,6 @@
         [cell.contentView layoutSubviews];
         cell.textLabel.text = cell.pet.petName;
         cell.detailTextLabel.text = cell.pet.petType;
-   
-  //      self.petID = cell.detailTextLabel.text;
     
         NSString *petFeedUrlString = cell.pet.feedImageString;
         UIImage *image = cell.pet.feedImage;
@@ -143,15 +141,11 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
-        
         PCDataSource *pc = [PCDataSource sharedInstance];
         NSMutableDictionary *petID = [@{} mutableCopy];
         Pet *pet = [pc.petsByOwner objectAtIndex:[indexPath row]];
         
         [petID setObject:pet.petID forKey:@"petID"];
-        
-        
-       
         [pc deletePetWithDataDictionary:petID andPet:pet];
 
        

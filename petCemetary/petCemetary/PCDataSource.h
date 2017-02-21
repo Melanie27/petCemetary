@@ -21,10 +21,10 @@
 @class EditPetPhotosTableViewController;
 @class AddPetProfilePhotoViewController;
 @class Pet;
-@class Owner;
 
 
-typedef void (^NewPetCompletionBlock)(NSError *error);
+
+typedef void (^RetrivePhotoURLCompletionBlock)(NSString *downloadURLString);
 
 
 @interface PCDataSource : NSObject
@@ -67,7 +67,7 @@ typedef void (^NewPetCompletionBlock)(NSError *error);
 
 -(void)deleteAlbumPhotoWithDataDictionary:(NSDictionary *)photoInfo andPet:(NSObject*)petMedia;
 -(void)editPetWithDataDictionary:(NSMutableDictionary *)editPetParameters;
--(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto andStorageRefURL:(NSString*)refURL andUploadDataSelectedImage:(UIImage *)selectedImage andDownloadURLString:(NSString *)downloadURLString;
+-(void)addNewFeedPhotoWithStorageRefURL:(NSString*)refURL andUploadDataSelectedImage:(UIImage *)selectedImage andCompletion:(RetrivePhotoURLCompletionBlock)completion;
 -(void)addImageWithDataDictionary:(NSDictionary*)parameters andPet:(NSObject*)petMedia;
 
 @end

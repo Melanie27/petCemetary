@@ -155,7 +155,7 @@
 }
 
 
--(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto andStorageRefURL:(NSString*)refURL andUploadDataSelectedImage:(UIImage *)selectedImage andDownloadURLString:(NSString *)downloadURLString {
+-(void)addNewFeedPhotoWithStorageRefURL:(NSString*)refURL andUploadDataSelectedImage:(UIImage *)selectedImage andCompletion:(RetrivePhotoURLCompletionBlock)completion {
     NSString *refURLWithDefault = refURL;
     if (refURLWithDefault == nil) {
         refURLWithDefault = @"gs://petcemetary-5fec2.appspot.com/petAlbums/";
@@ -228,11 +228,9 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
     [self.ref updateChildValues:childUpdates];
     NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMediaKeys"];
     
-    //TODO not sure why this isn't working
-    NSLog(@"pet we are working with %@, photo we are working with %@", petMedia, photoIDString);
-     NSLog(@"mutableArrayWithKVO %@", mutableArrayWithKVO);
+    
     [mutableArrayWithKVO removeObject:photoIDString];
-    //[self.albumMediaKeys removeObject:photoIDString];
+   
     [self.albumMediaKeys removeObject:photoIDString];
     
 }
@@ -337,10 +335,7 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
         }];
     }];
     
-    //NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"albumMedia"];
     
-    //[mutableArrayWithKVO addObject:petMedia];
-    //[_albumMedia addObject:petMedia];
 
 }
 

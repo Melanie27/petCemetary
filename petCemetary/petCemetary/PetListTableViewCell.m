@@ -50,9 +50,6 @@
     }
     
     CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
-    //self.petThumbnailView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
-    
-   
     
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
     
@@ -95,9 +92,6 @@
     
     
 }
-
-
-
 
 
 @end

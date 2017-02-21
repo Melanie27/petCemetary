@@ -14,7 +14,7 @@
 
 @interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
-@property (nonatomic, strong) NSString *downloadURLString;
+@property (nonatomic, strong) NSString *downloadURLString2;
 @property (nonatomic, strong) NSMutableDictionary *addPetParameters;
 
 @end
@@ -26,17 +26,9 @@
     // Do any additional setup after loading the view.
     self.title = @"Add Pet";
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    
-    
-    
-
 }
 
--(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
@@ -100,7 +92,6 @@
        
         Pet *pet = [[Pet alloc] init];
         
-        
         [addPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
         [addPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
        
@@ -110,8 +101,8 @@
         [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
         [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
         //[addPetParameters setObject:self.downloadURLString forKey:@"feedPhoto"];
-        NSString *petImageString = self.downloadURLString;
-        if ([self.downloadURLString length] == 0) {
+        NSString *petImageString = self.downloadURLString2;
+        if ([self.downloadURLString2 length] == 0) {
             //NSLog(@"no image was uploaded" );
             petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
             [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
@@ -126,10 +117,11 @@
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler: nil];
         [alertSaved addAction:cancel];
         [self presentViewController:alertSaved animated:YES completion:^(){
-            
+            //TODO pop back a level
+            //[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
            
         }];
-        
+        //[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
     }
     
     
@@ -140,9 +132,7 @@
 - (IBAction)savePetProfile:(id)sender {
     
     [self sendPetInfoToFirebase];
-   
-    
-    
+
 }
 
 
@@ -190,9 +180,14 @@
     
     [self.uploadProfilePhotoButton setBackgroundImage:selectedImageFromPicker forState:UIControlStateNormal];
     
-    //[[PCDataSource sharedInstance]addNewFeedPhotoWithDictionary:self.addPetParameters andStorageRefURL:@"gs://petcemetary-5fec2.appspot.com///petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andDownloadURLString:self.downloadURLString];
+    [[PCDataSource sharedInstance]addNewFeedPhotoWithStorageRefURL:@"gs://petcemetary-5fec2.appspot.com///petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andCompletion:^(NSString *downloadURLString)  {
+        NSLog(@"completion?");
+        downloadURLString = self.downloadURLString2;
+    }];
     
-    FIRStorage *storage = [FIRStorage storage];
+    
+    
+    /*FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
     
     NSString *imageID = [[NSUUID UUID] UUIDString];
@@ -214,10 +209,11 @@
              NSURL *downloadURL = metadata.downloadURL;
              NSString *downloadURLString = [ downloadURL absoluteString];
              self.downloadURLString = downloadURLString;
-             NSLog(@"no error printe metadata %@", metadata);
-             //TODO Dismiss view controller back to pet list
+             //NSLog(@"no error printe metadata %@", metadata);
+            
+             
          }
-     }];
+     }];*/
     
    
 

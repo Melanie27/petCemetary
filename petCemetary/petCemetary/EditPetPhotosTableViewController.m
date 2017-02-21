@@ -147,7 +147,7 @@ Pet *pet;
 
                                                             NSString *photoKey = [[self.ref child:@"photos"] childByAutoId].key;
                                                             self.pet.photoID = photoKey;
-                                                            NSMutableDictionary *params = [parameters mutableCopy];
+                                                            //NSMutableDictionary *params = [parameters mutableCopy];
                                                             NSString *captionString = [parameters valueForKey:@"photoCaption"];
                                                             NSString *petIDString = [parameters valueForKey:@"petID"];
                                                             NSDictionary *childUpdates = @{
@@ -161,11 +161,7 @@ Pet *pet;
                                                    
                                                 //[pc addImageWithDataDictionary:parameters andPet:pet];
                                                    
-                                                   
-                                                   
-                                                   
-                                                   
-                                                   
+
                                                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
                                                 }];
     
@@ -198,7 +194,6 @@ Pet *pet;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
      return self.pet.albumMedia.count;
-    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -243,33 +238,8 @@ Pet *pet;
     }
 }
 
-#pragma mark - Swipe to delete and KVO
+#pragma mark - Swipe to delete
 
-//KVO
-- (void) dealloc {
-    [[PCDataSource sharedInstance] removeObserver:self forKeyPath:@"albumMedia"];
- }
-
-- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-   
-    if (object == [PCDataSource sharedInstance] && [keyPath isEqualToString:@"albumMedia"]) {
-        NSKeyValueChange kindOfChange = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
-        //NSString *oldValue = [change objectForKey:NSKeyValueChangeOldKey];
-        //NSString *newValue = [change objectForKey:NSKeyValueChangeNewKey];
-        
-            if (kindOfChange == NSKeyValueChangeRemoval) {
-            // Someone set a brand new images array
-                //NSLog(@"photo album item deleted");
-                //NSLog(@"Observed: %@ of %@ was changed from %@ to %@", keyPath, object, oldValue, newValue);
-                [self.tableView reloadData];
-            }
-        
-            else if (kindOfChange == NSKeyValueChangeInsertion) {
-                
-                [self.tableView reloadData];
-            }
-        }
-    }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
