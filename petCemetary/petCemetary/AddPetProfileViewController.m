@@ -190,9 +190,9 @@
     
     [self.uploadProfilePhotoButton setBackgroundImage:selectedImageFromPicker forState:UIControlStateNormal];
     
-    [[PCDataSource sharedInstance]addNewFeedPhotoWithDictionary:self.addPetParameters andStorageRefURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andDownloadURLString:self.downloadURLString];
+    //[[PCDataSource sharedInstance]addNewFeedPhotoWithDictionary:self.addPetParameters andStorageRefURL:@"gs://petcemetary-5fec2.appspot.com///petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andDownloadURLString:self.downloadURLString];
     
-    /*FIRStorage *storage = [FIRStorage storage];
+    FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
     
     NSString *imageID = [[NSUUID UUID] UUIDString];
@@ -217,7 +217,7 @@
              NSLog(@"no error printe metadata %@", metadata);
              //TODO Dismiss view controller back to pet list
          }
-     }];*/
+     }];
     
    
 
