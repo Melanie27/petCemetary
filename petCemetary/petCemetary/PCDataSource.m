@@ -230,40 +230,40 @@
 }
 
 
-/*-(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto {
-    NSMutableDictionary *parameters = [addPetPhoto mutableCopy];
-    
-    PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[parameters[@"petImageURL"]] options:nil];
-    
-    [result enumerateObjectsUsingBlock:^(PHAsset *asset, NSUInteger idx, BOOL *stop) {
-        
-        [asset requestContentEditingInputWithOptions:kNilOptions
-                                   completionHandler:^(PHContentEditingInput *contentEditingInput, NSDictionary *info) {
-                                       NSURL *imageURL = contentEditingInput.fullSizeImageURL;
-                                       NSString *localURLString = [imageURL path];
-                                       NSString *theFileName = [[localURLString lastPathComponent] stringByDeletingPathExtension];
-                                       
-                                       FIRStorage *storage = [FIRStorage storage];
-                                       FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
-                                       FIRStorageReference *profileRef = [storageRef child:theFileName];
-                                       
-                                       
-                                       [profileRef putFile:imageURL metadata:nil completion:^(FIRStorageMetadata *metadata, NSError *error) {
-                                           if (error != nil) {
-                                               // Uh-oh, an error occurred!
-                                               NSLog(@"error %@", error);
-                                           } else {
-                                               NSURL *downloadURL = metadata.downloadURL;
-                                               NSString *downloadURLString = [ downloadURL absoluteString];
-                                               //TODO - pass the variable back to AddpetProfileVC
-                                               //self.downloadURLString = downloadURLString;
-                                           }
-                                       }];
-                                       
-                                   }];
-    }];
-    
-   }*/
+-(void)addNewFeedPhotoWithDictionary :(NSDictionary *)addPetPhoto andStorageRefURL:(NSString*)refURL andUploadDataSelectedImage:(UIImage *)selectedImage andDownloadURLString:(NSString *)downloadURLString {
+    NSString *refURLWithDefault = refURL;
+    if (refURLWithDefault == nil) {
+        refURLWithDefault = @"gs://petcemetary-5fec2.appspot.com/petAlbums/";
+    }
+ FIRStorage *storage = [FIRStorage storage];
+ FIRStorageReference *storageRef = [storage referenceForURL:refURLWithDefault];
+ 
+ NSString *imageID = [[NSUUID UUID] UUIDString];
+ NSString *imageName = [NSString stringWithFormat:@"Profile Pictures/%@.jpg",imageID];
+ FIRStorageReference *profileRef = [storageRef child:imageName];
+ FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
+ metadata.contentType = @"image/jpeg";
+ 
+NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
+ 
+ 
+ 
+ [profileRef putData:uploadData metadata:metadata completion:^
+ (FIRStorageMetadata *metadata, NSError *error) {
+ if (error != nil) {
+ // Uh-oh, an error occurred!
+ NSLog(@"Firebase Image Storage error %@", error);
+ } else {
+ 
+ NSURL *downloadURL = metadata.downloadURL;
+ NSString *downloadURLString = [ downloadURL absoluteString];
+ downloadURLString = downloadURLString;
+ NSLog(@"no error printe metadata %@", metadata);
+     //TODO Dismiss view controller back to pet list
+    }
+ }];
+ 
+   }
 
 -(void)editPetWithDataDictionary:(NSDictionary *)editPetParameters {
    //NSString *petPhotoString = [editPetParameters valueForKey:@"petPhoto"];

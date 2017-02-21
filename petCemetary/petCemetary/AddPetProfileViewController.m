@@ -168,7 +168,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info {
     
-    //NSMutableDictionary *parameters = [@{} mutableCopy];
+    NSMutableDictionary *parameters = [@{} mutableCopy];
     //[parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
 
     UIImage *originalImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
@@ -190,6 +190,8 @@
     }
     
     [self.uploadProfilePhotoButton setBackgroundImage:selectedImageFromPicker forState:UIControlStateNormal];
+    
+    [[PCDataSource sharedInstance]addNewFeedPhotoWithDictionary:parameters andStorageRefURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andDownloadURLString:self.downloadURLString];
     
     FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
