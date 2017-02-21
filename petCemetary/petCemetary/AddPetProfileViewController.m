@@ -15,6 +15,7 @@
 @interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSString *downloadURLString;
+@property (nonatomic, strong) NSMutableDictionary *addPetParameters;
 
 @end
 
@@ -108,7 +109,7 @@
         
         [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
         [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
-        
+        //[addPetParameters setObject:self.downloadURLString forKey:@"feedPhoto"];
         NSString *petImageString = self.downloadURLString;
         if ([self.downloadURLString length] == 0) {
             //NSLog(@"no image was uploaded" );
@@ -144,11 +145,7 @@
     
 }
 
-//-(void)sendToPhotoAlbum {
-    //EditPetPhotosTableViewController *editPhotosVC = [[EditPetPhotosTableViewController alloc] init];
-    //[self.navigationController pushViewController:editPhotosVC animated:YES];
-    //NSLog(@"yo");
-//}
+
 
 
 #pragma mark - UIImagePicker Delegate Methods
@@ -168,7 +165,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info {
     
-    NSMutableDictionary *parameters = [@{} mutableCopy];
+    //NSMutableDictionary *parameters = [@{} mutableCopy];
     //[parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
 
     UIImage *originalImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
@@ -189,11 +186,13 @@
         
     }
     
+    
+    
     [self.uploadProfilePhotoButton setBackgroundImage:selectedImageFromPicker forState:UIControlStateNormal];
     
-    [[PCDataSource sharedInstance]addNewFeedPhotoWithDictionary:parameters andStorageRefURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andDownloadURLString:self.downloadURLString];
+    [[PCDataSource sharedInstance]addNewFeedPhotoWithDictionary:self.addPetParameters andStorageRefURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andDownloadURLString:self.downloadURLString];
     
-    FIRStorage *storage = [FIRStorage storage];
+    /*FIRStorage *storage = [FIRStorage storage];
     FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
     
     NSString *imageID = [[NSUUID UUID] UUIDString];
@@ -218,7 +217,7 @@
              NSLog(@"no error printe metadata %@", metadata);
              //TODO Dismiss view controller back to pet list
          }
-     }];
+     }];*/
     
    
 

@@ -19,6 +19,7 @@
 @interface PCDataSource ()
 
     @property (nonatomic, strong) NSDictionary *albumMediaValues;
+    @property (nonatomic, strong) NSString *downloadURLString;
 
 @end
 
@@ -257,7 +258,7 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
  
  NSURL *downloadURL = metadata.downloadURL;
  NSString *downloadURLString = [ downloadURL absoluteString];
- downloadURLString = downloadURLString;
+ self.downloadURLString = downloadURLString;
  NSLog(@"no error printe metadata %@", metadata);
      //TODO Dismiss view controller back to pet list
     }
