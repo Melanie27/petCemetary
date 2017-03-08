@@ -78,14 +78,14 @@ static NSString *const kChangePasswordText = @"Change Password";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.passwordField.secureTextEntry = YES;
-    FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
+    //FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     // Optional: Place the button in the center of your view.
-    loginButton.center = self.view.center;
-    [self.view addSubview:loginButton];
-    if ([FBSDKAccessToken currentAccessToken]) {
+    //loginButton.center = self.view.center;
+    //[self.view addSubview:loginButton];
+   // if ([FBSDKAccessToken currentAccessToken]) {
         // User is logged in, do work such as go to next view controller.
         
-    }
+    //}
     
 }
 
@@ -146,10 +146,10 @@ static NSString *const kChangePasswordText = @"Change Password";
 
 - (IBAction)didTapEmailLogin:(id)sender {
     //keep this here for now so don't have to login every time
-    [self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    //[self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     
     //comment this in later
-    /*[self showSpinner:^{
+    [self showSpinner:^{
         // [START headless_email_auth]
         [[FIRAuth auth] signInWithEmail:_emailField.text
                                password:_passwordField.text
@@ -168,7 +168,7 @@ static NSString *const kChangePasswordText = @"Change Password";
                              }];
         // [END headless_email_auth]
         
-    }];*/
+    }];
 }
 
 /** @fn requestPasswordReset

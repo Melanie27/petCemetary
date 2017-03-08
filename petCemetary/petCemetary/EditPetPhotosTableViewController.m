@@ -98,9 +98,7 @@ Pet *pet;
                                                    [parameters setObject:[info objectForKey:@"UIImagePickerControllerReferenceURL"] forKey:@"petImageURL"];
                                                    
                                                    
-                                                   
                                                    UIImage *originalImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-                                                   //NSLog(@"print info %@", originalImage);
                                                    
                                                    UIImage *editedImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
                                                    
