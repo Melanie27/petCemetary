@@ -100,7 +100,7 @@ Pet *pet;
                                                    
                                                    
                                                    UIImage *originalImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-                                                   NSLog(@"print info %@", originalImage);
+                                                   //NSLog(@"print info %@", originalImage);
                                                    
                                                    UIImage *editedImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
                                                    
@@ -210,7 +210,7 @@ Pet *pet;
     
     NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
     NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
-    UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
+    UIFont *font=[UIFont fontWithName:@"Didot" size:14.0f];
     [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.attributedText = petCaptionMutableString;
@@ -234,7 +234,7 @@ Pet *pet;
         return height;
     } else {
         NSLog(@"bad height %f",height);
-        return 100.0;
+        return 400.0;
     }
 }
 

@@ -61,7 +61,7 @@
          NSDictionary *allPets = snapshot.value[@"pets"];
          self.petItems =  [NSMutableArray new];
          self.petsByOwner = [NSMutableArray new];
-         self.albumMedia = [NSMutableDictionary new];
+         //self.albumMedia = [NSMutableDictionary new];
          self.albumMediaKeys = [NSMutableArray new];
          for (NSString *keyPath in allPets) {
             Pet *pet = [[Pet alloc] init];
@@ -98,14 +98,12 @@
                  pet.albumImageStrings = [pet.albumImageStrings arrayByAddingObject:pet.albumImageString];
                  pet.albumCaptionString = [ self.albumMediaValues valueForKey:@"caption"];
                  pet.albumCaptionStrings = [pet.albumCaptionStrings arrayByAddingObject:pet.albumCaptionString];
-                
-                
-                
+  
             }
             
             
              //TODO Introspection here incase there are no album photos
-             //[self.albumMedia addObject:pet.albumMedia];
+            
                           
              for (NSString *string in pet.albumImageStrings) {
                  pet.albumImageString = string;
@@ -128,7 +126,6 @@
                 [self.petsByOwner addObject:pet];
 
              }
-             
              
              [self.petItems addObject:pet];
              
@@ -164,7 +161,7 @@
  FIRStorageReference *storageRef = [storage referenceForURL:refURLWithDefault];
  
  NSString *imageID = [[NSUUID UUID] UUIDString];
- NSString *imageName = [NSString stringWithFormat:@"Profile Pictures/%@.jpg",imageID];
+ NSString *imageName = [NSString stringWithFormat:@"%@.jpg",imageID];
  FIRStorageReference *profileRef = [storageRef child:imageName];
  FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
  metadata.contentType = @"image/jpeg";
@@ -183,8 +180,10 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
  NSURL *downloadURL = metadata.downloadURL;
  NSString *downloadURLString = [ downloadURL absoluteString];
  self.downloadURLString = downloadURLString;
+     //downloadURLString = self.downloadURLString;
  NSLog(@"no error printe metadata %@", metadata);
-     //TODO Dismiss view controller back to pet list
+     completion(downloadURLString);
+    
     }
  }];
  
@@ -266,7 +265,8 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
     NSString *petDodString = [addPetParameters valueForKey:@"dod"];
     NSString *petPersonalityString = [addPetParameters valueForKey:@"personality"];
     NSString *petOwnerString = [addPetParameters valueForKey:@"ownerName"];
-    NSString *petPlaceholderImageString = [addPetParameters valueForKey:@"placeholderImage"];
+    NSString *petDownloadURLString = [addPetParameters valueForKey:@"feedPhoto"];
+    //NSString *petPlaceholderImageString = [addPetParameters valueForKey:@"placeholderImage"];
     FIRUser *userAuth = [FIRAuth auth].currentUser;
     NSDictionary *petInfoCreation = @{
                                       [NSString stringWithFormat:@"/pets/%@/pet",key]:petNameString,
@@ -276,7 +276,8 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
                                        [NSString stringWithFormat:@"/pets/%@/personality",key]:petPersonalityString,
                                        [NSString stringWithFormat:@"/pets/%@/ownerName",key]:petOwnerString,
                                        [NSString stringWithFormat:@"/pets/%@/UID/", key]:userAuth.uid,
-                                      [NSString stringWithFormat:@"/pets/%@/feedPhoto/", key]:petPlaceholderImageString
+                                      [NSString stringWithFormat:@"/pets/%@/feedPhoto/", key]:petDownloadURLString
+                                      //[NSString stringWithFormat:@"/pets/%@/feedPhoto/", key]:petPlaceholderImageString
                                       };
                                        
     

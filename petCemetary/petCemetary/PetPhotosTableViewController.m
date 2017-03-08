@@ -24,8 +24,6 @@
     pc.pptVC = self;
     
     self.title = @"Photo Album";
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
     [self.tableView registerClass:[PetPhotosTableViewCell class] forCellReuseIdentifier:@"albumCell"];
     
@@ -75,7 +73,7 @@
     NSString *petCaptionString = cell.petAlbumItem.albumCaptionStrings[indexPath.row];
     
     NSMutableAttributedString *petCaptionMutableString = [[NSMutableAttributedString alloc]initWithString:petCaptionString];
-    UIFont *font=[UIFont fontWithName:@"Didot" size:12.0f];
+    UIFont *font=[UIFont fontWithName:@"Didot" size:14.0f];
     [petCaptionMutableString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, petCaptionString.length)];
     
     cell.textLabel.textAlignment = NSTextAlignmentCenter;

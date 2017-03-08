@@ -34,8 +34,7 @@
     [self.view endEditing:YES];
 }
 
-- (void)keyboardFrameWillChange:(NSNotification *)notification
-{
+- (void)keyboardFrameWillChange:(NSNotification *)notification {
     CGRect keyboardEndFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGRect keyboardBeginFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     UIViewAnimationCurve animationCurve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
@@ -100,31 +99,31 @@
         
         [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
         [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
-        //[addPetParameters setObject:self.downloadURLString forKey:@"feedPhoto"];
-        NSString *petImageString = self.downloadURLString2;
+        [addPetParameters setObject:self.downloadURLString2 forKey:@"feedPhoto"];
+        /*NSString *petImageString = self.downloadURLString2;
         if ([self.downloadURLString2 length] == 0) {
-            //NSLog(@"no image was uploaded" );
+            
             petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
             [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
-        }
+        }*/
         
-        [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
+        //[addPetParameters setObject:petImageString forKey:@"placeholderImage"];
         [pc addNewPetWithDataDictionary:addPetParameters andPet:pet];
         UIAlertController *alertSaved = [UIAlertController
-                                    alertControllerWithTitle: @"Thank you for starting your pet's memorial"
-                                    message: @"Please add photos of your pet to its album."
+                                    alertControllerWithTitle: @"THANK YOU!"
+                                    message: @"Go Back to add some photos to your pet's album"
                                     preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler: nil];
         [alertSaved addAction:cancel];
         [self presentViewController:alertSaved animated:YES completion:^(){
-            //TODO pop back a level
-            //[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-           
+            //dispatch_async(dispatch_get_main_queue(), ^{
+                //[self.navigationController popViewControllerAnimated:YES];
+            //});
         }];
-        //[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        
     }
     
-    
+   
  
 }
 
@@ -181,8 +180,14 @@
     [self.uploadProfilePhotoButton setBackgroundImage:selectedImageFromPicker forState:UIControlStateNormal];
     
     [[PCDataSource sharedInstance]addNewFeedPhotoWithStorageRefURL:@"gs://petcemetary-5fec2.appspot.com///petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andCompletion:^(NSString *downloadURLString)  {
-        NSLog(@"completion?");
-        downloadURLString = self.downloadURLString2;
+        
+        //downloadURLString = self.downloadURLString2;
+        self.downloadURLString2 = downloadURLString;
+        NSLog(@"completion? %@", downloadURLString);
+        //Call reload here
+        
+       
+
     }];
     
     
