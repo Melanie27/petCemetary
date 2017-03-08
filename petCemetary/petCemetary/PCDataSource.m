@@ -180,8 +180,7 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
  NSURL *downloadURL = metadata.downloadURL;
  NSString *downloadURLString = [ downloadURL absoluteString];
  self.downloadURLString = downloadURLString;
-     //downloadURLString = self.downloadURLString;
- NSLog(@"no error printe metadata %@", metadata);
+     
      completion(downloadURLString);
     
     }
@@ -198,14 +197,15 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
     NSString *petDodString = [editPetParameters valueForKey:@"dod"];
     NSString *petPersonalityString = [editPetParameters valueForKey:@"personality"];
     NSString *petOwnerString = [editPetParameters valueForKey:@"ownerName"];
-    
+    NSString *petDownloadURLString = [editPetParameters valueForKey:@"feedPhoto"];
     NSDictionary *petInfoEdits = @{
                                       [NSString stringWithFormat:@"/pets/%@/pet", petIDString]:petNameString,
                                       [NSString stringWithFormat:@"/pets/%@/animalType", petIDString]:petTypeString,
                                       [NSString stringWithFormat:@"/pets/%@/dateOfBirth", petIDString]:petDobString,
                                       [NSString stringWithFormat:@"/pets/%@/dateOfDeath", petIDString]:petDodString,
                                       [NSString stringWithFormat:@"/pets/%@/personality", petIDString]:petPersonalityString,
-                                      [NSString stringWithFormat:@"/pets/%@/ownerName", petIDString]:petOwnerString
+                                      [NSString stringWithFormat:@"/pets/%@/ownerName", petIDString]:petOwnerString,
+                                      [NSString stringWithFormat:@"/pets/%@/feedPhoto", petIDString]:petDownloadURLString
                                       
                                       };
     
@@ -276,7 +276,7 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
                                        [NSString stringWithFormat:@"/pets/%@/personality",key]:petPersonalityString,
                                        [NSString stringWithFormat:@"/pets/%@/ownerName",key]:petOwnerString,
                                        [NSString stringWithFormat:@"/pets/%@/UID/", key]:userAuth.uid,
-                                      [NSString stringWithFormat:@"/pets/%@/feedPhoto/", key]:petDownloadURLString
+                                      [NSString stringWithFormat:@"/pets/%@/feedPhoto/", key]:petDownloadURLString,
                                       //[NSString stringWithFormat:@"/pets/%@/feedPhoto/", key]:petPlaceholderImageString
                                       };
                                        
@@ -339,10 +339,5 @@ NSData *uploadData = UIImageJPEGRepresentation(selectedImage, 0.8);
     
 
 }
-
-
-
-
-    
 
 @end

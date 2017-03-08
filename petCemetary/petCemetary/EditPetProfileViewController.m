@@ -13,7 +13,7 @@
 
 
 @interface EditPetProfileViewController () <UITextFieldDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
-
+@property (nonatomic, strong) NSString *downloadURLString2;
 @end
 
 @implementation EditPetProfileViewController
@@ -33,6 +33,8 @@
     self.animalTypeTextField.text = _pet.petType;
     self.animalPersonalityTextView.text = _pet.petPersonality;
     self.ownerNameTextField.text = _pet.ownerName;
+    //self.downloadURLString2 = _pet.feedImageString;
+    
     
     NSString *petProfileString = _pet.feedImageString;
     NSURL *petProfileUrl=[NSURL URLWithString:petProfileString];
@@ -40,6 +42,9 @@
     
     [self.uploadProfilePhotoButton setBackgroundImage:savedProfileImage forState:UIControlStateNormal];
      self.uploadProfilePhotoButton.contentMode = UIViewContentModeScaleAspectFill;
+    
+    
+    
 }
 
 - (IBAction)uploadProfilePhoto:(id)sender {
@@ -53,6 +58,32 @@
         
     }
     
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info {
+    
+    UIImage *originalImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    UIImage *editedImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    
+    [self dismissViewControllerAnimated:YES completion:NULL];
+    
+    UIImage *selectedImageFromPicker;
+    
+    if(editedImage) {
+        selectedImageFromPicker = editedImage;
+        
+    } else {
+        selectedImageFromPicker = originalImage;
+    }
+
+    [self.uploadProfilePhotoButton setBackgroundImage:selectedImageFromPicker forState:UIControlStateNormal];
+    
+    [[PCDataSource sharedInstance]addNewFeedPhotoWithStorageRefURL:@"gs://petcemetary-5fec2.appspot.com///petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andCompletion:^(NSString *downloadURLString)  {
+        
+        self.downloadURLString2 = downloadURLString;
+
+    }];
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,7 +130,13 @@
         [editPetParameters setObject:self.dodTextField.text forKey:@"dod"];
         [editPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
         [editPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
-    
+        if ([self.downloadURLString2 length] == 0) {
+            
+            self.downloadURLString2 = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
+            [editPetParameters setObject:self.downloadURLString2 forKey:@"feedPhoto"];
+        }else {
+            [editPetParameters setObject:self.downloadURLString2 forKey:@"feedPhoto"];
+        }
    
         [pc editPetWithDataDictionary:editPetParameters];
         UIAlertController *alertSaved = [UIAlertController

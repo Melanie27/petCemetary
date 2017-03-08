@@ -99,15 +99,14 @@
         
         [addPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
         [addPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
-        [addPetParameters setObject:self.downloadURLString2 forKey:@"feedPhoto"];
-        /*NSString *petImageString = self.downloadURLString2;
         if ([self.downloadURLString2 length] == 0) {
             
-            petImageString = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
-            [addPetParameters setObject:petImageString forKey:@"placeholderImage"];
-        }*/
-        
-        //[addPetParameters setObject:petImageString forKey:@"placeholderImage"];
+            self.downloadURLString2 = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
+            [addPetParameters setObject:self.downloadURLString2 forKey:@"feedPhoto"];
+        }else {
+            [addPetParameters setObject:self.downloadURLString2 forKey:@"feedPhoto"];
+        }
+       
         [pc addNewPetWithDataDictionary:addPetParameters andPet:pet];
         UIAlertController *alertSaved = [UIAlertController
                                     alertControllerWithTitle: @"THANK YOU!"
@@ -181,44 +180,14 @@
     
     [[PCDataSource sharedInstance]addNewFeedPhotoWithStorageRefURL:@"gs://petcemetary-5fec2.appspot.com///petAlbums/" andUploadDataSelectedImage:selectedImageFromPicker andCompletion:^(NSString *downloadURLString)  {
         
-        //downloadURLString = self.downloadURLString2;
         self.downloadURLString2 = downloadURLString;
-        NSLog(@"completion? %@", downloadURLString);
-        //Call reload here
-        
+        //NSLog(@"completion? %@", downloadURLString);
        
 
     }];
     
     
     
-    /*FIRStorage *storage = [FIRStorage storage];
-    FIRStorageReference *storageRef = [storage referenceForURL:@"gs://petcemetary-5fec2.appspot.com/petAlbums/"];
-    
-    NSString *imageID = [[NSUUID UUID] UUIDString];
-    NSString *imageName = [NSString stringWithFormat:@"Profile Pictures/%@.jpg",imageID];
-    FIRStorageReference *profileRef = [storageRef child:imageName];
-    FIRStorageMetadata *metadata = [[FIRStorageMetadata alloc] init];
-    metadata.contentType = @"image/jpeg";
-    NSData *uploadData = UIImageJPEGRepresentation(selectedImageFromPicker, 0.8);
-    
-    
-    
-    [profileRef putData:uploadData metadata:metadata completion:^
-     (FIRStorageMetadata *metadata, NSError *error) {
-         if (error != nil) {
-             // Uh-oh, an error occurred!
-             NSLog(@"Firebase Image Storage error %@", error);
-         } else {
-             
-             NSURL *downloadURL = metadata.downloadURL;
-             NSString *downloadURLString = [ downloadURL absoluteString];
-             self.downloadURLString = downloadURLString;
-             //NSLog(@"no error printe metadata %@", metadata);
-            
-             
-         }
-     }];*/
     
    
 
