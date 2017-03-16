@@ -275,7 +275,7 @@ static NSString *const kChangePasswordText = @"Change Password";
                                 .localizedDescription];
                                return;
                            }
-                           NSLog(@"%@ created", user.email);
+                           //NSLog(@"%@ created", user.email);
                            [self.navigationController popViewControllerAnimated:YES];
                        }];
                        // [END_EXCLUDE]
@@ -483,6 +483,10 @@ static NSString *const kChangePasswordText = @"Change Password";
     if (user) {
         //self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", user.email];
         self.navigationItem.title = [NSString stringWithFormat:@"Welcome!"];
+        //skip launch screen
+        //UIViewController *vc = [[PetsFeedTableViewController alloc] init];
+       
+        
     } else {
         self.navigationItem.title = @"Login or Signup";
         
