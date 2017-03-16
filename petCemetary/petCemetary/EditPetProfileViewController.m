@@ -121,8 +121,7 @@
         [self presentViewController:alert animated:YES completion:nil];
         
     } else {
-        //TODO sometimes when I get here pet ID looks like 0x0000608000054eb0, which crashes
-        //[editPetParameters setObject:pc.pet.photoID forKey:@"photoID"];
+        
         [editPetParameters setObject:pc.pet.petID forKey:@"petID"];
         [editPetParameters setObject:self.petNameTextField.text forKey:@"petName"];
         [editPetParameters setObject:self.animalTypeTextField.text forKey:@"petType"];
@@ -130,12 +129,16 @@
         [editPetParameters setObject:self.dodTextField.text forKey:@"dod"];
         [editPetParameters setObject:self.animalPersonalityTextView.text forKey:@"personality"];
         [editPetParameters setObject:self.ownerNameTextField.text forKey:@"ownerName"];
-        if ([self.downloadURLString2 length] == 0) {
-            
-            self.downloadURLString2 = @"https://firebasestorage.googleapis.com/v0/b/petcemetary-5fec2.appspot.com/o/petFeed%2FprofilePlaceholder.png?alt=media&token=c5d106a3-d5d0-4d69-8732-a29bf1f3542c";
+         
+        
+        //IS this check even necessary - there should already be something in there even it is the placeholder
+        //test if the image string changed and only edit if it did - right now saving changes deletes pet photo
+        if ([self.downloadURLString2 length] != 0) {
+            //if the image has been changed
             [editPetParameters setObject:self.downloadURLString2 forKey:@"feedPhoto"];
         }else {
-            [editPetParameters setObject:self.downloadURLString2 forKey:@"feedPhoto"];
+            [editPetParameters setObject:pc.pet.feedImageString forKey:@"feedPhoto"];
+            
         }
    
         [pc editPetWithDataDictionary:editPetParameters];
