@@ -546,7 +546,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUF-Yh-4bg">
-                                <rect key="frame" x="147" y="257" width="80" height="20"/>
+                                <rect key="frame" x="147.5" y="257" width="80" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Personality">
                                         <attributes>
@@ -557,16 +557,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="34w-Fd-pyW">
-                                <rect key="frame" x="16" y="285" width="343" height="76"/>
+                                <rect key="frame" x="16" y="285" width="343" height="227"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="76" id="9uR-pM-Ex7"/>
+                                    <constraint firstAttribute="height" constant="227" id="y0L-Ms-cIT"/>
                                 </constraints>
                                 <attributedString key="attributedText">
                                     <fragment>
                                         <string key="content">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </string>
                                         <attributes>
-                                            <font key="NSFont" size="14" name="Didot"/>
+                                            <font key="NSFont" size="17" name="Didot"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
