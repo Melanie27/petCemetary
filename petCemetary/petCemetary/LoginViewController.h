@@ -23,6 +23,8 @@
 
 - (IBAction)IBActiondidRequestPasswordReset:(id)sender;
 
+- (IBAction)didRequestPasswordReset:(id)sender;
+
 @property (weak, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 

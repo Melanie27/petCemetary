@@ -146,7 +146,10 @@ static NSString *const kChangePasswordText = @"Change Password";
 
 - (IBAction)didTapEmailLogin:(id)sender {
     //keep this here for now so don't have to login every time
-    //[self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+   
+            //[self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
+    
     
     //comment this in later
     [self showSpinner:^{
@@ -478,7 +481,8 @@ static NSString *const kChangePasswordText = @"Change Password";
 
 - (void)setTitleDisplay: (FIRUser *)user {
     if (user) {
-        self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", user.email];
+        //self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", user.email];
+        self.navigationItem.title = [NSString stringWithFormat:@"Welcome!"];
     } else {
         self.navigationItem.title = @"Login or Signup";
         
