@@ -63,12 +63,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap image to add profile photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71f-KD-3n5">
-                                <rect key="frame" x="45" y="219" width="234" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Owner Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wpg-qG-Ob3">
                                 <rect key="frame" x="56" y="371" width="299" height="30"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
@@ -89,15 +83,22 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap image to add profile photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71f-KD-3n5">
+                                <rect key="frame" x="88" y="219" width="234" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tG2-gI-cCp" firstAttribute="trailing" secondItem="wpg-qG-Ob3" secondAttribute="trailing" id="04q-qv-ANV"/>
+                            <constraint firstItem="tG2-gI-cCp" firstAttribute="top" secondItem="71f-KD-3n5" secondAttribute="bottom" constant="16" id="5fz-Cg-p33"/>
+                            <constraint firstItem="71f-KD-3n5" firstAttribute="centerX" secondItem="wpg-qG-Ob3" secondAttribute="centerX" id="8hX-3m-hfO"/>
                             <constraint firstItem="3ip-IY-Pa5" firstAttribute="top" secondItem="wpg-qG-Ob3" secondAttribute="bottom" constant="8" symbolic="YES" id="BcJ-9S-t20"/>
                             <constraint firstItem="NF6-Wp-wBL" firstAttribute="leading" secondItem="MRZ-GW-Uop" secondAttribute="leadingMargin" constant="36" id="FiU-CY-U9Z"/>
                             <constraint firstItem="NF6-Wp-wBL" firstAttribute="top" secondItem="4Pt-nb-TlQ" secondAttribute="bottom" constant="9" id="G8r-cR-l5D"/>
                             <constraint firstItem="tG2-gI-cCp" firstAttribute="leading" secondItem="4Pt-nb-TlQ" secondAttribute="leading" id="IfY-MS-XK6"/>
-                            <constraint firstItem="71f-KD-3n5" firstAttribute="leading" secondItem="MRZ-GW-Uop" secondAttribute="leadingMargin" constant="25" id="Ju4-o3-wof"/>
                             <constraint firstItem="wpg-qG-Ob3" firstAttribute="top" secondItem="NF6-Wp-wBL" secondAttribute="bottom" constant="8" symbolic="YES" id="QGo-O2-xGl"/>
                             <constraint firstItem="4Pt-nb-TlQ" firstAttribute="top" secondItem="tG2-gI-cCp" secondAttribute="bottom" constant="8" symbolic="YES" id="TdG-Lo-H4A"/>
                             <constraint firstItem="tG2-gI-cCp" firstAttribute="trailing" secondItem="4Pt-nb-TlQ" secondAttribute="trailing" id="UrZ-hJ-y3n"/>
@@ -105,10 +106,9 @@
                             <constraint firstItem="tG2-gI-cCp" firstAttribute="trailing" secondItem="5ni-D3-Szf" secondAttribute="trailing" id="aVY-yJ-PdC"/>
                             <constraint firstItem="lQV-z5-a4J" firstAttribute="centerX" secondItem="MRZ-GW-Uop" secondAttribute="centerX" constant="-1" id="br3-MF-q7t"/>
                             <constraint firstItem="tG2-gI-cCp" firstAttribute="centerX" secondItem="MRZ-GW-Uop" secondAttribute="centerX" id="cM1-bD-Sxg"/>
-                            <constraint firstItem="tG2-gI-cCp" firstAttribute="top" secondItem="71f-KD-3n5" secondAttribute="bottom" constant="16" id="hou-oQ-Kif"/>
+                            <constraint firstItem="71f-KD-3n5" firstAttribute="top" secondItem="lQV-z5-a4J" secondAttribute="bottom" constant="8" symbolic="YES" id="gCn-En-Uyc"/>
                             <constraint firstItem="NF6-Wp-wBL" firstAttribute="leading" secondItem="wpg-qG-Ob3" secondAttribute="leading" id="oEo-PD-FXc"/>
                             <constraint firstItem="3ip-IY-Pa5" firstAttribute="bottom" secondItem="rdo-xo-maw" secondAttribute="top" id="pDC-2H-Cof"/>
-                            <constraint firstItem="71f-KD-3n5" firstAttribute="top" secondItem="lQV-z5-a4J" secondAttribute="bottom" constant="8" symbolic="YES" id="sSH-pG-7y1"/>
                             <constraint firstItem="3ip-IY-Pa5" firstAttribute="trailing" secondItem="MRZ-GW-Uop" secondAttribute="trailingMargin" id="t30-Tf-zjx"/>
                             <constraint firstItem="lQV-z5-a4J" firstAttribute="top" secondItem="R4B-wS-zPp" secondAttribute="bottom" constant="19" id="ubI-PN-caR"/>
                             <constraint firstItem="NF6-Wp-wBL" firstAttribute="baseline" secondItem="5ni-D3-Szf" secondAttribute="baseline" id="vSA-eS-T4X"/>
