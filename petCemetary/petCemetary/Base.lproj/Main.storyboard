@@ -70,10 +70,10 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Honor your pet with a few words." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3ip-IY-Pa5">
-                                <rect key="frame" x="17" y="426" width="288" height="228"/>
+                                <rect key="frame" x="17" y="426" width="288" height="90"/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="228" id="lj4-EV-lSi"/>
+                                    <constraint firstAttribute="height" constant="90" id="lj4-EV-lSi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

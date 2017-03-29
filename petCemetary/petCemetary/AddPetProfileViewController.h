@@ -11,7 +11,7 @@
 
 @class Pet;
 
-@interface AddPetProfileViewController : UIViewController <UITextFieldDelegate>
+@interface AddPetProfileViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UITextField *petNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *animalTypeTextField;

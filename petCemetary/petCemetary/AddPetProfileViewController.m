@@ -11,6 +11,7 @@
 #import <Photos/Photos.h>
 #import "Pet.h"
 #import "EditPetPhotosTableViewController.h"
+#define kOFFSET_FOR_KEYBOARD 80.0
 
 @interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
 
@@ -92,14 +93,19 @@
     {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= rect.size.height/2;
-        rect.size.height += rect.size.height/2;
+        //rect.origin.y -= rect.size.height/2;
+        //rect.size.height += rect.size.height/2;
+        
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height += kOFFSET_FOR_KEYBOARD;
     }
     else
     {
         // revert back to the normal state.
-        rect.origin.y += rect.size.height/3;
-        rect.size.height -= rect.size.height/3;
+        //rect.origin.y += rect.size.height/3;
+        //rect.size.height -= rect.size.height/3;
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+        rect.size.height -= kOFFSET_FOR_KEYBOARD;
     }
     self.view.frame = rect;
     
