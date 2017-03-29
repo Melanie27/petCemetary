@@ -14,6 +14,8 @@
 #define kOFFSET_FOR_KEYBOARD 180.0
 
 @interface AddPetProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITextViewDelegate>
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (nonatomic, strong) NSString *downloadURLString2;
 @property (nonatomic, strong) NSMutableDictionary *addPetParameters;
@@ -29,6 +31,12 @@
     [self.animalPersonalityTextView setReturnKeyType:UIReturnKeyDone];
     self.animalPersonalityTextView.delegate = self;
 
+}
+
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self.scrollView layoutIfNeeded];
+    self.scrollView.contentSize = self.contentView.bounds.size;
 }
 
 
