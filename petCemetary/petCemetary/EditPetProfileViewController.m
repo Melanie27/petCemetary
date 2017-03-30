@@ -14,6 +14,9 @@
 
 @interface EditPetProfileViewController () <UITextFieldDelegate, UITextViewDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, strong) NSString *downloadURLString2;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView2;
+
 @end
 
 @implementation EditPetProfileViewController
@@ -47,6 +50,13 @@
     self.animalPersonalityTextView.delegate = self;
     
 }
+
+-(void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self.scrollView2 layoutIfNeeded];
+   
+}
+
 
 /*- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     
