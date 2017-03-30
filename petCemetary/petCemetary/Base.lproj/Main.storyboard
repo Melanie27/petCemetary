@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ys6-mJ-7SC">
-                                <rect key="frame" x="0.0" y="64" width="320" height="721"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njQ-18-fSH" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="780"/>
@@ -140,7 +140,7 @@
                             <constraint firstItem="Ys6-mJ-7SC" firstAttribute="leading" secondItem="MRZ-GW-Uop" secondAttribute="leading" id="8o9-JX-2cb"/>
                             <constraint firstAttribute="trailing" secondItem="Ys6-mJ-7SC" secondAttribute="trailing" id="DuH-DM-lGA"/>
                             <constraint firstItem="Ys6-mJ-7SC" firstAttribute="top" secondItem="R4B-wS-zPp" secondAttribute="bottom" id="RGk-Ab-wpE"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Ys6-mJ-7SC" secondAttribute="bottom" constant="15" id="bWn-Jd-xg0"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Ys6-mJ-7SC" secondAttribute="bottom" id="bWn-Jd-xg0"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -329,7 +329,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OvD-pS-pnR" userLabel="Scroll View2">
-                                <rect key="frame" x="0.0" y="64" width="320" height="721"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="736"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cf1-Jc-Tnw" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="780"/>
@@ -403,7 +403,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.88235294119999996" green="0.34509803919999998" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Rm7-uW-i5i" firstAttribute="top" secondItem="lqY-i8-HAB" secondAttribute="bottom" constant="8" id="4cG-8X-DnL"/>
                                             <constraint firstItem="Y3o-vi-8Gq" firstAttribute="leading" secondItem="lqY-i8-HAB" secondAttribute="trailing" constant="22" id="5Yl-rs-cW3"/>
@@ -438,7 +438,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.80784313730000001" green="0.50588235290000005" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Cf1-Jc-Tnw" secondAttribute="trailing" id="17L-vb-7gM"/>
                                     <constraint firstAttribute="bottom" secondItem="Cf1-Jc-Tnw" secondAttribute="bottom" constant="20" id="GAQ-Bv-TcK"/>
@@ -452,7 +451,7 @@
                         <constraints>
                             <constraint firstItem="OvD-pS-pnR" firstAttribute="leading" secondItem="UAb-Fb-p3j" secondAttribute="leading" id="AGv-gj-GNc"/>
                             <constraint firstAttribute="trailing" secondItem="OvD-pS-pnR" secondAttribute="trailing" id="AKc-PI-vTx"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="OvD-pS-pnR" secondAttribute="bottom" constant="15" id="HP3-ld-2jg"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="OvD-pS-pnR" secondAttribute="bottom" id="HP3-ld-2jg"/>
                             <constraint firstItem="OvD-pS-pnR" firstAttribute="top" secondItem="1vj-sU-1qL" secondAttribute="bottom" id="JFR-iR-g9s"/>
                         </constraints>
                     </view>
