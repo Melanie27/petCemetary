@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -686,9 +687,8 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7b-WP-zEL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7b-WP-zEL">
                                 <rect key="frame" x="67" y="187" width="96" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Owner Name">
                                         <attributes>
@@ -699,7 +699,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUF-Yh-4bg">
-                                <rect key="frame" x="147.5" y="257" width="80" height="20"/>
+                                <rect key="frame" x="148" y="257" width="80" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Personality">
                                         <attributes>
@@ -726,7 +726,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfZ-Cn-xwD">
-                                <rect key="frame" x="215" y="159" width="25" height="20"/>
+                                <rect key="frame" x="215" y="159" width="144" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Cat">
                                         <attributes>
@@ -737,7 +737,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCF-K8-y1X">
-                                <rect key="frame" x="99" y="594" width="177" height="53"/>
+                                <rect key="frame" x="16" y="594" width="343" height="53"/>
                                 <color key="backgroundColor" red="0.26274509800000001" green="0.2901960784" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="53" id="3XM-yY-IRF"/>
@@ -749,9 +749,8 @@
                                     <segue destination="asp-Ic-rjJ" kind="show" identifier="albumSegue" id="P3h-e9-DWC"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGn-xk-KzX">
-                                <rect key="frame" x="215" y="187" width="57" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGn-xk-KzX">
+                                <rect key="frame" x="215" y="187" width="144" height="20"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Melanie">
                                         <attributes>
@@ -775,20 +774,28 @@
                             <constraint firstItem="34w-Fd-pyW" firstAttribute="leading" secondItem="9g4-Pr-OkO" secondAttribute="leadingMargin" id="BB9-p0-eMH"/>
                             <constraint firstItem="AfE-An-nrD" firstAttribute="baseline" secondItem="o8X-OK-fHK" secondAttribute="baseline" id="EJf-kL-X0m"/>
                             <constraint firstItem="pyO-m2-qro" firstAttribute="baseline" secondItem="v2Q-Ia-p5g" secondAttribute="baseline" id="GjR-3f-pwp"/>
+                            <constraint firstItem="gGn-xk-KzX" firstAttribute="leading" secondItem="zfZ-Cn-xwD" secondAttribute="leading" id="Gz4-It-0zq"/>
                             <constraint firstItem="34w-Fd-pyW" firstAttribute="top" secondItem="CUF-Yh-4bg" secondAttribute="bottom" constant="8" symbolic="YES" id="HG9-bY-daN"/>
                             <constraint firstItem="34w-Fd-pyW" firstAttribute="top" secondItem="9g4-Pr-OkO" secondAttribute="top" constant="285" id="Ivh-1z-JTI"/>
                             <constraint firstItem="pyO-m2-qro" firstAttribute="leading" secondItem="v2Q-Ia-p5g" secondAttribute="trailing" constant="7" id="LZN-I4-mdC"/>
                             <constraint firstItem="6GT-B0-bA6" firstAttribute="trailing" secondItem="AfE-An-nrD" secondAttribute="trailing" id="MYt-Zw-hsB"/>
+                            <constraint firstItem="m7b-WP-zEL" firstAttribute="leading" secondItem="o8X-OK-fHK" secondAttribute="leading" constant="-5" id="NCN-Z9-t6B"/>
                             <constraint firstItem="v2Q-Ia-p5g" firstAttribute="bottom" secondItem="dpv-wY-TTB" secondAttribute="bottom" id="OHD-av-icG"/>
+                            <constraint firstItem="gGn-xk-KzX" firstAttribute="trailing" secondItem="zfZ-Cn-xwD" secondAttribute="trailing" id="UyV-if-r45"/>
                             <constraint firstItem="6GT-B0-bA6" firstAttribute="top" secondItem="AfE-An-nrD" secondAttribute="bottom" constant="8" symbolic="YES" id="Whh-KN-NAw"/>
                             <constraint firstAttribute="bottom" secondItem="uCF-K8-y1X" secondAttribute="bottom" constant="20" symbolic="YES" id="Y3T-8S-XpQ"/>
                             <constraint firstItem="zfZ-Cn-xwD" firstAttribute="top" secondItem="pyO-m2-qro" secondAttribute="bottom" constant="10" id="Yjp-ri-9rk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zfZ-Cn-xwD" secondAttribute="trailing" id="aOJ-zx-lUM"/>
                             <constraint firstItem="zfZ-Cn-xwD" firstAttribute="leading" secondItem="AfE-An-nrD" secondAttribute="trailing" constant="6" id="c3U-41-2lr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="34w-Fd-pyW" secondAttribute="trailing" id="iC8-2H-y9b"/>
+                            <constraint firstItem="m7b-WP-zEL" firstAttribute="top" secondItem="o8X-OK-fHK" secondAttribute="bottom" constant="8" id="jCy-td-jvQ"/>
+                            <constraint firstItem="gGn-xk-KzX" firstAttribute="baseline" secondItem="6GT-B0-bA6" secondAttribute="baseline" id="jdM-sj-nXB"/>
                             <constraint firstItem="6GT-B0-bA6" firstAttribute="leading" secondItem="AfE-An-nrD" secondAttribute="leading" id="n0K-UQ-SZD"/>
-                            <constraint firstItem="uCF-K8-y1X" firstAttribute="leading" secondItem="9g4-Pr-OkO" secondAttribute="leadingMargin" constant="83" id="o2y-mO-teg"/>
+                            <constraint firstItem="uCF-K8-y1X" firstAttribute="leading" secondItem="9g4-Pr-OkO" secondAttribute="leadingMargin" id="o2y-mO-teg"/>
                             <constraint firstItem="OWa-Pq-Fiu" firstAttribute="centerX" secondItem="9g4-Pr-OkO" secondAttribute="centerX" id="oUw-xh-dff"/>
                             <constraint firstItem="34w-Fd-pyW" firstAttribute="centerX" secondItem="CUF-Yh-4bg" secondAttribute="centerX" id="qEK-n9-PY3"/>
+                            <constraint firstItem="gGn-xk-KzX" firstAttribute="top" secondItem="zfZ-Cn-xwD" secondAttribute="bottom" constant="8" symbolic="YES" id="qLz-a8-Jap"/>
+                            <constraint firstItem="gGn-xk-KzX" firstAttribute="baseline" secondItem="m7b-WP-zEL" secondAttribute="firstBaseline" id="qhh-ri-t0Z"/>
                             <constraint firstItem="v2Q-Ia-p5g" firstAttribute="leading" secondItem="dpv-wY-TTB" secondAttribute="trailing" constant="6" id="szq-eK-XyX"/>
                             <constraint firstItem="OWa-Pq-Fiu" firstAttribute="top" secondItem="Nj2-SA-3aP" secondAttribute="bottom" constant="21" id="wkd-9l-OSs"/>
                             <constraint firstItem="v2Q-Ia-p5g" firstAttribute="top" secondItem="dpv-wY-TTB" secondAttribute="top" id="y44-L1-DBa"/>
