@@ -573,7 +573,7 @@
                             <outlet property="dataSource" destination="ZBA-21-rvE" id="whv-FX-SyO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Pet Cemetary" id="OwV-wE-AO9">
+                    <navigationItem key="navigationItem" title="Pet Cemetery" id="OwV-wE-AO9">
                         <barButtonItem key="rightBarButtonItem" title="My Pets" id="dM9-FI-Ccy">
                             <connections>
                                 <segue destination="UDQ-cm-OfM" kind="show" identifier="addPet" id="Y6n-4r-SIC"/>
