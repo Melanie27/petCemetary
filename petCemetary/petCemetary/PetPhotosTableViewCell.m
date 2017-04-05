@@ -20,9 +20,6 @@
         for (UIView *view in @[self.albumPhotoImageView]) {
             [self.contentView addSubview:view];
         }
-       
-        
-        
     }
     
     return self;

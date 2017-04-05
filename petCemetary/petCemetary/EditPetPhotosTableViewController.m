@@ -145,7 +145,7 @@ Pet *pet;
 
                                                             NSString *photoKey = [[self.ref child:@"photos"] childByAutoId].key;
                                                             self.pet.photoID = photoKey;
-                                                            //NSMutableDictionary *params = [parameters mutableCopy];
+                                                           
                                                             NSString *captionString = [parameters valueForKey:@"photoCaption"];
                                                             NSString *petIDString = [parameters valueForKey:@"petID"];
                                                             NSDictionary *childUpdates = @{
@@ -157,7 +157,7 @@ Pet *pet;
                                                         }
                                                     }];
                                                    
-                                                //[pc addImageWithDataDictionary:parameters andPet:pet];
+                                               
                                                    
 
                                                    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];

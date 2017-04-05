@@ -27,16 +27,16 @@
 }
 
 
-- (void)awakeFromNib {
+/*- (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-}
+}*/
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+/*- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
+}*/
 
 -(void) layoutSubviews {
     [super layoutSubviews];
@@ -51,15 +51,15 @@
     if( self.petAlbumItem.albumImage == nil) {
         NSString *imageName = [NSString stringWithFormat:@"1.jpg"];
         image = [UIImage imageNamed:imageName];
-    }
+    } 
     
     CGFloat imageHeight = image.size.height / image.size.width * CGRectGetWidth(self.contentView.bounds);
     
     self.albumPhotoImageView.frame = CGRectMake(0, 0, CGRectGetWidth(self.contentView.bounds), imageHeight);
     
-    //self.albumPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
-    //THIS allows to see entire delete button
-    self.albumPhotoImageView.contentMode = UIViewContentModeScaleToFill;
+    self.albumPhotoImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.albumPhotoImageView setClipsToBounds:YES];
+    
     
     imageHeight = (imageHeight > 50.0) ? imageHeight : 100.0;
     
