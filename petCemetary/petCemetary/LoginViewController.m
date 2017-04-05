@@ -147,12 +147,12 @@ static NSString *const kChangePasswordText = @"Change Password";
 - (IBAction)didTapEmailLogin:(id)sender {
     //keep this here for now so don't have to login every time
    
-            [self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+            //[self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
     
     
     
     //comment this in later
-    /*[self showSpinner:^{
+    [self showSpinner:^{
         // [START headless_email_auth]
         [[FIRAuth auth] signInWithEmail:_emailField.text
                                password:_passwordField.text
@@ -164,14 +164,19 @@ static NSString *const kChangePasswordText = @"Change Password";
                                          [self showMessagePrompt:error.localizedDescription];
                                          return;
                                      }
-                                     //NSLog(@"success2, %@", user);
+                                     
+                                     //Saving username and password so they dont have to type it every time
+                                     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+                                     [prefs setObject:_emailField.text forKey:@"userEmail"];
+                                     [prefs setObject:_passwordField.text forKey:@"password"];
+                                     [prefs synchronize];
                                      [self.questionsButton sendActionsForControlEvents:UIControlEventTouchUpInside];
                                  }];
                                  // [END_EXCLUDE]
                              }];
         // [END headless_email_auth]
         
-    }];*/
+    }];
 }
 
 /** @fn requestPasswordReset
@@ -445,6 +450,14 @@ static NSString *const kChangePasswordText = @"Change Password";
         return;
     } else {
         NSLog(@"signed out");
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        
+        // getting an NSString
+        NSString *savedUsername = [prefs stringForKey:@"userEmail"];
+        NSString *savedPassword = [prefs stringForKey:@"password"];
+         //[prefs synchronize];
+        [self.emailField setText: savedUsername];
+        [self.passwordField setText: savedPassword];
     }
     // [END signout]
 }
@@ -481,8 +494,8 @@ static NSString *const kChangePasswordText = @"Change Password";
 
 - (void)setTitleDisplay: (FIRUser *)user {
     if (user) {
-        //self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", user.email];
-        self.navigationItem.title = [NSString stringWithFormat:@"Welcome!"];
+        self.navigationItem.title = [NSString stringWithFormat:@"Welcome %@", user.email];
+        //self.navigationItem.title = [NSString stringWithFormat:@"Welcome!"];
         //skip launch screen
         //UIViewController *vc = [[PetsFeedTableViewController alloc] init];
        
