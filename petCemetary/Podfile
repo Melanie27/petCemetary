@@ -11,5 +11,6 @@ pod 'Firebase/Storage'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
+pod 'ContextMenu.iOS', '~> 1.1.0'
 
 end
