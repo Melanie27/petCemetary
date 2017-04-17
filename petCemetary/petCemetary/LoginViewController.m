@@ -78,6 +78,14 @@ static NSString *const kChangePasswordText = @"Change Password";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.passwordField.secureTextEntry = YES;
+   
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *savedUsername = [prefs stringForKey:@"userEmail"];
+    NSString *savedPassword = [prefs stringForKey:@"password"];
+   
+    [self.emailField setText: savedUsername];
+    [self.passwordField setText: savedPassword];
+    
     //FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     // Optional: Place the button in the center of your view.
     //loginButton.center = self.view.center;
@@ -450,14 +458,14 @@ static NSString *const kChangePasswordText = @"Change Password";
         return;
     } else {
         NSLog(@"signed out");
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
         
         // getting an NSString
-        NSString *savedUsername = [prefs stringForKey:@"userEmail"];
-        NSString *savedPassword = [prefs stringForKey:@"password"];
-         //[prefs synchronize];
-        [self.emailField setText: savedUsername];
-        [self.passwordField setText: savedPassword];
+        //NSString *savedUsername = [prefs stringForKey:@"userEmail"];
+        //NSString *savedPassword = [prefs stringForKey:@"password"];
+        
+        //[self.emailField setText: savedUsername];
+        //[self.passwordField setText: savedPassword];
     }
     // [END signout]
 }
