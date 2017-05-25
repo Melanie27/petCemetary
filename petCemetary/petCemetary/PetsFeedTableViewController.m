@@ -104,14 +104,23 @@
    
     if (cell.petItem.petName != nil) {
     
+        NSMutableAttributedString *viewMemorialString = [[NSMutableAttributedString alloc] initWithString:@"    View Memorial-->"];
+        
+        
         NSMutableAttributedString *petNameString = [[NSMutableAttributedString alloc]initWithString:cell.petItem.petName];
         
         UIFont *font=[UIFont fontWithName:@"Zapfino" size:16.0f];
         [petNameString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, cell.petItem.petName.length)];
         
+        UIFont *font2=[UIFont fontWithName:@"HelveticaNeue" size:10.0f];
+        [viewMemorialString addAttribute:NSFontAttributeName value:font2 range:NSMakeRange(0, viewMemorialString.length)];
+        
+          [petNameString appendAttributedString:viewMemorialString];
+        NSLog(@"concatenated %@", viewMemorialString);
         
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.attributedText = petNameString;
+    
     }
    
     return cell;
